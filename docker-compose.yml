@@ -1,0 +1,29 @@
+services:
+  thingsboard:
+    init: true
+    image: docker.io/thingsboard/tb-postgres:3.6.4
+    ports:
+      - "9090:9090"
+      - "1883:1883"
+    environment:
+      TB_QUEUE_TYPE: in-memory
+    volumes:
+      - thingsboard:/data
+    depends_on:
+      init:
+        condition: service_completed_successfully
+  nodered:
+    build: nodered
+    ports:
+      - "1880:1880"
+    environment:
+      NODE_RED_HTTP_ADMIN_ROOT: false
+      NODE_RED_HTTP_NODE_ROOT: false
+      NODE_RED_DISABLE_EDITOR: false
+  init:
+    build: init
+    volumes:
+      - thingsboard:/data/thingsboard
+
+volumes:
+  thingsboard:

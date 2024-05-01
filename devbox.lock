@@ -1,0 +1,197 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "arduino-cli@latest": {
+      "last_modified": "2024-04-25T03:38:28-04:00",
+      "resolved": "github:NixOS/nixpkgs/b0d52b31f7f4d80f8bf38f0253652125579c35ff#arduino-cli",
+      "source": "devbox-search",
+      "version": "0.35.3",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/v2b50whx1kdm9izbxgd9kg4xx07v7nnz-arduino-cli-0.35.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/v2b50whx1kdm9izbxgd9kg4xx07v7nnz-arduino-cli-0.35.3"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/6srgph2h2zckygy7hs9j6g2671pdvxgj-arduino-cli-0.35.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/6srgph2h2zckygy7hs9j6g2671pdvxgj-arduino-cli-0.35.3"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/cblw0757qgi14hcyg9l98ihdqj3l1ya8-arduino-cli-0.35.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/cblw0757qgi14hcyg9l98ihdqj3l1ya8-arduino-cli-0.35.3"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/84lz71kw085fi851sniqwql8jrwq061r-arduino-cli-0.35.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/84lz71kw085fi851sniqwql8jrwq061r-arduino-cli-0.35.3"
+        }
+      }
+    },
+    "docker-compose@latest": {
+      "last_modified": "2024-04-19T17:36:04-04:00",
+      "resolved": "github:NixOS/nixpkgs/92d295f588631b0db2da509f381b4fb1e74173c5#docker-compose",
+      "source": "devbox-search",
+      "version": "2.26.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/vzf0m7fmrahv7ag80vpmsg6il3gdpdvh-docker-compose-2.26.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/vzf0m7fmrahv7ag80vpmsg6il3gdpdvh-docker-compose-2.26.1"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ja7132xnw5lzz8qvxmq44b4hkfi42rfy-docker-compose-2.26.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ja7132xnw5lzz8qvxmq44b4hkfi42rfy-docker-compose-2.26.1"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/7bjrsgdh3h37909gg8vlh09aqamjsshx-docker-compose-2.26.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/7bjrsgdh3h37909gg8vlh09aqamjsshx-docker-compose-2.26.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/mn13vcxl4nd6yx4968simkpfrpxypxbn-docker-compose-2.26.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/mn13vcxl4nd6yx4968simkpfrpxypxbn-docker-compose-2.26.1"
+        }
+      }
+    },
+    "docker@latest": {
+      "last_modified": "2024-04-26T22:17:36-04:00",
+      "resolved": "github:NixOS/nixpkgs/698fd43e541a6b8685ed408aaf7a63561018f9f8#docker",
+      "source": "devbox-search",
+      "version": "24.0.5",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/rq15kjwa4gjq9h8scbchxi9nyvrg44ab-docker-24.0.5",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/rq15kjwa4gjq9h8scbchxi9nyvrg44ab-docker-24.0.5"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ikxn41lp9cs7hwbd395f4yvpv5cqlpg6-docker-24.0.5",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ikxn41lp9cs7hwbd395f4yvpv5cqlpg6-docker-24.0.5"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ww9ncrcjwl2zvpfvz88z01yhasv3598k-docker-24.0.5",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ww9ncrcjwl2zvpfvz88z01yhasv3598k-docker-24.0.5"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/l28bkngsdil03fnbb6sl0hal1zs7qh3q-docker-24.0.5",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/l28bkngsdil03fnbb6sl0hal1zs7qh3q-docker-24.0.5"
+        }
+      }
+    },
+    "nodePackages.node-red@latest": {
+      "last_modified": "2024-04-19T17:36:04-04:00",
+      "resolved": "github:NixOS/nixpkgs/92d295f588631b0db2da509f381b4fb1e74173c5#nodePackages.node-red",
+      "source": "devbox-search",
+      "version": "3.1.7",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/qcc57mxwr475x43xy7s1m4s52m0hypgr-node-red-3.1.7",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/qcc57mxwr475x43xy7s1m4s52m0hypgr-node-red-3.1.7"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/l2c65lb4ymkzzcy5qg2j1ms13kl52bjx-node-red-3.1.7",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/l2c65lb4ymkzzcy5qg2j1ms13kl52bjx-node-red-3.1.7"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9l0656fy06scmqnhgdm5zajm925lbylm-node-red-3.1.7",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/9l0656fy06scmqnhgdm5zajm925lbylm-node-red-3.1.7"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/crcd3c3maifq9xmlfwbv60y50xw0b0sa-node-red-3.1.7",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/crcd3c3maifq9xmlfwbv60y50xw0b0sa-node-red-3.1.7"
+        }
+      }
+    }
+  }
+}

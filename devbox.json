@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.10.5/.schema/devbox.schema.json",
+  "packages": [
+    "arduino-cli@latest",
+    "docker@latest",
+    "docker-compose@latest",
+    "nodePackages.node-red@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "nodered": [
+        "node-red --port 1881 --userDir nodered"
+      ],
+      "arduino":["arduino-cli upload arduino -b arduino:renesas_uno:unor4wifi -p /dev/ttyACM0"]
+    }
+  }
+}
