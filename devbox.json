@@ -14,7 +14,7 @@
       "nodered": [
         "node-red --port 1881 --userDir nodered"
       ],
-      "arduino":["arduino-cli upload arduino -b arduino:renesas_uno:unor4wifi -p /dev/ttyACM0"]
+      "arduino":["arduino-cli compile arduino","arduino-cli upload arduino"]
     }
   }
 }
