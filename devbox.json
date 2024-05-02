@@ -7,14 +7,10 @@
     "nodePackages.node-red@latest"
   ],
   "shell": {
-    "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
-    ],
+    "init_hook": ["echo 'Welcome to devbox!' > /dev/null"],
     "scripts": {
-      "nodered": [
-        "node-red --port 1881 --userDir nodered"
-      ],
-      "arduino":["arduino-cli compile arduino","arduino-cli upload arduino"]
+      "nodered": ["node-red --port 1881 --userDir nodered"],
+      "arduino": ["arduino-cli compile arduino", "arduino-cli upload arduino"]
     }
   }
 }
