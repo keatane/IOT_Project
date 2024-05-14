@@ -1,2 +1,5 @@
 https://rdiot.tistory.com/63
 309 spins/500 ml
+0.0016181229773462784 litres/spin
+theoretical 1/(60*10) litres/spin
+errors: [1/(60*10)*90 1/(60*10)*110]
