@@ -1,177 +1,184 @@
-/*
-  WiFi Web Server LED Blink
-
-  A simple web server that lets you blink an LED via the web.
-  This sketch will create a new access point (with no password).
-  It will then launch a new server and print out the IP address
-  to the Serial Monitor. From there, you can open that address in a web browser
-  to turn on and off the LED on pin 13.
-
-  If the IP address of your board is yourAddress:
-    http://yourAddress/H turns the LED on
-    http://yourAddress/L turns it off
-
-  created 25 Nov 2012
-  by Tom Igoe
-  adapted to WiFi AP by Adafruit
-
-  Find the full UNO R4 WiFi Network documentation here:
-  https://docs.arduino.cc/tutorials/uno-r4-wifi/wifi-examples#access-point
- */
-
+#include "MQTT.h"
 #include "WiFiS3.h"
 
-// #include "arduino_secrets.h"
-
-///////please enter your sensitive data in the Secret tab/arduino_secrets.h
-char ssid[] = "caraffa_1"; // your network SSID (name)
-
-int led = LED_BUILTIN;
-int status = WL_IDLE_STATUS;
+const char HOTSPOT_SSID[] = "caraffa_1";
 WiFiServer server(80);
+const IPAddress SERVER_ADDRESS = IPAddress(192, 168, 4, 1);
+const int ID = 1;
+String ssid;
+String pw;
+bool paired;
+
+volatile int spins;
+const double C=1/(60*10); // litres/spin
+const int FLOW_SENSOR = 2;
+
+const char MQTT_BROKER[] = "212.78.1.205";
+const int MQTT_PORT = 1883;
+const char MQTT_USERNAME[] = "studenti";
+const char MQTT_PASSWORD[] = "studentiDRUIDLAB_1";
+const char MQTT_ID[]="jug1";
+const char MQTT_SENSOR_TOPIC[]="/Thingworx/Jug1/litresPerSecond";
+const char MQTT_TOKEN_TOPIC[]="/jug/pair";
+
+WiFiClient wifiMqttClient;
+MQTTClient mqttClient;
+
+
+void rpm() {
+  spins++;
+}
+
+void exit() {
+  while (true)
+    ;
+}
 
 void setup() {
-  // Initialize serial and wait for port to open:
   Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
+  while (!Serial)
+    ;
   Serial.println("Access Point Web Server");
-
-  pinMode(led, OUTPUT); // set the LED pin mode
-
-  // check for the WiFi module:
   if (WiFi.status() == WL_NO_MODULE) {
     Serial.println("Communication with WiFi module failed!");
-    // don't continue
-    while (true)
-      ;
+    exit();
   }
-
   String fv = WiFi.firmwareVersion();
   if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
     Serial.println("Please upgrade the firmware");
   }
-
-  // by default the local IP address will be 192.168.4.1
-  // you can override it with the following:
-  WiFi.config(IPAddress(192, 168, 4, 1));
-
-  // print the network name (SSID);
-  Serial.print("Creating access point named: ");
-  Serial.println(ssid);
-
-  // Create open network. Change this line if you want to create an WEP network:
-  status = WiFi.beginAP(ssid);
-  if (status != WL_AP_LISTENING) {
-    Serial.println("Creating access point failed");
-    // don't continue
-    while (true)
-      ;
-  }
-
-  // wait 10 seconds for connection:
-  delay(10000);
-
-  // start the web server on port 80
-  server.begin();
-
-  // you're connected now, so print out the status
-  printWiFiStatus();
+  attachInterrupt(digitalPinToInterrupt(FLOW_SENSOR), rpm, RISING); // Attach interrupt
+  setUnpaired();
 }
 
 void loop() {
+  if (paired)
+    loopPaired();
+  else
+    loopUnpaired();
+}
 
-  // compare the previous status to the current status
-  if (status != WiFi.status()) {
-    // it has changed update the variable
-    status = WiFi.status();
+void setUnpaired() {
+  paired = false;
+  WiFi.config(SERVER_ADDRESS);
 
-    if (status == WL_AP_CONNECTED) {
-      // a device has connected to the AP
-      Serial.println("Device connected to AP");
-    } else {
-      // a device has disconnected from the AP, and we are back in listening
-      // mode
-      Serial.println("Device disconnected from AP");
-    }
+  Serial.print("Creating access point named: ");
+  Serial.println(HOTSPOT_SSID);
+
+  int status = WiFi.beginAP(HOTSPOT_SSID);
+  if (status != WL_AP_LISTENING) {
+    Serial.println("Creating access point failed");
+    exit();
   }
 
-  WiFiClient client = server.available(); // listen for incoming clients
+  delay(10000);
 
-  // Serial.println("Looping");
+  server.begin();
 
-  if (client) {                   // if you get a client,
-    Serial.println("new client"); // print a message out the serial port
-    String currentLine =
-        ""; // make a String to hold incoming data from the client
-    while (client.connected()) { // loop while the client's connected
-      delayMicroseconds(
-          10); // This is required for the Arduino Nano RP2040 Connect -
-               // otherwise it will loop so fast that SPI will never be served.
-      if (client.available()) { // if there's bytes to read from the client,
-        char c = client.read(); // read a byte, then
-        Serial.write(c);        // print it out to the serial monitor
-        if (c == '\n') {        // if the byte is a newline character
+  printWiFiStatus();
+}
 
-          // if the current line is blank, you got two newline characters in a
-          // row. that's the end of the client HTTP request, so send a response:
-          if (currentLine.length() == 0) {
-            // HTTP headers always start with a response code (e.g. HTTP/1.1 200
-            // OK) and a content-type so the client knows what's coming, then a
-            // blank line:
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-type:text/html");
-            client.println();
-
-            // the content of the HTTP response follows the header:
-            client.print("<p style=\"font-size:7vw;\">Click <a "
-                         "href=\"/H\">here</a> turn the LED on<br></p>");
-            client.print("<p style=\"font-size:7vw;\">Click <a "
-                    "href=\"/L\">here</a> turn the LED off<br></p>");
-            client.print("<form method='post'><input name='ciao'><input type='submit'></form>");
-
-            // The HTTP response ends with another blank line:
-            client.println();
-            // break out of the while loop:
-            break;
-          }
-          if(currentLine.endsWith("")){
-
-              }
-            currentLine = "";
-        } else if (c != '\r') { // if you got anything else but a carriage
-                                // return character,
-          currentLine += c;     // add it to the end of the currentLine
-        }
-
-        // Check to see if the client request was "GET /H" or "GET /L":
-        if (currentLine.endsWith("GET /H")) {
-          Serial.println(currentLine);
-          digitalWrite(led, HIGH); // GET /H turns the LED on
-        }
-        if (currentLine.endsWith("GET /L")) {
-          digitalWrite(led, LOW); // GET /L turns the LED off
-        }
+void loopUnpaired() {
+  WiFiClient client = server.available();
+  if (client) {
+    Serial.println("new client");
+    String content = "";
+    while (client.connected()) {
+      delayMicroseconds(10);
+      if (client.available()) {
+        char c = client.read();
+        Serial.write(c);
+        content += c;
       }
     }
-    // close the connection:
+    pair(content);
+    client.println("OK");
     client.stop();
     Serial.println("client disconnected");
   }
 }
 
+void pair(String content) {
+  const int LENGTH = 3;
+  String pieces[LENGTH];
+  splitString(content, '\n', pieces, LENGTH);
+  String ssid = pieces[0];
+  String pw = pieces[1];
+  String token = pieces[2];
+  Serial.print("SSID: ");
+  Serial.println(ssid);
+  Serial.print("PW: ");
+  Serial.println(pw);
+  Serial.print("TOKEN: ");
+  Serial.println(token);
+  setPaired(ssid, pw, token);
+}
+
+void splitString(String text, char split, String *output, int length) {
+  for (int i = 0; i < length; ++i) {
+    int index = text.indexOf(split);
+    if (index == -1) {
+      output[i] = "";
+      continue;
+    }
+    output[i] = text.substring(0, index);
+    text = text.substring(index + 1);
+  }
+}
+
+void setPaired(String in_ssid, String in_pw, String token) {
+  ssid = in_ssid;
+  pw = in_pw;
+  paired = true;
+  const IPAddress EMPTY = IPAddress(0, 0, 0, 0);
+  WiFi.config(EMPTY, EMPTY, EMPTY);
+  connect();
+  publishMQTT(MQTT_TOKEN_TOPIC,token);
+  // subscribe();
+}
+
+void connect() {
+  while (WiFi.status() != WL_CONNECTED) {
+    int status = WiFi.begin(ssid.c_str(), pw.c_str());
+    if (status == WL_CONNECTED) {
+      IPAddress ip = WiFi.localIP();
+      Serial.print("IP Address: ");
+      Serial.println(ip);
+      connectMQTT();
+    }
+    delay(1000);
+  }
+}
+
+void connectMQTT() {
+  mqttClient.begin(MQTT_BROKER, MQTT_PORT, wifiMqttClient);
+  while (!mqttClient.connect(MQTT_ID, MQTT_USERNAME, MQTT_PASSWORD)) {
+    Serial.println(".");
+    delay(1000);
+  }
+}
+
+void publishMQTT(String topic,String message) { mqttClient.publish(topic,message); }
+
+void subscribeMQTT() {}
+
+void loopPaired() {
+  connect();
+  Serial.println("CONNECTED and looping");
+  spins=0;
+  delay(1000);
+  double litres=spins*C;
+  Serial.println(litres);
+  Serial.println(String(litres));
+  publishMQTT(MQTT_SENSOR_TOPIC,String(litres).c_str());
+}
+
 void printWiFiStatus() {
-  // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
-
-  // print your WiFi shield's IP address:
   IPAddress ip = WiFi.localIP();
   Serial.print("IP Address: ");
   Serial.println(ip);
-
-  // print where to go in a browser:
   Serial.print("To see this page in action, open a browser to http://");
   Serial.println(ip);
 }
