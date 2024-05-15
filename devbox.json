@@ -4,7 +4,9 @@
     "arduino-cli@latest",
     "docker@latest",
     "docker-compose@latest",
-    "nodePackages.node-red@latest"
+    "nodePackages.node-red@latest",
+    "nodePackages.pnpm@latest",
+    "bun@latest"
   ],
   "shell": {
     "init_hook": ["echo 'Welcome to devbox!' > /dev/null"],
