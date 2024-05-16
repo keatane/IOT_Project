@@ -4,7 +4,7 @@
 // LiquidCrystal_I2C lcd(0x27, 20, 4); // LCD2004
 
 volatile int NbTopsFan; // Measuring the rising edges of the signal
-const double C=1/(60*10); // litres/spin
+const double C=1.0/(60*10); // litres/spin
 
 const int hallsensor = 2; // The pin location of the sensor: D2
 

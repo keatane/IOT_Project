@@ -10,7 +10,7 @@ String pw;
 bool paired;
 
 volatile int spins;
-const double C=1/(60*10); // litres/spin
+const double C=1.0/(60*10); // litres/spin
 const int FLOW_SENSOR = 2;
 
 const char MQTT_BROKER[] = "212.78.1.205";
