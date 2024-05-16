@@ -474,7 +474,7 @@
         "id": "83c99c7142a96e7f",
         "type": "postgresql",
         "z": "217d4457bda21c0d",
-        "name": "",
+        "name": "Show table",
         "query": "SELECT * FROM UserTable;",
         "postgreSQLConfig": "647f7f903ce97865",
         "split": false,
@@ -540,6 +540,69 @@
                 "10b809801dba4bcb"
             ]
         ]
+    },
+    {
+        "id": "5898347def636b4d",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "d0c5bf7405388a7c"
+            ]
+        ]
+    },
+    {
+        "id": "d0c5bf7405388a7c",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "name": "Clean table",
+        "query": "DELETE FROM UserTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "c98c52a08de3b558"
+            ]
+        ]
+    },
+    {
+        "id": "c98c52a08de3b558",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 300,
+        "wires": []
     },
     {
         "id": "f26cc9e6ff46d635",
