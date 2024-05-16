@@ -6,7 +6,8 @@
     "docker-compose@latest",
     "nodePackages.node-red@latest",
     "nodePackages.pnpm@latest",
-    "bun@latest"
+    "bun@latest",
+    "nodejs@latest"
   ],
   "shell": {
     "init_hook": ["echo 'Welcome to devbox!' > /dev/null"],
