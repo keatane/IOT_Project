@@ -152,6 +152,82 @@
         "h": 142
     },
     {
+        "id": "1589093497ae43e3",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Pair Request",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "f5c3aee0864a46be",
+            "e57bdf0359866749",
+            "61ff41d6f79027dd",
+            "378b9baed000b7e6",
+            "4401d53accce85c2",
+            "17a95012080ff363",
+            "7337b18b2043a237"
+        ],
+        "x": 54,
+        "y": 1039,
+        "w": 1272,
+        "h": 82
+    },
+    {
+        "id": "bdbaa79edcd82992",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "User registration",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e617a36252101d98",
+            "9f2b775c5e24acb8",
+            "587d719d685f7298",
+            "8e7d846effd9e3d7",
+            "10b809801dba4bcb",
+            "ce4aa892ac61f3a4",
+            "a492c59417e3526d",
+            "68a2107c3e0d91ed",
+            "43ca287d27944fbd",
+            "c2adafc6141062ba",
+            "fa53f57ac6c934fc",
+            "82cd4ba7de232cdf"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 1372,
+        "h": 322
+    },
+    {
+        "id": "cb681741da812fc7",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "User login",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "4f6f6fac724a496a",
+            "5c3d7fd931d482a9",
+            "fb7f4297b358477b",
+            "68fcddddc6fb266a",
+            "02a9ea9e41023edc",
+            "7b80c134f08a63b6",
+            "c9342c2ae65773a2",
+            "344ec21cbcc27646",
+            "d585834b3020d2f1",
+            "74a2182d6cf3432b",
+            "6737c839da4aeeab",
+            "1130f17012c07889"
+        ],
+        "x": 34,
+        "y": 359,
+        "w": 1372,
+        "h": 322
+    },
+    {
         "id": "c77abff0c3609a0d",
         "type": "mqtt-broker",
         "name": "",
@@ -346,6 +422,7 @@
         "id": "e617a36252101d98",
         "type": "http in",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "Registration",
         "url": "/register",
         "method": "post",
@@ -363,6 +440,7 @@
         "id": "9f2b775c5e24acb8",
         "type": "postgresql",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "",
         "query": "INSERT INTO UserTable(email, password) VALUES ($1, $2);",
         "postgreSQLConfig": "647f7f903ce97865",
@@ -381,6 +459,7 @@
         "id": "587d719d685f7298",
         "type": "function",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "Extract email",
         "func": "msg.params = [msg.payload.username];\nmsg.old = msg.payload;\nreturn msg;",
         "outputs": 1,
@@ -401,6 +480,7 @@
         "id": "8e7d846effd9e3d7",
         "type": "json",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "",
         "property": "payload",
         "action": "obj",
@@ -417,6 +497,7 @@
         "id": "10b809801dba4bcb",
         "type": "http response",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -428,6 +509,7 @@
         "id": "ce4aa892ac61f3a4",
         "type": "debug",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "debug 4",
         "active": true,
         "tosidebar": true,
@@ -462,7 +544,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 760,
+        "y": 1240,
         "wires": [
             [
                 "83c99c7142a96e7f"
@@ -480,7 +562,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 760,
+        "y": 1240,
         "wires": [
             [
                 "e8bc2dd148bbffb3"
@@ -500,13 +582,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 760,
+        "y": 1240,
         "wires": []
     },
     {
         "id": "a492c59417e3526d",
         "type": "json",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "",
         "property": "payload",
         "action": "str",
@@ -541,7 +624,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 820,
+        "y": 1300,
         "wires": [
             [
                 "d0c5bf7405388a7c"
@@ -559,7 +642,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 820,
+        "y": 1300,
         "wires": [
             [
                 "c98c52a08de3b558"
@@ -579,13 +662,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 820,
+        "y": 1300,
         "wires": []
     },
     {
         "id": "68a2107c3e0d91ed",
         "type": "switch",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
@@ -618,6 +702,7 @@
         "id": "43ca287d27944fbd",
         "type": "postgresql",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "",
         "query": "SELECT * FROM UserTable WHERE email = $1;",
         "postgreSQLConfig": "647f7f903ce97865",
@@ -637,6 +722,7 @@
         "id": "c2adafc6141062ba",
         "type": "function",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "Extract user and pass",
         "func": "msg.params = [msg.old.username, msg.old.password];\nreturn msg;",
         "outputs": 1,
@@ -657,6 +743,7 @@
         "id": "fa53f57ac6c934fc",
         "type": "debug",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "debug 7",
         "active": true,
         "tosidebar": true,
@@ -674,6 +761,7 @@
         "id": "82cd4ba7de232cdf",
         "type": "function",
         "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
         "name": "Extract user and pass",
         "func": "msg.payload = {status:\"OK\"};\nreturn msg;",
         "outputs": 1,
@@ -695,13 +783,14 @@
         "id": "5c3d7fd931d482a9",
         "type": "http in",
         "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
         "name": "Login",
         "url": "/login",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
         "x": 110,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "68fcddddc6fb266a"
@@ -712,6 +801,7 @@
         "id": "fb7f4297b358477b",
         "type": "function",
         "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
         "name": "Extract email and password",
         "func": "msg.params = [msg.payload.username, msg.payload.password];\nmsg.old = msg.payload;\nreturn msg;",
         "outputs": 1,
@@ -721,7 +811,7 @@
         "finalize": "",
         "libs": [],
         "x": 320,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "344ec21cbcc27646"
@@ -732,12 +822,13 @@
         "id": "68fcddddc6fb266a",
         "type": "json",
         "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
         "name": "",
         "property": "payload",
         "action": "obj",
         "pretty": false,
         "x": 130,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "fb7f4297b358477b"
@@ -748,17 +839,19 @@
         "id": "4f6f6fac724a496a",
         "type": "http response",
         "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
         "name": "",
         "statusCode": "",
         "headers": {},
         "x": 1330,
-        "y": 600,
+        "y": 620,
         "wires": []
     },
     {
         "id": "02a9ea9e41023edc",
         "type": "debug",
         "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
         "name": "debug 8",
         "active": true,
         "tosidebar": true,
@@ -768,19 +861,20 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1020,
-        "y": 380,
+        "y": 400,
         "wires": []
     },
     {
         "id": "7b80c134f08a63b6",
         "type": "json",
         "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
         "name": "",
         "property": "payload",
         "action": "str",
         "pretty": false,
         "x": 1190,
-        "y": 460,
+        "y": 480,
         "wires": [
             [
                 "4f6f6fac724a496a"
@@ -789,6 +883,184 @@
     },
     {
         "id": "c9342c2ae65773a2",
+        "type": "switch",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 640,
+        "wires": [
+            [
+                "1130f17012c07889"
+            ],
+            [
+                "4f6f6fac724a496a"
+            ]
+        ]
+    },
+    {
+        "id": "344ec21cbcc27646",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "",
+        "query": "SELECT userId FROM UserTable WHERE email = $1 AND password = $2;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 510,
+        "y": 440,
+        "wires": [
+            [
+                "d585834b3020d2f1",
+                "c9342c2ae65773a2"
+            ]
+        ]
+    },
+    {
+        "id": "d585834b3020d2f1",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "74a2182d6cf3432b",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "Extract user and pass",
+        "func": "msg.payload = {status:\"OK\", token:msg.payload};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 480,
+        "wires": [
+            [
+                "7b80c134f08a63b6",
+                "02a9ea9e41023edc"
+            ]
+        ]
+    },
+    {
+        "id": "6737c839da4aeeab",
+        "type": "jwt sign",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "",
+        "alg": "HS256",
+        "exp": "31536000",
+        "jwkurl": "",
+        "jwkkid": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "payload",
+        "storetoken": "payload",
+        "x": 540,
+        "y": 580,
+        "wires": [
+            [
+                "74a2182d6cf3432b"
+            ]
+        ]
+    },
+    {
+        "id": "1130f17012c07889",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload[0];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 600,
+        "wires": [
+            [
+                "6737c839da4aeeab"
+            ]
+        ]
+    },
+    {
+        "id": "439179766e1f35cc",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1330,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "4240428fdf74c9fa",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "f9a3b44aeadaa5ec",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1190,
+        "y": 800,
+        "wires": [
+            [
+                "439179766e1f35cc"
+            ]
+        ]
+    },
+    {
+        "id": "3e76d12d9a3f36a9",
         "type": "switch",
         "z": "217d4457bda21c0d",
         "name": "",
@@ -808,54 +1080,37 @@
         "repair": false,
         "outputs": 2,
         "x": 170,
-        "y": 620,
+        "y": 960,
         "wires": [
             [
-                "1130f17012c07889"
+                "810bf7402e9b1a3f"
             ],
             [
-                "4f6f6fac724a496a"
+                "439179766e1f35cc"
             ]
         ]
     },
     {
-        "id": "344ec21cbcc27646",
+        "id": "17a95012080ff363",
         "type": "postgresql",
         "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
         "name": "",
-        "query": "SELECT userId FROM UserTable WHERE email = $1 AND password = $2;",
+        "query": "INSERT INTO JugTable VALUES ($1, $2);",
         "postgreSQLConfig": "647f7f903ce97865",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 510,
-        "y": 420,
+        "x": 830,
+        "y": 1080,
         "wires": [
             [
-                "d585834b3020d2f1",
-                "c9342c2ae65773a2"
+                "7337b18b2043a237"
             ]
         ]
     },
     {
-        "id": "d585834b3020d2f1",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "name": "debug 9",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "74a2182d6cf3432b",
+        "id": "b2d78a25b648251e",
         "type": "function",
         "z": "217d4457bda21c0d",
         "name": "Extract user and pass",
@@ -867,16 +1122,16 @@
         "finalize": "",
         "libs": [],
         "x": 980,
-        "y": 460,
+        "y": 800,
         "wires": [
             [
-                "7b80c134f08a63b6",
-                "02a9ea9e41023edc"
+                "f9a3b44aeadaa5ec",
+                "4240428fdf74c9fa"
             ]
         ]
     },
     {
-        "id": "6737c839da4aeeab",
+        "id": "4410cea2ae651c4e",
         "type": "jwt sign",
         "z": "217d4457bda21c0d",
         "name": "",
@@ -889,18 +1144,18 @@
         "signvar": "payload",
         "storetoken": "payload",
         "x": 540,
-        "y": 560,
+        "y": 900,
         "wires": [
             [
-                "74a2182d6cf3432b"
+                "b2d78a25b648251e"
             ]
         ]
     },
     {
-        "id": "1130f17012c07889",
+        "id": "810bf7402e9b1a3f",
         "type": "function",
         "z": "217d4457bda21c0d",
-        "name": "function 1",
+        "name": "function 2",
         "func": "msg.payload = msg.payload[0];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -909,10 +1164,135 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 580,
+        "y": 920,
         "wires": [
             [
-                "6737c839da4aeeab"
+                "4410cea2ae651c4e"
+            ]
+        ]
+    },
+    {
+        "id": "f5c3aee0864a46be",
+        "type": "mqtt in",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "",
+        "topic": "/jug/pair",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "c77abff0c3609a0d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 1080,
+        "wires": [
+            [
+                "61ff41d6f79027dd"
+            ]
+        ]
+    },
+    {
+        "id": "e57bdf0359866749",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "Token",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "61ff41d6f79027dd",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "Extract id and token",
+        "func": "msg.payload = msg.payload.id;\nmsg.token = msg.payload.token;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 1080,
+        "wires": [
+            [
+                "378b9baed000b7e6"
+            ]
+        ]
+    },
+    {
+        "id": "378b9baed000b7e6",
+        "type": "jwt verify",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "",
+        "alg": [
+            "HS256"
+        ],
+        "jwkurl": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "token",
+        "storetoken": "token",
+        "x": 490,
+        "y": 1080,
+        "wires": [
+            [
+                "4401d53accce85c2"
+            ]
+        ]
+    },
+    {
+        "id": "4401d53accce85c2",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "function 3",
+        "func": "msg.params = [msg.payload, msg.token.userid]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1080,
+        "wires": [
+            [
+                "17a95012080ff363"
+            ]
+        ]
+    },
+    {
+        "id": "7337b18b2043a237",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "Extract user and pass",
+        "func": "msg.payload = {status:\"OK\", token:msg.payload};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 1080,
+        "wires": [
+            [
+                "e57bdf0359866749"
             ]
         ]
     },
