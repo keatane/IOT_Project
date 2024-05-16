@@ -174,12 +174,15 @@
             "120dae098c73873b",
             "6bf593c124f692f4",
             "1e33342913f1a641",
-            "e007aae71a2fd34c"
+            "e007aae71a2fd34c",
+            "12e14872e9e1debc",
+            "fa3fe7db1655837d",
+            "5a63caf10b3b9a0e"
         ],
-        "x": 154,
+        "x": 114,
         "y": 719,
-        "w": 832,
-        "h": 142
+        "w": 1312,
+        "h": 182
     },
     {
         "id": "dec02f83255e8269",
@@ -1293,7 +1296,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "7f812365318f4aea",
         "name": "",
-        "topic": "/Thingworx/Jug1/litresPerSecond",
+        "topic": "/Thingworx/Jug555/litresPerSecond",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "c77abff0c3609a0d",
@@ -1301,7 +1304,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 310,
+        "x": 320,
         "y": 460,
         "wires": [
             [
@@ -1375,7 +1378,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "323958da1d4e2b7b",
         "name": "",
-        "topic": "/Thingworx/Jug1/litresPerSecond",
+        "topic": "/Thingworx/Jug555/litresPerSecond",
         "qos": "0",
         "retain": "",
         "respTopic": "",
@@ -1620,7 +1623,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "323958da1d4e2b7b",
         "name": "",
-        "topic": "/Thingworx/Jug1/totalLitres",
+        "topic": "/Thingworx/Jug555/totalLitres",
         "qos": "0",
         "retain": "",
         "respTopic": "",
@@ -1688,12 +1691,10 @@
         "authType": "basic",
         "senderr": false,
         "headers": [],
-        "x": 430,
+        "x": 390,
         "y": 760,
         "wires": [
-            [
-                "1e33342913f1a641"
-            ]
+            []
         ]
     },
     {
@@ -1709,7 +1710,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
+        "x": 1320,
         "y": 760,
         "wires": []
     },
@@ -1735,11 +1736,12 @@
         "topic": "",
         "payload": "{     \"name\": \"Jug555\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
         "payloadType": "json",
-        "x": 260,
+        "x": 220,
         "y": 760,
         "wires": [
             [
-                "df69d4b1370ec407"
+                "df69d4b1370ec407",
+                "5a63caf10b3b9a0e"
             ]
         ]
     },
@@ -1761,7 +1763,7 @@
         "senderr": false,
         "headers": [],
         "x": 430,
-        "y": 820,
+        "y": 860,
         "wires": [
             [
                 "e007aae71a2fd34c"
@@ -1781,8 +1783,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
-        "y": 820,
+        "x": 1320,
+        "y": 860,
         "wires": []
     },
     {
@@ -1807,8 +1809,8 @@
         "topic": "",
         "payload": "{     \"name\": \"Jug555\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
         "payloadType": "json",
-        "x": 260,
-        "y": 820,
+        "x": 220,
+        "y": 860,
         "wires": [
             [
                 "abf1b4b172e6ae86"
@@ -1828,7 +1830,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 650,
+        "x": 1150,
         "y": 760,
         "wires": [
             [
@@ -1849,8 +1851,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 650,
-        "y": 820,
+        "x": 1150,
+        "y": 860,
         "wires": [
             [
                 "120dae098c73873b"
@@ -1914,6 +1916,154 @@
         "x": 650,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "12e14872e9e1debc",
+        "type": "http request",
+        "z": "4c20aa2ac87fc1e6",
+        "g": "a70a5b1a39c32320",
+        "name": "Enable Thing",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug555/Services/EnableThing",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 650,
+        "y": 800,
+        "wires": [
+            [
+                "fa3fe7db1655837d"
+            ]
+        ]
+    },
+    {
+        "id": "16d8c648ffa37859",
+        "type": "inject",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 880,
+        "y": 580,
+        "wires": [
+            [
+                "12e14872e9e1debc"
+            ]
+        ]
+    },
+    {
+        "id": "fa3fe7db1655837d",
+        "type": "http request",
+        "z": "4c20aa2ac87fc1e6",
+        "g": "a70a5b1a39c32320",
+        "name": "Restart Thing",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug555/Services/RestartThing",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 920,
+        "y": 800,
+        "wires": [
+            [
+                "1e33342913f1a641"
+            ]
+        ]
+    },
+    {
+        "id": "72e88a4d529bd5f4",
+        "type": "inject",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1080,
+        "y": 580,
+        "wires": [
+            [
+                "fa3fe7db1655837d"
+            ]
+        ]
+    },
+    {
+        "id": "5a63caf10b3b9a0e",
+        "type": "delay",
+        "z": "4c20aa2ac87fc1e6",
+        "g": "a70a5b1a39c32320",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 800,
+        "wires": [
+            [
+                "12e14872e9e1debc"
+            ]
+        ]
     },
     {
         "id": "7c08cf946e57e464",
