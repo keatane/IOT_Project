@@ -65,7 +65,7 @@ async function register(username:string,password:string) {
 }
 
 async function login(username:string,password:string) {
-    LOGIN_API.send({username,password});
+    console.log(await LOGIN_API.send({username,password}));
 }
 
 async function registerDevices(n: string, token: string) {
