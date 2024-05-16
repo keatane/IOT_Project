@@ -3,7 +3,7 @@ import { program } from "commander";
 import fetch from "node-fetch";
 
 const HOST = "127.0.0.1";
-const PORT = 1234;
+const PORT = 1881;
 
 enum Method {
   GET = "get",
@@ -60,8 +60,8 @@ async function connect(host: string, port: string) {
   await connectAsync("mqtt://127.0.0.1:1883", { username: "" });
 }
 
-async function register() {
-    console.log(await REGISTER_API.send({username:'test',password:'test'})).ok
+async function register(username:string,password:string) {
+    console.log((await REGISTER_API.send({username,password})).ok)
 }
 
 async function login() {
@@ -77,4 +77,5 @@ async function registerDevices(n: string, token: string) {
 }
 
 program.command("connect <host> <ip>").action(connect);
+program.command("register <username> <password>").action(register);
 program.parse();
