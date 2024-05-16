@@ -352,7 +352,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 130,
-        "y": 140,
+        "y": 60,
         "wires": [
             [
                 "8e7d846effd9e3d7"
@@ -369,11 +369,10 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 730,
-        "y": 140,
+        "x": 630,
+        "y": 240,
         "wires": [
             [
-                "ce4aa892ac61f3a4",
                 "82cd4ba7de232cdf"
             ]
         ]
@@ -382,19 +381,19 @@
         "id": "587d719d685f7298",
         "type": "function",
         "z": "217d4457bda21c0d",
-        "name": "Extract user and pass",
-        "func": "msg.params = [msg.payload.username, msg.payload.password];\nreturn msg;",
+        "name": "Extract email",
+        "func": "msg.params = [msg.payload.username];\nmsg.old = msg.payload;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 140,
+        "x": 270,
+        "y": 120,
         "wires": [
             [
-                "9f2b775c5e24acb8"
+                "43ca287d27944fbd"
             ]
         ]
     },
@@ -406,8 +405,8 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 290,
-        "y": 140,
+        "x": 130,
+        "y": 120,
         "wires": [
             [
                 "587d719d685f7298"
@@ -421,8 +420,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1310,
-        "y": 140,
+        "x": 1330,
+        "y": 280,
         "wires": []
     },
     {
@@ -463,7 +462,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 240,
+        "y": 760,
         "wires": [
             [
                 "83c99c7142a96e7f"
@@ -481,31 +480,10 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 240,
+        "y": 760,
         "wires": [
             [
                 "e8bc2dd148bbffb3"
-            ]
-        ]
-    },
-    {
-        "id": "82cd4ba7de232cdf",
-        "type": "function",
-        "z": "217d4457bda21c0d",
-        "name": "Extract user and pass",
-        "func": "if (!msg.hasOwnProperty(\"error\")){\n    msg.payload = {status:\"OK\"};\n}\nelse{\n    msg.payload = {status:\"ERR\"};\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 960,
-        "y": 140,
-        "wires": [
-            [
-                "a492c59417e3526d",
-                "ce4aa892ac61f3a4"
             ]
         ]
     },
@@ -522,7 +500,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 240,
+        "y": 760,
         "wires": []
     },
     {
@@ -563,7 +541,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 300,
+        "y": 820,
         "wires": [
             [
                 "d0c5bf7405388a7c"
@@ -581,7 +559,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 300,
+        "y": 820,
         "wires": [
             [
                 "c98c52a08de3b558"
@@ -601,8 +579,342 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 300,
+        "y": 820,
         "wires": []
+    },
+    {
+        "id": "68a2107c3e0d91ed",
+        "type": "switch",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "10b809801dba4bcb"
+            ],
+            [
+                "fa53f57ac6c934fc",
+                "c2adafc6141062ba"
+            ]
+        ]
+    },
+    {
+        "id": "43ca287d27944fbd",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "query": "SELECT * FROM UserTable WHERE email = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "fa53f57ac6c934fc",
+                "68a2107c3e0d91ed"
+            ]
+        ]
+    },
+    {
+        "id": "c2adafc6141062ba",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Extract user and pass",
+        "func": "msg.params = [msg.old.username, msg.old.password];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 260,
+        "wires": [
+            [
+                "9f2b775c5e24acb8"
+            ]
+        ]
+    },
+    {
+        "id": "fa53f57ac6c934fc",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "82cd4ba7de232cdf",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Extract user and pass",
+        "func": "msg.payload = {status:\"OK\"};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 140,
+        "wires": [
+            [
+                "a492c59417e3526d",
+                "ce4aa892ac61f3a4"
+            ]
+        ]
+    },
+    {
+        "id": "5c3d7fd931d482a9",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "name": "Login",
+        "url": "/login",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 380,
+        "wires": [
+            [
+                "68fcddddc6fb266a"
+            ]
+        ]
+    },
+    {
+        "id": "fb7f4297b358477b",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Extract email and password",
+        "func": "msg.params = [msg.payload.username, msg.payload.password];\nmsg.old = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "344ec21cbcc27646"
+            ]
+        ]
+    },
+    {
+        "id": "68fcddddc6fb266a",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "fb7f4297b358477b"
+            ]
+        ]
+    },
+    {
+        "id": "4f6f6fac724a496a",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1330,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "02a9ea9e41023edc",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7b80c134f08a63b6",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1190,
+        "y": 460,
+        "wires": [
+            [
+                "4f6f6fac724a496a"
+            ]
+        ]
+    },
+    {
+        "id": "c9342c2ae65773a2",
+        "type": "switch",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 620,
+        "wires": [
+            [
+                "1130f17012c07889"
+            ],
+            [
+                "4f6f6fac724a496a"
+            ]
+        ]
+    },
+    {
+        "id": "344ec21cbcc27646",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "query": "SELECT userId FROM UserTable WHERE email = $1 AND password = $2;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 510,
+        "y": 420,
+        "wires": [
+            [
+                "d585834b3020d2f1",
+                "c9342c2ae65773a2"
+            ]
+        ]
+    },
+    {
+        "id": "d585834b3020d2f1",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "74a2182d6cf3432b",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Extract user and pass",
+        "func": "msg.payload = {status:\"OK\", token:msg.payload};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 460,
+        "wires": [
+            [
+                "7b80c134f08a63b6",
+                "02a9ea9e41023edc"
+            ]
+        ]
+    },
+    {
+        "id": "6737c839da4aeeab",
+        "type": "jwt sign",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "alg": "HS256",
+        "exp": "31536000",
+        "jwkurl": "",
+        "jwkkid": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "payload",
+        "storetoken": "payload",
+        "x": 540,
+        "y": 560,
+        "wires": [
+            [
+                "74a2182d6cf3432b"
+            ]
+        ]
+    },
+    {
+        "id": "1130f17012c07889",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload[0];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 580,
+        "wires": [
+            [
+                "6737c839da4aeeab"
+            ]
+        ]
     },
     {
         "id": "f26cc9e6ff46d635",
