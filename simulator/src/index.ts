@@ -56,6 +56,32 @@ interface LoginResponse{
 const LOGIN_API=new RestAPI<LoginRequest,LoginResponse>("login",Method.POST);
 
 
+class MQTTAPI<RequestType,ResponseType>{
+  constructor(
+    private topic: string
+  ) {
+      await connectAsync("mqtt://127.0.0.1:1883", { username: "studenti",password:"studentiDRUIDLAB_1" });
+  }
+  public async connect(){
+  }
+  public async send(obj: RequestType): Promise<ResponseType> {
+  }
+}
+
+interface PairRequest{
+    id:number,
+    token:string,
+}
+
+enum PairResponseStatus{
+    OK="OK"
+}
+
+interface PairResponse{
+    status:PairResponseStatus
+}
+
+
 async function connect(host: string, port: string) {
   await connectAsync("mqtt://127.0.0.1:1883", { username: "" });
 }
