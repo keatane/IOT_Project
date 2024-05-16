@@ -493,7 +493,7 @@
         "type": "function",
         "z": "217d4457bda21c0d",
         "name": "Extract user and pass",
-        "func": "if (!msg.hasOwnProperty(\"error\")){\n    msg.payload = \"OK\";\n}\nelse{\n    msg.payload = \"ERR\"\n}\nreturn msg;",
+        "func": "if (!msg.hasOwnProperty(\"error\")){\n    msg.payload = {status:\"OK\"};\n}\nelse{\n    msg.payload = {status:\"ERR\"};\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,

@@ -34,7 +34,7 @@ enum RegisterResponseStatus{
 }
 
 interface RegisterResponse{
-    ok:RegisterResponseStatus
+    status:RegisterResponseStatus
 }
 
 const REGISTER_API=new RestAPI<RegisterRequest,RegisterResponse>("register",Method.POST);
@@ -49,7 +49,7 @@ enum LoginResponseStatus{
 }
 
 interface LoginResponse{
-    ok:LoginResponseStatus
+    status:LoginResponseStatus
     token:string|null
 }
 
@@ -61,7 +61,7 @@ async function connect(host: string, port: string) {
 }
 
 async function register(username:string,password:string) {
-    console.log((await REGISTER_API.send({username,password})).ok)
+    console.log((await REGISTER_API.send({username,password})).status)
 }
 
 async function login() {
