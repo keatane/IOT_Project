@@ -2,7 +2,7 @@
     {
         "id": "217d4457bda21c0d",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Postgres",
         "disabled": false,
         "info": "",
         "env": []
@@ -316,6 +316,230 @@
         "width": "6",
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "647f7f903ce97865",
+        "type": "postgreSQLConfig",
+        "name": "",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "jugdb",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "nodered",
+        "userFieldType": "str",
+        "password": "passwordsegreta",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "e617a36252101d98",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "name": "Registration",
+        "url": "/register",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "8e7d846effd9e3d7"
+            ]
+        ]
+    },
+    {
+        "id": "9f2b775c5e24acb8",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "query": "INSERT INTO UserTable(email, password) VALUES ($1, $2);",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 730,
+        "y": 140,
+        "wires": [
+            [
+                "ce4aa892ac61f3a4",
+                "82cd4ba7de232cdf"
+            ]
+        ]
+    },
+    {
+        "id": "587d719d685f7298",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Extract user and pass",
+        "func": "msg.params = [msg.payload.username, msg.payload.password];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 140,
+        "wires": [
+            [
+                "9f2b775c5e24acb8"
+            ]
+        ]
+    },
+    {
+        "id": "8e7d846effd9e3d7",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "587d719d685f7298"
+            ]
+        ]
+    },
+    {
+        "id": "10b809801dba4bcb",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1310,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ce4aa892ac61f3a4",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "3c434ec046f71a23",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "83c99c7142a96e7f"
+            ]
+        ]
+    },
+    {
+        "id": "83c99c7142a96e7f",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "query": "SELECT * FROM UserTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 350,
+        "y": 240,
+        "wires": [
+            [
+                "e8bc2dd148bbffb3"
+            ]
+        ]
+    },
+    {
+        "id": "82cd4ba7de232cdf",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Extract user and pass",
+        "func": "if (!msg.hasOwnProperty(\"error\")){\n    msg.payload = \"OK\";\n}\nelse{\n    msg.payload = \"ERR\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 140,
+        "wires": [
+            [
+                "a492c59417e3526d",
+                "ce4aa892ac61f3a4"
+            ]
+        ]
+    },
+    {
+        "id": "e8bc2dd148bbffb3",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "a492c59417e3526d",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1170,
+        "y": 140,
+        "wires": [
+            [
+                "10b809801dba4bcb"
+            ]
+        ]
     },
     {
         "id": "f26cc9e6ff46d635",
@@ -1145,11 +1369,11 @@
         "z": "dd62ac133fb1360c",
         "g": "6cce7f7cd691161b",
         "name": "sum streams",
-        "func": "msg.payload = global.get(\"counter\") + msg.payload;\nreturn msg;",
+        "func": "global.set(\"counter\", global.get(\"counter\") + msg.payload);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"counter\", 0);  // this is now available to other nodes",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"counter\", 0);  // this is now available to other nodes\n",
         "finalize": "",
         "libs": [],
         "x": 590,
