@@ -9,6 +9,8 @@ services:
       NODE_RED_DISABLE_EDITOR: false
   db:
     image: docker.io/postgres:16.3-alpine3.19
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: passwordsegreta
       POSTGRES_USER: nodered
