@@ -147,3 +147,4 @@ dist
 .config.runtime.json
 .config.users.json
 .config.users.json.backup
+.flows_cred.json.backup
