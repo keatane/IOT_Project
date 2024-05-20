@@ -2,7 +2,7 @@
     {
         "id": "217d4457bda21c0d",
         "type": "tab",
-        "label": "Postgres",
+        "label": "Operations",
         "disabled": false,
         "info": "",
         "env": []
@@ -260,7 +260,7 @@
         ],
         "x": 34,
         "y": 659,
-        "w": 1272,
+        "w": 1292,
         "h": 122
     },
     {
@@ -1168,7 +1168,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1190,
+        "x": 1210,
         "y": 700,
         "wires": []
     },
@@ -1328,7 +1328,7 @@
         "correl": "",
         "expiry": "",
         "broker": "c77abff0c3609a0d",
-        "x": 1190,
+        "x": 1210,
         "y": 740,
         "wires": []
     },
