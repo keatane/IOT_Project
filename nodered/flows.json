@@ -331,6 +331,27 @@
         "h": 142
     },
     {
+        "id": "2014e345587e4007",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Show / Clean JugTable",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "801868f4cc631259",
+            "28705e872a39bf64",
+            "1cd3cb4c7a6a6292",
+            "f8e038c0ae26a12a",
+            "4810de2e5fcc3538",
+            "bad79e1fd1d22d16"
+        ],
+        "x": 694,
+        "y": 479,
+        "w": 632,
+        "h": 142
+    },
+    {
         "id": "dd1013cf1ed907ad",
         "type": "junction",
         "z": "217d4457bda21c0d",
@@ -1312,6 +1333,138 @@
         "wires": []
     },
     {
+        "id": "801868f4cc631259",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 520,
+        "wires": [
+            [
+                "28705e872a39bf64"
+            ]
+        ]
+    },
+    {
+        "id": "28705e872a39bf64",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "Show table",
+        "query": "SELECT * FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1010,
+        "y": 520,
+        "wires": [
+            [
+                "1cd3cb4c7a6a6292"
+            ]
+        ]
+    },
+    {
+        "id": "1cd3cb4c7a6a6292",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "f8e038c0ae26a12a",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 580,
+        "wires": [
+            [
+                "4810de2e5fcc3538"
+            ]
+        ]
+    },
+    {
+        "id": "4810de2e5fcc3538",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "Clean table",
+        "query": "DELETE FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1010,
+        "y": 580,
+        "wires": [
+            [
+                "bad79e1fd1d22d16"
+            ]
+        ]
+    },
+    {
+        "id": "bad79e1fd1d22d16",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 580,
+        "wires": []
+    },
+    {
         "id": "f26cc9e6ff46d635",
         "type": "mqtt in",
         "z": "4c20aa2ac87fc1e6",
@@ -1358,7 +1511,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "7f812365318f4aea",
         "name": "",
-        "topic": "/Thingworx/Jug1/totalLitres",
+        "topic": "/Thingworx/Jug555/totalLitres",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "c77abff0c3609a0d",
@@ -1366,7 +1519,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 290,
+        "x": 300,
         "y": 580,
         "wires": [
             [
