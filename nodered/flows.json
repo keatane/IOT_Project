@@ -255,12 +255,13 @@
             "378b9baed000b7e6",
             "4401d53accce85c2",
             "17a95012080ff363",
-            "7337b18b2043a237"
+            "7337b18b2043a237",
+            "99c1e01bcdde1e9a"
         ],
         "x": 34,
         "y": 659,
         "w": 1272,
-        "h": 82
+        "h": 122
     },
     {
         "id": "bdbaa79edcd82992",
@@ -1096,13 +1097,13 @@
         "type": "postgresql",
         "z": "217d4457bda21c0d",
         "g": "1589093497ae43e3",
-        "name": "Insert jug",
-        "query": "INSERT INTO JugTable VALUES ($1, $2);",
+        "name": "Insert or update jug",
+        "query": "INSERT INTO JugTable VALUES ($1, $2)\nON CONFLICT (id) DO UPDATE\n    SET userId = $2;",
         "postgreSQLConfig": "647f7f903ce97865",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 800,
+        "x": 830,
         "y": 700,
         "wires": [
             [
@@ -1146,7 +1147,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1210,
+        "x": 1190,
         "y": 700,
         "wires": []
     },
@@ -1156,7 +1157,7 @@
         "z": "217d4457bda21c0d",
         "g": "1589093497ae43e3",
         "name": "Extract id and token",
-        "func": "msg.payload = msg.payload.id;\nmsg.token = msg.payload.token;\nreturn msg;",
+        "func": "msg.token = msg.payload.token;\nmsg.payload = msg.payload.id;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1220,18 +1221,19 @@
         "z": "217d4457bda21c0d",
         "g": "1589093497ae43e3",
         "name": "Return Status",
-        "func": "msg.payload = {status:\"OK\", token:msg.payload};\nreturn msg;",
+        "func": "msg.payload = {status:\"OK\"};\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 980,
+        "x": 1020,
         "y": 700,
         "wires": [
             [
-                "e57bdf0359866749"
+                "e57bdf0359866749",
+                "99c1e01bcdde1e9a"
             ]
         ]
     },
@@ -1289,6 +1291,25 @@
                 "b3a6633e59d62793"
             ]
         ]
+    },
+    {
+        "id": "99c1e01bcdde1e9a",
+        "type": "mqtt out",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "",
+        "topic": "/jug/pair/response",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c77abff0c3609a0d",
+        "x": 1190,
+        "y": 740,
+        "wires": []
     },
     {
         "id": "f26cc9e6ff46d635",
