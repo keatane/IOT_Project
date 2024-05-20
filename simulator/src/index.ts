@@ -67,7 +67,9 @@ class MQTTAPI<RequestType,ResponseType>{
       await client.publishAsync(this.publishTopic,JSON.stringify(obj))
       await client.subscribeAsync(this.subscribeTopic)
       const promise=new Promise<ResponseType>((resolve)=>{client.on('message',(message)=>{resolve(JSON.parse(message))})});
-      return await promise;
+      const result=await promise;
+      await client.endAsync();
+      return result
   }
 }
 
