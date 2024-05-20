@@ -115,7 +115,7 @@ async function singleInstance(username:string,password:string,id:string){
     while(true){
         await sendData(id,"28");
         console.log("Sent, looping");
-        sleep(1);
+        await sleep(1);
     }
 }
 
