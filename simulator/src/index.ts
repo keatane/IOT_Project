@@ -148,5 +148,5 @@ program.command("login <username> <password>").action(print(login));
 program.command("pair <id> <token>").action(print(pair));
 program.command("send-data <id> <data>").action(print(pair));
 program.command("simulator-single <username> <password> <id>").action(print(singleInstance));
-program.command("simulator").action(print(simulator));
+program.command("simulator <n>").action(print(simulator));
 program.parse();
