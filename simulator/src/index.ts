@@ -58,13 +58,16 @@ const LOGIN_API=new RestAPI<LoginRequest,LoginResponse>("login",Method.POST);
 
 class MQTTAPI<RequestType,ResponseType>{
   constructor(
-    private topic: string
+    private publishTopic: string,
+    private subscribeTopic:string
   ) {
-      await connectAsync("mqtt://127.0.0.1:1883", { username: "studenti",password:"studentiDRUIDLAB_1" });
-  }
-  public async connect(){
   }
   public async send(obj: RequestType): Promise<ResponseType> {
+      const client=await connectAsync("mqtt://127.0.0.1:1883", { username: "studenti",password:"studentiDRUIDLAB_1" });
+      await client.publishAsync(this.publishTopic,JSON.stringify(obj))
+      await client.subscribeAsync(this.subscribeTopic)
+      const promise=new Promise<ResponseType>((resolve)=>{client.on('message',(message)=>{resolve(JSON.parse(message))})});
+      return await promise;
   }
 }
 
@@ -81,6 +84,8 @@ interface PairResponse{
     status:PairResponseStatus
 }
 
+const PAIR_API=new MQTTAPI<PairRequest,PairResponse>("/jug/pair","/jug/pair/response");
+
 
 async function connect(host: string, port: string) {
   await connectAsync("mqtt://127.0.0.1:1883", { username: "" });
@@ -94,15 +99,12 @@ async function login(username:string,password:string) {
     console.log(await LOGIN_API.send({username,password}));
 }
 
-async function registerDevices(n: string, token: string) {
-  const client = await connectAsync("mqtt://212.78.1.205", {
-    username: "studenti",
-    password: "studentiDRUIDLAB_1",
-  });
-  await client.publishAsync("/jug/pair", JSON.stringify({ id: "", token: "" }));
+async function pair(id: string, token: string) {
+    console.log(await PAIR_API.send({id:Number(id),token}));
 }
 
 program.command("connect <host> <ip>").action(connect);
 program.command("register <username> <password>").action(register);
 program.command("login <username> <password>").action(login);
+program.command("pair <id> <token>").action(pair);
 program.parse();
