@@ -131,7 +131,7 @@ async function pair(id: string, token: string) {
 }
 
 async function sendData(id:string,data:string){
-    return await new MQTTAPI<Number,null>(`/Thingworx/${id}/litresPerSecond`,null).send(Number(data));
+    return await new MQTTAPI<Number,null>(`/Thingworx/Jug${id}/litresPerSecond`,null).send(Number(data));
 }
 
 function print(f:(...string)=>Promise<any>){
