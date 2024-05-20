@@ -185,23 +185,6 @@
         "h": 182
     },
     {
-        "id": "dec02f83255e8269",
-        "type": "group",
-        "z": "dd62ac133fb1360c",
-        "name": "Token handler",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "7c08cf946e57e464",
-            "80cdd81f6d5a5a21"
-        ],
-        "x": 114,
-        "y": 19,
-        "w": 332,
-        "h": 82
-    },
-    {
         "id": "55c530ddc18f58e8",
         "type": "group",
         "z": "dd62ac133fb1360c",
@@ -211,15 +194,19 @@
         },
         "nodes": [
             "b2a3114f40da36d1",
-            "258db430c1a2dc71",
             "fc8edbf2fc5789ea",
-            "57cb151164b5677c",
-            "1f4ad03c7e8b57c2"
+            "12d815057cd57334",
+            "bca0d49876942d04",
+            "686e392549632634",
+            "0f36aa3917d94588",
+            "43eb9f6208742902",
+            "8e2873091a36bded",
+            "cdb712ef947b9f93"
         ],
-        "x": 114,
-        "y": 139,
-        "w": 872,
-        "h": 222
+        "x": 14,
+        "y": 59,
+        "w": 1592,
+        "h": 162
     },
     {
         "id": "6cce7f7cd691161b",
@@ -233,12 +220,13 @@
             "2a5abae8e17b662f",
             "6026dc6309b3c457",
             "56a581e5680ad6e3",
+            "e2b41d91cb228409",
             "edd3c74cf042e2ad"
         ],
         "x": 114,
-        "y": 419,
+        "y": 619,
         "w": 892,
-        "h": 142
+        "h": 162
     },
     {
         "id": "1589093497ae43e3",
@@ -1189,7 +1177,8 @@
         "y": 700,
         "wires": [
             [
-                "378b9baed000b7e6"
+                "378b9baed000b7e6",
+                "4ef11d4b115a505d"
             ]
         ]
     },
@@ -1465,6 +1454,230 @@
         "wires": []
     },
     {
+        "id": "ce16f9573b804d91",
+        "type": "http request",
+        "z": "217d4457bda21c0d",
+        "name": "Create Thing",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Resources/EntityServices/Services/CreateThing",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4818a8ee8ce9699e",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "90af0b5592d2b50b",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Transform output",
+        "func": "if (msg.payload == \"\"){\n    msg.payload = \"Thing successfully added.\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 840,
+        "wires": [
+            [
+                "4818a8ee8ce9699e"
+            ]
+        ]
+    },
+    {
+        "id": "6f1e5e7364d80697",
+        "type": "http request",
+        "z": "217d4457bda21c0d",
+        "name": "Enable Thing",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Services/EnableThing",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 550,
+        "y": 880,
+        "wires": [
+            [
+                "12d7faae89458ea7"
+            ]
+        ]
+    },
+    {
+        "id": "12d7faae89458ea7",
+        "type": "http request",
+        "z": "217d4457bda21c0d",
+        "name": "Restart Thing",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Services/RestartThing",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 740,
+        "y": 880,
+        "wires": [
+            [
+                "90af0b5592d2b50b"
+            ]
+        ]
+    },
+    {
+        "id": "5abf18101812be96",
+        "type": "delay",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 880,
+        "wires": [
+            [
+                "6f1e5e7364d80697"
+            ]
+        ]
+    },
+    {
+        "id": "c4bdcc33cbf74d3f",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "function 1",
+        "func": "msg.payload = { \"name\": `Jug${msg.payload}`, \"projectName\": \"cattaneo-isola\", \"thingTemplateName\": \"JugTemplate\" };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 880,
+        "wires": [
+            [
+                "ce16f9573b804d91",
+                "5abf18101812be96"
+            ]
+        ]
+    },
+    {
+        "id": "4ef11d4b115a505d",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "thing_id",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 972,
+        "wires": [
+            [
+                "08d1b59a62811f23"
+            ]
+        ]
+    },
+    {
+        "id": "08d1b59a62811f23",
+        "type": "http request",
+        "z": "217d4457bda21c0d",
+        "name": "Get Total litres",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/totalLitres",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 420,
+        "y": 972,
+        "wires": [
+            [
+                "c4bdcc33cbf74d3f"
+            ]
+        ]
+    },
+    {
         "id": "f26cc9e6ff46d635",
         "type": "mqtt in",
         "z": "4c20aa2ac87fc1e6",
@@ -1552,7 +1765,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "323958da1d4e2b7b",
         "name": "",
-        "topic": "/Thingworx/Jug555/litresPerSecond",
+        "topic": "/Thingworx/Jug1/litresPerSecond",
         "qos": "0",
         "retain": "",
         "respTopic": "",
@@ -1611,9 +1824,7 @@
         "x": 490,
         "y": 220,
         "wires": [
-            [
-                "27e373792b79bb87"
-            ]
+            []
         ]
     },
     {
@@ -1716,9 +1927,7 @@
         "x": 490,
         "y": 260,
         "wires": [
-            [
-                "1a3567de62c2120d"
-            ]
+            []
         ]
     },
     {
@@ -1786,9 +1995,7 @@
         "x": 490,
         "y": 300,
         "wires": [
-            [
-                "4708d0a4450dd8e9"
-            ]
+            []
         ]
     },
     {
@@ -2182,46 +2389,6 @@
         ]
     },
     {
-        "id": "7c08cf946e57e464",
-        "type": "mqtt in",
-        "z": "dd62ac133fb1360c",
-        "g": "dec02f83255e8269",
-        "name": "",
-        "topic": "/jug/pair",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "c77abff0c3609a0d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 190,
-        "y": 60,
-        "wires": [
-            [
-                "80cdd81f6d5a5a21"
-            ]
-        ]
-    },
-    {
-        "id": "80cdd81f6d5a5a21",
-        "type": "debug",
-        "z": "dd62ac133fb1360c",
-        "g": "dec02f83255e8269",
-        "name": "Token",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 350,
-        "y": 60,
-        "wires": []
-    },
-    {
         "id": "2a5abae8e17b662f",
         "type": "ui_gauge",
         "z": "dd62ac133fb1360c",
@@ -2247,7 +2414,7 @@
         "diff": false,
         "className": "",
         "x": 880,
-        "y": 520,
+        "y": 720,
         "wires": []
     },
     {
@@ -2265,10 +2432,10 @@
         "rh": 0,
         "inputs": 0,
         "x": 290,
-        "y": 460,
+        "y": 660,
         "wires": [
             [
-                "edd3c74cf042e2ad"
+                "e2b41d91cb228409"
             ]
         ]
     },
@@ -2287,30 +2454,8 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 850,
-        "y": 460,
+        "y": 660,
         "wires": []
-    },
-    {
-        "id": "258db430c1a2dc71",
-        "type": "mqtt in",
-        "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
-        "name": "",
-        "topic": "/Thingworx/Jug1/totalLitres",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "c77abff0c3609a0d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 250,
-        "y": 240,
-        "wires": [
-            [
-                "fc8edbf2fc5789ea"
-            ]
-        ]
     },
     {
         "id": "fc8edbf2fc5789ea",
@@ -2327,75 +2472,9 @@
         "correl": "",
         "expiry": "",
         "broker": "c77abff0c3609a0d",
-        "x": 810,
-        "y": 240,
+        "x": 1430,
+        "y": 160,
         "wires": []
-    },
-    {
-        "id": "57cb151164b5677c",
-        "type": "mqtt in",
-        "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
-        "name": "",
-        "topic": "/Thingworx/Jug2/totalLitres",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "c77abff0c3609a0d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 250,
-        "y": 280,
-        "wires": [
-            [
-                "fc8edbf2fc5789ea"
-            ]
-        ]
-    },
-    {
-        "id": "1f4ad03c7e8b57c2",
-        "type": "mqtt in",
-        "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
-        "name": "",
-        "topic": "/Thingworx/Jug3/totalLitres",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "c77abff0c3609a0d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 250,
-        "y": 320,
-        "wires": [
-            [
-                "fc8edbf2fc5789ea"
-            ]
-        ]
-    },
-    {
-        "id": "edd3c74cf042e2ad",
-        "type": "function",
-        "z": "dd62ac133fb1360c",
-        "g": "6cce7f7cd691161b",
-        "name": "sum streams",
-        "func": "global.set(\"counter\", global.get(\"counter\") + msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"counter\", 0);  // this is now available to other nodes\n",
-        "finalize": "",
-        "libs": [],
-        "x": 650,
-        "y": 460,
-        "wires": [
-            [
-                "56a581e5680ad6e3",
-                "2a5abae8e17b662f"
-            ]
-        ]
     },
     {
         "id": "b2a3114f40da36d1",
@@ -2419,12 +2498,255 @@
         "topic": "",
         "payload": "0",
         "payloadType": "num",
-        "x": 730,
-        "y": 180,
+        "x": 1110,
+        "y": 100,
         "wires": [
             [
                 "fc8edbf2fc5789ea"
             ]
         ]
+    },
+    {
+        "id": "12d815057cd57334",
+        "type": "http request",
+        "z": "dd62ac133fb1360c",
+        "g": "55c530ddc18f58e8",
+        "name": "Get Total litres",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/totalLitres",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 900,
+        "y": 180,
+        "wires": [
+            [
+                "cdb712ef947b9f93"
+            ]
+        ]
+    },
+    {
+        "id": "bca0d49876942d04",
+        "type": "inject",
+        "z": "dd62ac133fb1360c",
+        "g": "55c530ddc18f58e8",
+        "name": "Start dashboard",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "686e392549632634"
+            ]
+        ]
+    },
+    {
+        "id": "686e392549632634",
+        "type": "postgresql",
+        "z": "dd62ac133fb1360c",
+        "g": "55c530ddc18f58e8",
+        "name": "Get Jug ids from DB",
+        "query": "SELECT id FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "43eb9f6208742902"
+            ]
+        ]
+    },
+    {
+        "id": "0f36aa3917d94588",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "55c530ddc18f58e8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "thing_id",
+                "pt": "msg",
+                "to": "payload.id",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 140,
+        "wires": [
+            [
+                "8e2873091a36bded",
+                "12d815057cd57334"
+            ]
+        ]
+    },
+    {
+        "id": "e2b41d91cb228409",
+        "type": "join",
+        "z": "dd62ac133fb1360c",
+        "g": "6cce7f7cd691161b",
+        "name": "",
+        "mode": "reduce",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "$sum(array)\t",
+        "reduceInit": "0",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "56a581e5680ad6e3",
+                "2a5abae8e17b662f"
+            ]
+        ]
+    },
+    {
+        "id": "43eb9f6208742902",
+        "type": "split",
+        "z": "dd62ac133fb1360c",
+        "g": "55c530ddc18f58e8",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 530,
+        "y": 140,
+        "wires": [
+            [
+                "0f36aa3917d94588"
+            ]
+        ]
+    },
+    {
+        "id": "edd3c74cf042e2ad",
+        "type": "function",
+        "z": "dd62ac133fb1360c",
+        "g": "6cce7f7cd691161b",
+        "name": "sum streams",
+        "func": "let sum = 0;\nfor (let elem in msg.payload){\n    sum += elem;\n    // global.set(\"counter\", global.get(\"counter\") + msg.payload);\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"counter\", 0);  // this is now available to other nodes\n",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e2873091a36bded",
+        "type": "debug",
+        "z": "dd62ac133fb1360c",
+        "g": "55c530ddc18f58e8",
+        "name": "debug 9",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "thing_id",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "cdb712ef947b9f93",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "55c530ddc18f58e8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.rows[0].totalLitres",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 140,
+        "wires": [
+            [
+                "fc8edbf2fc5789ea",
+                "13259f49b6750854"
+            ]
+        ]
+    },
+    {
+        "id": "13259f49b6750854",
+        "type": "debug",
+        "z": "dd62ac133fb1360c",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 280,
+        "wires": []
     }
 ]
