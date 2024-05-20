@@ -63,7 +63,7 @@ class MQTTAPI<RequestType,ResponseType>{
   ) {
   }
   public async send(obj: RequestType): Promise<ResponseType> {
-      const client=await connectAsync("mqtt://127.0.0.1:1883", { username: "studenti",password:"studentiDRUIDLAB_1" });
+      const client=await connectAsync("mqtt://212.78.1.205:1883", { username: "studenti",password:"studentiDRUIDLAB_1" });
       await client.publishAsync(this.publishTopic,JSON.stringify(obj))
       await client.subscribeAsync(this.subscribeTopic)
       const promise=new Promise<ResponseType>((resolve)=>{client.on('message',(message)=>{resolve(JSON.parse(message))})});
