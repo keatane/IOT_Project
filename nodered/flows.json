@@ -2124,35 +2124,6 @@
         ]
     },
     {
-        "id": "16d8c648ffa37859",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 880,
-        "y": 580,
-        "wires": [
-            [
-                "12e14872e9e1debc"
-            ]
-        ]
-    },
-    {
         "id": "fa3fe7db1655837d",
         "type": "http request",
         "z": "4c20aa2ac87fc1e6",
@@ -2181,35 +2152,6 @@
         "wires": [
             [
                 "1e33342913f1a641"
-            ]
-        ]
-    },
-    {
-        "id": "72e88a4d529bd5f4",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1080,
-        "y": 580,
-        "wires": [
-            [
-                "fa3fe7db1655837d"
             ]
         ]
     },
