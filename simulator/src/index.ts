@@ -59,12 +59,13 @@ const LOGIN_API=new RestAPI<LoginRequest,LoginResponse>("login",Method.POST);
 class MQTTAPI<RequestType,ResponseType>{
   constructor(
     private publishTopic: string,
-    private subscribeTopic:string
+    private subscribeTopic:string|null
   ) {
   }
   public async send(obj: RequestType): Promise<ResponseType> {
       const client=await connectAsync("mqtt://212.78.1.205:1883", { username: "studenti",password:"studentiDRUIDLAB_1" });
       await client.publishAsync(this.publishTopic,JSON.stringify(obj))
+      if(this.subscribeTopic==null)return null as any;
       await client.subscribeAsync(this.subscribeTopic)
       const promise=new Promise<ResponseType>((resolve)=>{client.on('message',(_,message)=>{console.log(message.toString());resolve(JSON.parse(message.toString()))})});
       const result=await promise;
@@ -89,24 +90,61 @@ interface PairResponse{
 const PAIR_API=new MQTTAPI<PairRequest,PairResponse>("/jug/pair","/jug/pair/response");
 
 
-async function connect(host: string, port: string) {
+function assert(obj:boolean):asserts obj is true{
+    if(!obj)throw new Error("Assertion failure");
+}
+
+async function sleep(s) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, s*1000);
+  });
+}
+
+
+
+async function simulator(n:Number) {
   await connectAsync("mqtt://127.0.0.1:1883", { username: "" });
 }
 
+async function singleInstance(username:string,password:string,id:string){
+    await register(username,password);
+    const obj=await login(username,password);
+    const token=obj.token;
+    if(token===null)throw new Error();
+    await pair(id,token);
+    while(true){
+        sendData(id,"28");
+        sleep(1);
+    }
+}
+
 async function register(username:string,password:string) {
-    console.log((await REGISTER_API.send({username,password})).status)
+    return (await REGISTER_API.send({username,password})).status;
 }
 
 async function login(username:string,password:string) {
-    console.log(await LOGIN_API.send({username,password}));
+    return await LOGIN_API.send({username,password});
 }
 
 async function pair(id: string, token: string) {
-    console.log(await PAIR_API.send({id:Number(id),token}));
+    return await PAIR_API.send({id:Number(id),token});
 }
 
-program.command("connect <host> <ip>").action(connect);
-program.command("register <username> <password>").action(register);
-program.command("login <username> <password>").action(login);
-program.command("pair <id> <token>").action(pair);
+async function sendData(id:string,data:string){
+    return await new MQTTAPI<Number,null>(`/Thingworx/${id}/litresPerSecond`,null).send(Number(data));
+}
+
+function print(f:(...string)=>Promise<any>){
+    async function inner(...args:string[]){
+        console.log(await f(...args));
+    }
+    return inner
+}
+
+
+program.command("register <username> <password>").action(print(register));
+program.command("login <username> <password>").action(print(login));
+program.command("pair <id> <token>").action(print(pair));
+program.command("send-data <id> <data>").action(print(pair));
+program.command("simulator-single <username> <password> <id>").action(print(singleInstance));
 program.parse();
