@@ -146,7 +146,7 @@ function print(f:(..._:string[])=>Promise<any>){
 program.command("register <username> <password>").action(print(register));
 program.command("login <username> <password>").action(print(login));
 program.command("pair <id> <token>").action(print(pair));
-program.command("send-data <id> <data>").action(print(pair));
+program.command("send-data <id> <data>").action(print(sendData));
 program.command("simulator-single <username> <password> <id>").action(print(singleInstance));
 program.command("simulator <n>").action(print(simulator));
 program.parse();
