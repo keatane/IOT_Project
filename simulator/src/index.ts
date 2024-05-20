@@ -89,12 +89,7 @@ interface PairResponse{
 
 const PAIR_API=new MQTTAPI<PairRequest,PairResponse>("/jug/pair","/jug/pair/response");
 
-
-function assert(obj:boolean):asserts obj is true{
-    if(!obj)throw new Error("Assertion failure");
-}
-
-async function sleep(s) {
+async function sleep(s:number) {
   await new Promise((resolve) => {
     setTimeout(resolve, s*1000);
   });
@@ -102,15 +97,19 @@ async function sleep(s) {
 
 
 
-async function simulator(n:Number) {
-  await connectAsync("mqtt://127.0.0.1:1883", { username: "" });
+async function simulator(n:number|string) {
+    n=Number(n.toString())
+    for(let i=0;i<n;i++){
+        singleInstance(`simulation${i}`,`simulation${i}`,i);
+    }
 }
 
-async function singleInstance(username:string,password:string,id:string){
+async function singleInstance(username:string,password:string,id:string|number){
+    id=Number(id.toString())
     await register(username,password);
     const obj=await login(username,password);
     const token=obj.token;
-    if(token===null)throw new Error();
+    if(token===null)throw new Error("Login failed");
     await pair(id,token);
     while(true){
         await sendData(id,"28");
@@ -127,15 +126,16 @@ async function login(username:string,password:string) {
     return await LOGIN_API.send({username,password});
 }
 
-async function pair(id: string, token: string) {
+async function pair(id: string|number, token: string) {
+    id=Number(id.toString())
     return await PAIR_API.send({id:Number(id),token});
 }
 
-async function sendData(id:string,data:string){
+async function sendData(id:string|number,data:string){
     return await new MQTTAPI<Number,null>(`/Thingworx/Jug${id}/litresPerSecond`,null).send(Number(data));
 }
 
-function print(f:(...string)=>Promise<any>){
+function print(f:(..._:string[])=>Promise<any>){
     async function inner(...args:string[]){
         console.log(await f(...args));
     }
@@ -148,4 +148,5 @@ program.command("login <username> <password>").action(print(login));
 program.command("pair <id> <token>").action(print(pair));
 program.command("send-data <id> <data>").action(print(pair));
 program.command("simulator-single <username> <password> <id>").action(print(singleInstance));
+program.command("simulator").action(print(simulator));
 program.parse();
