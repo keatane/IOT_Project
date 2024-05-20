@@ -113,7 +113,8 @@ async function singleInstance(username:string,password:string,id:string){
     if(token===null)throw new Error();
     await pair(id,token);
     while(true){
-        sendData(id,"28");
+        await sendData(id,"28");
+        console.log("Sent, looping");
         sleep(1);
     }
 }
