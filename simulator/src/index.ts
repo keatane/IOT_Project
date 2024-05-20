@@ -95,6 +95,9 @@ async function sleep(s:number) {
   });
 }
 
+function randomNumber(min:number,max:number){
+    return Math.random()*(max-min)+min;
+}
 
 
 async function simulator(n:number|string) {
@@ -112,7 +115,7 @@ async function singleInstance(username:string,password:string,id:string|number){
     if(token===null)throw new Error("Login failed");
     await pair(id,token);
     while(true){
-        await sendData(id,"28");
+        await sendData(id,randomNumber(0,1));
         console.log("Sent, looping");
         await sleep(1);
     }
@@ -131,8 +134,8 @@ async function pair(id: string|number, token: string) {
     return await PAIR_API.send({id:Number(id),token});
 }
 
-async function sendData(id:string|number,data:string){
-    return await new MQTTAPI<Number,null>(`/Thingworx/Jug${id}/litresPerSecond`,null).send(Number(data));
+async function sendData(id:string|number,data:string|Number){
+    return await new MQTTAPI<number,null>(`/Thingworx/Jug${id}/litresPerSecond`,null).send(Number(data));
 }
 
 function print(f:(..._:string[])=>Promise<any>){
