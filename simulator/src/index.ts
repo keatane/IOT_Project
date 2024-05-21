@@ -106,6 +106,10 @@ async function sleep(s:number) {
   });
 }
 
+function assert(){
+
+}
+
 function randomNumber(min:number,max:number){
     return Math.random()*(max-min)+min;
 }
@@ -169,5 +173,5 @@ program.command("pair <id> <token>").action(print(pair));
 program.command("send-data <id> <data>").action(print(sendData));
 program.command("simulator-single <username> <password> <id>").action(print(singleInstance));
 program.command("simulator <n>").action(print(simulator));
-program.command("filter <n> <token> <capacity>").action(print(simulator));
+program.command("filter <n> <token> <capacity>").action(print(filter));
 program.parse();
