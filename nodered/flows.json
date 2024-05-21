@@ -341,12 +341,16 @@
             "e2b41d91cb228409",
             "cd95edaaaf747c92",
             "13259f49b6750854",
-            "a3cf40fceacb65df"
+            "a3cf40fceacb65df",
+            "bf3e55578af7a2e4",
+            "3ef85ed4716564ae",
+            "4eb1c96a4b440d38",
+            "72d7683f247d4f7a"
         ],
         "x": 94,
         "y": 79,
         "w": 1012,
-        "h": 402
+        "h": 442
     },
     {
         "id": "dd1013cf1ed907ad",
@@ -532,7 +536,7 @@
     {
         "id": "a6a64a541ae8c000",
         "type": "ui_group",
-        "name": "Jugs Quantity",
+        "name": "Plastic saved",
         "tab": "ff083ec2093f4a2e",
         "order": 3,
         "disp": true,
@@ -579,6 +583,17 @@
         "name": "Litres informations",
         "tab": "ff083ec2093f4a2e",
         "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2dab9229986fd1ba",
+        "type": "ui_group",
+        "name": "Textual informations",
+        "tab": "ff083ec2093f4a2e",
+        "order": 3,
         "disp": true,
         "width": "6",
         "collapse": false,
@@ -2380,7 +2395,9 @@
         "x": 430,
         "y": 760,
         "wires": [
-            []
+            [
+                "12e14872e9e1debc"
+            ]
         ]
     },
     {
@@ -2389,7 +2406,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "a70a5b1a39c32320",
         "name": "debug 2",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2448,7 +2465,7 @@
         "authType": "basic",
         "senderr": false,
         "headers": [],
-        "x": 470,
+        "x": 530,
         "y": 860,
         "wires": [
             [
@@ -2462,7 +2479,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "a70a5b1a39c32320",
         "name": "debug 3",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2541,7 +2558,8 @@
         "y": 860,
         "wires": [
             [
-                "120dae098c73873b"
+                "120dae098c73873b",
+                "289d5d7502ba340b"
             ]
         ]
     },
@@ -2673,10 +2691,11 @@
         "id": "5a63caf10b3b9a0e",
         "type": "delay",
         "z": "4c20aa2ac87fc1e6",
+        "d": true,
         "g": "a70a5b1a39c32320",
         "name": "",
         "pauseType": "delay",
-        "timeout": "2",
+        "timeout": "1",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2693,6 +2712,125 @@
             [
                 "12e14872e9e1debc"
             ]
+        ]
+    },
+    {
+        "id": "983a4efb652711eb",
+        "type": "inject",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "Clean all",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 960,
+        "wires": [
+            [
+                "325c4faa337cc671"
+            ]
+        ]
+    },
+    {
+        "id": "325c4faa337cc671",
+        "type": "postgresql",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "Get Jug ids from DB",
+        "query": "SELECT id FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 440,
+        "y": 960,
+        "wires": [
+            [
+                "24edee6879b68938"
+            ]
+        ]
+    },
+    {
+        "id": "24edee6879b68938",
+        "type": "split",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 630,
+        "y": 960,
+        "wires": [
+            [
+                "d824589b06d07a80"
+            ]
+        ]
+    },
+    {
+        "id": "d824589b06d07a80",
+        "type": "function",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "function 2",
+        "func": "msg.payload = {     \"name\": \"Jug\" + msg.payload.id,  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 1060,
+        "wires": [
+            [
+                "de0bdc66b84eb42b",
+                "abf1b4b172e6ae86"
+            ]
+        ]
+    },
+    {
+        "id": "de0bdc66b84eb42b",
+        "type": "debug",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "289d5d7502ba340b",
+        "type": "postgresql",
+        "z": "4c20aa2ac87fc1e6",
+        "name": "Clean table",
+        "query": "DELETE FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1070,
+        "y": 960,
+        "wires": [
+            []
         ]
     },
     {
@@ -2772,7 +2910,8 @@
         "wires": [
             [
                 "686e392549632634",
-                "fffcf2415ff35daf"
+                "fffcf2415ff35daf",
+                "96122b6e803914d0"
             ]
         ]
     },
@@ -2843,12 +2982,13 @@
         "reduceExp": "msg.payload\t",
         "reduceInit": "0",
         "reduceInitType": "num",
-        "reduceFixup": "$sum(msg.payload)",
+        "reduceFixup": "",
         "x": 670,
         "y": 300,
         "wires": [
             [
-                "cd95edaaaf747c92"
+                "cd95edaaaf747c92",
+                "4eb1c96a4b440d38"
             ]
         ]
     },
@@ -2940,11 +3080,12 @@
         "to": "",
         "reg": false,
         "x": 700,
-        "y": 360,
+        "y": 400,
         "wires": [
             [
                 "56a581e5680ad6e3",
-                "a3cf40fceacb65df"
+                "a3cf40fceacb65df",
+                "3ef85ed4716564ae"
             ]
         ]
     },
@@ -2999,7 +3140,7 @@
         "id": "e12e139248b70364",
         "type": "ui_text",
         "z": "dd62ac133fb1360c",
-        "group": "a6a64a541ae8c000",
+        "group": "2dab9229986fd1ba",
         "order": 1,
         "width": 0,
         "height": 0,
@@ -3042,5 +3183,238 @@
                 "e12e139248b70364"
             ]
         ]
+    },
+    {
+        "id": "6cc1040bfd802f1e",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "group": "a6a64a541ae8c000",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Kg of plastic saved",
+        "label": "Kg of plastic saved",
+        "format": "{{msg.payload | number: 4}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "20",
+        "color": "#000000",
+        "x": 950,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "bf3e55578af7a2e4",
+        "type": "calculator",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "",
+        "inputMsgField": "payload",
+        "outputMsgField": "payload",
+        "operation": "div",
+        "constant": "500000",
+        "round": false,
+        "truncate": false,
+        "decimals": 0,
+        "decimals2": 0,
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "6cc1040bfd802f1e",
+                "fa768fe8dd244a44"
+            ]
+        ]
+    },
+    {
+        "id": "3ef85ed4716564ae",
+        "type": "calculator",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "",
+        "inputMsgField": "payload",
+        "outputMsgField": "payload",
+        "operation": "mult",
+        "constant": "32",
+        "round": false,
+        "truncate": false,
+        "decimals": 0,
+        "decimals2": 0,
+        "x": 500,
+        "y": 480,
+        "wires": [
+            [
+                "bf3e55578af7a2e4"
+            ]
+        ]
+    },
+    {
+        "id": "fa768fe8dd244a44",
+        "type": "ui_chart",
+        "z": "dd62ac133fb1360c",
+        "name": "",
+        "group": "a6a64a541ae8c000",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Amount of plastic saved in one day",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1000,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "96122b6e803914d0",
+        "type": "postgresql",
+        "z": "dd62ac133fb1360c",
+        "name": "Get User ids from DB",
+        "query": "SELECT COUNT(userId) FROM UserTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 380,
+        "y": 760,
+        "wires": [
+            [
+                "c38392d9d315dc5d"
+            ]
+        ]
+    },
+    {
+        "id": "c38392d9d315dc5d",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].count",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 760,
+        "wires": [
+            [
+                "5415beb9fff2b624"
+            ]
+        ]
+    },
+    {
+        "id": "5415beb9fff2b624",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "group": "2dab9229986fd1ba",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Num of users registered",
+        "label": "Number of users registered:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "20",
+        "color": "#000000",
+        "x": 930,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "4eb1c96a4b440d38",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "$average(payload)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$average(payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "72d7683f247d4f7a"
+            ]
+        ]
+    },
+    {
+        "id": "72d7683f247d4f7a",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "",
+        "group": "d1a0b3959db61542",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Avg litres of all jugs",
+        "label": "liters",
+        "format": "{{msg.payload  | number: 2}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 930,
+        "y": 480,
+        "wires": []
     }
 ]
