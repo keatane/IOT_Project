@@ -1,123 +1,12 @@
-import { connectAsync } from "mqtt";
 import { program } from "commander";
-import fetch from "node-fetch";
+import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
+import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API } from "./api.js";
 
-const HOST = "127.0.0.1";
-const PORT = 1881;
-
-enum Method {
-  GET = "get",
-  POST = "post",
-}
-
-class RestAPI<RequestType, ResponseType> {
-  constructor(
-    private path: string,
-    private method: Method,
-  ) {}
-  public async send(obj: RequestType): Promise<ResponseType> {
-    const response = await fetch(`http://${HOST}:${PORT}/${this.path}`, {
-      method: this.method,
-      body: JSON.stringify(obj),
-    });
-    return (await response.json()) as ResponseType;
-  }
-}
-
-interface RegisterRequest{
-    username:string,
-    password:string
-}
-
-enum RegisterResponseStatus{
-    OK="OK"
-}
-
-interface RegisterResponse{
-    status:RegisterResponseStatus
-}
-
-const REGISTER_API=new RestAPI<RegisterRequest,RegisterResponse>("register",Method.POST);
-
-interface LoginRequest{
-    username:string
-    password:string
-}
-
-enum LoginResponseStatus{
-    OK="OK"
-}
-
-interface LoginResponse{
-    status:LoginResponseStatus
-    token:string|null
-}
-
-const LOGIN_API=new RestAPI<LoginRequest,LoginResponse>("login",Method.POST);
-
-interface FilterRequest{
-    token:string,
-    id:number,
-    filterCapacity:number
-}
-
-interface FilterResponse{
-    status:LoginResponse
-}
-
-const FILTER_API=new RestAPI<FilterRequest,FilterResponse>("filter",Method.POST);
-
-class MQTTAPI<RequestType,ResponseType>{
-  constructor(
-    private publishTopic: string,
-    private subscribeTopic:string|null
-  ) {
-  }
-  public async send(obj: RequestType): Promise<ResponseType> {
-      const client=await connectAsync("mqtt://212.78.1.205:1883", { username: "studenti",password:"studentiDRUIDLAB_1" });
-      await client.publishAsync(this.publishTopic,JSON.stringify(obj))
-      if(this.subscribeTopic==null)return null as any;
-      await client.subscribeAsync(this.subscribeTopic)
-      const promise=new Promise<ResponseType>((resolve)=>{client.on('message',(_,message)=>{console.log(message.toString());resolve(JSON.parse(message.toString()))})});
-      const result=await promise;
-      await client.endAsync();
-      return result
-  }
-}
-
-interface PairRequest{
-    id:number,
-    token:string,
-}
-
-enum PairResponseStatus{
-    OK="OK"
-}
-
-interface PairResponse{
-    status:PairResponseStatus
-}
-
-const PAIR_API=new MQTTAPI<PairRequest,PairResponse>("/jug/pair","/jug/pair/response");
-
-async function sleep(s:number) {
-  await new Promise((resolve) => {
-    setTimeout(resolve, s*1000);
-  });
-}
-
-function assert(){
-
-}
-
-function randomNumber(min:number,max:number){
-    return Math.random()*(max-min)+min;
-}
 
 
 async function simulator(n:number|string) {
     n=Number(n.toString())
-    for(let i=0;i<n;i++){
+    for(let i of range(n)){
         singleInstance(`simulation${i}`,`simulation${i}`,i);
     }
 }
@@ -127,7 +16,7 @@ async function singleInstance(username:string,password:string,id:string|number){
     await register(username,password);
     const obj=await login(username,password);
     const token=obj.token;
-    if(token===null)throw new Error("Login failed");
+    assert(token!==null);
     await pair(id,token);
     while(true){
         await sendData(id,randomNumber(0,1));
@@ -159,19 +48,11 @@ async function sendData(id:string|number,data:string|Number){
     return await new MQTTAPI<number,null>(`/Thingworx/Jug${id}/litresPerSecond`,null).send(Number(data));
 }
 
-function print(f:(..._:string[])=>Promise<any>){
-    async function inner(...args:string[]){
-        console.log(await f(...args));
-    }
-    return inner
-}
-
-
-program.command("register <username> <password>").action(print(register));
-program.command("login <username> <password>").action(print(login));
-program.command("pair <id> <token>").action(print(pair));
-program.command("send-data <id> <data>").action(print(sendData));
-program.command("simulator-single <username> <password> <id>").action(print(singleInstance));
-program.command("simulator <n>").action(print(simulator));
-program.command("filter <n> <token> <capacity>").action(print(filter));
+program.command("register <username> <password>").action(entry(register));
+program.command("login <username> <password>").action(entry(login));
+program.command("pair <id> <token>").action(entry(pair));
+program.command("send-data <id> <data>").action(entry(sendData));
+program.command("simulator-single <username> <password> <id>").action(entry(singleInstance));
+program.command("simulator <n>").action(entry(simulator));
+program.command("filter <n> <token> <capacity>").action(entry(filter));
 program.parse();
