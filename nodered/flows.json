@@ -155,7 +155,7 @@
         ],
         "x": 154,
         "y": 99,
-        "w": 1172,
+        "w": 1152,
         "h": 242
     },
     {
@@ -183,50 +183,6 @@
         "y": 719,
         "w": 1172,
         "h": 182
-    },
-    {
-        "id": "55c530ddc18f58e8",
-        "type": "group",
-        "z": "dd62ac133fb1360c",
-        "name": "Aggregating data",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "b2a3114f40da36d1",
-            "fc8edbf2fc5789ea",
-            "12d815057cd57334",
-            "bca0d49876942d04",
-            "686e392549632634",
-            "0f36aa3917d94588",
-            "43eb9f6208742902",
-            "8e2873091a36bded",
-            "cdb712ef947b9f93"
-        ],
-        "x": 14,
-        "y": 59,
-        "w": 1592,
-        "h": 162
-    },
-    {
-        "id": "6cce7f7cd691161b",
-        "type": "group",
-        "z": "dd62ac133fb1360c",
-        "name": "Enterprise dashboard",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "2a5abae8e17b662f",
-            "6026dc6309b3c457",
-            "56a581e5680ad6e3",
-            "e2b41d91cb228409",
-            "edd3c74cf042e2ad"
-        ],
-        "x": 114,
-        "y": 619,
-        "w": 892,
-        "h": 162
     },
     {
         "id": "1589093497ae43e3",
@@ -365,6 +321,32 @@
         "y": 1039,
         "w": 1452,
         "h": 182
+    },
+    {
+        "id": "f0c008adf5daaa20",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Enterprise dashboard",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "12d815057cd57334",
+            "bca0d49876942d04",
+            "686e392549632634",
+            "0f36aa3917d94588",
+            "43eb9f6208742902",
+            "cdb712ef947b9f93",
+            "56a581e5680ad6e3",
+            "e2b41d91cb228409",
+            "cd95edaaaf747c92",
+            "13259f49b6750854",
+            "a3cf40fceacb65df"
+        ],
+        "x": 94,
+        "y": 79,
+        "w": 1012,
+        "h": 402
     },
     {
         "id": "dd1013cf1ed907ad",
@@ -550,8 +532,8 @@
     {
         "id": "a6a64a541ae8c000",
         "type": "ui_group",
-        "name": "Enterprise",
-        "tab": "c1ceec1569757720",
+        "name": "Jugs Quantity",
+        "tab": "ff083ec2093f4a2e",
         "order": 3,
         "disp": true,
         "width": "6",
@@ -582,6 +564,25 @@
         "userFieldType": "str",
         "password": "passwordsegreta",
         "passwordFieldType": "str"
+    },
+    {
+        "id": "ff083ec2093f4a2e",
+        "type": "ui_tab",
+        "name": "Jugs Enterprise",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d1a0b3959db61542",
+        "type": "ui_group",
+        "name": "Litres informations",
+        "tab": "ff083ec2093f4a2e",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "587d719d685f7298",
@@ -2069,7 +2070,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "323958da1d4e2b7b",
         "name": "",
-        "topic": "/Thingworx/Jug1/litresPerSecond",
+        "topic": "/Thingworx/Jug0/litresPerSecond",
         "qos": "0",
         "retain": "",
         "respTopic": "",
@@ -2308,7 +2309,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "323958da1d4e2b7b",
         "name": "",
-        "topic": "/Thingworx/Jug555/totalLitresJug",
+        "topic": "/Thingworx/Jug0/totalLitresJug",
         "qos": "0",
         "retain": "",
         "respTopic": "",
@@ -2317,7 +2318,7 @@
         "correl": "",
         "expiry": "",
         "broker": "c77abff0c3609a0d",
-        "x": 1160,
+        "x": 1150,
         "y": 220,
         "wires": []
     },
@@ -2548,6 +2549,7 @@
         "id": "f8c1aade031fe803",
         "type": "ui_gauge",
         "z": "4c20aa2ac87fc1e6",
+        "d": true,
         "g": "7f812365318f4aea",
         "name": "",
         "group": "fcdb4c412482dcd0",
@@ -2577,6 +2579,7 @@
         "id": "76ef18b8c3aade51",
         "type": "ui_gauge",
         "z": "4c20aa2ac87fc1e6",
+        "d": true,
         "g": "7f812365318f4aea",
         "name": "",
         "group": "cc5f98c0f184bc2e",
@@ -2693,61 +2696,10 @@
         ]
     },
     {
-        "id": "2a5abae8e17b662f",
-        "type": "ui_gauge",
-        "z": "dd62ac133fb1360c",
-        "g": "6cce7f7cd691161b",
-        "name": "",
-        "group": "a6a64a541ae8c000",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Total litres of all jugs",
-        "label": "units",
-        "format": "{{msg.count}}",
-        "min": 0,
-        "max": "1000",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 880,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "6026dc6309b3c457",
-        "type": "mqtt in",
-        "z": "dd62ac133fb1360c",
-        "g": "6cce7f7cd691161b",
-        "name": "",
-        "topic": "/Thingworx/AggregatedData/totalLitres",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "c77abff0c3609a0d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 290,
-        "y": 660,
-        "wires": [
-            [
-                "e2b41d91cb228409"
-            ]
-        ]
-    },
-    {
         "id": "56a581e5680ad6e3",
         "type": "debug",
         "z": "dd62ac133fb1360c",
-        "g": "6cce7f7cd691161b",
+        "g": "f0c008adf5daaa20",
         "name": "Litres in total",
         "active": false,
         "tosidebar": true,
@@ -2757,64 +2709,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 850,
-        "y": 660,
+        "x": 930,
+        "y": 360,
         "wires": []
-    },
-    {
-        "id": "fc8edbf2fc5789ea",
-        "type": "mqtt out",
-        "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
-        "name": "",
-        "topic": "/Thingworx/AggregatedData/totalLitres",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c77abff0c3609a0d",
-        "x": 1430,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "b2a3114f40da36d1",
-        "type": "inject",
-        "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
-        "name": "Clear values",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0",
-        "payloadType": "num",
-        "x": 1110,
-        "y": 100,
-        "wires": [
-            [
-                "fc8edbf2fc5789ea"
-            ]
-        ]
     },
     {
         "id": "12d815057cd57334",
         "type": "http request",
         "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
+        "g": "f0c008adf5daaa20",
         "name": "Get Total litres",
         "method": "GET",
         "ret": "obj",
@@ -2834,8 +2737,8 @@
                 "valueValue": ""
             }
         ],
-        "x": 900,
-        "y": 180,
+        "x": 1000,
+        "y": 120,
         "wires": [
             [
                 "cdb712ef947b9f93"
@@ -2846,7 +2749,7 @@
         "id": "bca0d49876942d04",
         "type": "inject",
         "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
+        "g": "f0c008adf5daaa20",
         "name": "Start dashboard",
         "props": [
             {
@@ -2864,25 +2767,28 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 150,
-        "y": 140,
+        "x": 230,
+        "y": 120,
         "wires": [
-            []
+            [
+                "686e392549632634",
+                "fffcf2415ff35daf"
+            ]
         ]
     },
     {
         "id": "686e392549632634",
         "type": "postgresql",
         "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
+        "g": "f0c008adf5daaa20",
         "name": "Get Jug ids from DB",
         "query": "SELECT id FROM JugTable;",
         "postgreSQLConfig": "647f7f903ce97865",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 360,
-        "y": 140,
+        "x": 440,
+        "y": 120,
         "wires": [
             [
                 "43eb9f6208742902"
@@ -2893,7 +2799,7 @@
         "id": "0f36aa3917d94588",
         "type": "change",
         "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
+        "g": "f0c008adf5daaa20",
         "name": "",
         "rules": [
             {
@@ -2909,11 +2815,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 140,
+        "x": 800,
+        "y": 120,
         "wires": [
             [
-                "8e2873091a36bded",
                 "12d815057cd57334"
             ]
         ]
@@ -2922,29 +2827,28 @@
         "id": "e2b41d91cb228409",
         "type": "join",
         "z": "dd62ac133fb1360c",
-        "g": "6cce7f7cd691161b",
+        "g": "f0c008adf5daaa20",
         "name": "",
-        "mode": "reduce",
-        "build": "object",
+        "mode": "custom",
+        "build": "array",
         "property": "payload",
         "propertyType": "msg",
-        "key": "topic",
+        "key": "thing_id",
         "joiner": "\\n",
         "joinerType": "str",
-        "accumulate": true,
+        "accumulate": false,
         "timeout": "",
         "count": "",
-        "reduceRight": false,
-        "reduceExp": "$sum(array)\t",
+        "reduceRight": true,
+        "reduceExp": "msg.payload\t",
         "reduceInit": "0",
         "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 530,
-        "y": 660,
+        "reduceFixup": "$sum(msg.payload)",
+        "x": 670,
+        "y": 300,
         "wires": [
             [
-                "56a581e5680ad6e3",
-                "2a5abae8e17b662f"
+                "cd95edaaaf747c92"
             ]
         ]
     },
@@ -2952,7 +2856,7 @@
         "id": "43eb9f6208742902",
         "type": "split",
         "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
+        "g": "f0c008adf5daaa20",
         "name": "",
         "splt": "\\n",
         "spltType": "str",
@@ -2960,8 +2864,8 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 530,
-        "y": 140,
+        "x": 630,
+        "y": 120,
         "wires": [
             [
                 "0f36aa3917d94588"
@@ -2969,54 +2873,17 @@
         ]
     },
     {
-        "id": "edd3c74cf042e2ad",
-        "type": "function",
-        "z": "dd62ac133fb1360c",
-        "g": "6cce7f7cd691161b",
-        "name": "sum streams",
-        "func": "let sum = 0;\nfor (let elem in msg.payload){\n    sum += elem;\n    // global.set(\"counter\", global.get(\"counter\") + msg.payload);\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"counter\", 0);  // this is now available to other nodes\n",
-        "finalize": "",
-        "libs": [],
-        "x": 570,
-        "y": 740,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8e2873091a36bded",
-        "type": "debug",
-        "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
-        "name": "debug 9",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "thing_id",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 920,
-        "y": 100,
-        "wires": []
-    },
-    {
         "id": "cdb712ef947b9f93",
         "type": "change",
         "z": "dd62ac133fb1360c",
-        "g": "55c530ddc18f58e8",
+        "g": "f0c008adf5daaa20",
         "name": "",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.rows[0].totalLitres",
+                "to": "payload.rows[0].totalLitresJug",
                 "tot": "msg"
             }
         ],
@@ -3025,11 +2892,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
-        "y": 140,
+        "x": 660,
+        "y": 220,
         "wires": [
             [
-                "fc8edbf2fc5789ea",
+                "e2b41d91cb228409",
                 "13259f49b6750854"
             ]
         ]
@@ -3038,8 +2905,9 @@
         "id": "13259f49b6750854",
         "type": "debug",
         "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
         "name": "debug 11",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3047,8 +2915,132 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
-        "y": 280,
+        "x": 980,
+        "y": 240,
         "wires": []
+    },
+    {
+        "id": "cd95edaaaf747c92",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "$sum(payload)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$sum(payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 360,
+        "wires": [
+            [
+                "56a581e5680ad6e3",
+                "a3cf40fceacb65df"
+            ]
+        ]
+    },
+    {
+        "id": "a3cf40fceacb65df",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "",
+        "group": "d1a0b3959db61542",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Total litres of all jugs",
+        "label": "liters",
+        "format": "{{msg.payload  | number: 2}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 940,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "fffcf2415ff35daf",
+        "type": "postgresql",
+        "z": "dd62ac133fb1360c",
+        "name": "Get Jug ids from DB",
+        "query": "SELECT COUNT(id) FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 420,
+        "y": 620,
+        "wires": [
+            [
+                "6426c3f9917d2081"
+            ]
+        ]
+    },
+    {
+        "id": "e12e139248b70364",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "group": "a6a64a541ae8c000",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Num of jugs registered",
+        "label": "Number of jugs registered:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "20",
+        "color": "#000000",
+        "x": 960,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "6426c3f9917d2081",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].count",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 620,
+        "wires": [
+            [
+                "e12e139248b70364"
+            ]
+        ]
     }
 ]

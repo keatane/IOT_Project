@@ -6,6 +6,7 @@
     "dependencies": {
         "node-red-contrib-jwt": "~0.1.0",
         "node-red-contrib-postgresql": "~0.14.0",
+        "node-red-contrib-rate-avg": "~0.0.3",
         "node-red-dashboard": "~3.6.5"
     }
 }
