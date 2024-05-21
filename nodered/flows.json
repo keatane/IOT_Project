@@ -340,6 +340,33 @@
         "h": 142
     },
     {
+        "id": "20496de9b60de6a8",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Update filter information",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a22ecd30043c6866",
+            "45d1266ff6761abe",
+            "3045dac9484f5175",
+            "72f4e358b9e1da34",
+            "20db2b73e97c7a37",
+            "d6319534d951e563",
+            "0488de0f08689001",
+            "86072dca8a4675b9",
+            "7fe99103bea3c313",
+            "a28cd932aa8b670a",
+            "f946c919ead8f326",
+            "08d1b59a62811f23"
+        ],
+        "x": 14,
+        "y": 1039,
+        "w": 1452,
+        "h": 182
+    },
+    {
         "id": "dd1013cf1ed907ad",
         "type": "junction",
         "z": "217d4457bda21c0d",
@@ -1177,8 +1204,7 @@
         "y": 700,
         "wires": [
             [
-                "378b9baed000b7e6",
-                "4ef11d4b115a505d"
+                "378b9baed000b7e6"
             ]
         ]
     },
@@ -1200,7 +1226,8 @@
         "y": 700,
         "wires": [
             [
-                "4401d53accce85c2"
+                "4401d53accce85c2",
+                "4ef11d4b115a505d"
             ]
         ]
     },
@@ -1472,7 +1499,9 @@
         "x": 330,
         "y": 840,
         "wires": [
-            []
+            [
+                "5abf18101812be96"
+            ]
         ]
     },
     {
@@ -1610,12 +1639,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 140,
+        "x": 120,
         "y": 880,
         "wires": [
             [
-                "ce16f9573b804d91",
-                "5abf18101812be96"
+                "ce16f9573b804d91"
             ]
         ]
     },
@@ -1642,7 +1670,7 @@
         "y": 972,
         "wires": [
             [
-                "08d1b59a62811f23"
+                "c4bdcc33cbf74d3f"
             ]
         ]
     },
@@ -1650,11 +1678,12 @@
         "id": "08d1b59a62811f23",
         "type": "http request",
         "z": "217d4457bda21c0d",
-        "name": "Get Total litres",
-        "method": "GET",
+        "g": "20496de9b60de6a8",
+        "name": "Update Filter Capacity",
+        "method": "PUT",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/totalLitresFilter",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{jug}}/Properties/filterCapacity",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -1669,11 +1698,286 @@
                 "valueValue": ""
             }
         ],
-        "x": 420,
-        "y": 972,
+        "x": 1080,
+        "y": 1160,
         "wires": [
             [
-                "c4bdcc33cbf74d3f"
+                "d6319534d951e563"
+            ]
+        ]
+    },
+    {
+        "id": "a22ecd30043c6866",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Get Filter",
+        "url": "/filter",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 1120,
+        "wires": [
+            [
+                "7fe99103bea3c313"
+            ]
+        ]
+    },
+    {
+        "id": "45d1266ff6761abe",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Update DB",
+        "query": "UPDATE JugTable SET filterCapacity = $2 WHERE id = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 790,
+        "y": 1100,
+        "wires": [
+            [
+                "d6035113f9e9c06c"
+            ]
+        ]
+    },
+    {
+        "id": "3045dac9484f5175",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1310,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "72f4e358b9e1da34",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Print Return Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1330,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "20db2b73e97c7a37",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1290,
+        "y": 1140,
+        "wires": [
+            [
+                "3045dac9484f5175"
+            ]
+        ]
+    },
+    {
+        "id": "d6319534d951e563",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Return Status",
+        "func": "msg.payload = {status:\"OK\"};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 1100,
+        "wires": [
+            [
+                "20db2b73e97c7a37",
+                "72f4e358b9e1da34"
+            ]
+        ]
+    },
+    {
+        "id": "0488de0f08689001",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Extract id, token, filterCapacity",
+        "func": "msg.token = msg.payload.token;\nmsg.jug = msg.payload.id;\nmsg.filter = msg.payload.filterCapacity;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1100,
+        "wires": [
+            [
+                "86072dca8a4675b9"
+            ]
+        ]
+    },
+    {
+        "id": "86072dca8a4675b9",
+        "type": "jwt verify",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "",
+        "alg": [
+            "HS256"
+        ],
+        "jwkurl": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "token",
+        "storetoken": "token",
+        "x": 570,
+        "y": 1100,
+        "wires": [
+            [
+                "f946c919ead8f326"
+            ]
+        ]
+    },
+    {
+        "id": "7fe99103bea3c313",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 150,
+        "y": 1180,
+        "wires": [
+            [
+                "0488de0f08689001"
+            ]
+        ]
+    },
+    {
+        "id": "a28cd932aa8b670a",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Select from DB",
+        "query": "SELECT userId FROM JugTable WHERE id = $1 AND userId = $2;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 620,
+        "y": 1180,
+        "wires": [
+            [
+                "c04b38ae73eb9b2d"
+            ]
+        ]
+    },
+    {
+        "id": "f946c919ead8f326",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Extract id, userId",
+        "func": "msg.params = [msg.jug, msg.token.userid];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1180,
+        "wires": [
+            [
+                "a28cd932aa8b670a"
+            ]
+        ]
+    },
+    {
+        "id": "c04b38ae73eb9b2d",
+        "type": "switch",
+        "z": "217d4457bda21c0d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 568,
+        "y": 1333,
+        "wires": [
+            [
+                "73644bc60c823058"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "73644bc60c823058",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "Extract id, userId",
+        "func": "msg.params = [msg.jug, msg.filter];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 1300,
+        "wires": [
+            [
+                "45d1266ff6761abe"
+            ]
+        ]
+    },
+    {
+        "id": "d6035113f9e9c06c",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "name": "filterCapacity JSON",
+        "func": "msg.payload = { \"filterCapacity\": msg.filter}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 1320,
+        "wires": [
+            [
+                "08d1b59a62811f23"
             ]
         ]
     },
@@ -2188,7 +2492,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{     \"name\": \"Jug555\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
+        "payload": "{     \"name\": \"Jug1\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
         "payloadType": "json",
         "x": 260,
         "y": 860,
@@ -2563,9 +2867,7 @@
         "x": 150,
         "y": 140,
         "wires": [
-            [
-                "686e392549632634"
-            ]
+            []
         ]
     },
     {
