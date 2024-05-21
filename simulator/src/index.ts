@@ -55,6 +55,17 @@ interface LoginResponse{
 
 const LOGIN_API=new RestAPI<LoginRequest,LoginResponse>("login",Method.POST);
 
+interface FilterRequest{
+    token:string,
+    id:number,
+    filterCapacity:number
+}
+
+interface FilterResponse{
+    status:LoginResponse
+}
+
+const FILTER_API=new RestAPI<FilterRequest,FilterResponse>("filter",Method.POST);
 
 class MQTTAPI<RequestType,ResponseType>{
   constructor(
@@ -122,7 +133,13 @@ async function singleInstance(username:string,password:string,id:string|number){
 }
 
 async function register(username:string,password:string) {
-    return (await REGISTER_API.send({username,password})).status;
+    return await REGISTER_API.send({username,password});
+}
+
+async function filter(id:string|number,token:string,capacity:string|number) {
+    id=Number(id.toString())
+    const filterCapacity=Number(capacity.toString())
+    return await FILTER_API.send({id,token,filterCapacity});
 }
 
 async function login(username:string,password:string) {
@@ -152,4 +169,5 @@ program.command("pair <id> <token>").action(print(pair));
 program.command("send-data <id> <data>").action(print(sendData));
 program.command("simulator-single <username> <password> <id>").action(print(singleInstance));
 program.command("simulator <n>").action(print(simulator));
+program.command("filter <n> <token> <capacity>").action(print(simulator));
 program.parse();
