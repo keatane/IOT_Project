@@ -1,4 +1,4 @@
-import {RestAPI,Method,MQTTAPI} from "./utils";
+import {RestAPI,Method,MQTTAPI} from "./utils.js";
 
 enum ResponseStatus{
     OK="OK"

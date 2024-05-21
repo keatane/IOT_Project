@@ -33,8 +33,8 @@ export class RestAPI<RequestType, ResponseType> {
     private method: Method,
   ) {}
   public async send(obj: RequestType): Promise<ResponseType> {
-    const host=process.env.HOST||"127.0.0.1"
-    const port=process.env.PORT||"1881"
+    const host=process.env['HOST']||"127.0.0.1"
+    const port=process.env['PORT']||"1881"
     const response = await fetch(`http://${host}:${port}/${this.path}`, {
       method: this.method,
       body: JSON.stringify(obj),

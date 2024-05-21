@@ -1,6 +1,6 @@
 import { program } from "commander";
-import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils";
-import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API } from "./api";
+import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
+import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API } from "./api.js";
 
 
 
