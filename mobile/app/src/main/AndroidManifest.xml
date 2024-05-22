@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Dashboard"/>
+        <activity android:name=".Charts"/>
+        <activity android:name=".Account"/>
+        <activity android:name=".Jugs"/>
+        <activity android:name=".ChangePassword"/>
     </application>
 
 </manifest>

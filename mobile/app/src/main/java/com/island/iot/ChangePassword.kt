@@ -6,14 +6,24 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -21,6 +31,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,15 +39,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.island.iot.ui.theme.IOTTheme
 
-class MainActivity : ComponentActivity() {
+class ChangePassword : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -68,81 +81,28 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun Register(onRegister: (String, String) -> Unit) {
+    fun Section() {
         // Temp
         val mContext = LocalContext.current
-        var email by remember {
+        var oldPassword by remember {
             mutableStateOf("")
         }
         var password by remember {
             mutableStateOf("")
         }
-        var confPassword by remember {
-            mutableStateOf("")
-        }
-        OutlinedCard(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.dp, Color.Black),
-            modifier = maxWidth
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxHeight().padding(4.dp)
         ) {
-            Text(text = "Register", modifier = Modifier.padding(16.dp))
-            TextFieldState(label = "Email", text = email, onChange = { email = it })
-            TextFieldState(
-                label = "Password",
-                password = true,
-                text = password,
-                onChange = { password = it })
-            TextFieldState(
-                label = "Confirm password",
-                password = true,
-                text = confPassword,
-                onChange = { confPassword = it })
-            Button(
-                onClick = { onRegister(email, password) },
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(text = "Register")
-            }
-            // Temporary
-            Button(
-                onClick = {
-                    mContext.startActivity(Intent(mContext, Dashboard::class.java))
-                },
-                colors = ButtonDefaults.buttonColors(Color(0XFF0F9D58)),
-            ) {
-                Text("Go to Second Activity", color = Color.White)
-            }
-        }
-    }
+            Text(text = "Change password", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally))
+            TextFieldState(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
+            TextFieldState(label = "New Password", text = password, onChange = { password = it })
 
-    @Composable
-    fun Login() {
-        OutlinedCard(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.dp, Color.Black),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(text = "Login", modifier = Modifier.padding(16.dp))
-            TextField(
-                label = { Text("Email") },
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
-            TextField(
-                label = { Text("Password") },
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
-            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(16.dp)) {
-                Text(text = "Login")
+            Button(
+                onClick = { /* TODO */ },
+                modifier = Modifier.padding(32.dp)
+            ) {
+                Text(text = "Change password")
             }
         }
     }
@@ -160,18 +120,42 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun Layout(onRegister: (String, String) -> Unit) {
+        val mContext = LocalContext.current
+        var selectedItem by remember { mutableIntStateOf(0) }
+        val items = listOf("Dashboard", "Charts", "Jugs", "Account")
+        val icons = listOf(Icons.Filled.Home, Icons.Filled.Menu, Icons.Filled.Create, Icons.Filled.Person)
+        val classes = listOf(Dashboard::class.java, Charts::class.java, Jugs::class.java, Account::class.java)
         IOTTheme {
-            Scaffold {
+            Scaffold(
+                topBar = {
+                    Text("Change password", modifier = Modifier.padding(16.dp))
+                },
+                bottomBar = {
+                    NavigationBar {
+                        items.forEachIndexed { index, item ->
+                            NavigationBarItem(
+                                icon = { Icon(icons[index], contentDescription = item) },
+                                label = { Text(item) },
+                                selected = selectedItem == index,
+                                onClick = { selectedItem = index; mContext.startActivity(
+                                    Intent(mContext, classes[index])
+                                ) }
+                            )
+                        }
+                    }
+                }
+            ){
                 System.out.println(it)
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("Authentication", modifier = Modifier.padding(16.dp))
-                        Register(onRegister)
-                        Login()
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(0.dp, 32.dp)
+                    ) {
+                        Section()
                     }
                 }
             }
