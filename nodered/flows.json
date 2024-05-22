@@ -2003,7 +2003,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "7f812365318f4aea",
         "name": "",
-        "topic": "/Thingworx/Jug555/litresPerSecond",
+        "topic": "/Thingworx/Jug1/litresPerSecond",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "c77abff0c3609a0d",
@@ -2011,7 +2011,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 320,
+        "x": 310,
         "y": 460,
         "wires": [
             [
@@ -3051,8 +3051,8 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 980,
@@ -3070,7 +3070,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "$sum(payload)",
+                "to": "$sum(msg.payload)",
                 "tot": "jsonata"
             }
         ],
