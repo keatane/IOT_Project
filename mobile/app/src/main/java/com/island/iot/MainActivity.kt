@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Layout()
+            Root()
         }
 
     }
@@ -66,7 +66,7 @@ fun TextFieldState(
 }
 
 @Composable
-fun Register(viewModel: StateViewModel = viewModel()) {
+fun Register(onRegister: (String, String) -> Unit) {
     var email by remember {
         mutableStateOf("")
     }
@@ -94,7 +94,7 @@ fun Register(viewModel: StateViewModel = viewModel()) {
             text = confPassword,
             onChange = { confPassword = it })
         Button(
-            onClick = { viewModel.register(email, password) },
+            onClick = { onRegister(email,password) },
             modifier = Modifier.padding(16.dp)
         ) {
             Text(text = "Register")
@@ -134,9 +134,19 @@ fun Login() {
     }
 }
 
+@Composable
+fun Root(viewModel: StateViewModel = viewModel()) {
+    Layout { username, password -> viewModel.register(username, password) }
+}
+
 @Preview(showBackground = true)
 @Composable
-fun Layout() {
+fun Preview() {
+    Layout { _, _ -> }
+}
+
+@Composable
+fun Layout(onRegister: (String, String) -> Unit) {
     IOTTheme {
         Scaffold {
             System.out.println(it)
@@ -147,7 +157,7 @@ fun Layout() {
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text("Android2", modifier = Modifier.padding(16.dp))
-                    Register()
+                    Register(onRegister)
                     Login()
                 }
             }
