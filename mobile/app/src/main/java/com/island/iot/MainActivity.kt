@@ -30,6 +30,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.island.iot.ui.theme.IOTTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,6 +39,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Layout()
         }
+
     }
 }
 
@@ -46,14 +48,16 @@ val maxWidth = Modifier
     .padding(16.dp)
 
 @Composable
-fun TextFieldState(label: String, password: Boolean = false) {
-    var text by remember {
-        mutableStateOf("")
-    }
+fun TextFieldState(
+    label: String,
+    password: Boolean = false,
+    text: String,
+    onChange: (String) -> Unit
+) {
 
     TextField(
         value = text,
-        onValueChange = { text = it },
+        onValueChange = onChange,
         label = { Text(label) },
         modifier = maxWidth,
         visualTransformation = if (password) PasswordVisualTransformation() else VisualTransformation.None,
@@ -62,17 +66,37 @@ fun TextFieldState(label: String, password: Boolean = false) {
 }
 
 @Composable
-fun Register() {
+fun Register(viewModel: StateViewModel = viewModel()) {
+    var email by remember {
+        mutableStateOf("")
+    }
+    var password by remember {
+        mutableStateOf("")
+    }
+    var confPassword by remember {
+        mutableStateOf("")
+    }
     OutlinedCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         border = BorderStroke(1.dp, Color.Black),
         modifier = maxWidth
     ) {
         Text(text = "Register", modifier = Modifier.padding(16.dp))
-        TextFieldState(label = "Email")
-        TextFieldState(label = "Password", password = true)
-        TextFieldState(label = "Confirm password", password = true)
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(16.dp)) {
+        TextFieldState(label = "Email", text = email, onChange = { email = it })
+        TextFieldState(
+            label = "Password",
+            password = true,
+            text = password,
+            onChange = { password = it })
+        TextFieldState(
+            label = "Confirm password",
+            password = true,
+            text = confPassword,
+            onChange = { confPassword = it })
+        Button(
+            onClick = { viewModel.register(email, password) },
+            modifier = Modifier.padding(16.dp)
+        ) {
             Text(text = "Register")
         }
     }

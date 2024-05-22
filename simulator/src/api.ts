@@ -22,7 +22,8 @@ interface LoginRequest{
 
 interface LoginResponse{
     status:ResponseStatus
-    token:string|null
+    token:string|undefined
+    userId:Number|undefined
 }
 
 export const LOGIN_API=new RestAPI<LoginRequest,LoginResponse>("login",Method.POST);
