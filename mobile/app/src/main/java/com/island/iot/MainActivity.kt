@@ -1,40 +1,40 @@
 package com.island.iot
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.island.iot.ui.theme.IOTTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,139 +42,84 @@ class MainActivity : ComponentActivity() {
         setContent {
             Root()
         }
-
     }
+}
 
-    val maxWidth = Modifier
-        .fillMaxWidth()
-        .padding(16.dp, 4.dp)
-
-    @Composable
-    fun TextFieldState(
-        label: String,
-        password: Boolean = false,
-        text: String,
-        onChange: (String) -> Unit
-    ) {
-
-        TextField(
-            value = text,
-            onValueChange = onChange,
-            label = { Text(label) },
-            modifier = maxWidth,
-            visualTransformation = if (password) PasswordVisualTransformation() else VisualTransformation.None,
-            keyboardOptions = if (password) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default
-        )
-    }
-
-    @Composable
-    fun Register(onRegister: (String, String) -> Unit) {
-        // Temp
-        val mContext = LocalContext.current
-        var email by remember {
-            mutableStateOf("")
-        }
-        var password by remember {
-            mutableStateOf("")
-        }
-        var confPassword by remember {
-            mutableStateOf("")
-        }
-        OutlinedCard(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.dp, Color.Black),
-            modifier = maxWidth
-        ) {
-            Text(text = "Register", modifier = Modifier.padding(16.dp))
-            TextFieldState(label = "Email", text = email, onChange = { email = it })
-            TextFieldState(
-                label = "Password",
-                password = true,
-                text = password,
-                onChange = { password = it })
-            TextFieldState(
-                label = "Confirm password",
-                password = true,
-                text = confPassword,
-                onChange = { confPassword = it })
-            Button(
-                onClick = { onRegister(email, password) },
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(text = "Register")
-            }
-            // Temporary
-            Button(
-                onClick = {
-                    mContext.startActivity(Intent(mContext, Dashboard::class.java))
-                },
-                colors = ButtonDefaults.buttonColors(Color(0XFF0F9D58)),
-            ) {
-                Text("Go to Second Activity", color = Color.White)
-            }
-        }
-    }
-
-    @Composable
-    fun Login() {
-        OutlinedCard(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.dp, Color.Black),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(text = "Login", modifier = Modifier.padding(16.dp))
-            TextField(
-                label = { Text("Email") },
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
-            TextField(
-                label = { Text("Password") },
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
-            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(16.dp)) {
-                Text(text = "Login")
-            }
-        }
-    }
-
-    @Composable
-    fun Root(viewModel: StateViewModel = viewModel()) {
-        Layout { username, password -> viewModel.register(username, password) }
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun Preview() {
-        Layout { _, _ -> }
-    }
-
-    @Composable
-    fun Layout(onRegister: (String, String) -> Unit) {
-        IOTTheme {
-            Scaffold {
-                System.out.println(it)
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("Authentication", modifier = Modifier.padding(16.dp))
-                        Register(onRegister)
-                        Login()
+@Composable
+fun Decorations(bottomBarVisible:Boolean=true,content:@Composable (Modifier)->Unit){
+    val items = listOf("Dashboard", "Charts", "Jugs", "Account")
+    val icons = listOf(Icons.Filled.Home, Icons.Filled.Menu, Icons.Filled.Create, Icons.Filled.Person)
+    var selectedItem by remember { mutableIntStateOf(0) }
+    IOTTheme {
+        Scaffold(
+            topBar = {
+                Text("Dashboard", modifier = Modifier.padding(16.dp))
+            },
+            bottomBar = {
+                if(bottomBarVisible)
+                NavigationBar {
+                    items.forEachIndexed { index, item ->
+                        NavigationBarItem(
+                            icon = { Icon(icons[index], contentDescription = item) },
+                            label = { Text(item) },
+                            selected = selectedItem == index,
+                            onClick = {  }
+                        )
                     }
                 }
             }
+        ) {
+            content(
+                Modifier
+                    .padding(
+                        it.calculateStartPadding(LayoutDirection.Ltr),
+                        it.calculateTopPadding(),
+                        it.calculateEndPadding(LayoutDirection.Ltr),
+                        it.calculateBottomPadding()
+                    )
+                    .consumeWindowInsets(it)
+            )
+        }
+    }
+}
+
+@Composable
+fun Root(viewModel:StateViewModel= viewModel()) {
+    val scope = viewModel.viewModelScope
+    val state = viewModel.repository
+    val controller = rememberNavController()
+    var bottomBarVisible by rememberSaveable { mutableStateOf(false) }
+    // A surface container using the 'background' color from the theme
+    Decorations (bottomBarVisible = bottomBarVisible){
+        NavHost(
+            navController = controller,
+            modifier = it,
+            startDestination = "loginpage"
+        ) {
+            composable("loginpage") {
+                LoginPage(
+                    register = { username, password ->
+                        scope.launch {
+                            state.register(
+                                username,
+                                password
+                            )
+                        }
+                    },
+                    homePage = {
+                        bottomBarVisible=true
+                        controller.navigate("dashboard") },
+                    login = { username, password ->
+                        scope.launch {
+                            state.login(
+                                username,
+                                password
+                            )
+                        }
+                    }
+                )
+            }
+            composable("dashboard") { Dashboard() }
         }
     }
 }

@@ -51,82 +51,44 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-class Charts : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Root()
-        }
+@Preview(showBackground = true)
+@Composable
+fun ChartsPreview() {
+    Decorations(
+    ) {
+        Chart()
     }
+}
 
-    @Composable
-    fun Root(viewModel: StateViewModel = viewModel()) {
-        Layout { username, password -> viewModel.register(username, password) }
+@Composable
+fun ChartChart(title: String) {
+    OutlinedCard(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = BorderStroke(1.dp, Color.Black),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(text = title, modifier = Modifier.padding(64.dp))
     }
+}
 
-    @Preview(showBackground = true)
-    @Composable
-    fun Preview() {
-        Layout { _, _ -> }
-    }
 
-    @Composable
-    fun Chart(title:String) {
-        OutlinedCard(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.dp, Color.Black),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+@Composable
+fun Chart() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(0.dp, 64.dp)
         ) {
-            Text(text = title, modifier = Modifier.padding(64.dp))
-        }
-    }
-
-
-    @Composable
-    fun Layout(onRegister: (String, String) -> Unit) {
-        val mContext = LocalContext.current
-        var selectedItem by remember { mutableIntStateOf(0) }
-        val items = listOf("Dashboard", "Charts", "Jugs", "Account")
-        val icons = listOf(Icons.Filled.Home, Icons.Filled.Menu, Icons.Filled.Create, Icons.Filled.Person)
-        val classes = listOf(Dashboard::class.java, Charts::class.java, Jugs::class.java, Account::class.java)
-        IOTTheme {
-            Scaffold(
-                topBar = {
-                    Text("Charts", modifier = Modifier.padding(16.dp))
-                },
-                bottomBar = {
-                    NavigationBar {
-                        items.forEachIndexed { index, item ->
-                            NavigationBarItem(
-                                icon = { Icon(icons[index], contentDescription = item) },
-                                label = { Text(item) },
-                                selected = selectedItem == index,
-                                onClick = { selectedItem = index; mContext.startActivity(
-                                    android.content.Intent(mContext, classes[index])
-                                ) }
-                            )
-                        }
-                    }
-                }
-            ){
-                System.out.println(it)
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(0.dp, 64.dp)
-                    ) {
-                        Chart("Litres consumed in the last hour")
-                        HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(1f).padding(36.dp))
-                        Chart("Litres consumed in the last days")
-                    }
-                }
-            }
+            ChartChart("Litres consumed in the last hour")
+            HorizontalDivider(thickness = 2.dp, modifier = Modifier
+                .fillMaxWidth(1f)
+                .padding(36.dp))
+            ChartChart("Litres consumed in the last days")
         }
     }
 }

@@ -49,116 +49,55 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.island.iot.ui.theme.IOTTheme
 
-class ChangePassword : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Root()
-        }
-
+@Composable
+fun ChangePasswordSection() {
+    var oldPassword by remember {
+        mutableStateOf("")
     }
-
-    val maxWidth = Modifier
-        .fillMaxWidth()
-        .padding(16.dp, 4.dp)
-
-    @Composable
-    fun TextFieldState(
-        label: String,
-        password: Boolean = false,
-        text: String,
-        onChange: (String) -> Unit
+    var password by remember {
+        mutableStateOf("")
+    }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxHeight()
+            .padding(4.dp)
     ) {
-
-        TextField(
-            value = text,
-            onValueChange = onChange,
-            label = { Text(label) },
-            modifier = maxWidth,
-            visualTransformation = if (password) PasswordVisualTransformation() else VisualTransformation.None,
-            keyboardOptions = if (password) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default
+        Text(
+            text = "Change password",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
         )
-    }
+        CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
+        CardTextField(label = "New Password", text = password, onChange = { password = it })
 
-    @Composable
-    fun Section() {
-        // Temp
-        val mContext = LocalContext.current
-        var oldPassword by remember {
-            mutableStateOf("")
-        }
-        var password by remember {
-            mutableStateOf("")
-        }
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxHeight().padding(4.dp)
+        Button(
+            onClick = { /* TODO */ },
+            modifier = Modifier.padding(32.dp)
         ) {
-            Text(text = "Change password", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally))
-            TextFieldState(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
-            TextFieldState(label = "New Password", text = password, onChange = { password = it })
-
-            Button(
-                onClick = { /* TODO */ },
-                modifier = Modifier.padding(32.dp)
-            ) {
-                Text(text = "Change password")
-            }
+            Text(text = "Change password")
         }
     }
+}
 
-    @Composable
-    fun Root(viewModel: StateViewModel = viewModel()) {
-        Layout { username, password -> viewModel.register(username, password) }
+@Preview(showBackground = true)
+@Composable
+fun ChangePasswordPreview() {
+    Decorations(
+    ) {
+        ChangePassword()
     }
+}
 
-    @Preview(showBackground = true)
-    @Composable
-    fun Preview() {
-        Layout { _, _ -> }
-    }
-
-    @Composable
-    fun Layout(onRegister: (String, String) -> Unit) {
-        val mContext = LocalContext.current
-        var selectedItem by remember { mutableIntStateOf(0) }
-        val items = listOf("Dashboard", "Charts", "Jugs", "Account")
-        val icons = listOf(Icons.Filled.Home, Icons.Filled.Menu, Icons.Filled.Create, Icons.Filled.Person)
-        val classes = listOf(Dashboard::class.java, Charts::class.java, Jugs::class.java, Account::class.java)
-        IOTTheme {
-            Scaffold(
-                topBar = {
-                    Text("Change password", modifier = Modifier.padding(16.dp))
-                },
-                bottomBar = {
-                    NavigationBar {
-                        items.forEachIndexed { index, item ->
-                            NavigationBarItem(
-                                icon = { Icon(icons[index], contentDescription = item) },
-                                label = { Text(item) },
-                                selected = selectedItem == index,
-                                onClick = { selectedItem = index; mContext.startActivity(
-                                    Intent(mContext, classes[index])
-                                ) }
-                            )
-                        }
-                    }
-                }
-            ){
-                System.out.println(it)
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(0.dp, 32.dp)
-                    ) {
-                        Section()
-                    }
-                }
-            }
-        }
+@Composable
+fun ChangePassword() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(0.dp, 32.dp)
+    ) {
+        ChangePasswordSection()
     }
 }
