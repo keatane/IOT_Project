@@ -65,7 +65,7 @@ enum class Route(val id: String) {
 enum class BottomButton(val route: Route, val text: String, val icon: ImageVector) {
     DASHBOARD(Route.DASHBOARD, "Dashboard", Icons.Filled.Home),
     CHARTS(Route.CHARTS, "Charts", Icons.Filled.Menu),
-    JUGS(Route.JUGS, "Justs", Icons.Filled.Create),
+    JUGS(Route.JUGS, "Jugs", Icons.Filled.Create),
     ACCOUNT(Route.ACCOUNT, "Account", Icons.Filled.Person)
 }
 

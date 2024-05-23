@@ -488,26 +488,6 @@
         "h": 182
     },
     {
-        "id": "9e5f8bb47ea0c6cd",
-        "type": "group",
-        "z": "dd62ac133fb1360c",
-        "g": "f0c008adf5daaa20",
-        "name": "Plastic information",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "6cc1040bfd802f1e",
-            "bf3e55578af7a2e4",
-            "3ef85ed4716564ae",
-            "fa768fe8dd244a44"
-        ],
-        "x": 614,
-        "y": 479,
-        "w": 732,
-        "h": 142
-    },
-    {
         "id": "261acb4b06f35df7",
         "type": "group",
         "z": "dd62ac133fb1360c",
@@ -526,6 +506,26 @@
         "x": 314,
         "y": 679,
         "w": 812,
+        "h": 142
+    },
+    {
+        "id": "9e5f8bb47ea0c6cd",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "Plastic information",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "6cc1040bfd802f1e",
+            "bf3e55578af7a2e4",
+            "3ef85ed4716564ae",
+            "fa768fe8dd244a44"
+        ],
+        "x": 614,
+        "y": 479,
+        "w": 732,
         "h": 142
     },
     {
@@ -2364,7 +2364,7 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "323958da1d4e2b7b",
         "name": "",
-        "topic": "/Thingworx/Jug0/litresPerSecond",
+        "topic": "/Thingworx/Jug1/litresPerSecond",
         "qos": "0",
         "retain": "",
         "respTopic": "",
