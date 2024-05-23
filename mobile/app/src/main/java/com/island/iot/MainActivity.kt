@@ -3,13 +3,11 @@ package com.island.iot
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
@@ -19,7 +17,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -27,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -36,14 +34,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.island.iot.ui.theme.IOTTheme
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -55,7 +53,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-enum class Route(val id:String){
+enum class Route(val id: String) {
     DASHBOARD("dashboard"),
     LOGINPAGE("loginpage"),
     ACCOUNT("account"),
@@ -64,18 +62,18 @@ enum class Route(val id:String){
     JUGS("jugs")
 }
 
-enum class BottomButton(val route:Route,val text:String,val icon:ImageVector){
-    DASHBOARD(Route.DASHBOARD,"Dashboard",Icons.Filled.Home),
-    CHARTS(Route.CHARTS,"Charts",Icons.Filled.Menu),
-    JUGS(Route.JUGS,"Justs",Icons.Filled.Create),
-    ACCOUNT(Route.ACCOUNT,"Account",Icons.Filled.Person)
+enum class BottomButton(val route: Route, val text: String, val icon: ImageVector) {
+    DASHBOARD(Route.DASHBOARD, "Dashboard", Icons.Filled.Home),
+    CHARTS(Route.CHARTS, "Charts", Icons.Filled.Menu),
+    JUGS(Route.JUGS, "Justs", Icons.Filled.Create),
+    ACCOUNT(Route.ACCOUNT, "Account", Icons.Filled.Person)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Decorations(
     bottomBarVisible: Boolean = true,
-    navigate:(String)->Unit={},
+    navigate: (String) -> Unit = {},
     content: @Composable (Modifier) -> Unit
 ) {
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
@@ -89,7 +87,7 @@ fun Decorations(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.primary,
 
-                    ),
+                        ),
                     title = {
                         Text(
                             "Centered Top App Bar",
@@ -97,23 +95,23 @@ fun Decorations(
                             overflow = TextOverflow.Ellipsis
                         )
                     },
-                    navigationIcon = {
-                        IconButton(onClick = { /* do something */ }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description"
-                            )
-                        }
-                    },
+//                    navigationIcon = {
+//                        IconButton(onClick = { /* do something */ }) {
+//                            Icon(
+//                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+//                                contentDescription = "Localized description"
+//                            )
+//                        }
+//                    },
                     actions = {
                         IconButton(onClick = { /* do something */ }) {
                             Icon(
-                                imageVector = Icons.Filled.Menu,
+                                imageVector = Icons.Filled.AccountCircle,
                                 contentDescription = "Localized description"
                             )
                         }
                     },
-                    scrollBehavior = scrollBehavior,
+//                    scrollBehavior = scrollBehavior,
                 )
             },
             bottomBar = {
@@ -124,7 +122,7 @@ fun Decorations(
                                 icon = { Icon(item.icon, contentDescription = item.text) },
                                 label = { Text(item.text) },
                                 selected = selectedItem == index,
-                                onClick = { selectedItem=index;navigate(item.route.id) }
+                                onClick = { selectedItem = index;navigate(item.route.id) }
                             )
                         }
                     }
@@ -140,11 +138,26 @@ fun Decorations(
 //                    )
 //                    .consumeWindowInsets(it)
 //            )
-            content(Modifier.fillMaxSize().padding(it).consumeWindowInsets(it))
+            content(
+                Modifier
+                    .fillMaxSize()
+                    .padding(it)
+                    .consumeWindowInsets(it)
+            )
         }
     }
 }
 
+@Composable
+fun LoginNavigate(user: Flow<User?>, navigate: () -> Unit) {
+    val userValue by user.collectAsState(initial = null)
+    if (userValue !== null) navigate()
+}
+
+fun navigateTo(controller: NavController, id: String) {
+    controller.popBackStack(controller.currentDestination!!.route!!, inclusive = true)
+    controller.navigate(id)
+}
 
 @Composable
 fun Root(viewModel: StateViewModel = viewModel()) {
@@ -152,10 +165,11 @@ fun Root(viewModel: StateViewModel = viewModel()) {
     val state = viewModel.repository
     val controller = rememberNavController()
     var bottomBarVisible by rememberSaveable { mutableStateOf(false) }
-    // A surface container using the 'background' color from the theme
     Decorations(
         bottomBarVisible = bottomBarVisible,
-        navigate = { controller.navigate(it) }
+        navigate = {
+            navigateTo(controller, it)
+        }
     ) {
         NavHost(
             navController = controller,
@@ -174,7 +188,7 @@ fun Root(viewModel: StateViewModel = viewModel()) {
                     },
                     homePage = {
                         bottomBarVisible = true
-                        controller.navigate(Route.DASHBOARD.id)
+                        navigateTo(controller, Route.DASHBOARD.id)
                     },
                     login = { username, password ->
                         scope.launch {
@@ -192,5 +206,9 @@ fun Root(viewModel: StateViewModel = viewModel()) {
             composable(Route.CHARTS.id) { Chart() }
             composable(Route.JUGS.id) { Jugs() }
         }
+    }
+    LoginNavigate(user = viewModel.repository.user) {
+        bottomBarVisible = true
+        navigateTo(controller, Route.DASHBOARD.id)
     }
 }

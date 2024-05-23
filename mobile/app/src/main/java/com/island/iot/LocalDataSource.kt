@@ -8,9 +8,7 @@ import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.RoomDatabase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.Flow
 
 
 @Entity
@@ -23,7 +21,7 @@ data class User(
 @Dao
 interface UserDAO {
     @Query("SELECT * FROM user")
-    suspend fun get(): User
+    fun get(): Flow<List<User>>
 
     @Insert
     suspend fun insert(users: User)
@@ -39,12 +37,10 @@ abstract class AppDatabase : RoomDatabase() {
 
 
 class LocalDataSource(db: AppDatabase) {
-    val _user = MutableStateFlow<User?>(null)
-    val user = _user.asStateFlow()
     val _userDAO = db.userDao()
+    val user = _userDAO.get()
 
     suspend fun setUser(user: User) {
         _userDAO.insert(user)
-        _user.update { user }
     }
 }
