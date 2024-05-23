@@ -3374,7 +3374,7 @@
         "font": "Verdana,Verdana,Geneva,sans-serif",
         "fontSize": "20",
         "color": "#000000",
-        "x": 940,
+        "x": 980,
         "y": 720,
         "wires": []
     },
@@ -3398,7 +3398,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
+        "x": 700,
         "y": 720,
         "wires": [
             [

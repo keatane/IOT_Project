@@ -101,10 +101,7 @@ fun Preview() {
 
 @Composable
 fun Jugs() {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth().padding(0.dp, 32.dp)
-    ) {
+    ScrollableContent{
         Section()
     }
 }

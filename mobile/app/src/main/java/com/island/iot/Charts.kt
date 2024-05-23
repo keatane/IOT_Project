@@ -80,10 +80,7 @@ fun Chart() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(0.dp, 64.dp)
-        ) {
+        ScrollableContent {
             ChartChart("Litres consumed in the last hour")
             HorizontalDivider(thickness = 2.dp, modifier = Modifier
                 .fillMaxWidth(1f)

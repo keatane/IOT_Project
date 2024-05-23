@@ -1,11 +1,14 @@
 package com.island.iot
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -26,10 +29,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import kotlinx.coroutines.launch
 
 val maxWidth = Modifier
     .fillMaxWidth()
@@ -133,7 +132,7 @@ fun LoginPage(
     homePage: () -> Unit = {},
     login: (String, String) -> Unit = { _, _ -> }
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    ScrollableContent {
         Text("Authentication", modifier = Modifier.padding(16.dp))
         RegisterCard(register)
         LoginCard(login)

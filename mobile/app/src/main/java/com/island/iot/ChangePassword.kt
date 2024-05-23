@@ -94,10 +94,7 @@ fun ChangePasswordPreview() {
 
 @Composable
 fun ChangePassword() {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(0.dp, 32.dp)
-    ) {
+    ScrollableContent {
         ChangePasswordSection()
     }
 }

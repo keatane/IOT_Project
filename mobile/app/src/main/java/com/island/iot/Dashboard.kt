@@ -107,10 +107,7 @@ fun DashboardPreview() {
 
 @Composable
 fun Dashboard() {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(0.dp, 32.dp)
-    ) {
+    ScrollableContent {
         Grid()
     }
 }

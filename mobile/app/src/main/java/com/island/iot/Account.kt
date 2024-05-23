@@ -114,10 +114,7 @@ fun Account() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(0.dp, 32.dp)
-        ) {
+        ScrollableContent {
             AccountSection()
         }
     }
