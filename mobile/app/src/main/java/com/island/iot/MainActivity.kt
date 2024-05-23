@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
@@ -22,10 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
@@ -45,28 +44,46 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+enum class Route(val id:String){
+    DASHBOARD("dashboard"),
+    LOGINPAGE("loginpage"),
+    ACCOUNT("account"),
+    CHANGE_PASSWORD("changePassword"),
+    CHARTS("charts"),
+    JUGS("jugs")
+}
+
+enum class BottomButton(val route:Route,val text:String,val icon:ImageVector){
+    DASHBOARD(Route.DASHBOARD,"Dashboard",Icons.Filled.Home),
+    CHARTS(Route.CHARTS,"Charts",Icons.Filled.Menu),
+    JUGS(Route.JUGS,"Justs",Icons.Filled.Create),
+    ACCOUNT(Route.ACCOUNT,"Account",Icons.Filled.Person)
+}
+
 @Composable
-fun Decorations(bottomBarVisible:Boolean=true,content:@Composable (Modifier)->Unit){
-    val items = listOf("Dashboard", "Charts", "Jugs", "Account")
-    val icons = listOf(Icons.Filled.Home, Icons.Filled.Menu, Icons.Filled.Create, Icons.Filled.Person)
-    var selectedItem by remember { mutableIntStateOf(0) }
+fun Decorations(
+    bottomBarVisible: Boolean = true,
+    navigate:(String)->Unit={},
+    content: @Composable (Modifier) -> Unit
+) {
+    var selectedItem by rememberSaveable { mutableIntStateOf(0) }
     IOTTheme {
         Scaffold(
             topBar = {
                 Text("Dashboard", modifier = Modifier.padding(16.dp))
             },
             bottomBar = {
-                if(bottomBarVisible)
-                NavigationBar {
-                    items.forEachIndexed { index, item ->
-                        NavigationBarItem(
-                            icon = { Icon(icons[index], contentDescription = item) },
-                            label = { Text(item) },
-                            selected = selectedItem == index,
-                            onClick = {  }
-                        )
+                if (bottomBarVisible)
+                    NavigationBar {
+                        BottomButton.entries.forEachIndexed { index, item ->
+                            NavigationBarItem(
+                                icon = { Icon(item.icon, contentDescription = item.text) },
+                                label = { Text(item.text) },
+                                selected = selectedItem == index,
+                                onClick = { selectedItem=index;navigate(item.route.id) }
+                            )
+                        }
                     }
-                }
             }
         ) {
             content(
@@ -83,20 +100,23 @@ fun Decorations(bottomBarVisible:Boolean=true,content:@Composable (Modifier)->Un
     }
 }
 
+
 @Composable
-fun Root(viewModel:StateViewModel= viewModel()) {
+fun Root(viewModel: StateViewModel = viewModel()) {
     val scope = viewModel.viewModelScope
     val state = viewModel.repository
     val controller = rememberNavController()
     var bottomBarVisible by rememberSaveable { mutableStateOf(false) }
     // A surface container using the 'background' color from the theme
-    Decorations (bottomBarVisible = bottomBarVisible){
+    Decorations(
+        bottomBarVisible = bottomBarVisible,
+        navigate = { controller.navigate(it) }) {
         NavHost(
             navController = controller,
             modifier = it,
-            startDestination = "loginpage"
+            startDestination = Route.LOGINPAGE.id
         ) {
-            composable("loginpage") {
+            composable(Route.LOGINPAGE.id) {
                 LoginPage(
                     register = { username, password ->
                         scope.launch {
@@ -107,8 +127,9 @@ fun Root(viewModel:StateViewModel= viewModel()) {
                         }
                     },
                     homePage = {
-                        bottomBarVisible=true
-                        controller.navigate("dashboard") },
+                        bottomBarVisible = true
+                        controller.navigate(Route.DASHBOARD.id)
+                    },
                     login = { username, password ->
                         scope.launch {
                             state.login(
@@ -119,7 +140,11 @@ fun Root(viewModel:StateViewModel= viewModel()) {
                     }
                 )
             }
-            composable("dashboard") { Dashboard() }
+            composable(Route.DASHBOARD.id) { Dashboard() }
+            composable(Route.ACCOUNT.id) { Account() }
+            composable(Route.CHANGE_PASSWORD.id) { ChangePassword() }
+            composable(Route.CHARTS.id) { Chart() }
+            composable(Route.JUGS.id) { Jugs() }
         }
     }
 }
