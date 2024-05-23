@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -87,6 +88,7 @@ fun Decorations(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.primary,
+
                     ),
                     title = {
                         Text(
@@ -128,16 +130,17 @@ fun Decorations(
                     }
             }
         ) {
-            content(
-                Modifier
-                    .padding(
-                        it.calculateStartPadding(LayoutDirection.Ltr),
-                        it.calculateTopPadding(),
-                        it.calculateEndPadding(LayoutDirection.Ltr),
-                        it.calculateBottomPadding()
-                    )
-                    .consumeWindowInsets(it)
-            )
+//            content(
+//                Modifier
+//                    .padding(
+//                        it.calculateStartPadding(LayoutDirection.Ltr),
+//                        it.calculateTopPadding(),
+//                        it.calculateEndPadding(LayoutDirection.Ltr),
+//                        it.calculateBottomPadding()
+//                    )
+//                    .consumeWindowInsets(it)
+//            )
+            content(Modifier.fillMaxSize().padding(it).consumeWindowInsets(it))
         }
     }
 }
@@ -152,7 +155,8 @@ fun Root(viewModel: StateViewModel = viewModel()) {
     // A surface container using the 'background' color from the theme
     Decorations(
         bottomBarVisible = bottomBarVisible,
-        navigate = { controller.navigate(it) }) {
+        navigate = { controller.navigate(it) }
+    ) {
         NavHost(
             navController = controller,
             modifier = it,

@@ -133,7 +133,6 @@ fun LoginPage(
     login: (String, String) -> Unit = { _, _ -> }
 ) {
     ScrollableContent {
-        Text("Authentication", modifier = Modifier.padding(16.dp))
         RegisterCard(register)
         LoginCard(login)
         Button(onClick = { homePage() }) { Text("HomePage") }

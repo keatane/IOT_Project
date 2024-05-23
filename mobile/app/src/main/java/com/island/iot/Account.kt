@@ -61,14 +61,6 @@ fun AccountSection() {
             .fillMaxHeight()
             .padding(4.dp)
     ) {
-        Text(
-            text = "Your account",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
         CardTextField(label = "Email", text = email, onChange = { email = it })
         Button(
             onClick = { /* TODO */ },
