@@ -21,8 +21,8 @@
  **/
 
 /* ENV VARS -- Kevin */
-process.env.DB_IP = "127.0.0.1";
-process.env.DB_PORT = "5432";
+process.env.DB_IP = process.env.DB_IP||"127.0.0.1";
+process.env.DB_PORT = process.env.DB_PORT||"5432";
 
 
 module.exports = {
