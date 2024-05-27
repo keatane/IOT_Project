@@ -1,2 +1,12 @@
-default_fqbn: arduino:renesas_uno:unor4wifi
-default_port: /dev/ttyACM0
+profiles:
+  default:
+    fqbn: arduino:renesas_uno:unor4wifi
+    platforms:
+      - platform: arduino:renesas_uno (1.1.0)
+    libraries:
+      - WiFiWebServer (1.10.1)
+      - ArduinoJson (7.0.4)
+      - MQTT (2.5.2)
+    port: /dev/ttyACM0
+
+
