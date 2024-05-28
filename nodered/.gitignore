@@ -148,5 +148,5 @@ dist
 .config.users.json
 .config.users.json.backup
 .flows_cred.json.backup
-flows_cred.json
+# flows_cred.json
 .flows.json.backup

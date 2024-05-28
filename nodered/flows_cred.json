@@ -1,0 +1,38 @@
+{
+    "c77abff0c3609a0d": {
+        "user": "$(MQTT_USERNAME)",
+        "password": "$(MQTT_PASSWORD)"
+    },
+    "08d1b59a62811f23": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "ce16f9573b804d91": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "6f1e5e7364d80697": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "12d7faae89458ea7": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "df69d4b1370ec407": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "abf1b4b172e6ae86": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "12e14872e9e1debc": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "fa3fe7db1655837d": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    }
+}

@@ -9,6 +9,13 @@ services:
       NODE_RED_DISABLE_EDITOR: false
       DB_IP: db
       DB_PORT: 5432
+      DB_USER: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      THINGWORX_USERNAME: ${THINGWORX_USERNAME}
+      THINGWORX_PASSWORD: ${THINGWORX_PASSWORD}
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
   redis:
     image: docker.io/redis:7.2.5-alpine3.19
     ports:
@@ -18,9 +25,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: passwordsegreta
-      POSTGRES_USER: nodered
-      POSTGRES_DB: jugdb
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE}
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres:/var/lib/postgresql/data

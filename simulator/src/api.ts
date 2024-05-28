@@ -1,7 +1,8 @@
 import {RestAPI,Method,MQTTAPI} from "./utils.js";
 
 enum ResponseStatus{
-    OK="OK"
+    OK="OK",
+    Malformed="Malformed"
 }
 
 interface RegisterRequest{
@@ -51,4 +52,16 @@ interface PairResponse{
 }
 
 export const PAIR_API=new MQTTAPI<PairRequest,PairResponse>("/jug/pair","/jug/pair/response");
+
+interface EdgePairRequest{
+    ssid:string,
+    pw:string,
+    token:string
+}
+
+interface EdgePairResponse{
+    status:ResponseStatus
+}
+
+export const EDGE_PAIR_API=new RestAPI<EdgePairRequest,EdgePairResponse>("pair",Method.POST,"192.168.4.1","8080");
 

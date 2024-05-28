@@ -12,5 +12,5 @@ WORKDIR /usr/src/node-red
 #       If you need to use an external volume for persistence then
 #       copy your settings and flows files to that volume instead.
 COPY --chown=1000:1000 settings.js /data/settings.js
-# COPY flows_cred.json /data/flows_cred.json
+COPY flows_cred.json /data/flows_cred.json
 COPY --chown=1000:1000 flows.json /data/flows.json
