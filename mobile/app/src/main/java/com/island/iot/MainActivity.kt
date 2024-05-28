@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
@@ -86,32 +87,33 @@ fun Decorations(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.primary,
-
                         ),
                     title = {
                         Text(
-                            "Centered Top App Bar",
+                            text = if (bottomBarVisible) BottomButton.entries[selectedItem].text else "Login",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
                     },
-//                    navigationIcon = {
+                    navigationIcon = {
+                        if (bottomBarVisible) {
+                            IconButton(onClick = { /* do something */ }) {
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "Localized description"
+                                )
+                            }
+                        }
+                    },
+//                    actions = {
 //                        IconButton(onClick = { /* do something */ }) {
 //                            Icon(
-//                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+//                                imageVector = Icons.Filled.AccountCircle,
 //                                contentDescription = "Localized description"
 //                            )
 //                        }
 //                    },
-                    actions = {
-                        IconButton(onClick = { /* do something */ }) {
-                            Icon(
-                                imageVector = Icons.Filled.AccountCircle,
-                                contentDescription = "Localized description"
-                            )
-                        }
-                    },
-//                    scrollBehavior = scrollBehavior,
+                    scrollBehavior = scrollBehavior,
                 )
             },
             bottomBar = {
@@ -201,8 +203,18 @@ fun Root(viewModel: StateViewModel = viewModel()) {
                 )
             }
             composable(Route.DASHBOARD.id) { Dashboard() }
-            composable(Route.ACCOUNT.id) { Account() }
-            composable(Route.CHANGE_PASSWORD.id) { ChangePassword() }
+            composable(Route.ACCOUNT.id) { Account(
+                passwordPage = {
+                    bottomBarVisible = true
+                    navigateTo(controller, Route.CHANGE_PASSWORD.id)
+                },
+            ) }
+            composable(Route.CHANGE_PASSWORD.id) { ChangePassword(
+                accountPage = {
+                    bottomBarVisible = true
+                    navigateTo(controller, Route.ACCOUNT.id)
+                },
+            ) }
             composable(Route.CHARTS.id) { Chart() }
             composable(Route.JUGS.id) { Jugs() }
         }

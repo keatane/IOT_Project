@@ -51,7 +51,9 @@ import com.island.iot.ui.theme.IOTTheme
 
 
 @Composable
-fun AccountSection() {
+fun AccountSection(
+    passwordPage: () -> Unit
+) {
     var email by remember {
         mutableStateOf("")
     }
@@ -69,8 +71,7 @@ fun AccountSection() {
             Text(text = "Change email")
         }
         Button(
-            onClick = {
-            },
+            onClick = { passwordPage() },
             modifier = Modifier.padding(32.dp)
         ) {
             Text(text = "Change password")
@@ -101,13 +102,15 @@ fun AccountPreview() {
 }
 
 @Composable
-fun Account() {
+fun Account(
+    passwordPage: () -> Unit = {},
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         ScrollableContent {
-            AccountSection()
+            AccountSection(passwordPage)
         }
     }
 }

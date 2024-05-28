@@ -50,7 +50,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.island.iot.ui.theme.IOTTheme
 
 @Composable
-fun ChangePasswordSection() {
+fun ChangePasswordSection(
+    accountPage: () -> Unit = {},
+) {
     var oldPassword by remember {
         mutableStateOf("")
     }
@@ -63,14 +65,6 @@ fun ChangePasswordSection() {
             .fillMaxHeight()
             .padding(4.dp)
     ) {
-        Text(
-            text = "Change password",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
         CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
         CardTextField(label = "New Password", text = password, onChange = { password = it })
 
@@ -79,6 +73,13 @@ fun ChangePasswordSection() {
             modifier = Modifier.padding(32.dp)
         ) {
             Text(text = "Change password")
+        }
+
+        Button(
+            onClick = { accountPage() },
+            modifier = Modifier.padding(32.dp)
+        ) {
+            Text(text = "Back to account")
         }
     }
 }
@@ -93,8 +94,10 @@ fun ChangePasswordPreview() {
 }
 
 @Composable
-fun ChangePassword() {
+fun ChangePassword(
+    accountPage: () -> Unit = {},
+) {
     ScrollableContent {
-        ChangePasswordSection()
+        ChangePasswordSection(accountPage)
     }
 }
