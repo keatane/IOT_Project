@@ -36,50 +36,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AlertDialogExample(
-    onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
-    dialogTitle: String,
-    dialogText: String,
-    icon: ImageVector,
-) {
-    AlertDialog(
-        icon = {
-            Icon(icon, contentDescription = "Warning icon")
-        },
-        title = {
-            Text(text = dialogTitle)
-        },
-        text = {
-            Text(text = dialogText)
-        },
-        onDismissRequest = {
-            onDismissRequest()
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onConfirmation()
-                }
-            ) {
-                Text("Confirm")
-            }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = {
-                    onDismissRequest()
-                }
-            ) {
-                Text("Dismiss")
-            }
-        }
-    )
-}
-@Composable
 fun WarningDialog(openAlertDialog: MutableState<Boolean>) {
     if (openAlertDialog.value) {
-            AlertDialogExample(
+            AlertDialogGeneric(
                 onDismissRequest = { openAlertDialog.value = false },
                 onConfirmation = {
                     openAlertDialog.value = false
@@ -149,8 +108,10 @@ fun AccountPreview() {
 
 @Composable
 fun Account(
+    initAccount: () -> Unit = {},
     passwordPage: () -> Unit = {},
 ) {
+    initAccount()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background

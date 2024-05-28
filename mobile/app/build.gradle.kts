@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.navigation.compose)
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)

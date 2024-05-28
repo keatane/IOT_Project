@@ -10,9 +10,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -60,7 +62,8 @@ enum class Route(val id: String) {
     ACCOUNT("account"),
     CHANGE_PASSWORD("changePassword"),
     CHARTS("charts"),
-    JUGS("jugs")
+    JUGS("jugs"),
+    NEWS("news")
 }
 
 enum class BottomButton(val route: Route, val text: String, val icon: ImageVector) {
@@ -74,6 +77,7 @@ enum class BottomButton(val route: Route, val text: String, val icon: ImageVecto
 @Composable
 fun Decorations(
     bottomBarVisible: Boolean = true,
+    newsFeedVisible: Boolean = false,
     navigate: (String) -> Unit = {},
     content: @Composable (Modifier) -> Unit
 ) {
@@ -90,29 +94,30 @@ fun Decorations(
                         ),
                     title = {
                         Text(
-                            text = if (bottomBarVisible) BottomButton.entries[selectedItem].text else "Login",
-                            maxLines = 1,
+                            text = if (newsFeedVisible) "News Feed" else if (bottomBarVisible) BottomButton.entries[selectedItem].text else "Login/Register",
                             overflow = TextOverflow.Ellipsis
                         )
                     },
                     navigationIcon = {
                         if (bottomBarVisible) {
-                            IconButton(onClick = { /* do something */ }) {
+                            IconButton(onClick = { navigate(Route.DASHBOARD.id) }) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    contentDescription = "Localized description"
+                                    contentDescription = "Go back"
                                 )
                             }
                         }
                     },
-//                    actions = {
-//                        IconButton(onClick = { /* do something */ }) {
-//                            Icon(
-//                                imageVector = Icons.Filled.AccountCircle,
-//                                contentDescription = "Localized description"
-//                            )
-//                        }
-//                    },
+                    actions = {
+                        if (bottomBarVisible) {
+                            IconButton(onClick = { navigate(Route.NEWS.id) }) {
+                                Icon(
+                                    imageVector = Icons.Filled.Email,
+                                    contentDescription = "News feed"
+                                )
+                            }
+                        }
+                    },
                     scrollBehavior = scrollBehavior,
                 )
             },
@@ -130,16 +135,6 @@ fun Decorations(
                     }
             }
         ) {
-//            content(
-//                Modifier
-//                    .padding(
-//                        it.calculateStartPadding(LayoutDirection.Ltr),
-//                        it.calculateTopPadding(),
-//                        it.calculateEndPadding(LayoutDirection.Ltr),
-//                        it.calculateBottomPadding()
-//                    )
-//                    .consumeWindowInsets(it)
-//            )
             content(
                 Modifier
                     .fillMaxSize()
@@ -167,8 +162,10 @@ fun Root(viewModel: StateViewModel = viewModel()) {
     val state = viewModel.repository
     val controller = rememberNavController()
     var bottomBarVisible by rememberSaveable { mutableStateOf(false) }
+    var newsFeedVisible by rememberSaveable { mutableStateOf(false) }
     Decorations(
         bottomBarVisible = bottomBarVisible,
+        newsFeedVisible = newsFeedVisible,
         navigate = {
             navigateTo(controller, it)
         }
@@ -190,6 +187,7 @@ fun Root(viewModel: StateViewModel = viewModel()) {
                     },
                     homePage = {
                         bottomBarVisible = true
+                        newsFeedVisible = false
                         navigateTo(controller, Route.DASHBOARD.id)
                     },
                     login = { username, password ->
@@ -202,25 +200,49 @@ fun Root(viewModel: StateViewModel = viewModel()) {
                     }
                 )
             }
-            composable(Route.DASHBOARD.id) { Dashboard() }
+            composable(Route.DASHBOARD.id) { Dashboard(
+                initDashboard = {
+                    bottomBarVisible = true
+                    newsFeedVisible = false
+                }
+            ) }
             composable(Route.ACCOUNT.id) { Account(
                 passwordPage = {
                     bottomBarVisible = true
+                    newsFeedVisible = false
                     navigateTo(controller, Route.CHANGE_PASSWORD.id)
                 },
             ) }
             composable(Route.CHANGE_PASSWORD.id) { ChangePassword(
                 accountPage = {
                     bottomBarVisible = true
+                    newsFeedVisible = false
                     navigateTo(controller, Route.ACCOUNT.id)
                 },
             ) }
-            composable(Route.CHARTS.id) { Chart() }
-            composable(Route.JUGS.id) { Jugs() }
+            composable(Route.CHARTS.id) { Chart(
+                initCharts = {
+                    bottomBarVisible = true
+                    newsFeedVisible = false
+                }
+            ) }
+            composable(Route.JUGS.id) { Jugs(
+                initJugs = {
+                    bottomBarVisible = true
+                    newsFeedVisible = false
+                }
+            ) }
+            composable(Route.NEWS.id) { News(
+                initNews = {
+                    bottomBarVisible = true
+                    newsFeedVisible = true
+                }
+            ) }
         }
     }
     LoginNavigate(user = viewModel.repository.user) {
         bottomBarVisible = true
+        newsFeedVisible = false
         navigateTo(controller, Route.DASHBOARD.id)
     }
 }

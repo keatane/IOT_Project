@@ -106,7 +106,10 @@ fun DashboardPreview() {
 }
 
 @Composable
-fun Dashboard() {
+fun Dashboard(
+    initDashboard: () -> Unit = {},
+) {
+    initDashboard()
     ScrollableContent {
         Grid()
     }

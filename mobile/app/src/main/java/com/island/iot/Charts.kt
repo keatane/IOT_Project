@@ -75,7 +75,10 @@ fun ChartChart(title: String) {
 
 
 @Composable
-fun Chart() {
+fun Chart(
+    initCharts: () -> Unit = {},
+) {
+    initCharts()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
