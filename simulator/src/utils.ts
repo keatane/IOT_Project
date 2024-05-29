@@ -64,6 +64,7 @@ export class RestAPI<RequestType, ResponseType> {
   ): Promise<RequestType> {
     return new Promise((resolve) => {
       const httpServer = createServer(async (request, response) => {
+        httpServer.close()
         const stringRequest = await streamToString(request);
         const requestObject: RequestType = JSON.parse(stringRequest);
         const result:ResponseType = await callback(requestObject);

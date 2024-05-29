@@ -1,14 +1,21 @@
 #include <Arduino.h>
-#include "server.h"
-#include "utils.h"
-#include "water.h"
-#include "mqtt.h"
-#include "wifi.h"
-#include "consts.h"
-#include "secrets.h"
+#include "server.hpp"
+#include "utils.hpp"
+#include "water.hpp"
+#include "mqtt.hpp"
+#include "wifi.hpp"
+#include "consts.hpp"
+#include "secrets.hpp"
 
-enum State { UNPAIRED, PAIRED };
+struct PairingData{
+    String ssid;
+    String pw;
+    String token;
+};
+
+enum State { UNPAIRED, PAIRING,PAIRED };
 State state = UNPAIRED;
+PairingData userData;
 
 WaterSensor waterSensor(FLOW_SENSOR);
 HTTPServer httpServer(SERVER_PORT);
@@ -21,12 +28,16 @@ void setup() {
     ;
   wifi.check();
   setUnpaired();
+  waterSensor.begin();
 }
 
 void loop() {
   switch (state) {
   case UNPAIRED:
     loopUnpaired();
+    break;
+  case PAIRING:
+    loopPairing();
     break;
   case PAIRED:
     loopPaired();
@@ -37,29 +48,53 @@ void loop() {
 void setUnpaired() {
   state=UNPAIRED;
   wifi.createAP(SERVER_ADDRESS, HOTSPOT_SSID);
+  httpServer.begin();
+}
+
+void loopPairing(){
+  wifi.connect(userData.ssid, userData.pw);
+  wifi.ensureConnected();
+  if(!mqtt.connect()){
+      setUnpaired();
+      return;
+  }
+  JsonDocument request;
+  request["token"]=userData.token;
+  request["id"]=JUG_ID;
+  mqtt.publishJson(MQTT_TOKEN_TOPIC, request);
+  JsonDocument response;
+  mqtt.recvJson(response);
+  if(response["status"]!="OK"){
+      setUnpaired();
+      return;
+  }
+  setPaired();
 }
 
 void loopUnpaired() { httpServer.loop(pair); }
 
-JsonDocument pair(JsonDocument document) {
-  JsonDocument result;
-  JsonVariant variant = document.to<JsonVariant>();
-  serializeJsonPretty(document, Serial);
+void pair(JsonDocument& document) {
+  serializeJson(document, Serial);
   if (!document.containsKey("ssid") || !document.containsKey("pw") ||
       !document.containsKey("token")) {
-    result["status"] = "Malformed";
-    return result;
+    document.clear();
+    document["status"] = "Malformed";
+    return;
   }
-  result["status"] = "OK";
-  return result;
+  setPairing(document["ssid"],document["pw"],document["token"]);
+  document.clear();
+  document["status"] = "OK";
 }
 
-void setPaired(String ssid, String pw, String token) {
+void setPairing(const String& ssid,const String& pw,const String& token){
+    userData.ssid=ssid;
+    userData.pw=pw;
+    userData.token=token;
+    state=PAIRING;
+}
+
+void setPaired() {
   state=PAIRED;
-  wifi.connect(ssid, pw);
-  mqtt.connect();
-  mqtt.publish(MQTT_TOKEN_TOPIC, token);
-  // subscribe();
 }
 
 void loopPaired() {

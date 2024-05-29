@@ -1,9 +1,7 @@
-#include <Arduino.h>
 #include "ArduinoHttpServer.h"
 #include "ArduinoJson.h"
 #include "WiFiS3.h"
-
-namespace server {
+#include <Arduino.h>
 
 class HTTPServer {
 private:
@@ -11,7 +9,8 @@ private:
 
 public:
   HTTPServer(int port) : server(port) {}
-  JsonDocument loop(JsonDocument (*callback)(JsonDocument)) {
+  void begin() { server.begin(); }
+  JsonDocument loop(void (*callback)(JsonDocument &)) {
     JsonDocument result;
     WiFiClient client = server.available();
     if (!client)
@@ -21,15 +20,17 @@ public:
     if (!success)
       return result;
     const char *body = httpRequest.getBody();
+    Serial.print("Body: ");
+    Serial.println(body);
     deserializeJson(result, body);
     Serial.println("new client");
-    JsonDocument response = callback(result);
+    Serial.print("json:");
+    serializeJson(result, Serial);
+    Serial.println("");
+    callback(result);
     serializeJson(result, client);
     client.stop();
     Serial.println("client disconnected");
     return result;
   }
 };
-} // namespace server
-
-using server::HTTPServer;

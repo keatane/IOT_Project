@@ -1,9 +1,10 @@
 {
     "scripts":{
         "nodered":"node-red --port 1881 --userDir nodered",
-        "arduino":"arduino-cli compile arduino --build-property \"build.extra_flags=-DJUG_ID=1 -DMQTT_USERNAME=\\\"$MQTT_USERNAME\\\" -DMQTT_PASSWORD=\\\"$MQTT_PASSWORD\\\" -Iarduino/patches\" && arduino-cli upload arduino && arduino-cli monitor -p /dev/ttyACM0",
+        "arduino":"arduino-cli compile arduino --build-property \"build.extra_flags=-DJUG_ID=1 -DMQTT_USER=$MQTT_USERNAME -DMQTT_PASS=$MQTT_PASSWORD -Iarduino/patches\" && arduino-cli upload arduino && stty -F /dev/ttyACM0 raw 9600 && cat /dev/ttyACM0",
         "simulate-arduino":"sudo $(which create_ap) wlp0s20f3 wlp0s20f3 jug_2 --freq-band 2.4 -g 192.168.4.1 --no-dnsmasq --daemon && sleep 5 && sudo dnsmasq --interface=ap0 --bind-interfaces --dhcp-range=192.168.4.2,192.168.4.255 -z -H hosts",
       "hostspot": "sudo $(which create_ap) wlp0s20f3 wlp0s20f3 islandwifi island01 --freq-band 2.4 -g 192.168.4.1 --no-dnsmasq --daemon && sleep 5 && sudo dnsmasq --interface=ap0 --bind-interfaces --dhcp-range=192.168.4.2,192.168.4.255 -z -H hosts",
-      "stop-hotspot": "sudo pkill create_ap && sudo pkill dnsmasq"
+      "stop-hotspot": "sudo pkill create_ap && sudo pkill dnsmasq",
+      "monitor":"stty -F /dev/ttyACM0 raw 9600 && cat /dev/ttyACM0"
     }
 }

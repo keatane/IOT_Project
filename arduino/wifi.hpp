@@ -7,18 +7,20 @@ private:
   String pw;
 
 public:
-  void check() {
+  void check() const{
     Serial.println("Access Point Web Server");
     if (WiFi.status() == WL_NO_MODULE) {
       Serial.println("Communication with WiFi module failed!");
       exit();
     }
     String fv = WiFi.firmwareVersion();
+    Serial.print("Version:");
+    Serial.println(fv);
     if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
       Serial.println("Please upgrade the firmware");
     }
   }
-  void createAP(IPAddress server_address, String ssid) {
+  void createAP(const IPAddress& server_address, const String& ssid) const{
     WiFi.config(server_address);
 
     Serial.print("Creating access point named: ");
@@ -41,12 +43,12 @@ public:
     Serial.print("To see this page in action, open a browser to http://");
     Serial.println(ip);
   }
-  void connect(String ssid, String pw) {
+  void connect(const String& ssid,const String& pw) {
     this->ssid = ssid;
     this->pw = pw;
     ensureConnected();
   }
-  bool ensureConnected() {
+  bool ensureConnected() const{
     while (WiFi.status() != WL_CONNECTED) {
       const IPAddress EMPTY = IPAddress(0, 0, 0, 0);
       WiFi.config(EMPTY, EMPTY, EMPTY);

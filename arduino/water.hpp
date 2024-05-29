@@ -9,8 +9,12 @@ volatile int spins;
 void rpm() { spins++; }
 
 class WaterSensor {
+private:
+    int flow_sensor;
 public:
-  WaterSensor(int flow_sensor) {
+  WaterSensor(int flow_sensor):flow_sensor(flow_sensor) {}
+
+  void begin() {
     attachInterrupt(digitalPinToInterrupt(flow_sensor), rpm,
                     RISING); // Attach interrupt
   }
