@@ -36,7 +36,7 @@
         "password": "$(THINGWORX_PASSWORD)"
     },
     "12d815057cd57334": {
-        "user": "CattaneoIsola",
-        "password": "S4944382S4943369"
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
     }
 }
