@@ -69,7 +69,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Root(searchJugs = { search(this, pairingRequest, DEVICE_REQUEST_CODE) })
+            Root(
+                searchJugs = { search(this, pairingRequest, DEVICE_REQUEST_CODE) },
+                onPaired = { disconnect() })
         }
     }
 
@@ -117,9 +119,15 @@ class MainActivity : ComponentActivity() {
             ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 Log.d("fdhjhjdsjdjs", "CONNETED YAYAYAYYAY")
+                connectivityManager.bindProcessToNetwork(network)
                 search(this@MainActivity, allPairingRequest, NORMAL_WIFI_CODE)
             }
         })
+    }
+
+    fun disconnect() {
+        val connectivityManager = getSystemService(ConnectivityManager::class.java)
+        connectivityManager.bindProcessToNetwork(null)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -263,7 +271,7 @@ fun PasswordDialog(callback: (String) -> Unit) {
 }
 
 @Composable
-fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit) {
+fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPaired: () -> Unit) {
     val scope = viewModel.viewModelScope
     val state = viewModel.repository
     val controller = rememberNavController()
@@ -367,6 +375,7 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit) {
     val pairingState by state.memoryDataSource.pairingState.collectAsState()
     if (pairingState == PairingState.ASK_PASSWORD)
         PasswordDialog {
-            scope.launch { state.memoryDataSource.enterSending() }
+            state.memoryDataSource.wifiPassword.value = it
+            scope.launch { state.memoryDataSource.enterSending() }.invokeOnCompletion { onPaired() }
         }
 }
