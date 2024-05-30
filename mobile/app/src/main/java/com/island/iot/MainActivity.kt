@@ -1,20 +1,33 @@
 package com.island.iot
 
+import android.companion.AssociationRequest
+import android.companion.CompanionDeviceManager
+import android.companion.WifiDeviceFilter
+import android.content.Context
+import android.content.Intent
+import android.content.IntentSender
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
+import android.net.wifi.ScanResult
+import android.net.wifi.WifiNetworkSpecifier
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -46,12 +59,95 @@ import androidx.navigation.compose.rememberNavController
 import com.island.iot.ui.theme.IOTTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
+
 
 class MainActivity : ComponentActivity() {
+    val DEVICE_REQUEST_CODE = 1
+    val NORMAL_WIFI_CODE = 2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Root()
+            Root(searchJugs = { search(this, pairingRequest, DEVICE_REQUEST_CODE) })
+        }
+    }
+
+    val deviceFilter: WifiDeviceFilter =
+        WifiDeviceFilter.Builder().setNamePattern(Pattern.compile("jug_\\d+")).build()
+    val pairingRequest = AssociationRequest.Builder().addDeviceFilter(deviceFilter).build()
+
+    val allPairingRequest = AssociationRequest.Builder().build()
+
+    fun search(context: Context, request: AssociationRequest, code: Int) {
+        val deviceManager = context.getSystemService(CompanionDeviceManager::class.java)
+
+        deviceManager.associate(
+            request,
+            object : CompanionDeviceManager.Callback() {
+                // Called when a device is found. Launch the IntentSender so the user
+                // can select the device they want to pair with.
+                override fun onDeviceFound(chooserLauncher: IntentSender) {
+                    startIntentSenderForResult(
+                        chooserLauncher,
+                        code, null, 0, 0, 0
+                    )
+                }
+
+                override fun onFailure(error: CharSequence?) {
+                    // Handle the failure.
+                }
+            }, null
+        )
+
+    }
+
+    fun connect(ssid: String) {
+        val connectivityManager = getSystemService(ConnectivityManager::class.java)
+        val wifiNetworkSpecifier = WifiNetworkSpecifier.Builder()
+            .setSsid(ssid)
+            .build()
+
+        val networkRequest = NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .setNetworkSpecifier(wifiNetworkSpecifier)
+            .build()
+
+        connectivityManager.requestNetwork(networkRequest, object :
+            ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                Log.d("fdhjhjdsjdjs", "CONNETED YAYAYAYYAY")
+                search(this@MainActivity, allPairingRequest, NORMAL_WIFI_CODE)
+            }
+        })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            DEVICE_REQUEST_CODE -> when (resultCode) {
+                RESULT_OK -> {
+                    // The user chose to pair the app with a Bluetooth device.
+                    val deviceToPair: ScanResult? =
+                        data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
+                    Log.d("dhjfhdjhhdjhf", deviceToPair!!.BSSID)
+                    val viewModel: StateViewModel by viewModels()
+                    viewModel.repository.memoryDataSource.enterConnecting()
+                    connect(deviceToPair.SSID)
+                }
+            }
+
+            NORMAL_WIFI_CODE -> when (resultCode) {
+                RESULT_OK -> {
+                    // The user chose to pair the app with a Bluetooth device.
+                    val deviceToPair: ScanResult? =
+                        data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
+                    Log.d("dhjfhdjhhdjhf", deviceToPair!!.BSSID)
+                    val viewModel: StateViewModel by viewModels()
+                    viewModel.repository.memoryDataSource.enterAskPassword(deviceToPair.SSID)
+                }
+            }
+
+            else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
@@ -91,7 +187,7 @@ fun Decorations(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.primary,
-                        ),
+                    ),
                     title = {
                         Text(
                             text = if (newsFeedVisible) "News Feed" else if (bottomBarVisible) BottomButton.entries[selectedItem].text else "Login/Register",
@@ -157,7 +253,17 @@ fun navigateTo(controller: NavController, id: String) {
 }
 
 @Composable
-fun Root(viewModel: StateViewModel = viewModel()) {
+fun PasswordDialog(callback: (String) -> Unit) {
+    DialogGeneric(
+        onDismissRequest = { },
+        onConfirmation = callback,
+        dialogTitle = "Wifi password",
+        icon = Icons.Default.Edit
+    )
+}
+
+@Composable
+fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit) {
     val scope = viewModel.viewModelScope
     val state = viewModel.repository
     val controller = rememberNavController()
@@ -200,44 +306,57 @@ fun Root(viewModel: StateViewModel = viewModel()) {
                     }
                 )
             }
-            composable(Route.DASHBOARD.id) { Dashboard(
-                initDashboard = {
-                    bottomBarVisible = true
-                    newsFeedVisible = false
-                }
-            ) }
-            composable(Route.ACCOUNT.id) { Account(
-                passwordPage = {
-                    bottomBarVisible = true
-                    newsFeedVisible = false
-                    navigateTo(controller, Route.CHANGE_PASSWORD.id)
-                },
-            ) }
-            composable(Route.CHANGE_PASSWORD.id) { ChangePassword(
-                accountPage = {
-                    bottomBarVisible = true
-                    newsFeedVisible = false
-                    navigateTo(controller, Route.ACCOUNT.id)
-                },
-            ) }
-            composable(Route.CHARTS.id) { Chart(
-                initCharts = {
-                    bottomBarVisible = true
-                    newsFeedVisible = false
-                }
-            ) }
-            composable(Route.JUGS.id) { Jugs(
-                initJugs = {
-                    bottomBarVisible = true
-                    newsFeedVisible = false
-                }
-            ) }
-            composable(Route.NEWS.id) { News(
-                initNews = {
-                    bottomBarVisible = true
-                    newsFeedVisible = true
-                }
-            ) }
+            composable(Route.DASHBOARD.id) {
+                Dashboard(
+                    initDashboard = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                    }
+                )
+            }
+            composable(Route.ACCOUNT.id) {
+                Account(
+                    passwordPage = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                        navigateTo(controller, Route.CHANGE_PASSWORD.id)
+                    },
+                )
+            }
+            composable(Route.CHANGE_PASSWORD.id) {
+                ChangePassword(
+                    accountPage = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                        navigateTo(controller, Route.ACCOUNT.id)
+                    },
+                )
+            }
+            composable(Route.CHARTS.id) {
+                Chart(
+                    initCharts = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                    }
+                )
+            }
+            composable(Route.JUGS.id) {
+                Jugs(
+                    initJugs = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                    },
+                    searchJugs = searchJugs
+                )
+            }
+            composable(Route.NEWS.id) {
+                News(
+                    initNews = {
+                        bottomBarVisible = true
+                        newsFeedVisible = true
+                    }
+                )
+            }
         }
     }
     LoginNavigate(user = viewModel.repository.user) {
@@ -245,4 +364,9 @@ fun Root(viewModel: StateViewModel = viewModel()) {
         newsFeedVisible = false
         navigateTo(controller, Route.DASHBOARD.id)
     }
+    val pairingState by state.memoryDataSource.pairingState.collectAsState()
+    if (pairingState == PairingState.ASK_PASSWORD)
+        PasswordDialog {
+            scope.launch { state.memoryDataSource.enterSending() }
+        }
 }

@@ -1,58 +1,42 @@
 package com.island.iot
 
-import androidx.compose.material3.Icon
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.island.iot.ui.theme.IOTTheme
 
 data class JugElement(val title: String)
+
 var selectedId = 0
 var sampleJugsList = mutableListOf(
     JugElement(title = "Kitchen Jug"),
     JugElement(title = "Living Room Jug")
 )
+
+
 @Composable
 fun DeleteJugDialog(
     openAlertDialog: MutableState<Boolean>,
@@ -85,7 +69,7 @@ fun RenameJugDialog(
                 println("Jug renamed")
             },
             dialogTitle = "Rename jug",
-            dialogText = "Provide the new name for the jug.",
+            //dialogText = "Provide the new name for the jug.",
             icon = Icons.Default.Edit
         )
     }
@@ -112,9 +96,11 @@ fun Jug(id: Int, title: String) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(text = title, modifier = Modifier
-                .padding(8.dp)
-                .weight(1f))
+            Text(
+                text = title, modifier = Modifier
+                    .padding(8.dp)
+                    .weight(1f)
+            )
             IconButton(onClick = { openRenameialog.value = true; selectedId = id }) {
                 Icon(Icons.Outlined.Create, contentDescription = "Rename")
             }
@@ -129,14 +115,14 @@ fun Jug(id: Int, title: String) {
 }
 
 @Composable
-fun Section() {
+fun Section(searchJugs: () -> Unit) {
     val jugList = remember { sampleJugsList }
     Column {
         for ((i, jug) in jugList.withIndex()) {
             Jug(i, jug.title)
         }
         Button(
-            onClick = { /* TODO */ },
+            onClick = { searchJugs() },
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
@@ -150,14 +136,14 @@ fun Section() {
 @Preview(showBackground = true)
 @Composable
 fun JugsPreview() {
-    Decorations{
+    Decorations {
         Jugs()
     }
 }
 
 @Composable
 fun Jugs(
-    initJugs: () -> Unit = {},
+    initJugs: () -> Unit = {}, searchJugs: () -> Unit = {}
 ) {
     initJugs()
     Column(
@@ -166,6 +152,7 @@ fun Jugs(
             .fillMaxWidth()
             .padding(0.dp, 32.dp)
     ) {
-        Section()
+        Section(searchJugs)
     }
 }
+
