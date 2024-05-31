@@ -387,12 +387,15 @@
             "5a63caf10b3b9a0e",
             "983a4efb652711eb",
             "acb3b289268ebf17",
-            "289d5d7502ba340b"
+            "289d5d7502ba340b",
+            "776ccf38c843d360",
+            "c5526e3a82f3fba4",
+            "00166d442c6f8738"
         ],
         "x": 154,
         "y": 719,
         "w": 1172,
-        "h": 242
+        "h": 342
     },
     {
         "id": "1589093497ae43e3",
@@ -595,26 +598,6 @@
         "h": 142
     },
     {
-        "id": "9e5f8bb47ea0c6cd",
-        "type": "group",
-        "z": "dd62ac133fb1360c",
-        "g": "f0c008adf5daaa20",
-        "name": "Plastic information",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "6cc1040bfd802f1e",
-            "bf3e55578af7a2e4",
-            "3ef85ed4716564ae",
-            "fa768fe8dd244a44"
-        ],
-        "x": 614,
-        "y": 479,
-        "w": 732,
-        "h": 142
-    },
-    {
         "id": "f78c38617ed627c9",
         "type": "group",
         "z": "217d4457bda21c0d",
@@ -683,6 +666,26 @@
         "y": 1459,
         "w": 1292,
         "h": 182
+    },
+    {
+        "id": "9e5f8bb47ea0c6cd",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "g": "f0c008adf5daaa20",
+        "name": "Plastic information",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "6cc1040bfd802f1e",
+            "bf3e55578af7a2e4",
+            "3ef85ed4716564ae",
+            "fa768fe8dd244a44"
+        ],
+        "x": 614,
+        "y": 479,
+        "w": 732,
+        "h": 142
     },
     {
         "id": "dd1013cf1ed907ad",
@@ -1661,7 +1664,7 @@
         "type": "function",
         "z": "fa232f5df39eb96b",
         "name": "function 2",
-        "func": "msg.payload = {     \"name\": \"Jug\" + msg.payload.id,  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }\nreturn msg;",
+        "func": "msg.payload = {\"name\": \"Jug\" + msg.payload.id,  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3520,9 +3523,7 @@
         "x": 430,
         "y": 760,
         "wires": [
-            [
-                "12e14872e9e1debc"
-            ]
+            []
         ]
     },
     {
@@ -3635,7 +3636,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{     \"name\": \"Jug1\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
+        "payload": "{     \"name\": \"Jug0\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
         "payloadType": "json",
         "x": 260,
         "y": 860,
@@ -3816,7 +3817,6 @@
         "id": "5a63caf10b3b9a0e",
         "type": "delay",
         "z": "4c20aa2ac87fc1e6",
-        "d": true,
         "g": "a70a5b1a39c32320",
         "name": "",
         "pauseType": "delay",
@@ -3898,6 +3898,91 @@
                 "abf1b4b172e6ae86"
             ]
         ]
+    },
+    {
+        "id": "776ccf38c843d360",
+        "type": "inject",
+        "z": "4c20aa2ac87fc1e6",
+        "g": "a70a5b1a39c32320",
+        "name": "Inject Jug",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{ \"maxItems\": \"1000\"}",
+        "payloadType": "json",
+        "x": 260,
+        "y": 1020,
+        "wires": [
+            [
+                "c5526e3a82f3fba4"
+            ]
+        ]
+    },
+    {
+        "id": "c5526e3a82f3fba4",
+        "type": "http request",
+        "z": "4c20aa2ac87fc1e6",
+        "g": "a70a5b1a39c32320",
+        "name": "Get value stream",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug0/Services/QueryPropertyHistory",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            },
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 450,
+        "y": 1020,
+        "wires": [
+            [
+                "00166d442c6f8738"
+            ]
+        ]
+    },
+    {
+        "id": "00166d442c6f8738",
+        "type": "debug",
+        "z": "4c20aa2ac87fc1e6",
+        "g": "a70a5b1a39c32320",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 1020,
+        "wires": []
     },
     {
         "id": "56a581e5680ad6e3",
@@ -4112,7 +4197,7 @@
         "z": "dd62ac133fb1360c",
         "g": "f0c008adf5daaa20",
         "name": "debug 11",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,

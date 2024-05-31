@@ -38,5 +38,9 @@
     "12d815057cd57334": {
         "user": "$(THINGWORX_USERNAME)",
         "password": "$(THINGWORX_PASSWORD)"
+    },
+    "c5526e3a82f3fba4": {
+        "user": "${THINGWORX_USERNAME}",
+        "password": "${THINGWORX_PASSWORD}"
     }
 }
