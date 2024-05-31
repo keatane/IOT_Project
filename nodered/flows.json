@@ -231,6 +231,92 @@
         "color": "#DDAA99"
     },
     {
+        "id": "f05d8c8cfc406587",
+        "type": "subflow",
+        "name": "Verify email for newEmail",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "a9ec44fac6c9a09e"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1300,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "dd3c6b3d71b6914d",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1300,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "b85105acce2536a8",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "068fb15905289024",
+        "type": "subflow",
+        "name": "Verify email for new pw",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "77b06aea27b6120d"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "997c28ceb500a478",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 960,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "62d9f94796a79510",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
         "id": "7f812365318f4aea",
         "type": "group",
         "z": "4c20aa2ac87fc1e6",
@@ -529,6 +615,76 @@
         "h": 142
     },
     {
+        "id": "f78c38617ed627c9",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Change email",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "0e902976e72968fd",
+            "419b5ed523e9346f",
+            "609dbd1c08bd7ab5",
+            "f75a3d739c971280",
+            "e6ba9985cbf50861",
+            "04ec13791e494d5d",
+            "972ae2bb601df8f1",
+            "a5402ac78cf6ece8"
+        ],
+        "x": 34,
+        "y": 1019,
+        "w": 1292,
+        "h": 182
+    },
+    {
+        "id": "2d8f9ba287e5298a",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Change password",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "52c86537f1269879",
+            "181a7d2e9fcd4401",
+            "3e44f1d40cd6ce3c",
+            "59187e25badcac28",
+            "dfee985f36d96ec3",
+            "2e8e555a47647e91",
+            "56503f67950889f9",
+            "f550a3ea77c0a320"
+        ],
+        "x": 34,
+        "y": 1239,
+        "w": 1292,
+        "h": 182
+    },
+    {
+        "id": "85cf4f26a7c39064",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Account deletion",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "2a9796619308d20a",
+            "98bdb442331f9b81",
+            "74e10613a80e738c",
+            "7a0bf8e481e8a362",
+            "5f0ce829587c2de1",
+            "47ec1230f0a190de",
+            "0e21d86ce0178699",
+            "d3d0bb83655f4888",
+            "e9961cce33071acc"
+        ],
+        "x": 34,
+        "y": 1459,
+        "w": 1292,
+        "h": 182
+    },
+    {
         "id": "dd1013cf1ed907ad",
         "type": "junction",
         "z": "217d4457bda21c0d",
@@ -551,6 +707,45 @@
         "wires": [
             [
                 "4f6f6fac724a496a"
+            ]
+        ]
+    },
+    {
+        "id": "04ec13791e494d5d",
+        "type": "junction",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "x": 720,
+        "y": 1160,
+        "wires": [
+            [
+                "419b5ed523e9346f"
+            ]
+        ]
+    },
+    {
+        "id": "2e8e555a47647e91",
+        "type": "junction",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "x": 720,
+        "y": 1380,
+        "wires": [
+            [
+                "181a7d2e9fcd4401"
+            ]
+        ]
+    },
+    {
+        "id": "47ec1230f0a190de",
+        "type": "junction",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "x": 720,
+        "y": 1600,
+        "wires": [
+            [
+                "98bdb442331f9b81"
             ]
         ]
     },
@@ -1498,6 +1693,262 @@
         "wires": []
     },
     {
+        "id": "e66f8155b4e1b52a",
+        "type": "function",
+        "z": "f05d8c8cfc406587",
+        "name": "Extract email and new email",
+        "func": "msg.params = msg.payload.email;\nmsg.newEmail = msg.payload.newEmail;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "c2822bf990e74802"
+            ]
+        ]
+    },
+    {
+        "id": "c2822bf990e74802",
+        "type": "postgresql",
+        "z": "f05d8c8cfc406587",
+        "name": "Verify email",
+        "query": "SELECT userId FROM UserTable WHERE email = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 610,
+        "y": 140,
+        "wires": [
+            [
+                "b85105acce2536a8"
+            ]
+        ]
+    },
+    {
+        "id": "0cfe13a9f759e6cf",
+        "type": "function",
+        "z": "f05d8c8cfc406587",
+        "name": "Extract userId",
+        "func": "msg.payload = msg.payload[0];\nmsg.userId=msg.payload.userid;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 80,
+        "wires": [
+            [
+                "dd3c6b3d71b6914d"
+            ]
+        ]
+    },
+    {
+        "id": "b85105acce2536a8",
+        "type": "switch",
+        "z": "f05d8c8cfc406587",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 140,
+        "wires": [
+            [
+                "0cfe13a9f759e6cf"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a9ec44fac6c9a09e",
+        "type": "json",
+        "z": "f05d8c8cfc406587",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "e66f8155b4e1b52a"
+            ]
+        ]
+    },
+    {
+        "id": "dd3c6b3d71b6914d",
+        "type": "change",
+        "z": "f05d8c8cfc406587",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.userId, msg.newEmail]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1180,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "108b22bc6a8f63b5",
+        "type": "function",
+        "z": "068fb15905289024",
+        "name": "Extract email, old pw and new pw",
+        "func": "msg.params = msg.payload.email;\nmsg.oldPw = msg.payload.oldPw;\nmsg.pw = msg.payload.pw;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 140,
+        "wires": [
+            [
+                "8b3ebfb491597f88"
+            ]
+        ]
+    },
+    {
+        "id": "8b3ebfb491597f88",
+        "type": "postgresql",
+        "z": "068fb15905289024",
+        "name": "Verify email",
+        "query": "SELECT userId FROM UserTable WHERE email = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 140,
+        "wires": [
+            [
+                "62d9f94796a79510"
+            ]
+        ]
+    },
+    {
+        "id": "75970ecc2cfbcabf",
+        "type": "function",
+        "z": "068fb15905289024",
+        "name": "Extract userId",
+        "func": "msg.payload = msg.payload[0];\nmsg.userId=msg.payload.userid;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 80,
+        "wires": [
+            [
+                "997c28ceb500a478"
+            ]
+        ]
+    },
+    {
+        "id": "62d9f94796a79510",
+        "type": "switch",
+        "z": "068fb15905289024",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 140,
+        "wires": [
+            [
+                "75970ecc2cfbcabf"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "77b06aea27b6120d",
+        "type": "json",
+        "z": "068fb15905289024",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "108b22bc6a8f63b5"
+            ]
+        ]
+    },
+    {
+        "id": "997c28ceb500a478",
+        "type": "change",
+        "z": "068fb15905289024",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.userId, msg.newPw]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1180,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "e617a36252101d98",
         "type": "http in",
         "z": "217d4457bda21c0d",
@@ -2273,6 +2724,401 @@
             [
                 "20db2b73e97c7a37",
                 "72f4e358b9e1da34"
+            ]
+        ]
+    },
+    {
+        "id": "0e902976e72968fd",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "Change email",
+        "url": "/email",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 1080,
+        "wires": [
+            [
+                "a5402ac78cf6ece8"
+            ]
+        ]
+    },
+    {
+        "id": "419b5ed523e9346f",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1250,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "609dbd1c08bd7ab5",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "Print Return Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "f75a3d739c971280",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1110,
+        "y": 1120,
+        "wires": [
+            [
+                "419b5ed523e9346f"
+            ]
+        ]
+    },
+    {
+        "id": "e6ba9985cbf50861",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "Return Status",
+        "func": "msg.payload = {status:\"OK\"};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 1080,
+        "wires": [
+            [
+                "609dbd1c08bd7ab5",
+                "f75a3d739c971280"
+            ]
+        ]
+    },
+    {
+        "id": "972ae2bb601df8f1",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "Update DB",
+        "query": "UPDATE UserTable SET email = $2 WHERE id = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 1080,
+        "wires": [
+            [
+                "e6ba9985cbf50861"
+            ]
+        ]
+    },
+    {
+        "id": "a5402ac78cf6ece8",
+        "type": "subflow:f05d8c8cfc406587",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "x": 410,
+        "y": 1080,
+        "wires": [
+            [
+                "972ae2bb601df8f1"
+            ],
+            [
+                "04ec13791e494d5d"
+            ]
+        ]
+    },
+    {
+        "id": "52c86537f1269879",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "Change password",
+        "url": "/pw",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 1300,
+        "wires": [
+            [
+                "f550a3ea77c0a320"
+            ]
+        ]
+    },
+    {
+        "id": "181a7d2e9fcd4401",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1250,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "3e44f1d40cd6ce3c",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "Print Return Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "59187e25badcac28",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1110,
+        "y": 1340,
+        "wires": [
+            [
+                "181a7d2e9fcd4401"
+            ]
+        ]
+    },
+    {
+        "id": "dfee985f36d96ec3",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "Return Status",
+        "func": "msg.payload = {status:\"OK\"};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 1300,
+        "wires": [
+            [
+                "3e44f1d40cd6ce3c",
+                "59187e25badcac28"
+            ]
+        ]
+    },
+    {
+        "id": "56503f67950889f9",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "Update DB",
+        "query": "UPDATE UserTable SET password = $2 WHERE id = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 1300,
+        "wires": [
+            [
+                "dfee985f36d96ec3"
+            ]
+        ]
+    },
+    {
+        "id": "f550a3ea77c0a320",
+        "type": "subflow:068fb15905289024",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "x": 410,
+        "y": 1300,
+        "wires": [
+            [
+                "56503f67950889f9"
+            ],
+            [
+                "2e8e555a47647e91"
+            ]
+        ]
+    },
+    {
+        "id": "2a9796619308d20a",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "Delete account",
+        "url": "/deleteAccount",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 1560,
+        "wires": [
+            [
+                "d3d0bb83655f4888"
+            ]
+        ]
+    },
+    {
+        "id": "98bdb442331f9b81",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1250,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "74e10613a80e738c",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "Print Return Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "7a0bf8e481e8a362",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1110,
+        "y": 1560,
+        "wires": [
+            [
+                "98bdb442331f9b81"
+            ]
+        ]
+    },
+    {
+        "id": "5f0ce829587c2de1",
+        "type": "function",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "Return Status",
+        "func": "msg.payload = {status:\"OK\"};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 1520,
+        "wires": [
+            [
+                "74e10613a80e738c",
+                "7a0bf8e481e8a362"
+            ]
+        ]
+    },
+    {
+        "id": "0e21d86ce0178699",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "Delete Account",
+        "query": "DELETE FROM UserTable WHERE id = $1",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 740,
+        "y": 1520,
+        "wires": [
+            [
+                "5f0ce829587c2de1"
+            ]
+        ]
+    },
+    {
+        "id": "d3d0bb83655f4888",
+        "type": "subflow:3a056c2d95c24d79",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "",
+        "x": 350,
+        "y": 1560,
+        "wires": [
+            [
+                "e9961cce33071acc"
+            ],
+            [
+                "47ec1230f0a190de"
+            ]
+        ]
+    },
+    {
+        "id": "e9961cce33071acc",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "userId",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 1520,
+        "wires": [
+            [
+                "0e21d86ce0178699"
             ]
         ]
     },

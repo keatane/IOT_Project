@@ -43,6 +43,20 @@ class StateRepository(db: AppDatabase) {
         return user
     }
 
+    suspend fun delete(username: String, password: String) {
+        val result = _remoteDataSource.delete(RegisterRequest(username, password))
+        when (result.status) {
+            ResponseStatus.OK -> {}
+        }
+    }
+
+    suspend fun filter(username: String, jugId: Int, filter: Int) {
+        val result = _remoteDataSource.filter(FilterRequest(username, jugId, filter))
+        when (result.status) {
+            ResponseStatus.OK -> {}
+        }
+    }
+
     suspend fun _pair(ssid: String, password: String, token: String) {
         Log.d("fhdjhfdjfhjdhfj", "START PAIRING")
         val result = _arduinoDataSource.pair(PairRequest(ssid, password, token))

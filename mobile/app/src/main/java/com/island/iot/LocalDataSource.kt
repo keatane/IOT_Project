@@ -43,4 +43,8 @@ class LocalDataSource(db: AppDatabase) {
     suspend fun setUser(user: User) {
         _userDAO.insert(user)
     }
+
+    suspend fun deleteUser(user: User) {
+        _userDAO.delete(user)
+    }
 }

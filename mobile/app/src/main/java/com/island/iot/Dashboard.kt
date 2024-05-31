@@ -53,7 +53,7 @@ fun Grid() {
             modifier = Modifier
                 .padding(16.dp, 0.dp)
         ) {
-            Metric("Filter capacity", "LLL")
+            Metric("Filter capacity", sampleJugsList[selectedJug].filter.toString() + "L")
             HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.6f))
             Metric("Filter life", "LLL")
         }
@@ -66,7 +66,7 @@ fun Grid() {
     ) {
         Column {
             HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.5f))
-            Metric("Quantity of plastic save", "LLL")
+            Metric("Quantity of plastic save", "LLL") // totalFilter*32/500000
         }
     }
     Row() {
@@ -76,7 +76,7 @@ fun Grid() {
             modifier = Modifier.padding(16.dp)
         ) {
             Text("Filter status", modifier = Modifier.padding(4.dp))
-            Text("%%%")
+            Text("%%%") // totalFilter/filterCapacity*100 (trim 2,3 o 4)
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = "",

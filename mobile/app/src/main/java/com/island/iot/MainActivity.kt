@@ -228,12 +228,13 @@ fun Decorations(
             bottomBar = {
                 if (bottomBarVisible)
                     NavigationBar {
+                        val prevSelected = selectedItem
                         BottomButton.entries.forEachIndexed { index, item ->
                             NavigationBarItem(
                                 icon = { Icon(item.icon, contentDescription = item.text) },
                                 label = { Text(item.text) },
                                 selected = selectedItem == index,
-                                onClick = { selectedItem = index;navigate(item.route.id) }
+                                onClick = { selectedItem = index; if(prevSelected != selectedItem) navigate(item.route.id) }
                             )
                         }
                     }
@@ -319,16 +320,28 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
                     initDashboard = {
                         bottomBarVisible = true
                         newsFeedVisible = false
-                    }
+                    },
                 )
             }
             composable(Route.ACCOUNT.id) {
                 Account(
+                    initAccount = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                    },
                     passwordPage = {
                         bottomBarVisible = true
                         newsFeedVisible = false
                         navigateTo(controller, Route.CHANGE_PASSWORD.id)
                     },
+                    deleteAccount = { username, password ->
+                        scope.launch {
+                            state.delete(
+                                username,
+                                password
+                            )
+                        }
+                    }
                 )
             }
             composable(Route.CHANGE_PASSWORD.id) {
@@ -354,7 +367,21 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
                         bottomBarVisible = true
                         newsFeedVisible = false
                     },
-                    searchJugs = searchJugs
+                    searchJugs = searchJugs,
+                    changeFilter = { username, jugId, filter ->
+                        scope.launch {
+                            state.filter(
+                                username,
+                                jugId,
+                                filter
+                            )
+                        }
+                    },
+                    dashboardPage = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                        navigateTo(controller, Route.DASHBOARD.id)
+                    },
                 )
             }
             composable(Route.NEWS.id) {
