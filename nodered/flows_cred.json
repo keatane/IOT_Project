@@ -42,5 +42,18 @@
     "c5526e3a82f3fba4": {
         "user": "${THINGWORX_USERNAME}",
         "password": "${THINGWORX_PASSWORD}"
+    },
+    "f666e567f16cadaa": {},
+    "c82c75d3b593411b": {
+        "user": "${THINGWORX_USERNAME}",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "c2d21a8e765e0a8d": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
+    },
+    "f00e83fd74bdad42": {
+        "user": "$(THINGWORX_USERNAME)",
+        "password": "$(THINGWORX_PASSWORD)"
     }
 }

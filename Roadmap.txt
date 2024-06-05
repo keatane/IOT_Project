@@ -46,3 +46,7 @@
 - andare indietro con la freccia alla dashboard non aggiorna top e bottom bar
 - sistemare colorazione
 - nuove icone (Google (?))
+
+[[ Domande ]]
+- Arduino: ha senso il delay nella funzione water (measure), rispetto al delay nel loop esterno? Di base dovrebbe 
+lanciare in loop e dopo un secondo ritornare una serie di valori e così via
