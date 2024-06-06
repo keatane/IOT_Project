@@ -2,7 +2,15 @@
     {
         "id": "217d4457bda21c0d",
         "type": "tab",
-        "label": "Operations",
+        "label": "API Handling",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dd62ac133fb1360c",
+        "type": "tab",
+        "label": "JugEnterprise (Dashboard)",
         "disabled": false,
         "info": "",
         "env": []
@@ -11,14 +19,6 @@
         "id": "4c20aa2ac87fc1e6",
         "type": "tab",
         "label": "Playground",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "dd62ac133fb1360c",
-        "type": "tab",
-        "label": "JugEnterprise",
         "disabled": false,
         "info": "",
         "env": []
@@ -439,12 +439,16 @@
             "99c1e01bcdde1e9a",
             "a55abe65144b7b0c",
             "dcd2b471dd5d1d54",
-            "fa470500be985961"
+            "fa470500be985961",
+            "70e3419b45428f51",
+            "581e57b5ed15ddce",
+            "b79303726be56dc6",
+            "27ad1b042019570d"
         ],
         "x": 34,
-        "y": 699,
+        "y": 519,
         "w": 1292,
-        "h": 142
+        "h": 182
     },
     {
         "id": "bdbaa79edcd82992",
@@ -458,12 +462,14 @@
             "e617a36252101d98",
             "9f2b775c5e24acb8",
             "10b809801dba4bcb",
-            "ce4aa892ac61f3a4",
             "a492c59417e3526d",
             "c80edb6648fb5c23",
             "dd1013cf1ed907ad",
             "4d1c9031b225c4e5",
-            "da290a44a03ac8ee"
+            "da290a44a03ac8ee",
+            "3e6ab8f278a930ef",
+            "c2d7c74e09b2e312",
+            "6addd85ab87497c3"
         ],
         "x": 34,
         "y": 19,
@@ -481,64 +487,20 @@
         "nodes": [
             "4f6f6fac724a496a",
             "5c3d7fd931d482a9",
-            "02a9ea9e41023edc",
             "7b80c134f08a63b6",
             "74a2182d6cf3432b",
             "6737c839da4aeeab",
             "594f99b964435f02",
             "b3a6633e59d62793",
-            "a4b68c47b965d3f2"
+            "a4b68c47b965d3f2",
+            "2c0f67140fd1b413",
+            "40ce6893f6966a45",
+            "339436e98d838faf"
         ],
         "x": 34,
         "y": 259,
         "w": 1292,
         "h": 222
-    },
-    {
-        "id": "dd69043d1cb5236a",
-        "type": "group",
-        "z": "217d4457bda21c0d",
-        "name": "Show / Clean UserTable",
-        "style": {
-            "label": true,
-            "stroke": "#ff0000",
-            "color": "#ff0000"
-        },
-        "nodes": [
-            "3c434ec046f71a23",
-            "83c99c7142a96e7f",
-            "e8bc2dd148bbffb3",
-            "5898347def636b4d",
-            "d0c5bf7405388a7c",
-            "c98c52a08de3b558"
-        ],
-        "x": 34,
-        "y": 519,
-        "w": 632,
-        "h": 142
-    },
-    {
-        "id": "2014e345587e4007",
-        "type": "group",
-        "z": "217d4457bda21c0d",
-        "name": "Show / Clean JugTable",
-        "style": {
-            "label": true,
-            "stroke": "#ff0000",
-            "color": "#ff0000"
-        },
-        "nodes": [
-            "801868f4cc631259",
-            "28705e872a39bf64",
-            "1cd3cb4c7a6a6292",
-            "f8e038c0ae26a12a",
-            "4810de2e5fcc3538",
-            "bad79e1fd1d22d16"
-        ],
-        "x": 694,
-        "y": 519,
-        "w": 632,
-        "h": 142
     },
     {
         "id": "20496de9b60de6a8",
@@ -551,18 +513,20 @@
         "nodes": [
             "a22ecd30043c6866",
             "3045dac9484f5175",
-            "72f4e358b9e1da34",
             "20db2b73e97c7a37",
             "0488de0f08689001",
             "86072dca8a4675b9",
             "7fe99103bea3c313",
             "15a4b9f0df755521",
-            "8962bee34f1ecb3d"
+            "8962bee34f1ecb3d",
+            "06749a30d3205d94",
+            "841f478027e2f418",
+            "28d97bfdb5c2a53a"
         ],
         "x": 34,
-        "y": 879,
+        "y": 739,
         "w": 1292,
-        "h": 142
+        "h": 162
     },
     {
         "id": "ef04f78fe84031f4",
@@ -587,7 +551,7 @@
         "id": "261acb4b06f35df7",
         "type": "group",
         "z": "dd62ac133fb1360c",
-        "name": "Statistical information",
+        "name": "Jug Count",
         "style": {
             "label": true
         },
@@ -595,14 +559,13 @@
             "fffcf2415ff35daf",
             "e12e139248b70364",
             "6426c3f9917d2081",
-            "96122b6e803914d0",
-            "c38392d9d315dc5d",
-            "5415beb9fff2b624"
+            "ed3067e7caae1618",
+            "33457bfaf6556358"
         ],
         "x": 314,
-        "y": 899,
-        "w": 812,
-        "h": 142
+        "y": 1039,
+        "w": 792,
+        "h": 162
     },
     {
         "id": "f78c38617ed627c9",
@@ -615,18 +578,20 @@
         "nodes": [
             "0e902976e72968fd",
             "419b5ed523e9346f",
-            "609dbd1c08bd7ab5",
             "f75a3d739c971280",
             "e6ba9985cbf50861",
             "04ec13791e494d5d",
             "972ae2bb601df8f1",
             "a5402ac78cf6ece8",
-            "04da69c72b57d39e"
+            "04da69c72b57d39e",
+            "91f42fd977778f76",
+            "8e2288be6eecf071",
+            "85468fb5347ae2b0"
         ],
         "x": 34,
-        "y": 1059,
+        "y": 939,
         "w": 1292,
-        "h": 182
+        "h": 162
     },
     {
         "id": "2d8f9ba287e5298a",
@@ -639,18 +604,20 @@
         "nodes": [
             "52c86537f1269879",
             "181a7d2e9fcd4401",
-            "3e44f1d40cd6ce3c",
             "59187e25badcac28",
             "dfee985f36d96ec3",
             "2e8e555a47647e91",
             "56503f67950889f9",
             "f550a3ea77c0a320",
-            "0b04a181ff7e9628"
+            "0b04a181ff7e9628",
+            "035d90da9f82f6ee",
+            "dda3f2e8d089d3b3",
+            "9b2e1ee643f77b0a"
         ],
         "x": 34,
-        "y": 1279,
+        "y": 1139,
         "w": 1292,
-        "h": 182
+        "h": 162
     },
     {
         "id": "85cf4f26a7c39064",
@@ -663,19 +630,21 @@
         "nodes": [
             "2a9796619308d20a",
             "98bdb442331f9b81",
-            "74e10613a80e738c",
             "7a0bf8e481e8a362",
             "5f0ce829587c2de1",
             "47ec1230f0a190de",
             "0e21d86ce0178699",
             "d3d0bb83655f4888",
             "e9961cce33071acc",
-            "a149da1c07a321c2"
+            "a149da1c07a321c2",
+            "7863615649b984e9",
+            "02dfd341a8807e9a",
+            "185774d4d094bfe0"
         ],
         "x": 34,
-        "y": 1499,
+        "y": 1339,
         "w": 1292,
-        "h": 182
+        "h": 162
     },
     {
         "id": "f74c838012730271",
@@ -707,20 +676,238 @@
             "6f1e5e7364d80697",
             "12d7faae89458ea7",
             "5abf18101812be96",
-            "505ccfe324b1de17"
+            "505ccfe324b1de17",
+            "82fb31efe44e0adb",
+            "dbf82feb9c4d4d46",
+            "d440997e40980e95"
         ],
-        "x": 294,
+        "x": 274,
         "y": 159,
-        "w": 612,
-        "h": 182
+        "w": 632,
+        "h": 242
+    },
+    {
+        "id": "99bd9f011057c2f8",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "User Count",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "96122b6e803914d0",
+            "c38392d9d315dc5d",
+            "5415beb9fff2b624",
+            "2e8fa7ec9d191f25",
+            "e7bd29cb35dc2be0"
+        ],
+        "x": 314,
+        "y": 1239,
+        "w": 792,
+        "h": 162
+    },
+    {
+        "id": "d8af04f52759052d",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Plastic saving computation",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "6cc1040bfd802f1e",
+            "bf3e55578af7a2e4",
+            "3ef85ed4716564ae",
+            "fa768fe8dd244a44",
+            "1b5612176c75fd15"
+        ],
+        "x": 314,
+        "y": 839,
+        "w": 792,
+        "h": 162
+    },
+    {
+        "id": "e5db3ff7e0f7bdc2",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Low-filter alerts information",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "fb708c2fcfc9c453",
+            "c2d21a8e765e0a8d",
+            "f9bff4e17ea17d24",
+            "f00e83fd74bdad42",
+            "6dde29be83f4a808",
+            "17ca1b2582d81a62",
+            "e3ece40c497798c1",
+            "3d45bdf91619d41e"
+        ],
+        "x": 314,
+        "y": 599,
+        "w": 1012,
+        "h": 202
+    },
+    {
+        "id": "44ca8a1c36ba7dc9",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Total litres information",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "12d815057cd57334",
+            "e2b41d91cb228409",
+            "cdb712ef947b9f93",
+            "cd95edaaaf747c92",
+            "4eb1c96a4b440d38",
+            "72d7683f247d4f7a",
+            "b1bfa462b34b5621",
+            "a3cf40fceacb65df"
+        ],
+        "x": 314,
+        "y": 219,
+        "w": 1032,
+        "h": 162
+    },
+    {
+        "id": "2a6fd50769b56baf",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Active jug computation",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "2ad5bd5afacb1fd8",
+            "c82c75d3b593411b",
+            "0c96d057bbeba1ac",
+            "04502fd62b09576f",
+            "fcc269dc861c255c"
+        ],
+        "x": 314,
+        "y": 419,
+        "w": 1012,
+        "h": 142
+    },
+    {
+        "id": "07434671c4362d4f",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Extracting each jug id",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "686e392549632634",
+            "0f36aa3917d94588",
+            "43eb9f6208742902"
+        ],
+        "x": 314,
+        "y": 79,
+        "w": 512,
+        "h": 82
+    },
+    {
+        "id": "85f31b0f7e802da4",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Error Handling",
+        "style": {
+            "stroke": "#ff3f3f",
+            "label": true,
+            "color": "#ff3f3f"
+        },
+        "nodes": [
+            "9a21dec140558ec4",
+            "9eb6688fb3790834",
+            "48549ff50829816e",
+            "451e852607a62c46",
+            "e55c49e819e6e582",
+            "0d496130a175a9fe",
+            "ebae16586d820da2"
+        ],
+        "x": 314,
+        "y": 1439,
+        "w": 892,
+        "h": 122
+    },
+    {
+        "id": "d4ecc9458d879224",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Error Handling",
+        "style": {
+            "stroke": "#ff3f3f",
+            "label": true,
+            "color": "#ff3f3f"
+        },
+        "nodes": [
+            "f886d4659e9bc7b2",
+            "5da336415b282089",
+            "613e58eb0f13e50a",
+            "8c7e366cc35b87af"
+        ],
+        "x": 34,
+        "y": 1719,
+        "w": 792,
+        "h": 82
+    },
+    {
+        "id": "dd69043d1cb5236a",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Show / Clean UserTable",
+        "style": {
+            "label": true,
+            "stroke": "#0070c0",
+            "color": "#0070c0"
+        },
+        "nodes": [
+            "3c434ec046f71a23",
+            "83c99c7142a96e7f",
+            "e8bc2dd148bbffb3",
+            "5898347def636b4d",
+            "d0c5bf7405388a7c",
+            "c98c52a08de3b558"
+        ],
+        "x": 34,
+        "y": 1539,
+        "w": 632,
+        "h": 142
+    },
+    {
+        "id": "2014e345587e4007",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Show / Clean JugTable",
+        "style": {
+            "label": true,
+            "stroke": "#0070c0",
+            "color": "#0070c0"
+        },
+        "nodes": [
+            "801868f4cc631259",
+            "28705e872a39bf64",
+            "1cd3cb4c7a6a6292",
+            "f8e038c0ae26a12a",
+            "4810de2e5fcc3538",
+            "bad79e1fd1d22d16"
+        ],
+        "x": 694,
+        "y": 1539,
+        "w": 632,
+        "h": 142
     },
     {
         "id": "dd1013cf1ed907ad",
         "type": "junction",
         "z": "217d4457bda21c0d",
         "g": "bdbaa79edcd82992",
-        "x": 700,
-        "y": 180,
+        "x": 560,
+        "y": 140,
         "wires": [
             [
                 "10b809801dba4bcb"
@@ -745,8 +932,8 @@
         "type": "junction",
         "z": "217d4457bda21c0d",
         "g": "f78c38617ed627c9",
-        "x": 720,
-        "y": 1200,
+        "x": 740,
+        "y": 1060,
         "wires": [
             [
                 "419b5ed523e9346f"
@@ -758,8 +945,8 @@
         "type": "junction",
         "z": "217d4457bda21c0d",
         "g": "2d8f9ba287e5298a",
-        "x": 660,
-        "y": 1420,
+        "x": 600,
+        "y": 1220,
         "wires": [
             [
                 "181a7d2e9fcd4401"
@@ -771,8 +958,8 @@
         "type": "junction",
         "z": "217d4457bda21c0d",
         "g": "85cf4f26a7c39064",
-        "x": 720,
-        "y": 1640,
+        "x": 500,
+        "y": 1420,
         "wires": [
             [
                 "98bdb442331f9b81"
@@ -810,8 +997,8 @@
     {
         "id": "c1ceec1569757720",
         "type": "ui_tab",
-        "name": "Jugs",
-        "icon": "dashboard",
+        "name": "Objectives",
+        "icon": "mi-emoji_events",
         "disabled": false,
         "hidden": false
     },
@@ -973,15 +1160,15 @@
     {
         "id": "ff083ec2093f4a2e",
         "type": "ui_tab",
-        "name": "Jugs Enterprise",
-        "icon": "dashboard",
+        "name": "Dashboard",
+        "icon": "mi-water_drop",
         "disabled": false,
         "hidden": false
     },
     {
         "id": "d1a0b3959db61542",
         "type": "ui_group",
-        "name": "Litres informations",
+        "name": "Water informations",
         "tab": "ff083ec2093f4a2e",
         "order": 2,
         "disp": true,
@@ -992,7 +1179,7 @@
     {
         "id": "2dab9229986fd1ba",
         "type": "ui_group",
-        "name": "Textual informations",
+        "name": "Jugs Quantities",
         "tab": "ff083ec2093f4a2e",
         "order": 3,
         "disp": true,
@@ -1039,6 +1226,50 @@
         "order": 4,
         "disp": true,
         "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4bfb72e0581a07c0",
+        "type": "ui_group",
+        "name": "Users Information",
+        "tab": "ff083ec2093f4a2e",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c27372d8e95188d1",
+        "type": "ui_group",
+        "name": "Plastic Obj",
+        "tab": "c1ceec1569757720",
+        "order": 6,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c73a3a9fe70498d5",
+        "type": "ui_group",
+        "name": "Jugs Obj",
+        "tab": "c1ceec1569757720",
+        "order": 4,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cdbb240eb1898b91",
+        "type": "ui_group",
+        "name": "Users Obj",
+        "tab": "c1ceec1569757720",
+        "order": 5,
+        "disp": true,
+        "width": "8",
         "collapse": false,
         "className": ""
     },
@@ -1571,23 +1802,6 @@
         ]
     },
     {
-        "id": "4818a8ee8ce9699e",
-        "type": "debug",
-        "z": "b6b33a23690f53f3",
-        "name": "Print result",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1290,
-        "y": 300,
-        "wires": []
-    },
-    {
         "id": "89435c690d0590a0",
         "type": "link out",
         "z": "b6b33a23690f53f3",
@@ -1625,6 +1839,89 @@
         "info": "",
         "x": 600,
         "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4818a8ee8ce9699e",
+        "type": "debug",
+        "z": "b6b33a23690f53f3",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "82fb31efe44e0adb",
+        "type": "catch",
+        "z": "b6b33a23690f53f3",
+        "g": "d0158497c3f88bb8",
+        "name": "HTTP Catch",
+        "scope": [
+            "ce16f9573b804d91",
+            "6f1e5e7364d80697",
+            "12d7faae89458ea7"
+        ],
+        "uncaught": false,
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "dbf82feb9c4d4d46"
+            ]
+        ]
+    },
+    {
+        "id": "dbf82feb9c4d4d46",
+        "type": "change",
+        "z": "b6b33a23690f53f3",
+        "g": "d0158497c3f88bb8",
+        "name": "Craft error msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "error",
+                "pt": "msg",
+                "to": "Error while performing HTTP Request during Thing Creation phase",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 360,
+        "wires": [
+            [
+                "d440997e40980e95"
+            ]
+        ]
+    },
+    {
+        "id": "d440997e40980e95",
+        "type": "debug",
+        "z": "b6b33a23690f53f3",
+        "g": "d0158497c3f88bb8",
+        "name": "Print error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "error",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 360,
         "wires": []
     },
     {
@@ -2536,7 +2833,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 130,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "c80edb6648fb5c23"
@@ -2575,90 +2872,6 @@
         "wires": []
     },
     {
-        "id": "ce4aa892ac61f3a4",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "bdbaa79edcd82992",
-        "name": "Print Return Status",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1090,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "3c434ec046f71a23",
-        "type": "inject",
-        "z": "217d4457bda21c0d",
-        "g": "dd69043d1cb5236a",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 560,
-        "wires": [
-            [
-                "83c99c7142a96e7f"
-            ]
-        ]
-    },
-    {
-        "id": "83c99c7142a96e7f",
-        "type": "postgresql",
-        "z": "217d4457bda21c0d",
-        "g": "dd69043d1cb5236a",
-        "name": "Show USER table",
-        "query": "SELECT * FROM UserTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 350,
-        "y": 560,
-        "wires": [
-            [
-                "e8bc2dd148bbffb3"
-            ]
-        ]
-    },
-    {
-        "id": "e8bc2dd148bbffb3",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "dd69043d1cb5236a",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 560,
-        "y": 560,
-        "wires": []
-    },
-    {
         "id": "a492c59417e3526d",
         "type": "json",
         "z": "217d4457bda21c0d",
@@ -2668,78 +2881,12 @@
         "action": "str",
         "pretty": false,
         "x": 1050,
-        "y": 140,
+        "y": 100,
         "wires": [
             [
                 "10b809801dba4bcb"
             ]
         ]
-    },
-    {
-        "id": "5898347def636b4d",
-        "type": "inject",
-        "z": "217d4457bda21c0d",
-        "g": "dd69043d1cb5236a",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 620,
-        "wires": [
-            [
-                "d0c5bf7405388a7c"
-            ]
-        ]
-    },
-    {
-        "id": "d0c5bf7405388a7c",
-        "type": "postgresql",
-        "z": "217d4457bda21c0d",
-        "g": "dd69043d1cb5236a",
-        "name": "Clean USER table",
-        "query": "DELETE FROM UserTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 350,
-        "y": 620,
-        "wires": [
-            [
-                "c98c52a08de3b558"
-            ]
-        ]
-    },
-    {
-        "id": "c98c52a08de3b558",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "dd69043d1cb5236a",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 560,
-        "y": 620,
-        "wires": []
     },
     {
         "id": "5c3d7fd931d482a9",
@@ -2772,24 +2919,6 @@
         "wires": []
     },
     {
-        "id": "02a9ea9e41023edc",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "cb681741da812fc7",
-        "name": "Print Return Status",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1150,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "7b80c134f08a63b6",
         "type": "json",
         "z": "217d4457bda21c0d",
@@ -2799,7 +2928,7 @@
         "action": "str",
         "pretty": false,
         "x": 1110,
-        "y": 380,
+        "y": 340,
         "wires": [
             [
                 "4f6f6fac724a496a"
@@ -2823,8 +2952,7 @@
         "y": 340,
         "wires": [
             [
-                "7b80c134f08a63b6",
-                "02a9ea9e41023edc"
+                "7b80c134f08a63b6"
             ]
         ]
     },
@@ -2843,7 +2971,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 110,
-        "y": 740,
+        "y": 600,
         "wires": [
             [
                 "61ff41d6f79027dd",
@@ -2857,7 +2985,7 @@
         "z": "217d4457bda21c0d",
         "g": "1589093497ae43e3",
         "name": "Print Token",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2866,7 +2994,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1210,
-        "y": 740,
+        "y": 600,
         "wires": []
     },
     {
@@ -2883,8 +3011,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
-        "y": 800,
+        "x": 320,
+        "y": 640,
         "wires": [
             [
                 "378b9baed000b7e6"
@@ -2906,7 +3034,7 @@
         "signvar": "token",
         "storetoken": "token",
         "x": 530,
-        "y": 740,
+        "y": 600,
         "wires": [
             [
                 "a55abe65144b7b0c",
@@ -2943,7 +3071,7 @@
         "g": "bdbaa79edcd82992",
         "name": "",
         "x": 360,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "9f2b775c5e24acb8"
@@ -2986,140 +3114,7 @@
         "expiry": "",
         "broker": "c77abff0c3609a0d",
         "x": 1210,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "801868f4cc631259",
-        "type": "inject",
-        "z": "217d4457bda21c0d",
-        "g": "2014e345587e4007",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 800,
-        "y": 560,
-        "wires": [
-            [
-                "28705e872a39bf64"
-            ]
-        ]
-    },
-    {
-        "id": "28705e872a39bf64",
-        "type": "postgresql",
-        "z": "217d4457bda21c0d",
-        "g": "2014e345587e4007",
-        "name": "Show  JUG table",
-        "query": "SELECT * FROM JugTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 1020,
-        "y": 560,
-        "wires": [
-            [
-                "1cd3cb4c7a6a6292"
-            ]
-        ]
-    },
-    {
-        "id": "1cd3cb4c7a6a6292",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "2014e345587e4007",
-        "name": "debug 7",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "f8e038c0ae26a12a",
-        "type": "inject",
-        "z": "217d4457bda21c0d",
-        "g": "2014e345587e4007",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 800,
-        "y": 620,
-        "wires": [
-            [
-                "4810de2e5fcc3538"
-            ]
-        ]
-    },
-    {
-        "id": "4810de2e5fcc3538",
-        "type": "postgresql",
-        "z": "217d4457bda21c0d",
-        "g": "2014e345587e4007",
-        "name": "Clean JUG table",
-        "query": "DELETE FROM JugTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 1020,
-        "y": 620,
-        "wires": [
-            [
-                "bad79e1fd1d22d16"
-            ]
-        ]
-    },
-    {
-        "id": "bad79e1fd1d22d16",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "2014e345587e4007",
-        "name": "debug 8",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 620,
+        "y": 660,
         "wires": []
     },
     {
@@ -3133,7 +3128,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 120,
-        "y": 940,
+        "y": 780,
         "wires": [
             [
                 "7fe99103bea3c313"
@@ -3149,25 +3144,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1220,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "72f4e358b9e1da34",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "20496de9b60de6a8",
-        "name": "Print Return Status",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1130,
-        "y": 920,
+        "y": 860,
         "wires": []
     },
     {
@@ -3179,8 +3156,8 @@
         "property": "payload",
         "action": "str",
         "pretty": false,
-        "x": 1070,
-        "y": 980,
+        "x": 1110,
+        "y": 780,
         "wires": [
             [
                 "3045dac9484f5175"
@@ -3202,7 +3179,7 @@
         "finalize": "",
         "libs": [],
         "x": 450,
-        "y": 980,
+        "y": 820,
         "wires": [
             [
                 "86072dca8a4675b9"
@@ -3224,7 +3201,7 @@
         "signvar": "token",
         "storetoken": "token",
         "x": 670,
-        "y": 940,
+        "y": 780,
         "wires": [
             [
                 "15a4b9f0df755521"
@@ -3241,7 +3218,7 @@
         "action": "obj",
         "pretty": false,
         "x": 250,
-        "y": 940,
+        "y": 780,
         "wires": [
             [
                 "0488de0f08689001",
@@ -3255,7 +3232,7 @@
         "z": "217d4457bda21c0d",
         "g": "1589093497ae43e3",
         "x": 790,
-        "y": 800,
+        "y": 660,
         "wires": []
     },
     {
@@ -3263,8 +3240,9 @@
         "type": "subflow:98b9aea3ec541c1d",
         "z": "217d4457bda21c0d",
         "g": "1589093497ae43e3",
+        "name": "",
         "x": 770,
-        "y": 740,
+        "y": 600,
         "wires": [
             [
                 "e57bdf0359866749",
@@ -3279,11 +3257,10 @@
         "g": "20496de9b60de6a8",
         "name": "",
         "x": 890,
-        "y": 940,
+        "y": 780,
         "wires": [
             [
-                "20db2b73e97c7a37",
-                "72f4e358b9e1da34"
+                "20db2b73e97c7a37"
             ]
         ]
     },
@@ -3298,7 +3275,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 130,
-        "y": 1120,
+        "y": 980,
         "wires": [
             [
                 "a5402ac78cf6ece8"
@@ -3314,25 +3291,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1220,
-        "y": 1200,
-        "wires": []
-    },
-    {
-        "id": "609dbd1c08bd7ab5",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "f78c38617ed627c9",
-        "name": "Print Return Status",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1150,
-        "y": 1100,
+        "y": 1060,
         "wires": []
     },
     {
@@ -3345,7 +3304,7 @@
         "action": "str",
         "pretty": false,
         "x": 1110,
-        "y": 1160,
+        "y": 980,
         "wires": [
             [
                 "419b5ed523e9346f"
@@ -3367,10 +3326,9 @@
         "finalize": "",
         "libs": [],
         "x": 910,
-        "y": 1160,
+        "y": 1020,
         "wires": [
             [
-                "609dbd1c08bd7ab5",
                 "f75a3d739c971280"
             ]
         ]
@@ -3387,7 +3345,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 690,
-        "y": 1120,
+        "y": 980,
         "wires": [
             [
                 "e6ba9985cbf50861",
@@ -3401,7 +3359,7 @@
         "z": "217d4457bda21c0d",
         "g": "f78c38617ed627c9",
         "x": 410,
-        "y": 1120,
+        "y": 980,
         "wires": [
             [
                 "972ae2bb601df8f1"
@@ -3422,7 +3380,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 150,
-        "y": 1340,
+        "y": 1180,
         "wires": [
             [
                 "f550a3ea77c0a320"
@@ -3438,25 +3396,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1220,
-        "y": 1420,
-        "wires": []
-    },
-    {
-        "id": "3e44f1d40cd6ce3c",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "2d8f9ba287e5298a",
-        "name": "Print Return Status",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1150,
-        "y": 1320,
+        "y": 1260,
         "wires": []
     },
     {
@@ -3469,7 +3409,7 @@
         "action": "str",
         "pretty": false,
         "x": 1110,
-        "y": 1380,
+        "y": 1180,
         "wires": [
             [
                 "181a7d2e9fcd4401"
@@ -3491,10 +3431,9 @@
         "finalize": "",
         "libs": [],
         "x": 930,
-        "y": 1380,
+        "y": 1220,
         "wires": [
             [
-                "3e44f1d40cd6ce3c",
                 "59187e25badcac28"
             ]
         ]
@@ -3511,7 +3450,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 690,
-        "y": 1340,
+        "y": 1180,
         "wires": [
             [
                 "dfee985f36d96ec3",
@@ -3525,7 +3464,7 @@
         "z": "217d4457bda21c0d",
         "g": "2d8f9ba287e5298a",
         "x": 410,
-        "y": 1340,
+        "y": 1180,
         "wires": [
             [
                 "56503f67950889f9"
@@ -3546,7 +3485,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 140,
-        "y": 1600,
+        "y": 1380,
         "wires": [
             [
                 "d3d0bb83655f4888"
@@ -3562,25 +3501,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1220,
-        "y": 1640,
-        "wires": []
-    },
-    {
-        "id": "74e10613a80e738c",
-        "type": "debug",
-        "z": "217d4457bda21c0d",
-        "g": "85cf4f26a7c39064",
-        "name": "Print Return Status",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1190,
-        "y": 1540,
+        "y": 1460,
         "wires": []
     },
     {
@@ -3592,8 +3513,8 @@
         "property": "payload",
         "action": "str",
         "pretty": false,
-        "x": 1130,
-        "y": 1600,
+        "x": 1210,
+        "y": 1380,
         "wires": [
             [
                 "98bdb442331f9b81"
@@ -3614,11 +3535,10 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
-        "y": 1600,
+        "x": 970,
+        "y": 1420,
         "wires": [
             [
-                "74e10613a80e738c",
                 "7a0bf8e481e8a362"
             ]
         ]
@@ -3634,8 +3554,8 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 740,
-        "y": 1560,
+        "x": 780,
+        "y": 1380,
         "wires": [
             [
                 "5f0ce829587c2de1",
@@ -3650,7 +3570,7 @@
         "g": "85cf4f26a7c39064",
         "name": "",
         "x": 330,
-        "y": 1600,
+        "y": 1380,
         "wires": [
             [
                 "e9961cce33071acc"
@@ -3680,8 +3600,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 540,
-        "y": 1560,
+        "x": 580,
+        "y": 1380,
         "wires": [
             [
                 "0e21d86ce0178699"
@@ -3712,7 +3632,6 @@
         "y": 100,
         "wires": [
             [
-                "ce4aa892ac61f3a4",
                 "a492c59417e3526d"
             ]
         ]
@@ -3745,7 +3664,7 @@
         "to": "",
         "reg": false,
         "x": 310,
-        "y": 740,
+        "y": 600,
         "wires": [
             [
                 "378b9baed000b7e6"
@@ -3759,7 +3678,7 @@
         "g": "bdbaa79edcd82992",
         "name": "If user doesn't exists, insert into DB, otherwise respond back with provided credentials",
         "info": "",
-        "x": 660,
+        "x": 620,
         "y": 60,
         "wires": []
     },
@@ -3809,7 +3728,7 @@
         "to": "",
         "reg": false,
         "x": 450,
-        "y": 940,
+        "y": 780,
         "wires": [
             [
                 "86072dca8a4675b9"
@@ -3837,10 +3756,9 @@
         "to": "",
         "reg": false,
         "x": 910,
-        "y": 1120,
+        "y": 980,
         "wires": [
             [
-                "609dbd1c08bd7ab5",
                 "f75a3d739c971280"
             ]
         ]
@@ -3866,10 +3784,9 @@
         "to": "",
         "reg": false,
         "x": 930,
-        "y": 1340,
+        "y": 1180,
         "wires": [
             [
-                "3e44f1d40cd6ce3c",
                 "59187e25badcac28"
             ]
         ]
@@ -3894,12 +3811,2268 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 950,
-        "y": 1560,
+        "x": 990,
+        "y": 1380,
         "wires": [
             [
-                "7a0bf8e481e8a362",
-                "74e10613a80e738c"
+                "7a0bf8e481e8a362"
+            ]
+        ]
+    },
+    {
+        "id": "f886d4659e9bc7b2",
+        "type": "catch",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "DB Catch",
+        "scope": [
+            "9f2b775c5e24acb8",
+            "83c99c7142a96e7f",
+            "d0c5bf7405388a7c",
+            "28705e872a39bf64",
+            "4810de2e5fcc3538",
+            "972ae2bb601df8f1",
+            "56503f67950889f9",
+            "0e21d86ce0178699"
+        ],
+        "uncaught": false,
+        "x": 120,
+        "y": 1760,
+        "wires": [
+            [
+                "5da336415b282089"
+            ]
+        ]
+    },
+    {
+        "id": "5da336415b282089",
+        "type": "delay",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 300,
+        "y": 1760,
+        "wires": [
+            [
+                "613e58eb0f13e50a"
+            ]
+        ]
+    },
+    {
+        "id": "613e58eb0f13e50a",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "Craft error msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "error",
+                "pt": "msg",
+                "to": "Error while performing DB Queries",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 1760,
+        "wires": [
+            [
+                "8c7e366cc35b87af"
+            ]
+        ]
+    },
+    {
+        "id": "8c7e366cc35b87af",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "Print error (API)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "error",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "3e6ab8f278a930ef",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
+        "name": "Registration Completition",
+        "scope": [
+            "4d1c9031b225c4e5"
+        ],
+        "uncaught": false,
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "6addd85ab87497c3"
+            ]
+        ]
+    },
+    {
+        "id": "c2d7c74e09b2e312",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2c0f67140fd1b413",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "Login Completition",
+        "scope": [
+            "74a2182d6cf3432b"
+        ],
+        "uncaught": false,
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "40ce6893f6966a45"
+            ]
+        ]
+    },
+    {
+        "id": "06749a30d3205d94",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Update Filter Completition",
+        "scope": [
+            "15a4b9f0df755521"
+        ],
+        "uncaught": false,
+        "x": 170,
+        "y": 860,
+        "wires": [
+            [
+                "841f478027e2f418"
+            ]
+        ]
+    },
+    {
+        "id": "91f42fd977778f76",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "Change Email Completition",
+        "scope": [
+            "04da69c72b57d39e"
+        ],
+        "uncaught": false,
+        "x": 170,
+        "y": 1060,
+        "wires": [
+            [
+                "8e2288be6eecf071"
+            ]
+        ]
+    },
+    {
+        "id": "035d90da9f82f6ee",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "Change Password Completition",
+        "scope": [
+            "0b04a181ff7e9628"
+        ],
+        "uncaught": false,
+        "x": 190,
+        "y": 1260,
+        "wires": [
+            [
+                "9b2e1ee643f77b0a"
+            ]
+        ]
+    },
+    {
+        "id": "7863615649b984e9",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "Account Deletion Completition",
+        "scope": [
+            "a149da1c07a321c2"
+        ],
+        "uncaught": false,
+        "x": 180,
+        "y": 1460,
+        "wires": [
+            [
+                "02dfd341a8807e9a"
+            ]
+        ]
+    },
+    {
+        "id": "3c434ec046f71a23",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1580,
+        "wires": [
+            [
+                "83c99c7142a96e7f"
+            ]
+        ]
+    },
+    {
+        "id": "83c99c7142a96e7f",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "Show USER table",
+        "query": "SELECT * FROM UserTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 350,
+        "y": 1580,
+        "wires": [
+            [
+                "e8bc2dd148bbffb3"
+            ]
+        ]
+    },
+    {
+        "id": "e8bc2dd148bbffb3",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "5898347def636b4d",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1640,
+        "wires": [
+            [
+                "d0c5bf7405388a7c"
+            ]
+        ]
+    },
+    {
+        "id": "d0c5bf7405388a7c",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "Clean USER table",
+        "query": "DELETE FROM UserTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 350,
+        "y": 1640,
+        "wires": [
+            [
+                "c98c52a08de3b558"
+            ]
+        ]
+    },
+    {
+        "id": "c98c52a08de3b558",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "801868f4cc631259",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 1580,
+        "wires": [
+            [
+                "28705e872a39bf64"
+            ]
+        ]
+    },
+    {
+        "id": "28705e872a39bf64",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "Show  JUG table",
+        "query": "SELECT * FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1020,
+        "y": 1580,
+        "wires": [
+            [
+                "1cd3cb4c7a6a6292"
+            ]
+        ]
+    },
+    {
+        "id": "1cd3cb4c7a6a6292",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "f8e038c0ae26a12a",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 1640,
+        "wires": [
+            [
+                "4810de2e5fcc3538"
+            ]
+        ]
+    },
+    {
+        "id": "4810de2e5fcc3538",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "Clean JUG table",
+        "query": "DELETE FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1020,
+        "y": 1640,
+        "wires": [
+            [
+                "bad79e1fd1d22d16"
+            ]
+        ]
+    },
+    {
+        "id": "bad79e1fd1d22d16",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "2014e345587e4007",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "70e3419b45428f51",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "Pair Completition",
+        "scope": [
+            "dcd2b471dd5d1d54"
+        ],
+        "uncaught": false,
+        "x": 140,
+        "y": 660,
+        "wires": [
+            [
+                "581e57b5ed15ddce"
+            ]
+        ]
+    },
+    {
+        "id": "6addd85ab87497c3",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "bdbaa79edcd82992",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Registration Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 180,
+        "wires": [
+            [
+                "c2d7c74e09b2e312"
+            ]
+        ]
+    },
+    {
+        "id": "40ce6893f6966a45",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Login Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "339436e98d838faf"
+            ]
+        ]
+    },
+    {
+        "id": "339436e98d838faf",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "581e57b5ed15ddce",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Paring Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 660,
+        "wires": [
+            [
+                "b79303726be56dc6"
+            ]
+        ]
+    },
+    {
+        "id": "b79303726be56dc6",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "841f478027e2f418",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Filter Update Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 860,
+        "wires": [
+            [
+                "28d97bfdb5c2a53a"
+            ]
+        ]
+    },
+    {
+        "id": "28d97bfdb5c2a53a",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "20496de9b60de6a8",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "8e2288be6eecf071",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Email Change Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 1060,
+        "wires": [
+            [
+                "85468fb5347ae2b0"
+            ]
+        ]
+    },
+    {
+        "id": "85468fb5347ae2b0",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "f78c38617ed627c9",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "9b2e1ee643f77b0a",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Password Change Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 1260,
+        "wires": [
+            [
+                "dda3f2e8d089d3b3"
+            ]
+        ]
+    },
+    {
+        "id": "dda3f2e8d089d3b3",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "2d8f9ba287e5298a",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "02dfd341a8807e9a",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Account Deletion Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 1460,
+        "wires": [
+            [
+                "185774d4d094bfe0"
+            ]
+        ]
+    },
+    {
+        "id": "185774d4d094bfe0",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "85cf4f26a7c39064",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "27ad1b042019570d",
+        "type": "comment",
+        "z": "217d4457bda21c0d",
+        "g": "1589093497ae43e3",
+        "name": "Jug sends pair request to add itself, with the user who requested, to the DB and ThingWorx",
+        "info": "",
+        "x": 650,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "12d815057cd57334",
+        "type": "http request",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "Get Total litres",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/totalLitresJug",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "cdb712ef947b9f93"
+            ]
+        ]
+    },
+    {
+        "id": "bca0d49876942d04",
+        "type": "inject",
+        "z": "dd62ac133fb1360c",
+        "name": "Start dashboard",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "686e392549632634",
+                "b4bb400f7fb5444d"
+            ]
+        ]
+    },
+    {
+        "id": "686e392549632634",
+        "type": "postgresql",
+        "z": "dd62ac133fb1360c",
+        "g": "07434671c4362d4f",
+        "name": "Get Jug ids",
+        "query": "SELECT id FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "43eb9f6208742902"
+            ]
+        ]
+    },
+    {
+        "id": "0f36aa3917d94588",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "07434671c4362d4f",
+        "name": "Set thing_id",
+        "rules": [
+            {
+                "t": "set",
+                "p": "thing_id",
+                "pt": "msg",
+                "to": "payload.id",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 120,
+        "wires": [
+            [
+                "62c0ce56e6d2d453"
+            ]
+        ]
+    },
+    {
+        "id": "e2b41d91cb228409",
+        "type": "join",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "Merge all jugs values",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "thing_id",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": true,
+        "reduceExp": "msg.payload\t",
+        "reduceInit": "0",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 820,
+        "y": 300,
+        "wires": [
+            [
+                "4eb1c96a4b440d38",
+                "cd95edaaaf747c92"
+            ]
+        ]
+    },
+    {
+        "id": "43eb9f6208742902",
+        "type": "split",
+        "z": "dd62ac133fb1360c",
+        "g": "07434671c4362d4f",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "0f36aa3917d94588"
+            ]
+        ]
+    },
+    {
+        "id": "cdb712ef947b9f93",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "Set totalLitresJug",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.rows[0].totalLitresJug",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 300,
+        "wires": [
+            [
+                "e2b41d91cb228409"
+            ]
+        ]
+    },
+    {
+        "id": "cd95edaaaf747c92",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "Compute sum",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$sum(msg.payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 320,
+        "wires": [
+            [
+                "b1bfa462b34b5621",
+                "a3cf40fceacb65df"
+            ]
+        ]
+    },
+    {
+        "id": "a3cf40fceacb65df",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "",
+        "group": "d1a0b3959db61542",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Total litres of all jugs",
+        "label": "liters",
+        "format": "{{msg.payload  | number: 2}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1220,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "fffcf2415ff35daf",
+        "type": "postgresql",
+        "z": "dd62ac133fb1360c",
+        "g": "261acb4b06f35df7",
+        "name": "Get Jugs Count",
+        "query": "SELECT COUNT(id) FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 420,
+        "y": 1080,
+        "wires": [
+            [
+                "6426c3f9917d2081"
+            ]
+        ]
+    },
+    {
+        "id": "e12e139248b70364",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "g": "261acb4b06f35df7",
+        "group": "2dab9229986fd1ba",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Num of jugs registered",
+        "label": "Number of jugs registered:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "16",
+        "color": "#000000",
+        "x": 900,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "6426c3f9917d2081",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "261acb4b06f35df7",
+        "name": "Set Jugs Count",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].count",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 1080,
+        "wires": [
+            [
+                "e12e139248b70364",
+                "ed3067e7caae1618",
+                "33457bfaf6556358"
+            ]
+        ]
+    },
+    {
+        "id": "6cc1040bfd802f1e",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "group": "a6a64a541ae8c000",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Kg of plastic saved",
+        "label": "Kg of plastic saved",
+        "format": "{{msg.payload | number: 4}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "16",
+        "color": "#000000",
+        "x": 910,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "bf3e55578af7a2e4",
+        "type": "calculator",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "name": "",
+        "inputMsgField": "payload",
+        "outputMsgField": "payload",
+        "operation": "div",
+        "constant": "500000",
+        "round": false,
+        "truncate": false,
+        "decimals": 0,
+        "decimals2": 0,
+        "x": 610,
+        "y": 880,
+        "wires": [
+            [
+                "6cc1040bfd802f1e",
+                "fa768fe8dd244a44",
+                "1b5612176c75fd15"
+            ]
+        ]
+    },
+    {
+        "id": "3ef85ed4716564ae",
+        "type": "calculator",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "name": "",
+        "inputMsgField": "payload",
+        "outputMsgField": "payload",
+        "operation": "mult",
+        "constant": "32",
+        "round": false,
+        "truncate": false,
+        "decimals": 0,
+        "decimals2": 0,
+        "x": 400,
+        "y": 880,
+        "wires": [
+            [
+                "bf3e55578af7a2e4"
+            ]
+        ]
+    },
+    {
+        "id": "fa768fe8dd244a44",
+        "type": "ui_chart",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "name": "",
+        "group": "a6a64a541ae8c000",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Amount of plastic saved (hour)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1a7cc1",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 930,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "96122b6e803914d0",
+        "type": "postgresql",
+        "z": "dd62ac133fb1360c",
+        "g": "99bd9f011057c2f8",
+        "name": "Get User ids from DB",
+        "query": "SELECT COUNT(userId) FROM UserTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 440,
+        "y": 1280,
+        "wires": [
+            [
+                "c38392d9d315dc5d"
+            ]
+        ]
+    },
+    {
+        "id": "c38392d9d315dc5d",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "99bd9f011057c2f8",
+        "name": "Set Users Count",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].count",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 1280,
+        "wires": [
+            [
+                "5415beb9fff2b624",
+                "2e8fa7ec9d191f25",
+                "e7bd29cb35dc2be0"
+            ]
+        ]
+    },
+    {
+        "id": "5415beb9fff2b624",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "g": "99bd9f011057c2f8",
+        "group": "4bfb72e0581a07c0",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Num of users registered",
+        "label": "Number of users registered:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "16",
+        "color": "#000000",
+        "x": 890,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "4eb1c96a4b440d38",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "Compute avg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$average(payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 260,
+        "wires": [
+            [
+                "72d7683f247d4f7a"
+            ]
+        ]
+    },
+    {
+        "id": "72d7683f247d4f7a",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "",
+        "group": "d1a0b3959db61542",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Avg litres of all jugs",
+        "label": "liters",
+        "format": "{{msg.payload  | number: 2}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00f094",
+            "#00b0bd",
+            "#4400ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1210,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b1bfa462b34b5621",
+        "type": "link out",
+        "z": "dd62ac133fb1360c",
+        "g": "44ca8a1c36ba7dc9",
+        "name": "link out 5",
+        "mode": "link",
+        "links": [
+            "72b8d5bea41ced2f"
+        ],
+        "x": 1145,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "72b8d5bea41ced2f",
+        "type": "link in",
+        "z": "dd62ac133fb1360c",
+        "name": "link in 5",
+        "links": [
+            "b1bfa462b34b5621"
+        ],
+        "x": 255,
+        "y": 880,
+        "wires": [
+            [
+                "3ef85ed4716564ae"
+            ]
+        ]
+    },
+    {
+        "id": "2ad5bd5afacb1fd8",
+        "type": "function",
+        "z": "dd62ac133fb1360c",
+        "g": "2a6fd50769b56baf",
+        "name": "Compute total current jugs active",
+        "func": "if (msg.payload == undefined || msg.payload.length == 0){\n    msg.payload = 0;\n    return msg;\n}\n\nlet sum = 0;\nmsg.payload.forEach(function(element) {\n    if (element != 0.0)\n        sum += 1\n});\nmsg.payload = sum;\nsum = 0;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 460,
+        "wires": [
+            [
+                "fcc269dc861c255c"
+            ]
+        ]
+    },
+    {
+        "id": "7a088ebc13b22c17",
+        "type": "link in",
+        "z": "dd62ac133fb1360c",
+        "name": "link in 6",
+        "links": [
+            "62c0ce56e6d2d453"
+        ],
+        "x": 255,
+        "y": 380,
+        "wires": [
+            [
+                "12d815057cd57334",
+                "c82c75d3b593411b"
+            ]
+        ]
+    },
+    {
+        "id": "62c0ce56e6d2d453",
+        "type": "link out",
+        "z": "dd62ac133fb1360c",
+        "name": "link out 6",
+        "mode": "link",
+        "links": [
+            "7a088ebc13b22c17",
+            "69dfaeb2e0718c27"
+        ],
+        "x": 865,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c82c75d3b593411b",
+        "type": "http request",
+        "z": "dd62ac133fb1360c",
+        "g": "2a6fd50769b56baf",
+        "name": "Get Litres Per Second",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/litresPerSecond",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 440,
+        "y": 460,
+        "wires": [
+            [
+                "04502fd62b09576f"
+            ]
+        ]
+    },
+    {
+        "id": "0c96d057bbeba1ac",
+        "type": "join",
+        "z": "dd62ac133fb1360c",
+        "g": "2a6fd50769b56baf",
+        "name": "Merge all jugs values",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "thing_id",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": true,
+        "reduceExp": "msg.payload\t",
+        "reduceInit": "0",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 880,
+        "y": 460,
+        "wires": [
+            [
+                "2ad5bd5afacb1fd8"
+            ]
+        ]
+    },
+    {
+        "id": "04502fd62b09576f",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "2a6fd50769b56baf",
+        "name": "Set litresPerSecond",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.rows[0].litresPerSecond",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 460,
+        "wires": [
+            [
+                "0c96d057bbeba1ac"
+            ]
+        ]
+    },
+    {
+        "id": "fcc269dc861c255c",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "g": "2a6fd50769b56baf",
+        "group": "2dab9229986fd1ba",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Num of jugs active",
+        "label": "Number of jugs currently sending data:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "16",
+        "color": "#000000",
+        "x": 1210,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "fb708c2fcfc9c453",
+        "type": "function",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "Compute total alert for low filter (20%)",
+        "func": "let sum = 0;\nmsg.payload.forEach(function(pair) {\n    if (pair[0] >= pair[1])\n        sum += 1;\n});\nmsg.payload = sum;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 700,
+        "wires": [
+            [
+                "17ca1b2582d81a62",
+                "3d45bdf91619d41e"
+            ]
+        ]
+    },
+    {
+        "id": "c2d21a8e765e0a8d",
+        "type": "http request",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "Get Filter Capacity",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/filterCapacity",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 430,
+        "y": 640,
+        "wires": [
+            [
+                "f9bff4e17ea17d24"
+            ]
+        ]
+    },
+    {
+        "id": "f9bff4e17ea17d24",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "Set filterCapacity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filterCapacity",
+                "pt": "msg",
+                "to": "payload.rows[0].filterCapacity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 640,
+        "wires": [
+            [
+                "f00e83fd74bdad42"
+            ]
+        ]
+    },
+    {
+        "id": "f00e83fd74bdad42",
+        "type": "http request",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "Get Filter Usage",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/totalLitresFilter",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 860,
+        "y": 640,
+        "wires": [
+            [
+                "6dde29be83f4a808"
+            ]
+        ]
+    },
+    {
+        "id": "6dde29be83f4a808",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "Set filter usage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filterUsage",
+                "pt": "msg",
+                "to": "payload.rows[0].totalLitresFilter",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[msg.filterUsage,msg.filterCapacity]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 640,
+        "wires": [
+            [
+                "e3ece40c497798c1"
+            ]
+        ]
+    },
+    {
+        "id": "17ca1b2582d81a62",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "",
+        "group": "12c2e9b2a697267d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Num of low-filter alerts currently triggered",
+        "label": "liters",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#29ffe6",
+            "#fff700",
+            "#ff0059"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1140,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "e3ece40c497798c1",
+        "type": "join",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "Merge all jugs values",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "thing_id",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": true,
+        "reduceExp": "msg.payload\t",
+        "reduceInit": "0",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 480,
+        "y": 700,
+        "wires": [
+            [
+                "fb708c2fcfc9c453"
+            ]
+        ]
+    },
+    {
+        "id": "3d45bdf91619d41e",
+        "type": "ui_chart",
+        "z": "dd62ac133fb1360c",
+        "g": "e5db3ff7e0f7bdc2",
+        "name": "",
+        "group": "12c2e9b2a697267d",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "label": "Alerts triggered (week)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "D/M",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ffa200",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1100,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e8fa7ec9d191f25",
+        "type": "ui_chart",
+        "z": "dd62ac133fb1360c",
+        "g": "99bd9f011057c2f8",
+        "name": "",
+        "group": "4bfb72e0581a07c0",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Cumulative of users registered (day)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "D/M",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#44ff00",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 930,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9de3a121d9fea562",
+        "type": "delay",
+        "z": "dd62ac133fb1360c",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 230,
+        "y": 1280,
+        "wires": [
+            [
+                "96122b6e803914d0"
+            ]
+        ]
+    },
+    {
+        "id": "ed3067e7caae1618",
+        "type": "ui_chart",
+        "z": "dd62ac133fb1360c",
+        "g": "261acb4b06f35df7",
+        "name": "",
+        "group": "2dab9229986fd1ba",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Cumulative of jugs registered (min)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#e100ff",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 940,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4bb400f7fb5444d",
+        "type": "link out",
+        "z": "dd62ac133fb1360c",
+        "name": "link out 7",
+        "mode": "link",
+        "links": [
+            "bc2ea44de7c98582",
+            "97382bb942b28a70"
+        ],
+        "x": 255,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "bc2ea44de7c98582",
+        "type": "link in",
+        "z": "dd62ac133fb1360c",
+        "name": "link in 7",
+        "links": [
+            "b4bb400f7fb5444d"
+        ],
+        "x": 255,
+        "y": 1080,
+        "wires": [
+            [
+                "fffcf2415ff35daf"
+            ]
+        ]
+    },
+    {
+        "id": "97382bb942b28a70",
+        "type": "link in",
+        "z": "dd62ac133fb1360c",
+        "name": "link in 8",
+        "links": [
+            "b4bb400f7fb5444d"
+        ],
+        "x": 115,
+        "y": 1280,
+        "wires": [
+            [
+                "9de3a121d9fea562"
+            ]
+        ]
+    },
+    {
+        "id": "69dfaeb2e0718c27",
+        "type": "link in",
+        "z": "dd62ac133fb1360c",
+        "name": "link in 9",
+        "links": [
+            "62c0ce56e6d2d453"
+        ],
+        "x": 255,
+        "y": 640,
+        "wires": [
+            [
+                "c2d21a8e765e0a8d"
+            ]
+        ]
+    },
+    {
+        "id": "1b5612176c75fd15",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "name": "",
+        "group": "c27372d8e95188d1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Plastic Saved Objective: 10 Kg",
+        "label": "kg",
+        "format": "{{msg.payload | number: 2}}",
+        "min": 0,
+        "max": "10",
+        "colors": [
+            "#f02400",
+            "#fbff00",
+            "#44ff00"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "33457bfaf6556358",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "261acb4b06f35df7",
+        "name": "",
+        "group": "c73a3a9fe70498d5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Jugs Registered Objective: 10",
+        "label": "jugs",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": "10",
+        "colors": [
+            "#f02400",
+            "#fbff00",
+            "#44ff00"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 930,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "e7bd29cb35dc2be0",
+        "type": "ui_gauge",
+        "z": "dd62ac133fb1360c",
+        "g": "99bd9f011057c2f8",
+        "name": "",
+        "group": "cdbb240eb1898b91",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "User Registered Objective: 10",
+        "label": "users",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": "10",
+        "colors": [
+            "#f02400",
+            "#fbff00",
+            "#44ff00"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 910,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "9a21dec140558ec4",
+        "type": "catch",
+        "z": "dd62ac133fb1360c",
+        "g": "85f31b0f7e802da4",
+        "name": "HTTP Catch",
+        "scope": [
+            "12d815057cd57334",
+            "c82c75d3b593411b",
+            "c2d21a8e765e0a8d",
+            "f00e83fd74bdad42"
+        ],
+        "uncaught": false,
+        "x": 410,
+        "y": 1480,
+        "wires": [
+            [
+                "9eb6688fb3790834"
+            ]
+        ]
+    },
+    {
+        "id": "9eb6688fb3790834",
+        "type": "delay",
+        "z": "dd62ac133fb1360c",
+        "g": "85f31b0f7e802da4",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 1480,
+        "wires": [
+            [
+                "48549ff50829816e"
+            ]
+        ]
+    },
+    {
+        "id": "48549ff50829816e",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "85f31b0f7e802da4",
+        "name": "Craft error msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "error",
+                "pt": "msg",
+                "to": "Error while performing HTTP Requests",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 1480,
+        "wires": [
+            [
+                "451e852607a62c46"
+            ]
+        ]
+    },
+    {
+        "id": "451e852607a62c46",
+        "type": "debug",
+        "z": "dd62ac133fb1360c",
+        "g": "85f31b0f7e802da4",
+        "name": "Print error (Dashboard)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "error",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "e55c49e819e6e582",
+        "type": "catch",
+        "z": "dd62ac133fb1360c",
+        "g": "85f31b0f7e802da4",
+        "name": "Computation Catch",
+        "scope": [
+            "12d815057cd57334",
+            "c82c75d3b593411b",
+            "c2d21a8e765e0a8d",
+            "f00e83fd74bdad42",
+            "cd95edaaaf747c92",
+            "4eb1c96a4b440d38"
+        ],
+        "uncaught": false,
+        "x": 430,
+        "y": 1520,
+        "wires": [
+            [
+                "0d496130a175a9fe"
+            ]
+        ]
+    },
+    {
+        "id": "0d496130a175a9fe",
+        "type": "delay",
+        "z": "dd62ac133fb1360c",
+        "g": "85f31b0f7e802da4",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 620,
+        "y": 1520,
+        "wires": [
+            [
+                "ebae16586d820da2"
+            ]
+        ]
+    },
+    {
+        "id": "ebae16586d820da2",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "85f31b0f7e802da4",
+        "name": "Craft error msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "error",
+                "pt": "msg",
+                "to": "Error while performing Computation of Avg and/or Sum",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 1520,
+        "wires": [
+            [
+                "451e852607a62c46"
             ]
         ]
     },
@@ -4799,990 +6972,6 @@
         "statusType": "auto",
         "x": 420,
         "y": 1160,
-        "wires": []
-    },
-    {
-        "id": "12d815057cd57334",
-        "type": "http request",
-        "z": "dd62ac133fb1360c",
-        "name": "Get Total litres",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/totalLitresJug",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Accept",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 460,
-        "y": 260,
-        "wires": [
-            [
-                "cdb712ef947b9f93"
-            ]
-        ]
-    },
-    {
-        "id": "bca0d49876942d04",
-        "type": "inject",
-        "z": "dd62ac133fb1360c",
-        "name": "Start dashboard",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 150,
-        "y": 140,
-        "wires": [
-            [
-                "686e392549632634",
-                "fffcf2415ff35daf",
-                "96122b6e803914d0"
-            ]
-        ]
-    },
-    {
-        "id": "686e392549632634",
-        "type": "postgresql",
-        "z": "dd62ac133fb1360c",
-        "name": "Get Jug ids from DB",
-        "query": "SELECT id FROM JugTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 440,
-        "y": 120,
-        "wires": [
-            [
-                "43eb9f6208742902"
-            ]
-        ]
-    },
-    {
-        "id": "0f36aa3917d94588",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "name": "Set thing_id",
-        "rules": [
-            {
-                "t": "set",
-                "p": "thing_id",
-                "pt": "msg",
-                "to": "payload.id",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 790,
-        "y": 120,
-        "wires": [
-            [
-                "62c0ce56e6d2d453"
-            ]
-        ]
-    },
-    {
-        "id": "e2b41d91cb228409",
-        "type": "join",
-        "z": "dd62ac133fb1360c",
-        "name": "Merge all jugs values",
-        "mode": "custom",
-        "build": "array",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "thing_id",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "",
-        "reduceRight": true,
-        "reduceExp": "msg.payload\t",
-        "reduceInit": "0",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 880,
-        "y": 260,
-        "wires": [
-            [
-                "4eb1c96a4b440d38",
-                "cd95edaaaf747c92"
-            ]
-        ]
-    },
-    {
-        "id": "43eb9f6208742902",
-        "type": "split",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 630,
-        "y": 120,
-        "wires": [
-            [
-                "0f36aa3917d94588"
-            ]
-        ]
-    },
-    {
-        "id": "cdb712ef947b9f93",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "name": "Set totalLitresJug",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.rows[0].totalLitresJug",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 650,
-        "y": 260,
-        "wires": [
-            [
-                "e2b41d91cb228409"
-            ]
-        ]
-    },
-    {
-        "id": "cd95edaaaf747c92",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "name": "Compute sum",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "$sum(msg.payload)",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1080,
-        "y": 280,
-        "wires": [
-            [
-                "b1bfa462b34b5621"
-            ]
-        ]
-    },
-    {
-        "id": "a3cf40fceacb65df",
-        "type": "ui_gauge",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "group": "d1a0b3959db61542",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "wave",
-        "title": "Total litres of all jugs",
-        "label": "liters",
-        "format": "{{msg.payload  | number: 2}}",
-        "min": 0,
-        "max": "1000",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 620,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "fffcf2415ff35daf",
-        "type": "postgresql",
-        "z": "dd62ac133fb1360c",
-        "g": "261acb4b06f35df7",
-        "name": "Get Jug ids from DB",
-        "query": "SELECT COUNT(id) FROM JugTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 440,
-        "y": 940,
-        "wires": [
-            [
-                "6426c3f9917d2081"
-            ]
-        ]
-    },
-    {
-        "id": "e12e139248b70364",
-        "type": "ui_text",
-        "z": "dd62ac133fb1360c",
-        "g": "261acb4b06f35df7",
-        "group": "2dab9229986fd1ba",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "Num of jugs registered",
-        "label": "Number of jugs registered:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": true,
-        "font": "Verdana,Verdana,Geneva,sans-serif",
-        "fontSize": "20",
-        "color": "#000000",
-        "x": 980,
-        "y": 940,
-        "wires": []
-    },
-    {
-        "id": "6426c3f9917d2081",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "g": "261acb4b06f35df7",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload[0].count",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 700,
-        "y": 940,
-        "wires": [
-            [
-                "e12e139248b70364"
-            ]
-        ]
-    },
-    {
-        "id": "6cc1040bfd802f1e",
-        "type": "ui_text",
-        "z": "dd62ac133fb1360c",
-        "group": "a6a64a541ae8c000",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "Kg of plastic saved",
-        "label": "Kg of plastic saved",
-        "format": "{{msg.payload | number: 4}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": true,
-        "font": "Verdana,Verdana,Geneva,sans-serif",
-        "fontSize": "20",
-        "color": "#000000",
-        "x": 1050,
-        "y": 820,
-        "wires": []
-    },
-    {
-        "id": "bf3e55578af7a2e4",
-        "type": "calculator",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "inputMsgField": "payload",
-        "outputMsgField": "payload",
-        "operation": "div",
-        "constant": "500000",
-        "round": false,
-        "truncate": false,
-        "decimals": 0,
-        "decimals2": 0,
-        "x": 750,
-        "y": 800,
-        "wires": [
-            [
-                "6cc1040bfd802f1e",
-                "fa768fe8dd244a44"
-            ]
-        ]
-    },
-    {
-        "id": "3ef85ed4716564ae",
-        "type": "calculator",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "inputMsgField": "payload",
-        "outputMsgField": "payload",
-        "operation": "mult",
-        "constant": "32",
-        "round": false,
-        "truncate": false,
-        "decimals": 0,
-        "decimals2": 0,
-        "x": 600,
-        "y": 800,
-        "wires": [
-            [
-                "bf3e55578af7a2e4"
-            ]
-        ]
-    },
-    {
-        "id": "fa768fe8dd244a44",
-        "type": "ui_chart",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "group": "a6a64a541ae8c000",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "Amount of plastic saved in one day",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": true,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "86400",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1080,
-        "y": 860,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "96122b6e803914d0",
-        "type": "postgresql",
-        "z": "dd62ac133fb1360c",
-        "g": "261acb4b06f35df7",
-        "name": "Get User ids from DB",
-        "query": "SELECT COUNT(userId) FROM UserTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 440,
-        "y": 1000,
-        "wires": [
-            [
-                "c38392d9d315dc5d"
-            ]
-        ]
-    },
-    {
-        "id": "c38392d9d315dc5d",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "g": "261acb4b06f35df7",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload[0].count",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 700,
-        "y": 1000,
-        "wires": [
-            [
-                "5415beb9fff2b624"
-            ]
-        ]
-    },
-    {
-        "id": "5415beb9fff2b624",
-        "type": "ui_text",
-        "z": "dd62ac133fb1360c",
-        "g": "261acb4b06f35df7",
-        "group": "2dab9229986fd1ba",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "Num of users registered",
-        "label": "Number of users registered:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": true,
-        "font": "Verdana,Verdana,Geneva,sans-serif",
-        "fontSize": "20",
-        "color": "#000000",
-        "x": 990,
-        "y": 1000,
-        "wires": []
-    },
-    {
-        "id": "4eb1c96a4b440d38",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "name": "Compute avg",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "$average(payload)",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1070,
-        "y": 220,
-        "wires": [
-            [
-                "72d7683f247d4f7a"
-            ]
-        ]
-    },
-    {
-        "id": "72d7683f247d4f7a",
-        "type": "ui_gauge",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "group": "d1a0b3959db61542",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Avg litres of all jugs",
-        "label": "liters",
-        "format": "{{msg.payload  | number: 2}}",
-        "min": 0,
-        "max": "500",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1270,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "56a581e5680ad6e3",
-        "type": "debug",
-        "z": "dd62ac133fb1360c",
-        "name": "Litres in total",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 590,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "b1bfa462b34b5621",
-        "type": "link out",
-        "z": "dd62ac133fb1360c",
-        "name": "link out 5",
-        "mode": "link",
-        "links": [
-            "72b8d5bea41ced2f"
-        ],
-        "x": 1205,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "72b8d5bea41ced2f",
-        "type": "link in",
-        "z": "dd62ac133fb1360c",
-        "name": "link in 5",
-        "links": [
-            "b1bfa462b34b5621"
-        ],
-        "x": 405,
-        "y": 740,
-        "wires": [
-            [
-                "3ef85ed4716564ae",
-                "56a581e5680ad6e3",
-                "a3cf40fceacb65df"
-            ]
-        ]
-    },
-    {
-        "id": "2ad5bd5afacb1fd8",
-        "type": "function",
-        "z": "dd62ac133fb1360c",
-        "name": "Compute total current jugs active",
-        "func": "if (msg.payload == undefined || msg.payload.length == 0){\n    msg.payload = 0;\n    return msg;\n}\n\nlet sum = 0;\nmsg.payload.forEach(function(element) {\n    if (element != 0.0)\n        sum += 1\n});\nmsg.payload = sum;\nsum = 0;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1200,
-        "y": 400,
-        "wires": [
-            [
-                "fcc269dc861c255c"
-            ]
-        ]
-    },
-    {
-        "id": "7a088ebc13b22c17",
-        "type": "link in",
-        "z": "dd62ac133fb1360c",
-        "name": "link in 6",
-        "links": [
-            "62c0ce56e6d2d453"
-        ],
-        "x": 345,
-        "y": 340,
-        "wires": [
-            [
-                "12d815057cd57334",
-                "c82c75d3b593411b",
-                "c2d21a8e765e0a8d",
-                "f00e83fd74bdad42"
-            ]
-        ]
-    },
-    {
-        "id": "62c0ce56e6d2d453",
-        "type": "link out",
-        "z": "dd62ac133fb1360c",
-        "name": "link out 6",
-        "mode": "link",
-        "links": [
-            "7a088ebc13b22c17"
-        ],
-        "x": 925,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "c82c75d3b593411b",
-        "type": "http request",
-        "z": "dd62ac133fb1360c",
-        "name": "Get Litres Per Second",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/litresPerSecond",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Accept",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 500,
-        "y": 400,
-        "wires": [
-            [
-                "04502fd62b09576f"
-            ]
-        ]
-    },
-    {
-        "id": "0c96d057bbeba1ac",
-        "type": "join",
-        "z": "dd62ac133fb1360c",
-        "name": "Merge all jugs values",
-        "mode": "custom",
-        "build": "array",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "thing_id",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "",
-        "reduceRight": true,
-        "reduceExp": "msg.payload\t",
-        "reduceInit": "0",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 940,
-        "y": 400,
-        "wires": [
-            [
-                "2ad5bd5afacb1fd8"
-            ]
-        ]
-    },
-    {
-        "id": "04502fd62b09576f",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "name": "Set litresPerSecond",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.rows[0].litresPerSecond",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 720,
-        "y": 400,
-        "wires": [
-            [
-                "0c96d057bbeba1ac"
-            ]
-        ]
-    },
-    {
-        "id": "fcc269dc861c255c",
-        "type": "ui_text",
-        "z": "dd62ac133fb1360c",
-        "group": "2dab9229986fd1ba",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "Num of jugs active",
-        "label": "Number of jugs active:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": true,
-        "font": "Verdana,Verdana,Geneva,sans-serif",
-        "fontSize": "20",
-        "color": "#000000",
-        "x": 1250,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "fb708c2fcfc9c453",
-        "type": "function",
-        "z": "dd62ac133fb1360c",
-        "name": "Compute total alert for low filter (20%)",
-        "func": "let sum = 0;\nif (msg.filterUsage >= msg.filterCapacity)\n    sum += 1;\nmsg.payload = sum;\nsum = 0;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1010,
-        "y": 520,
-        "wires": [
-            [
-                "17ca1b2582d81a62"
-            ]
-        ]
-    },
-    {
-        "id": "c2d21a8e765e0a8d",
-        "type": "http request",
-        "z": "dd62ac133fb1360c",
-        "name": "Get Filter Capacity",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/filterCapacity",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Accept",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 470,
-        "y": 480,
-        "wires": [
-            [
-                "f9bff4e17ea17d24"
-            ]
-        ]
-    },
-    {
-        "id": "f9bff4e17ea17d24",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "name": "Set filterCapacity",
-        "rules": [
-            {
-                "t": "set",
-                "p": "filterCapacity",
-                "pt": "msg",
-                "to": "payload.rows[0].filterCapacity",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "thing_id",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 690,
-        "y": 480,
-        "wires": [
-            [
-                "61c86c61f6a67dc1",
-                "6aa11d1569ef2785"
-            ]
-        ]
-    },
-    {
-        "id": "f00e83fd74bdad42",
-        "type": "http request",
-        "z": "dd62ac133fb1360c",
-        "name": "Get Filter Usage",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Properties/totalLitresFilter",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Accept",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 460,
-        "y": 540,
-        "wires": [
-            [
-                "6dde29be83f4a808"
-            ]
-        ]
-    },
-    {
-        "id": "6dde29be83f4a808",
-        "type": "change",
-        "z": "dd62ac133fb1360c",
-        "name": "Set filter usage",
-        "rules": [
-            {
-                "t": "set",
-                "p": "filterUsage",
-                "pt": "msg",
-                "to": "payload.rows[0].totalLitresFilter",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "thing_id",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 680,
-        "y": 540,
-        "wires": [
-            [
-                "61c86c61f6a67dc1",
-                "a7aa806e2fb8ef96"
-            ]
-        ]
-    },
-    {
-        "id": "6aa11d1569ef2785",
-        "type": "debug",
-        "z": "dd62ac133fb1360c",
-        "name": "debug 15",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "filterCapacity",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 980,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "a7aa806e2fb8ef96",
-        "type": "debug",
-        "z": "dd62ac133fb1360c",
-        "name": "debug 16",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "filterUsage",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 980,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "61c86c61f6a67dc1",
-        "type": "delay",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "pauseType": "timed",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "2",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 970,
-        "y": 460,
-        "wires": [
-            [
-                "fb708c2fcfc9c453"
-            ]
-        ]
-    },
-    {
-        "id": "17ca1b2582d81a62",
-        "type": "ui_gauge",
-        "z": "dd62ac133fb1360c",
-        "name": "",
-        "group": "12c2e9b2a697267d",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Num of alerts currently triggered",
-        "label": "liters",
-        "format": "{{msg.payload}}",
-        "min": 0,
-        "max": "5",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1270,
-        "y": 580,
         "wires": []
     }
 ]

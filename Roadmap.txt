@@ -50,3 +50,5 @@
 [[ Domande ]]
 - Arduino: ha senso il delay nella funzione water (measure), rispetto al delay nel loop esterno? Di base dovrebbe 
 lanciare in loop e dopo un secondo ritornare una serie di valori e così via
+- quando il simulatore js termina mandare degli zeri come litresPerSecond prima di chiudere (così da evitare il comportamento di continuo versamento d'acqua per ThingWorx)
+- mettere un delay fra creazione di un'istanza e un'altra nel simulatore (onde evitare crash di ThingWorx)
