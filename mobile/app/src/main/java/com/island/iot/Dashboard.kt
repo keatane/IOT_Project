@@ -4,15 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +19,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.Icon
 
 @Composable
 fun Metric(title: String, value: String) {
@@ -34,7 +31,7 @@ fun Metric(title: String, value: String) {
 }
 
 @Composable
-fun Grid() {
+fun Grid(jugsList: List<JugElement>, selectedJug: Int) {
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier.fillMaxWidth()
@@ -53,7 +50,7 @@ fun Grid() {
             modifier = Modifier
                 .padding(16.dp, 0.dp)
         ) {
-            Metric("Filter capacity", sampleJugsList[selectedJug].filter.toString() + "L")
+            Metric("Filter capacity", jugsList[selectedJug].filter.toString() + "L")
             HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.6f))
             Metric("Filter life", "LLL")
         }
@@ -100,17 +97,17 @@ fun Grid() {
 @Composable
 @Preview
 fun DashboardPreview() {
-    Decorations{
+    Decorations {
         Dashboard()
     }
 }
 
 @Composable
 fun Dashboard(
-    initDashboard: () -> Unit = {},
+    initDashboard: () -> Unit = {}, jugsList: List<JugElement> = listOf(), selectedJug: Int = 0
 ) {
     initDashboard()
     ScrollableContent {
-        Grid()
+        Grid(jugsList, selectedJug)
     }
 }

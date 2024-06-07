@@ -234,7 +234,10 @@ fun Decorations(
                                 icon = { Icon(item.icon, contentDescription = item.text) },
                                 label = { Text(item.text) },
                                 selected = selectedItem == index,
-                                onClick = { selectedItem = index; if(prevSelected != selectedItem) navigate(item.route.id) }
+                                onClick = {
+                                    selectedItem =
+                                        index; if (prevSelected != selectedItem) navigate(item.route.id)
+                                }
                             )
                         }
                     }
@@ -278,6 +281,10 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
     val controller = rememberNavController()
     var bottomBarVisible by rememberSaveable { mutableStateOf(false) }
     var newsFeedVisible by rememberSaveable { mutableStateOf(false) }
+    val jugs by viewModel.repository.memoryDataSource.jugList.collectAsState()
+    var selectedJug by rememberSaveable {
+        mutableStateOf(0)
+    }
     Decorations(
         bottomBarVisible = bottomBarVisible,
         newsFeedVisible = newsFeedVisible,
@@ -321,6 +328,7 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
                         bottomBarVisible = true
                         newsFeedVisible = false
                     },
+                    jugsList = jugs, selectedJug = selectedJug
                 )
             }
             composable(Route.ACCOUNT.id) {
@@ -368,13 +376,9 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
                         newsFeedVisible = false
                     },
                     searchJugs = searchJugs,
-                    changeFilter = { username, jugId, filter ->
+                    changeFilter = { jugId, filter ->
                         scope.launch {
-                            state.filter(
-                                username,
-                                jugId,
-                                filter
-                            )
+                            state.changeFilter(jugId, filter)
                         }
                     },
                     dashboardPage = {
@@ -382,6 +386,14 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
                         newsFeedVisible = false
                         navigateTo(controller, Route.DASHBOARD.id)
                     },
+                    jugList = jugs,
+                    renameJug = { id, name ->
+                        scope.launch {
+                            state.renameJug(id, name)
+                        }
+                    },
+                    deleteJug = { id -> scope.launch { state.deleteJug(id) } },
+                    selectJug = { selectedJug = it }
                 )
             }
             composable(Route.NEWS.id) {

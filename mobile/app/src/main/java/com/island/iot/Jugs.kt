@@ -23,92 +23,81 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-data class JugElement(var title: String, var filter: Int)
-
-var selectedJug = 0
-// The sample jug list will be substituted by the actual list of jugs of the user from the database node-red
-var sampleJugsList = mutableListOf(
-    JugElement(title = "Kitchen Jug", filter = 150),
-    JugElement(title = "Living Room Jug", filter = 200)
-)
-
-fun fetchJugs() {
-    // should call node-red to get the list of jugs
-    // sampleJugsList = fetchDB()
-    Log.d("Jugs", "Jugs initialized")
-}
 
 @Composable
 fun DeleteJugDialog(
     openDeleteDialog: MutableState<Boolean>,
-    id: Int
+    id: Int,
+    deleteJug: (Int) -> Unit
 ) {
-    if (openDeleteDialog.value) {
-        AlertDialogGeneric(
-            onDismissRequest = { openDeleteDialog.value = false },
-            onConfirmation = {
-                openDeleteDialog.value = false
-                sampleJugsList.remove(sampleJugsList[id]) // Still doesn't visually remove it until a refresh
-                // should remove also jug from db node-red
-                println("Jug deleted")
-            },
-            dialogTitle = "Are you sure?",
-            dialogText = "This action is irreversible. You will have to pair again the jug if you remove it.",
-            icon = Icons.Default.Warning
-        )
-    }
+    AlertDialogGeneric(
+        onDismissRequest = { openDeleteDialog.value = false },
+        onConfirmation = {
+            openDeleteDialog.value = false
+            deleteJug(id)
+            // should remove also jug from db node-red
+            println("Jug deleted")
+        },
+        dialogTitle = "Are you sure?",
+        dialogText = "This action is irreversible. You will have to pair again the jug if you remove it.",
+        icon = Icons.Default.Warning
+    )
 }
 
 @Composable
 fun RenameJugDialog(
     openAlertDialog: MutableState<Boolean>,
-    id: Int
+    id: Int, renameJug: (Int, String) -> Unit
 ) {
-    if (openAlertDialog.value) {
-        DialogGeneric(
-            onDismissRequest = { openAlertDialog.value = false },
-            onConfirmation = {
-                openAlertDialog.value = false
-                sampleJugsList[id].title = it // still doesn't visually update it until a refresh
-            },
-            dialogTitle = "Rename jug",
-            icon = Icons.Default.Edit
-        )
-    }
+    DialogGeneric(
+        onDismissRequest = { openAlertDialog.value = false },
+        onConfirmation = {
+            openAlertDialog.value = false
+            renameJug(id, it)
+        },
+        dialogTitle = "Rename jug",
+        icon = Icons.Default.Edit
+    )
 }
 
 @Composable
 fun FilterDialog(
     openFilterDialog: MutableState<Boolean>,
     id: Int,
-    changeFilter: (String, Int, Int) -> Unit
+    changeFilter: (Int, Int) -> Unit
 ) {
-    if (openFilterDialog.value) {
-        DialogGeneric(
-            onDismissRequest = { openFilterDialog.value = false },
-            onConfirmation = {
-                openFilterDialog.value = false
-                sampleJugsList[id].filter = it.toInt()
-                changeFilter("username", id, it.toInt()) // should update filter in db node-red
-            },
-            dialogTitle = "Edit filter capacity",
-            icon = Icons.Default.Edit
-        )
-    }
+    DialogGeneric(
+        onDismissRequest = { openFilterDialog.value = false },
+        onConfirmation = {
+            openFilterDialog.value = false
+            changeFilter(id, it.toInt()) // should update filter in db node-red
+        },
+        dialogTitle = "Edit filter capacity",
+        icon = Icons.Default.Edit
+    )
 }
 
 @Composable
-fun Jug(id: Int, title: String, changeFilter: (String, Int, Int) -> Unit, dashboardPage: () -> Unit){
-    val openDeleteDialog = remember { mutableStateOf(false) }
-    val openRenameDialog = remember { mutableStateOf(false) }
-    val openFilterDialog = remember { mutableStateOf(false) }
+fun Jug(
+    id: Int,
+    title: String,
+    changeFilter: (Int, Int) -> Unit,
+    dashboardPage: () -> Unit,
+    deleteJug: (Int) -> Unit, renameJug: (Int, String) -> Unit,
+    selectJug: (Int) -> Unit,
+) {
+    val openDeleteDialog = rememberSaveable { mutableStateOf(false) }
+    val openRenameDialog = rememberSaveable { mutableStateOf(false) }
+    val openFilterDialog = rememberSaveable { mutableStateOf(false) }
+
+    Log.d("SAS", "SAS")
 
     OutlinedCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -118,10 +107,10 @@ fun Jug(id: Int, title: String, changeFilter: (String, Int, Int) -> Unit, dashbo
             .padding(16.dp, 16.dp)
     ) {
         if (openDeleteDialog.value) {
-            DeleteJugDialog(openDeleteDialog, id)
+            DeleteJugDialog(openDeleteDialog, id, deleteJug)
         }
         if (openRenameDialog.value) {
-            RenameJugDialog(openRenameDialog, id)
+            RenameJugDialog(openRenameDialog, id, renameJug)
         }
         if (openFilterDialog.value) {
             FilterDialog(openFilterDialog, id, changeFilter)
@@ -134,7 +123,7 @@ fun Jug(id: Int, title: String, changeFilter: (String, Int, Int) -> Unit, dashbo
                     .padding(8.dp)
                     .weight(1f)
             )
-            IconButton(onClick = { selectedJug = id; dashboardPage() }) {
+            IconButton(onClick = { selectJug(id); dashboardPage() }) {
                 Icon(Icons.Outlined.Info, contentDescription = "Observe")
             }
             IconButton(onClick = { openRenameDialog.value = true }) {
@@ -153,13 +142,21 @@ fun Jug(id: Int, title: String, changeFilter: (String, Int, Int) -> Unit, dashbo
 @Composable
 fun JugsSection(
     searchJugs: () -> Unit,
-    changeFilter: (String, Int, Int) -> Unit,
-    dashboardPage: () -> Unit
+    changeFilter: (Int, Int) -> Unit,
+    dashboardPage: () -> Unit, sampleJugsList: List<JugElement>,
+    renameJug: (Int, String) -> Unit, deleteJug: (Int) -> Unit, selectJug: (Int) -> Unit
 ) {
-    val jugList = remember { sampleJugsList }
     Column {
-        for ((i, jug) in jugList.withIndex()) {
-            Jug(i, jug.title, changeFilter, dashboardPage)
+        for ((i, jug) in sampleJugsList.withIndex()) {
+            Jug(
+                i,
+                jug.title ?: "i don't know",
+                changeFilter,
+                dashboardPage,
+                deleteJug,
+                renameJug,
+                selectJug
+            )
         }
         Button(
             onClick = { searchJugs() },
@@ -185,8 +182,11 @@ fun JugsPreview() {
 fun Jugs(
     initJugs: () -> Unit = {},
     searchJugs: () -> Unit = {},
-    changeFilter: (String, Int, Int) -> Unit = { _, _, _ -> },
-    dashboardPage: () -> Unit = {}
+    changeFilter: (Int, Int) -> Unit = { _, _ -> },
+    dashboardPage: () -> Unit = {},
+    jugList: List<JugElement> = listOf(),
+    renameJug: (Int, String) -> Unit = { _, _ -> },
+    deleteJug: (Int) -> Unit = {}, selectJug: (Int) -> Unit = {}
 ) {
     initJugs()
     Column(
@@ -195,7 +195,15 @@ fun Jugs(
             .fillMaxWidth()
             .padding(0.dp, 32.dp)
     ) {
-        JugsSection(searchJugs, changeFilter, dashboardPage)
+        JugsSection(
+            searchJugs,
+            changeFilter,
+            dashboardPage,
+            jugList,
+            renameJug,
+            deleteJug,
+            selectJug
+        )
     }
 }
 

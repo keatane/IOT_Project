@@ -1,17 +1,68 @@
 package com.island.iot
 
 import android.util.Log
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import java.net.SocketTimeoutException
 
 
 class StateRepository(db: AppDatabase) {
-    val _remoteDataSource = RemoteDataSource("http://192.168.4.1:1881")
+    val _remoteDataSource = RemoteDataSource("http://192.168.137.1:1881")
     val _localDataSource = LocalDataSource(db)
     val user = _localDataSource.user.map {
         Log.d(
             "dhjshjdsf",
             "MAPPING DATABASE $it"
         );if (it.isEmpty()) null else it[0]
+    }
+
+    suspend fun updateJugs() {
+        user.collect {
+            if (it != null) {
+                try {
+                    val jugs = _remoteDataSource.getJugs(GetJugsRequest(it.token)).jugs!!
+                    memoryDataSource.jugList.value = jugs
+                } catch (e: SocketTimeoutException) {
+                    Log.e("ERRORS", "ERROR", e)
+                }
+            }
+        }
+    }
+
+    suspend fun deleteJug(index: Int) {
+        Log.d("LAST STUCK", "LAST STUCK")
+        val jugs = memoryDataSource.jugList.first()
+        Log.d("JUGS SIZE", jugs.size.toString())
+        Log.d("djksjdf", jugs.toString())
+        val jug = jugs[index]
+        memoryDataSource.modifyJugList { it.removeAt(index) }
+        val user = user.first()
+        user!!
+        _remoteDataSource.deleteJug(DeleteJugRequest(user.token, jug.id))
+
+    }
+
+    suspend fun renameJug(id: Int, name: String) {
+        memoryDataSource.modifySingleJug(id) { it.copy(title = name) }
+        user.collectLatest {
+            it!!
+            _remoteDataSource.renameJug(RenameJugRequest(it.token, name))
+        }
+    }
+
+    suspend fun changeFilter(id: Int, filter: Int) {
+        memoryDataSource.modifySingleJug(id) { it.copy(filter = filter) }
+
+
+        user.collectLatest { user ->
+            user!!
+            _filter(
+                user.token,
+                id,
+                filter
+            )
+        }
     }
 
     val _arduinoDataSource = ArduinoDataSource()
@@ -50,7 +101,7 @@ class StateRepository(db: AppDatabase) {
         }
     }
 
-    suspend fun filter(username: String, jugId: Int, filter: Int) {
+    suspend fun _filter(username: String, jugId: Int, filter: Int) {
         val result = _remoteDataSource.filter(FilterRequest(username, jugId, filter))
         when (result.status) {
             ResponseStatus.OK -> {}
