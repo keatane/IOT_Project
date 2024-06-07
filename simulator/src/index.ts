@@ -3,19 +3,26 @@ import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
 import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API } from "./api.js";
 
 async function sendLoop(id:string|number){
-    while(true){
+    let stop=false;
+    process.on("SIGINT",()=>stop=true);
+    while(!stop){
         await sendData(id,randomNumber(0,1));
         console.log("Sent, looping");
         await sleep(1);
     }
+    await sendData(id,0);
 }
 
 
 async function simulator(n:number|string) {
     n=Number(n.toString())
+    const background=[];
     for(let i of range(n)){
-        singleInstance(`simulation${i}`,`simulation${i}`,i);
+        const instance=singleInstance(`simulation${i}`,`simulation${i}`,i);
+        background.push(instance);
+        await sleep(1);
     }
+    await Promise.allSettled(background);
 }
 
 async function singleInstance(username:string,password:string,id:string|number){
@@ -73,6 +80,7 @@ program.command("register <username> <password>").action(entry(register));
 program.command("login <username> <password>").action(entry(login));
 program.command("pair <id> <token>").action(entry(pair));
 program.command("send-data <id> <data>").action(entry(sendData));
+program.command("send-loop <id>").action(entry(sendLoop));
 program.command("simulator-single <username> <password> <id>").action(entry(singleInstance));
 program.command("simulator <n>").action(entry(simulator));
 program.command("filter <n> <token> <capacity>").action(entry(filter));

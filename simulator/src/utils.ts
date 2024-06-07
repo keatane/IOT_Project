@@ -30,6 +30,7 @@ export function randomNumber(min: number, max: number) {
 export function entry(f: (..._: string[]) => Promise<any>) {
   async function inner(...args: string[]) {
     console.log(await f(...args));
+    process.exit(0);
   }
   return inner;
 }
