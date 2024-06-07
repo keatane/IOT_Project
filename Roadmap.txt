@@ -14,10 +14,7 @@
 
 [ Jugs ]
 - implementare richiesta al db di node-red per le jug dell'utente
-- rinominazione jug
-	- manca refresh pagina
 - cancellazione jug
-	- manca refresh pagina
 	- implementare richiesta node-red per cancellazione da db
 - selezione jug da mostrare in dashboard
 	- al momento come global var, prob da cambiare
@@ -46,9 +43,3 @@
 - andare indietro con la freccia alla dashboard non aggiorna top e bottom bar
 - sistemare colorazione
 - nuove icone (Google (?))
-
-[[ Domande ]]
-- Arduino: ha senso il delay nella funzione water (measure), rispetto al delay nel loop esterno? Di base dovrebbe 
-lanciare in loop e dopo un secondo ritornare una serie di valori e così via
-- quando il simulatore js termina mandare degli zeri come litresPerSecond prima di chiudere (così da evitare il comportamento di continuo versamento d'acqua per ThingWorx)
-- mettere un delay fra creazione di un'istanza e un'altra nel simulatore (onde evitare crash di ThingWorx)

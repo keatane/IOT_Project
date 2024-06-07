@@ -103,8 +103,8 @@
                 ]
             },
             {
-                "x": 1220,
-                "y": 220,
+                "x": 1200,
+                "y": 160,
                 "wires": [
                     {
                         "id": "c9342c2ae65773a2",
@@ -318,8 +318,8 @@
         ],
         "out": [
             {
-                "x": 1340,
-                "y": 80,
+                "x": 1300,
+                "y": 140,
                 "wires": [
                     {
                         "id": "997c28ceb500a478",
@@ -328,7 +328,7 @@
                 ]
             },
             {
-                "x": 1160,
+                "x": 1180,
                 "y": 180,
                 "wires": [
                     {
@@ -1406,8 +1406,8 @@
                 "t": "set",
                 "p": "params",
                 "pt": "msg",
-                "to": "payload.username",
-                "tot": "msg"
+                "to": "[msg.payload.username]",
+                "tot": "jsonata"
             },
             {
                 "t": "set",
@@ -1465,7 +1465,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 810,
+        "x": 750,
         "y": 140,
         "wires": [
             [
@@ -1512,7 +1512,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1030,
+        "x": 990,
         "y": 140,
         "wires": [
             [
@@ -1543,7 +1543,7 @@
         "id": "7e1954517d0b4ab3",
         "type": "change",
         "z": "3a056c2d95c24d79",
-        "name": "Prepare params (email and password) and save payload",
+        "name": "Prepare params (email and password)",
         "rules": [
             {
                 "t": "set",
@@ -1551,13 +1551,6 @@
                 "pt": "msg",
                 "to": "[msg.payload.username, msg.payload.password]",
                 "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "old",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
             }
         ],
         "action": "",
@@ -1565,7 +1558,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
+        "x": 390,
         "y": 140,
         "wires": [
             [
@@ -1598,13 +1591,13 @@
         "id": "eb01921b49e9b9ed",
         "type": "change",
         "z": "3a056c2d95c24d79",
-        "name": "Extract userId",
+        "name": "Set payload to userId obj",
         "rules": [
             {
                 "t": "set",
-                "p": "userId",
+                "p": "payload",
                 "pt": "msg",
-                "to": "msg.payload[0].userId",
+                "to": "msg.payload[0]",
                 "tot": "jsonata"
             }
         ],
@@ -1613,11 +1606,29 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1240,
+        "x": 1230,
         "y": 80,
         "wires": [
-            []
+            [
+                "3f1e4b572f01b380"
+            ]
         ]
+    },
+    {
+        "id": "3f1e4b572f01b380",
+        "type": "debug",
+        "z": "3a056c2d95c24d79",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 340,
+        "wires": []
     },
     {
         "id": "ce16f9573b804d91",
@@ -2600,7 +2611,7 @@
                 "t": "set",
                 "p": "params",
                 "pt": "msg",
-                "to": "msg.payload.email",
+                "to": "[msg.payload.email]",
                 "tot": "jsonata"
             },
             {
@@ -2680,7 +2691,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 740,
+        "x": 800,
         "y": 140,
         "wires": [
             [
@@ -2729,7 +2740,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1010,
+        "x": 1050,
         "y": 140,
         "wires": [
             [
@@ -2760,7 +2771,7 @@
         "id": "997c28ceb500a478",
         "type": "change",
         "z": "068fb15905289024",
-        "name": "",
+        "name": "Prepare params (userId, newPw)",
         "rules": [
             {
                 "t": "set",
@@ -2775,7 +2786,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1200,
+        "x": 1220,
         "y": 80,
         "wires": [
             []
@@ -2785,14 +2796,14 @@
         "id": "e13ee0f839d3fca9",
         "type": "change",
         "z": "068fb15905289024",
-        "name": "Extract email, old pw and new pw",
+        "name": "Prepare params (email), save old pw and new pw",
         "rules": [
             {
                 "t": "set",
                 "p": "params",
                 "pt": "msg",
-                "to": "payload.email",
-                "tot": "msg"
+                "to": "[msg.payload.email]",
+                "tot": "jsonata"
             },
             {
                 "t": "set",
@@ -2814,7 +2825,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 400,
+        "x": 430,
         "y": 140,
         "wires": [
             [
@@ -2941,7 +2952,7 @@
         "z": "217d4457bda21c0d",
         "g": "cb681741da812fc7",
         "name": "Craft Return Status \"OK\", Set Token and UserId ",
-        "func": "msg.payload = { \"status\": \"OK\", \"token\": msg.payload, \"userId\": msg.userId };\nreturn msg;",
+        "func": "msg.payload = { \"status\": \"OK\", \"token\": msg.token, \"userId\": msg.payload.userid };\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2952,7 +2963,8 @@
         "y": 340,
         "wires": [
             [
-                "7b80c134f08a63b6"
+                "7b80c134f08a63b6",
+                "339436e98d838faf"
             ]
         ]
     },
@@ -3055,7 +3067,7 @@
         "secret": "secret",
         "key": "",
         "signvar": "payload",
-        "storetoken": "payload",
+        "storetoken": "token",
         "x": 550,
         "y": 340,
         "wires": [
@@ -3591,8 +3603,8 @@
                 "t": "set",
                 "p": "params",
                 "pt": "msg",
-                "to": "userId",
-                "tot": "msg"
+                "to": "[msg.userId]",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -4795,7 +4807,8 @@
         "y": 120,
         "wires": [
             [
-                "0f36aa3917d94588"
+                "0f36aa3917d94588",
+                "55c2bd16708392a8"
             ]
         ]
     },
@@ -5260,8 +5273,8 @@
         "y": 380,
         "wires": [
             [
-                "12d815057cd57334",
-                "c82c75d3b593411b"
+                "c82c75d3b593411b",
+                "12d815057cd57334"
             ]
         ]
     },
@@ -6075,6 +6088,22 @@
                 "451e852607a62c46"
             ]
         ]
+    },
+    {
+        "id": "55c2bd16708392a8",
+        "type": "debug",
+        "z": "dd62ac133fb1360c",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 120,
+        "wires": []
     },
     {
         "id": "f26cc9e6ff46d635",
