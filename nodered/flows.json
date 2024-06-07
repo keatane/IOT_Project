@@ -46,10 +46,6 @@
                 "y": 220,
                 "wires": [
                     {
-                        "id": "c2adafc6141062ba",
-                        "port": 0
-                    },
-                    {
                         "id": "7837703e879a4a5c",
                         "port": 0
                     }
@@ -89,13 +85,9 @@
         ],
         "out": [
             {
-                "x": 1360,
+                "x": 1320,
                 "y": 80,
                 "wires": [
-                    {
-                        "id": "1130f17012c07889",
-                        "port": 0
-                    },
                     {
                         "id": "eb01921b49e9b9ed",
                         "port": 0
@@ -103,8 +95,8 @@
                 ]
             },
             {
-                "x": 1200,
-                "y": 160,
+                "x": 1020,
+                "y": 180,
                 "wires": [
                     {
                         "id": "c9342c2ae65773a2",
@@ -488,14 +480,14 @@
             "4f6f6fac724a496a",
             "5c3d7fd931d482a9",
             "7b80c134f08a63b6",
-            "74a2182d6cf3432b",
             "6737c839da4aeeab",
             "594f99b964435f02",
             "b3a6633e59d62793",
             "a4b68c47b965d3f2",
             "2c0f67140fd1b413",
             "40ce6893f6966a45",
-            "339436e98d838faf"
+            "339436e98d838faf",
+            "516f8568ef9efb35"
         ],
         "x": 34,
         "y": 259,
@@ -848,12 +840,14 @@
             "f886d4659e9bc7b2",
             "5da336415b282089",
             "613e58eb0f13e50a",
-            "8c7e366cc35b87af"
+            "8c7e366cc35b87af",
+            "98c6aa8214050734",
+            "d60a99a7a42e13aa"
         ],
         "x": 34,
-        "y": 1719,
-        "w": 792,
-        "h": 82
+        "y": 2259,
+        "w": 812,
+        "h": 122
     },
     {
         "id": "dd69043d1cb5236a",
@@ -874,7 +868,7 @@
             "c98c52a08de3b558"
         ],
         "x": 34,
-        "y": 1539,
+        "y": 2079,
         "w": 632,
         "h": 142
     },
@@ -897,8 +891,90 @@
             "bad79e1fd1d22d16"
         ],
         "x": 694,
-        "y": 1539,
+        "y": 2079,
         "w": 632,
+        "h": 142
+    },
+    {
+        "id": "8b12de2fdf899788",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Return Jugs from Account",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "c7d12a04bb0c7cc3",
+            "98f18f7a7a288504",
+            "1cfcbe763e4966cd",
+            "ec9eb5085c4a8fe1",
+            "d9e203587f3d77f1",
+            "0f8de66e8416d0a1",
+            "ca273c111a09dc87",
+            "7603bf0f721ecf7a",
+            "9cd4aacb75e41236",
+            "9034a056bc11e4cd",
+            "3fc7f576baa8f340",
+            "8e020c02f1d5bca5"
+        ],
+        "x": 34,
+        "y": 1719,
+        "w": 1352,
+        "h": 142
+    },
+    {
+        "id": "24db0ec2768119c9",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Delete Jug from User",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e978e5b480cfcf05",
+            "29bf6d8e0cfbd548",
+            "2c01cab46f92f6bc",
+            "dfa5ae5d5416ad40",
+            "47bebb0e6c631ce5",
+            "97a10cbacf03277e",
+            "aa8199b9c92b6b43",
+            "30f9c95a1522a625",
+            "2bb3eaec03c0dc95",
+            "574a4b59ef9c857c",
+            "12f171e5e2f97465",
+            "739fe77fb6b1077a",
+            "fb8c27e2561866a2"
+        ],
+        "x": 34,
+        "y": 1899,
+        "w": 1352,
+        "h": 142
+    },
+    {
+        "id": "b1b492ef5f16e6c1",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Rename Jug from Account",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "2066612c8c9eee2a",
+            "d600bb276f59c790",
+            "ecc2bae2ea58566d",
+            "cda6c2362dcb7726",
+            "25d561d291787dc2",
+            "d19accf56a5f8b81",
+            "6dd0e3ed1b81fb3f",
+            "47a6f97b12ee7513",
+            "04498a2c6e846273",
+            "4f141f46c11c181f",
+            "47e2ea0a595f5919",
+            "5179787add360544"
+        ],
+        "x": 34,
+        "y": 1539,
+        "w": 1292,
         "h": 142
     },
     {
@@ -919,8 +995,8 @@
         "type": "junction",
         "z": "217d4457bda21c0d",
         "g": "cb681741da812fc7",
-        "x": 700,
-        "y": 440,
+        "x": 560,
+        "y": 400,
         "wires": [
             [
                 "4f6f6fac724a496a"
@@ -1274,27 +1350,6 @@
         "className": ""
     },
     {
-        "id": "587d719d685f7298",
-        "type": "function",
-        "z": "8ae59feea1fac0e6",
-        "d": true,
-        "name": "Extract email",
-        "func": "msg.params = [msg.payload.username];\nmsg.old = msg.payload;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 180,
-        "wires": [
-            [
-                "43ca287d27944fbd"
-            ]
-        ]
-    },
-    {
         "id": "8e7d846effd9e3d7",
         "type": "json",
         "z": "8ae59feea1fac0e6",
@@ -1306,7 +1361,6 @@
         "y": 80,
         "wires": [
             [
-                "587d719d685f7298",
                 "69cda81b0575d657"
             ]
         ]
@@ -1336,7 +1390,6 @@
         "wires": [
             [],
             [
-                "c2adafc6141062ba",
                 "7837703e879a4a5c"
             ]
         ]
@@ -1358,25 +1411,6 @@
                 "fa53f57ac6c934fc",
                 "68a2107c3e0d91ed"
             ]
-        ]
-    },
-    {
-        "id": "c2adafc6141062ba",
-        "type": "function",
-        "z": "8ae59feea1fac0e6",
-        "d": true,
-        "name": "Return existent email and pw",
-        "func": "msg.params = [msg.old.username, msg.old.password];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1080,
-        "y": 280,
-        "wires": [
-            []
         ]
     },
     {
@@ -1465,31 +1499,12 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 750,
+        "x": 650,
         "y": 140,
         "wires": [
             [
                 "c9342c2ae65773a2"
             ]
-        ]
-    },
-    {
-        "id": "1130f17012c07889",
-        "type": "function",
-        "z": "3a056c2d95c24d79",
-        "d": true,
-        "name": "Extract userId",
-        "func": "msg.payload = msg.payload[0];\nmsg.userId=msg.payload.userid;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1240,
-        "y": 40,
-        "wires": [
-            []
         ]
     },
     {
@@ -1512,11 +1527,10 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 990,
+        "x": 870,
         "y": 140,
         "wires": [
             [
-                "1130f17012c07889",
                 "eb01921b49e9b9ed"
             ],
             []
@@ -1534,8 +1548,7 @@
         "y": 140,
         "wires": [
             [
-                "7e1954517d0b4ab3",
-                "fb7f4297b358477b"
+                "7e1954517d0b4ab3"
             ]
         ]
     },
@@ -1558,29 +1571,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 390,
+        "x": 370,
         "y": 140,
-        "wires": [
-            [
-                "344ec21cbcc27646"
-            ]
-        ]
-    },
-    {
-        "id": "fb7f4297b358477b",
-        "type": "function",
-        "z": "3a056c2d95c24d79",
-        "d": true,
-        "name": "Prepare params (email and password) and save payload",
-        "func": "msg.params = [msg.payload.username, msg.payload.password];\nmsg.old = msg.payload;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 200,
         "wires": [
             [
                 "344ec21cbcc27646"
@@ -1606,7 +1598,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1230,
+        "x": 1110,
         "y": 80,
         "wires": [
             [
@@ -1626,8 +1618,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
-        "y": 340,
+        "x": 1300,
+        "y": 140,
         "wires": []
     },
     {
@@ -2938,33 +2930,11 @@
         "property": "payload",
         "action": "str",
         "pretty": false,
-        "x": 1110,
+        "x": 1130,
         "y": 340,
         "wires": [
             [
                 "4f6f6fac724a496a"
-            ]
-        ]
-    },
-    {
-        "id": "74a2182d6cf3432b",
-        "type": "function",
-        "z": "217d4457bda21c0d",
-        "g": "cb681741da812fc7",
-        "name": "Craft Return Status \"OK\", Set Token and UserId ",
-        "func": "msg.payload = { \"status\": \"OK\", \"token\": msg.token, \"userId\": msg.payload.userid };\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 840,
-        "y": 340,
-        "wires": [
-            [
-                "7b80c134f08a63b6",
-                "339436e98d838faf"
             ]
         ]
     },
@@ -3072,7 +3042,7 @@
         "y": 340,
         "wires": [
             [
-                "74a2182d6cf3432b"
+                "516f8568ef9efb35"
             ]
         ]
     },
@@ -3849,7 +3819,7 @@
         ],
         "uncaught": false,
         "x": 120,
-        "y": 1760,
+        "y": 2300,
         "wires": [
             [
                 "5da336415b282089"
@@ -3875,7 +3845,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 300,
-        "y": 1760,
+        "y": 2300,
         "wires": [
             [
                 "613e58eb0f13e50a"
@@ -3903,7 +3873,7 @@
         "to": "",
         "reg": false,
         "x": 500,
-        "y": 1760,
+        "y": 2300,
         "wires": [
             [
                 "8c7e366cc35b87af"
@@ -3925,7 +3895,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 700,
-        "y": 1760,
+        "y": 2300,
         "wires": []
     },
     {
@@ -4077,7 +4047,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 1580,
+        "y": 2120,
         "wires": [
             [
                 "83c99c7142a96e7f"
@@ -4096,7 +4066,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 1580,
+        "y": 2120,
         "wires": [
             [
                 "e8bc2dd148bbffb3"
@@ -4117,7 +4087,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 1580,
+        "y": 2120,
         "wires": []
     },
     {
@@ -4143,7 +4113,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 1640,
+        "y": 2180,
         "wires": [
             [
                 "d0c5bf7405388a7c"
@@ -4162,7 +4132,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 1640,
+        "y": 2180,
         "wires": [
             [
                 "c98c52a08de3b558"
@@ -4183,7 +4153,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 1640,
+        "y": 2180,
         "wires": []
     },
     {
@@ -4209,7 +4179,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 800,
-        "y": 1580,
+        "y": 2120,
         "wires": [
             [
                 "28705e872a39bf64"
@@ -4228,7 +4198,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 1020,
-        "y": 1580,
+        "y": 2120,
         "wires": [
             [
                 "1cd3cb4c7a6a6292"
@@ -4250,7 +4220,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1220,
-        "y": 1580,
+        "y": 2120,
         "wires": []
     },
     {
@@ -4276,7 +4246,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 800,
-        "y": 1640,
+        "y": 2180,
         "wires": [
             [
                 "4810de2e5fcc3538"
@@ -4295,7 +4265,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 1020,
-        "y": 1640,
+        "y": 2180,
         "wires": [
             [
                 "bad79e1fd1d22d16"
@@ -4316,7 +4286,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1220,
-        "y": 1640,
+        "y": 2180,
         "wires": []
     },
     {
@@ -4653,6 +4623,860 @@
         "wires": []
     },
     {
+        "id": "c7d12a04bb0c7cc3",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Get Jugs",
+        "url": "/getJugs",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1760,
+        "wires": [
+            [
+                "9cd4aacb75e41236"
+            ]
+        ]
+    },
+    {
+        "id": "98f18f7a7a288504",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "HTTP Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1280,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "1cfcbe763e4966cd",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "to json",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1130,
+        "y": 1820,
+        "wires": [
+            [
+                "98f18f7a7a288504"
+            ]
+        ]
+    },
+    {
+        "id": "ec9eb5085c4a8fe1",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Get Jugs from Account",
+        "query": "SELECT * FROM JugTable WHERE userId = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 980,
+        "y": 1760,
+        "wires": [
+            [
+                "d9e203587f3d77f1"
+            ]
+        ]
+    },
+    {
+        "id": "d9e203587f3d77f1",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Craft Return Status \"OK\" and Jug List",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"status\":\"OK\", \"jugs\":msg.payload}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 1820,
+        "wires": [
+            [
+                "1cfcbe763e4966cd"
+            ]
+        ]
+    },
+    {
+        "id": "0f8de66e8416d0a1",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Get Jugs Completition",
+        "scope": [
+            "d9e203587f3d77f1"
+        ],
+        "uncaught": false,
+        "x": 160,
+        "y": 1820,
+        "wires": [
+            [
+                "ca273c111a09dc87"
+            ]
+        ]
+    },
+    {
+        "id": "ca273c111a09dc87",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Get Jugs Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 1820,
+        "wires": [
+            [
+                "7603bf0f721ecf7a"
+            ]
+        ]
+    },
+    {
+        "id": "7603bf0f721ecf7a",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "9cd4aacb75e41236",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "to obj",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 250,
+        "y": 1760,
+        "wires": [
+            [
+                "9034a056bc11e4cd"
+            ]
+        ]
+    },
+    {
+        "id": "9034a056bc11e4cd",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Extract token",
+        "rules": [
+            {
+                "t": "set",
+                "p": "token",
+                "pt": "msg",
+                "to": "payload.token",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 1760,
+        "wires": [
+            [
+                "3fc7f576baa8f340"
+            ]
+        ]
+    },
+    {
+        "id": "3fc7f576baa8f340",
+        "type": "jwt verify",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "",
+        "alg": [
+            "HS256"
+        ],
+        "jwkurl": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "token",
+        "storetoken": "token",
+        "x": 550,
+        "y": 1760,
+        "wires": [
+            [
+                "8e020c02f1d5bca5"
+            ]
+        ]
+    },
+    {
+        "id": "8e020c02f1d5bca5",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "8b12de2fdf899788",
+        "name": "Set params (userId)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.token.userid]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 1760,
+        "wires": [
+            [
+                "ec9eb5085c4a8fe1"
+            ]
+        ]
+    },
+    {
+        "id": "98c6aa8214050734",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "HTTP Response Error",
+        "statusCode": "",
+        "headers": {},
+        "x": 720,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "d60a99a7a42e13aa",
+        "type": "catch",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "Catch All",
+        "scope": null,
+        "uncaught": true,
+        "x": 120,
+        "y": 2340,
+        "wires": [
+            [
+                "98c6aa8214050734"
+            ]
+        ]
+    },
+    {
+        "id": "e978e5b480cfcf05",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Delete Jug",
+        "url": "/deleteJug",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1940,
+        "wires": [
+            [
+                "2bb3eaec03c0dc95"
+            ]
+        ]
+    },
+    {
+        "id": "29bf6d8e0cfbd548",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "HTTP Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1240,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "2c01cab46f92f6bc",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "to json",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1050,
+        "y": 2000,
+        "wires": [
+            [
+                "29bf6d8e0cfbd548"
+            ]
+        ]
+    },
+    {
+        "id": "dfa5ae5d5416ad40",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Delete Jug from Account",
+        "query": "DELETE FROM JugTable WHERE id = $1 AND userId = $2;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1010,
+        "y": 1940,
+        "wires": [
+            [
+                "47bebb0e6c631ce5"
+            ]
+        ]
+    },
+    {
+        "id": "47bebb0e6c631ce5",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Craft Return Status \"OK\"",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"status\":\"OK\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1250,
+        "y": 1940,
+        "wires": [
+            [
+                "2c01cab46f92f6bc"
+            ]
+        ]
+    },
+    {
+        "id": "97a10cbacf03277e",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Delete Jug Completition",
+        "scope": [
+            "47bebb0e6c631ce5"
+        ],
+        "uncaught": false,
+        "x": 160,
+        "y": 2000,
+        "wires": [
+            [
+                "aa8199b9c92b6b43"
+            ]
+        ]
+    },
+    {
+        "id": "aa8199b9c92b6b43",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Jug Deletion Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 2000,
+        "wires": [
+            [
+                "30f9c95a1522a625"
+            ]
+        ]
+    },
+    {
+        "id": "30f9c95a1522a625",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "2bb3eaec03c0dc95",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "to obj",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 250,
+        "y": 1940,
+        "wires": [
+            [
+                "574a4b59ef9c857c"
+            ]
+        ]
+    },
+    {
+        "id": "574a4b59ef9c857c",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Extract id, token",
+        "rules": [
+            {
+                "t": "set",
+                "p": "token",
+                "pt": "msg",
+                "to": "payload.token",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "jug",
+                "pt": "msg",
+                "to": "payload.id",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1940,
+        "wires": [
+            [
+                "12f171e5e2f97465"
+            ]
+        ]
+    },
+    {
+        "id": "12f171e5e2f97465",
+        "type": "jwt verify",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "",
+        "alg": [
+            "HS256"
+        ],
+        "jwkurl": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "token",
+        "storetoken": "token",
+        "x": 570,
+        "y": 1940,
+        "wires": [
+            [
+                "739fe77fb6b1077a"
+            ]
+        ]
+    },
+    {
+        "id": "739fe77fb6b1077a",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "Set params (jugId, userId)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.jug, msg.token.userid]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 1940,
+        "wires": [
+            [
+                "dfa5ae5d5416ad40",
+                "fb8c27e2561866a2"
+            ]
+        ]
+    },
+    {
+        "id": "2066612c8c9eee2a",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Rename Jugs",
+        "url": "/renameJug",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 1580,
+        "wires": [
+            [
+                "04498a2c6e846273"
+            ]
+        ]
+    },
+    {
+        "id": "d600bb276f59c790",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "HTTP Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1220,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "ecc2bae2ea58566d",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "to json",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1050,
+        "y": 1640,
+        "wires": [
+            [
+                "d600bb276f59c790"
+            ]
+        ]
+    },
+    {
+        "id": "cda6c2362dcb7726",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Rename Jug from Account",
+        "query": "UPDATE JugTable SET ,name = $2 WHERE id = $1 AND userId = $3;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1080,
+        "y": 1580,
+        "wires": [
+            [
+                "25d561d291787dc2"
+            ]
+        ]
+    },
+    {
+        "id": "25d561d291787dc2",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Craft Return Status \"OK\"",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"status\":\"OK\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 1640,
+        "wires": [
+            [
+                "ecc2bae2ea58566d"
+            ]
+        ]
+    },
+    {
+        "id": "d19accf56a5f8b81",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Rename Jug Completition",
+        "scope": [
+            "25d561d291787dc2"
+        ],
+        "uncaught": false,
+        "x": 170,
+        "y": 1640,
+        "wires": [
+            [
+                "6dd0e3ed1b81fb3f"
+            ]
+        ]
+    },
+    {
+        "id": "6dd0e3ed1b81fb3f",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Rename Jug Completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 1640,
+        "wires": [
+            [
+                "47a6f97b12ee7513"
+            ]
+        ]
+    },
+    {
+        "id": "47a6f97b12ee7513",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Print result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "04498a2c6e846273",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "to obj",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 270,
+        "y": 1580,
+        "wires": [
+            [
+                "4f141f46c11c181f"
+            ]
+        ]
+    },
+    {
+        "id": "4f141f46c11c181f",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Extract id, token",
+        "rules": [
+            {
+                "t": "set",
+                "p": "token",
+                "pt": "msg",
+                "to": "payload.token",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "jug",
+                "pt": "msg",
+                "to": "payload.id",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload.name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 1580,
+        "wires": [
+            [
+                "47e2ea0a595f5919"
+            ]
+        ]
+    },
+    {
+        "id": "47e2ea0a595f5919",
+        "type": "jwt verify",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "",
+        "alg": [
+            "HS256"
+        ],
+        "jwkurl": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "token",
+        "storetoken": "token",
+        "x": 590,
+        "y": 1580,
+        "wires": [
+            [
+                "5179787add360544"
+            ]
+        ]
+    },
+    {
+        "id": "5179787add360544",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "b1b492ef5f16e6c1",
+        "name": "Set params (id, name, userId)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.jug, msg.name, msg.token.userid]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 1580,
+        "wires": [
+            [
+                "cda6c2362dcb7726"
+            ]
+        ]
+    },
+    {
+        "id": "516f8568ef9efb35",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "cb681741da812fc7",
+        "name": "Craft Return Status \"OK\", Set Token and UserId ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"status\": \"OK\", \"token\": msg.token, \"userId\": msg.payload.userid}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 340,
+        "wires": [
+            [
+                "7b80c134f08a63b6"
+            ]
+        ]
+    },
+    {
+        "id": "fb8c27e2561866a2",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "24db0ec2768119c9",
+        "name": "debug 17",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 2000,
+        "wires": []
+    },
+    {
         "id": "12d815057cd57334",
         "type": "http request",
         "z": "dd62ac133fb1360c",
@@ -4807,8 +5631,7 @@
         "y": 120,
         "wires": [
             [
-                "0f36aa3917d94588",
-                "55c2bd16708392a8"
+                "0f36aa3917d94588"
             ]
         ]
     },
@@ -5935,9 +6758,7 @@
         "x": 410,
         "y": 1480,
         "wires": [
-            [
-                "9eb6688fb3790834"
-            ]
+            []
         ]
     },
     {
@@ -6019,10 +6840,6 @@
         "g": "85f31b0f7e802da4",
         "name": "Computation Catch",
         "scope": [
-            "12d815057cd57334",
-            "c82c75d3b593411b",
-            "c2d21a8e765e0a8d",
-            "f00e83fd74bdad42",
             "cd95edaaaf747c92",
             "4eb1c96a4b440d38"
         ],
@@ -6030,9 +6847,7 @@
         "x": 430,
         "y": 1520,
         "wires": [
-            [
-                "0d496130a175a9fe"
-            ]
+            []
         ]
     },
     {
@@ -6088,22 +6903,6 @@
                 "451e852607a62c46"
             ]
         ]
-    },
-    {
-        "id": "55c2bd16708392a8",
-        "type": "debug",
-        "z": "dd62ac133fb1360c",
-        "name": "debug 15",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1060,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "f26cc9e6ff46d635",
