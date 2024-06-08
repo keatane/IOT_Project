@@ -163,6 +163,7 @@ class MainActivity : ComponentActivity() {
 enum class Route(val id: String) {
     DASHBOARD("dashboard"),
     LOGINPAGE("loginpage"),
+    REGISTERPAGE("registerpage"),
     ACCOUNT("account"),
     CHANGE_PASSWORD("changePassword"),
     CHARTS("charts"),
@@ -191,39 +192,37 @@ fun Decorations(
         Scaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                CenterAlignedTopAppBar(
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary,
-                    ),
-                    title = {
-                        Text(
-                            text = if (newsFeedVisible) "News Feed" else if (bottomBarVisible) BottomButton.entries[selectedItem].text else "Login/Register",
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    },
-                    navigationIcon = {
-                        if (bottomBarVisible) {
+                if (bottomBarVisible || newsFeedVisible) {
+                    CenterAlignedTopAppBar(
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            titleContentColor = MaterialTheme.colorScheme.primary,
+                        ),
+                        title = {
+                            Text(
+                                text = if (newsFeedVisible) "News Feed" else BottomButton.entries[selectedItem].text,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        },
+                        navigationIcon = {
                             IconButton(onClick = { navigate(Route.DASHBOARD.id) }) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = "Go back"
                                 )
                             }
-                        }
-                    },
-                    actions = {
-                        if (bottomBarVisible) {
+                        },
+                        actions = {
                             IconButton(onClick = { navigate(Route.NEWS.id) }) {
                                 Icon(
                                     imageVector = Icons.Filled.Email,
                                     contentDescription = "News feed"
                                 )
                             }
-                        }
-                    },
-                    scrollBehavior = scrollBehavior,
-                )
+                        },
+                        scrollBehavior = scrollBehavior,
+                    )
+                }
             },
             bottomBar = {
                 if (bottomBarVisible)
@@ -297,8 +296,8 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
             modifier = it,
             startDestination = Route.LOGINPAGE.id
         ) {
-            composable(Route.LOGINPAGE.id) {
-                LoginPage(
+            composable(Route.REGISTERPAGE.id) {
+                RegisterPage(
                     register = { username, password ->
                         scope.launch {
                             state.register(
@@ -306,6 +305,25 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
                                 password
                             )
                         }
+                    },
+                    homePage = {
+                        bottomBarVisible = true
+                        newsFeedVisible = false
+                        navigateTo(controller, Route.DASHBOARD.id)
+                    },
+                    login = {
+                        bottomBarVisible = false
+                        newsFeedVisible = false
+                        navigateTo(controller, Route.LOGINPAGE.id)
+                    }
+                )
+            }
+            composable(Route.LOGINPAGE.id) {
+                LoginPage(
+                    register = {
+                        bottomBarVisible = false
+                        newsFeedVisible = false
+                        navigateTo(controller, Route.REGISTERPAGE.id)
                     },
                     homePage = {
                         bottomBarVisible = true
