@@ -41,12 +41,6 @@ interface RemoteService {
     suspend fun filter(@Body body: FilterRequest): RegisterResponse
 
     /* To be added for the dashboard */
-    @POST("totalLitres")
-    suspend fun totalLitres(@Body body: FilterRequest): RegisterResponse
-
-    @POST("dailyConsumption")
-    suspend fun dailyConsumption(@Body body: FilterRequest): RegisterResponse
-
     @POST("getJugs")
     suspend fun getJugs(@Body body: GetJugsRequest): GetJugsResponse
 

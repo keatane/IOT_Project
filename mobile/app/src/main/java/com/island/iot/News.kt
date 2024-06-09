@@ -12,6 +12,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 data class NewsArticle(val title: String, val content: String, val imageUrl: String)
 
@@ -30,8 +34,9 @@ data class NewsArticle(val title: String, val content: String, val imageUrl: Str
 fun NewsCard(article: NewsArticle) {
     Card(
         elevation = CardDefaults.elevatedCardElevation(),
-        modifier = Modifier.padding(24.dp, 12.dp)
-    ) {
+        modifier = Modifier.padding(24.dp, 12.dp),
+        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.abyss)),
+        ) {
         Column (
             modifier = Modifier.padding(12.dp)
         ){
@@ -39,8 +44,8 @@ fun NewsCard(article: NewsArticle) {
                 model = article.imageUrl,
                 contentDescription = "News article image",
             )
-            Text(text = article.title, style = MaterialTheme.typography.titleMedium)
-            Text(text = article.content, maxLines = 2)
+            Text(text = article.title, style = MaterialTheme.typography.titleMedium, color = colorResource(id = R.color.cream))
+            Text(text = article.content, maxLines = 2, color = colorResource(id = R.color.cream))
         }
     }
 }
@@ -69,6 +74,7 @@ val sampleNewsArticles = listOf(
 fun NewsFeed() {
     val newsArticles = sampleNewsArticles // Replace with fetchNewsArticles() for real data
     Column {
+        Text(text = "Latest news", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp, 0.dp).align(Alignment.CenterHorizontally))
         for (article in newsArticles) {
             NewsCard(article = article)
             Spacer(modifier = Modifier.height(8.dp))

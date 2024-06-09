@@ -35,6 +35,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -47,8 +48,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -195,12 +199,15 @@ fun Decorations(
                 if (bottomBarVisible || newsFeedVisible) {
                     CenterAlignedTopAppBar(
                         colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            titleContentColor = MaterialTheme.colorScheme.primary,
+                            containerColor = colorResource(id = R.color.rock),
+                            titleContentColor = colorResource(id = R.color.cream),
+                            navigationIconContentColor = colorResource(id = R.color.cream),
+                            actionIconContentColor = colorResource(id = R.color.cream),
                         ),
                         title = {
                             Text(
                                 text = if (newsFeedVisible) "News Feed" else BottomButton.entries[selectedItem].text,
+                                fontWeight = FontWeight.Bold,
                                 overflow = TextOverflow.Ellipsis
                             )
                         },
@@ -226,7 +233,10 @@ fun Decorations(
             },
             bottomBar = {
                 if (bottomBarVisible)
-                    NavigationBar {
+                    NavigationBar (
+                        containerColor = colorResource(id = R.color.rock),
+                        contentColor = colorResource(id = R.color.cream),
+                    ){
                         val prevSelected = selectedItem
                         BottomButton.entries.forEachIndexed { index, item ->
                             NavigationBarItem(
@@ -236,7 +246,16 @@ fun Decorations(
                                 onClick = {
                                     selectedItem =
                                         index; if (prevSelected != selectedItem) navigate(item.route.id)
-                                }
+                                },
+                                colors = NavigationBarItemColors(
+                                    selectedIconColor = colorResource(id = R.color.abyss),
+                                    unselectedIconColor = colorResource(id = R.color.cream),
+                                    selectedTextColor = colorResource(id = R.color.oxygen),
+                                    unselectedTextColor = colorResource(id = R.color.cream),
+                                    disabledIconColor = Color.Gray,
+                                    disabledTextColor = Color.Gray,
+                                    selectedIndicatorColor = colorResource(id = R.color.oxygen),
+                                )
                             )
                         }
                     }

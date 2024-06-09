@@ -2,12 +2,14 @@ package com.island.iot
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Create
@@ -15,6 +17,7 @@ import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +30,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -42,8 +48,6 @@ fun DeleteJugDialog(
         onConfirmation = {
             openDeleteDialog.value = false
             deleteJug(id)
-            // should remove also jug from db node-red
-            println("Jug deleted")
         },
         dialogTitle = "Are you sure?",
         dialogText = "This action is irreversible. You will have to pair again the jug if you remove it.",
@@ -77,7 +81,7 @@ fun FilterDialog(
         onDismissRequest = { openFilterDialog.value = false },
         onConfirmation = {
             openFilterDialog.value = false
-            changeFilter(id, it.toInt()) // should update filter in db node-red
+            changeFilter(id, it.toInt())
         },
         dialogTitle = "Edit filter capacity",
         icon = Icons.Default.Edit
@@ -97,10 +101,8 @@ fun Jug(
     val openRenameDialog = rememberSaveable { mutableStateOf(false) }
     val openFilterDialog = rememberSaveable { mutableStateOf(false) }
 
-    Log.d("SAS", "SAS")
-
     OutlinedCard(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.cardColors(containerColor = colorResource(id = if (id % 2 == 0) R.color.seaside else R.color.abyss)),
         border = BorderStroke(1.dp, Color.Black),
         modifier = Modifier
             .fillMaxWidth()
@@ -119,21 +121,24 @@ fun Jug(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = title, modifier = Modifier
+                text = title,
+                modifier = Modifier
                     .padding(8.dp)
-                    .weight(1f)
+                    .weight(1f),
+                color = colorResource(id = R.color.cream),
+                maxLines = 1
             )
             IconButton(onClick = { selectJug(id); dashboardPage() }) {
-                Icon(Icons.Outlined.Info, contentDescription = "Observe")
+                Icon(Icons.Outlined.Info, contentDescription = "Observe", tint = colorResource(id = R.color.cream))
             }
             IconButton(onClick = { openRenameDialog.value = true }) {
-                Icon(Icons.Outlined.Create, contentDescription = "Rename")
+                Icon(Icons.Outlined.Create, contentDescription = "Rename", tint = colorResource(id = R.color.cream))
             }
             IconButton(onClick = { openFilterDialog.value = true }) {
-                Icon(Icons.Outlined.Build, contentDescription = "Change filter")
+                Icon(Icons.Outlined.Build, contentDescription = "Change filter", tint = colorResource(id = R.color.cream))
             }
             IconButton(onClick = { openDeleteDialog.value = true }) {
-                Icon(Icons.Outlined.Delete, contentDescription = "Delete jug")
+                Icon(Icons.Outlined.Delete, contentDescription = "Delete jug", tint = colorResource(id = R.color.cream))
             }
         }
     }
@@ -158,14 +163,15 @@ fun JugsSection(
                 selectJug
             )
         }
-        Button(
+        ExtendedFloatingActionButton(
             onClick = { searchJugs() },
+            icon = { Icon(painterResource(id = R.drawable.wifi), "WiFi icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Pair a new jug", color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.water),
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
-        ) {
-            Text(text = "Pair a new jug")
-        }
+        )
     }
 }
 

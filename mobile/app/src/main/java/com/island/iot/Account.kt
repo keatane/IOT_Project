@@ -5,9 +5,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,8 +24,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun WarningDialog(openAlertDialog: MutableState<Boolean>) {
@@ -57,32 +65,44 @@ fun AccountSection(
         if (openAlertDeleteDialog.value) {
             WarningDialog(openAlertDeleteDialog)
         }
+        Text(text = "Insert your new email", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally))
         CardTextField(label = "Email", text = email, onChange = { email = it })
-        Button(
+        ExtendedFloatingActionButton(
             onClick = { /* TODO */ },
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Text(text = "Change email")
-        }
-        Button(
+            icon = { Icon(Icons.Filled.Check, "Confirm email icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Change email", color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.water),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        ExtendedFloatingActionButton(
             onClick = { passwordPage() },
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Text(text = "Change password")
-        }
-        Button(
+            icon = { Icon(painterResource(id = R.drawable.key), "Key icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Change password", color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.water),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        ExtendedFloatingActionButton(
             onClick = { /* TODO */ },
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Text(text = "Disconnect")
-        }
-        Button(
+            icon = { Icon(painterResource(id = R.drawable.logout), "Logout icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Logout", color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.water),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        ExtendedFloatingActionButton(
             onClick = { openAlertDeleteDialog.value = true },
-            modifier = Modifier.padding(64.dp),
-            colors = ButtonDefaults.buttonColors(Color.Red)
-        ) {
-            Text(text = "Delete account")
-        }
+            icon = { Icon(Icons.Filled.Delete, "Delete icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Delete account", color = colorResource(id = R.color.cream)) },
+            containerColor = Color.Red,
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
     }
 }
 
@@ -106,8 +126,6 @@ fun Account(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        ScrollableContent {
-            AccountSection(passwordPage, deleteAccount)
-        }
+        AccountSection(passwordPage, deleteAccount)
     }
 }

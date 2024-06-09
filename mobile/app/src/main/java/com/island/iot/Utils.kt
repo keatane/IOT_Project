@@ -25,6 +25,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -125,7 +126,8 @@ fun CredentialCard(
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally),
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
+            fontSize = 18.sp,
+            color = colorResource(id = R.color.cream)
         )
         CardTextField(
             label = "Email",
@@ -146,24 +148,24 @@ fun CredentialCard(
                 onChange = { confPassword = it }
             )
         }
-        FloatingActionButton(
+        ExtendedFloatingActionButton(
             onClick = { operation(email, password) },
-            containerColor = colorResource(id = R.color.ocean),
+            icon = { Icon(painterResource(id = R.drawable.login), "WiFi icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = firstButtonMsg, fontSize = 16.sp, modifier = Modifier.padding(24.dp, 0.dp), color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.rock),
             modifier = Modifier
-                .padding(8.dp)
+                .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
-        ){
-            Text(text = firstButtonMsg, fontSize = 16.sp, modifier = Modifier.padding(24.dp, 0.dp))
-        }
-        FloatingActionButton(
+        )
+        ExtendedFloatingActionButton(
             onClick = { navigate() },
-            containerColor = colorResource(id = R.color.ocean),
+            icon = { Icon(painterResource(id = R.drawable.people), "WiFi icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = secondButtonMsg, fontSize = 16.sp, modifier = Modifier.padding(24.dp, 0.dp), color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.rock),
             modifier = Modifier
-                .padding(8.dp)
+                .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
-        ){
-            Text(text = secondButtonMsg, fontSize = 16.sp, modifier = Modifier.padding(24.dp, 0.dp))
-        }
+        )
     }
 }
 
@@ -218,13 +220,15 @@ fun CredentialPage(
                     text = "SmartJugs",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Thin,
-                    modifier = Modifier.padding(32.dp, 4.dp)
+                    modifier = Modifier.padding(32.dp, 4.dp),
+                    color = colorResource(id = R.color.cream)
                 )
                 Text(
                     text = if (!isRegistration) "Login" else "Sign up",
                     fontSize = 48.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(32.dp, 0.dp)
+                    modifier = Modifier.padding(32.dp, 0.dp),
+                    color = colorResource(id = R.color.cream)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 CredentialCard(
@@ -302,7 +306,8 @@ fun DialogGeneric(
             OutlinedTextField(
                 value = text,
                 onValueChange = { text = it },
-                label = { Text("Input") }
+                label = { Text("Input") },
+                singleLine = true
             )
         },
         onDismissRequest = {

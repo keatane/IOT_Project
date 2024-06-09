@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
@@ -20,6 +22,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -39,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -65,22 +69,27 @@ fun ChangePasswordSection(
             .fillMaxHeight()
             .padding(4.dp)
     ) {
+        Text(text = "Insert your passwords", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally))
         CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
         CardTextField(label = "New Password", text = password, onChange = { password = it })
-
-        Button(
+        ExtendedFloatingActionButton(
             onClick = { /* TODO */ },
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Text(text = "Change password")
-        }
-
-        Button(
+            icon = { Icon(Icons.Filled.Check, "Confirm password icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Change password", color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.water),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        ExtendedFloatingActionButton(
             onClick = { accountPage() },
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Text(text = "Back to account")
-        }
+            icon = { Icon(Icons.Filled.ArrowBack, "Confirm email icon", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Return to account details", color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.water),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
     }
 }
 
@@ -97,7 +106,5 @@ fun ChangePasswordPreview() {
 fun ChangePassword(
     accountPage: () -> Unit = {},
 ) {
-    ScrollableContent {
-        ChangePasswordSection(accountPage)
-    }
+    ChangePasswordSection(accountPage)
 }

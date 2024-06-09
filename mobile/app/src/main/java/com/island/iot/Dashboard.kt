@@ -34,7 +34,7 @@ fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false
         shape = CardDefaults.elevatedShape,
         colors = CardDefaults.cardColors(containerColor = colorResource(id = cardColor)),
         modifier = Modifier
-            .width(if(!isLast) 150.dp else 300.dp)
+            .width(if (!isLast) 150.dp else 300.dp)
             .height(130.dp)
             .padding(0.dp, 8.dp)
     ) {
@@ -45,10 +45,10 @@ fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false
         ){
             Text(value, modifier = Modifier
                 .padding(8.dp, 8.dp)
-                .wrapContentHeight(), textAlign = TextAlign.Center, fontSize = 32.sp, fontWeight = FontWeight.Bold)
+                .wrapContentHeight(), textAlign = TextAlign.Center, fontSize = 32.sp, fontWeight = FontWeight.Bold, color = colorResource(id = R.color.cream))
             Text(title, modifier = Modifier
                 .padding(8.dp, 0.dp)
-                .wrapContentHeight(), textAlign = TextAlign.Center, fontSize = 16.sp, fontWeight = FontWeight.Thin)
+                .wrapContentHeight(), textAlign = TextAlign.Center, fontSize = 16.sp, fontWeight = FontWeight.Thin, color = colorResource(id = R.color.cream))
         }
     }
 }
@@ -56,11 +56,13 @@ fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false
 @Composable
 fun Grid(jugsList: List<JugElement>, selectedJug: Int) {
     val uriHandler = LocalUriHandler.current
-    val colors = intListOf(R.color.ocean, R.color.sand, R.color.crab, R.color.abyss, R.color.seaside, R.color.red)
+    val colors = intListOf(R.color.abyss, R.color.abyss, R.color.abyss, R.color.abyss, R.color.seaweed, R.color.octopus)
     Text(text = jugsList[selectedJug].title.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp, 0.dp))
     Row(
         horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxWidth().padding(0.dp, 16.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(0.dp, 16.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp, 0.dp),
@@ -98,8 +100,8 @@ fun Grid(jugsList: List<JugElement>, selectedJug: Int) {
     ) {
         ExtendedFloatingActionButton(
             onClick = { uriHandler.openUri("https://www.google.com/search?q=jug+filter") },
-            icon = { Icon(Icons.Filled.ShoppingCart, "Buy filter") },
-            text = { Text(text = "Buy filter") },
+            icon = { Icon(Icons.Filled.ShoppingCart, "Buy filter", tint = colorResource(id = R.color.cream)) },
+            text = { Text(text = "Buy filter", color = colorResource(id = R.color.cream)) },
             containerColor = colorResource(id = R.color.water),
         )
     }
