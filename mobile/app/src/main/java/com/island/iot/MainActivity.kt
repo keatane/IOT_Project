@@ -282,7 +282,7 @@ fun Root(viewModel: StateViewModel = viewModel(), searchJugs: () -> Unit, onPair
     var newsFeedVisible by rememberSaveable { mutableStateOf(false) }
     val jugs by viewModel.repository.memoryDataSource.jugList.collectAsState()
     var selectedJug by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
     Decorations(
         bottomBarVisible = bottomBarVisible,
