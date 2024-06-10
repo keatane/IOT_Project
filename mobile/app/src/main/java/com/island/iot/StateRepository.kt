@@ -1,80 +1,76 @@
 package com.island.iot
 
 import android.util.Log
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.zip
 import java.net.SocketTimeoutException
 
 
-class StateRepository(db: AppDatabase) {
-    val _remoteDataSource = RemoteDataSource("http://192.168.137.1:1881")
-    val _localDataSource = LocalDataSource(db)
-    val user = _localDataSource.user.map {
-        Log.d(
-            "dhjshjdsf",
-            "MAPPING DATABASE $it"
-        );if (it.isEmpty()) null else it[0]
-    }
+class StateRepository(
+    val launch: (suspend CoroutineScope.() -> Unit) -> Unit,
+    private val _remoteDataSource: RemoteDataSource,
+    private val _localDataSource: LocalDataSource,
+    private val _memoryDataSource: MemoryDataSource,
+    private val _arduinoDataSource: ArduinoDataSource
+) {
+    val jugList = _memoryDataSource.jugList.asStateFlow()
+    val pairingState = _memoryDataSource.pairingState.asStateFlow()
+    val user = _localDataSource.user
+    val currentRoute = _memoryDataSource.currentRoute
+    val selectedJug =
+        _memoryDataSource.jugList.zip(_memoryDataSource.selectedJugIndex) { list, index ->
+            list.getOrNull(index ?: return@zip null)
+        }
 
-    suspend fun updateJugs() {
-        user.collect {
-            if (it != null) {
-                try {
-                    val jugs = _remoteDataSource.getJugs(GetJugsRequest(it.token)).jugs!!
-                    memoryDataSource.jugList.value = jugs
-                } catch (e: SocketTimeoutException) {
-                    Log.e("ERRORS", "ERROR", e)
-                }
+    suspend fun _updateJugs() {
+        val user = _localDataSource.user.first()
+        if (user != null) {
+            try {
+                val jugs = _remoteDataSource.getJugs(GetJugsRequest(user.token)).jugs!!
+                _memoryDataSource.jugList.value = jugs
+            } catch (e: SocketTimeoutException) {
+                Log.e("ERRORS", "ERROR", e)
             }
         }
     }
 
-    suspend fun deleteJug(index: Int) {
+    init {
+        launch { _updateJugs() }
+    }
+
+    fun setSelectedJug(jug: JugElement) {
+        _memoryDataSource.selectedJugIndex.value = jugList.value.indexOf(jug)
+    }
+
+    suspend fun deleteJug(jug: JugElement) {
         Log.d("LAST STUCK", "LAST STUCK")
-        val jugs = memoryDataSource.jugList.first()
+        val jugs = _memoryDataSource.jugList.first()
         Log.d("JUGS SIZE", jugs.size.toString())
         Log.d("djksjdf", jugs.toString())
-        val jug = jugs[index]
-        memoryDataSource.modifyJugList { it.removeAt(index) }
-        val user = user.first()
+        _modifyJugList { it.remove(jug) }
+        val user = _localDataSource.user.first()
         user!!
         _remoteDataSource.deleteJug(DeleteJugRequest(user.token, jug.id))
-
     }
 
-    suspend fun renameJug(id: Int, name: String) {
-        memoryDataSource.modifySingleJug(id) { it.copy(title = name) }
-        user.collectLatest {
-            it!!
-            _remoteDataSource.renameJug(RenameJugRequest(it.token, name))
-        }
+    suspend fun renameJug(jug: JugElement, name: String) {
+        _modifySingleJug(jug.id) { it.copy(title = name) }
+        _remoteDataSource.renameJug(
+            RenameJugRequest(_localDataSource.user.first()!!.token, name)
+        )
     }
 
-    suspend fun changeFilter(id: Int, filter: Int) {
-        memoryDataSource.modifySingleJug(id) { it.copy(filter = filter) }
-
-
-        user.collectLatest { user ->
-            user!!
-            _filter(
-                user.token,
-                id,
-                filter
-            )
-        }
+    suspend fun changeFilter(jug: JugElement, filter: Int) {
+        _modifySingleJug(jug.id) { it.copy(filter = filter) }
+        _filter(
+            _localDataSource.user.first()!!.token,
+            jug.id,
+            filter
+        )
     }
 
-    val _arduinoDataSource = ArduinoDataSource()
-    val memoryDataSource =
-        MemoryDataSource { ssid, pw ->
-            user.collect {
-                if (it == null) Log.d(
-                    "dhjshfjdfd",
-                    "USER IS NULLLLLLL"
-                ) else _pair(ssid, pw, it.token)
-            }
-        }
 
     suspend fun register(username: String, password: String): User {
         val registerResult = _remoteDataSource.register(RegisterRequest(username, password))
@@ -114,5 +110,35 @@ class StateRepository(db: AppDatabase) {
         when (result.status) {
             ResponseStatus.OK -> {}
         }
+    }
+
+    private fun _modifyJugList(callback: (MutableList<JugElement>) -> Unit) {
+        val mutable = _memoryDataSource.jugList.value.toMutableList()
+        callback(mutable)
+        _memoryDataSource.jugList.value = mutable
+    }
+
+    private fun _modifySingleJug(id: Int, callback: (JugElement) -> JugElement) {
+        _modifyJugList { it[id] = callback(it[id]) }
+    }
+
+    fun enterConnecting() {
+        _memoryDataSource.pairingState.value = PairingState.CONNECTING
+    }
+
+    fun enterAskPassword(ssid: String) {
+        _memoryDataSource.ssid.value = ssid
+        _memoryDataSource.wifiPassword.value = ""
+        _memoryDataSource.pairingState.value = PairingState.ASK_PASSWORD
+    }
+
+    suspend fun enterSending(wifiPassword: String) {
+        _memoryDataSource.wifiPassword.value = wifiPassword
+        _memoryDataSource.pairingState.value = PairingState.SENDING
+        _pair(
+            _memoryDataSource.ssid.value,
+            _memoryDataSource.wifiPassword.value,
+            _localDataSource.user.first()!!.token
+        )
     }
 }

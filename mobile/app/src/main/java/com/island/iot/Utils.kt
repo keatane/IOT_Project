@@ -57,6 +57,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 
 
@@ -171,9 +172,7 @@ fun CredentialCard(
 
 @Composable
 fun CredentialPage(
-    navigation: () -> Unit = {},
-    homePage: () -> Unit = {},
-    operation: (String, String) -> Unit = { _, _ -> },
+    navController: NavController,stateRepository: StateRepository,
     isRegistration: Boolean = false
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -232,13 +231,13 @@ fun CredentialPage(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 CredentialCard(
-                    operation = operation,
-                    navigate = navigation,
+                    operation = {username,password->stateRepository.launch{if(isRegistration){stateRepository.register(username,password)}else stateRepository.login(username,password) }},
+                    navigate = {if(isRegistration)Route.LOGINPAGE.open(navController, stateRepository)else Route.REGISTERPAGE.open(navController,stateRepository)},
                     isRegistration = isRegistration,
                     firstButtonMsg = if (!isRegistration) "Login" else "Sign up",
                     secondButtonMsg = if (!isRegistration) "Not a user? Sign up" else "Already a user? Sign in"
                 )
-                Button(onClick = { homePage() }) { Text("HomePage") }
+                Button(onClick = { Route.DASHBOARD.open(navController,stateRepository) }) { Text("HomePage") }
             }
         }
     }

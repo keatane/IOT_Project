@@ -29,23 +29,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 
 @Composable
 @Preview
 fun LoginPagePreview() {
-    Decorations(
-        bottomBarVisible = false
+    val controller:NavController= rememberNavController()
+    Decorations(controller, FAKE_REPOSITORY,Route.LOGINPAGE
     ) {
-        LoginPage()
+        LoginPage(controller, FAKE_REPOSITORY)
     }
 }
 
 @Composable
 fun LoginPage(
-    register: () -> Unit = {},
-    homePage: () -> Unit = {},
-    login: (String, String) -> Unit = { _, _ -> }
+    navController: NavController,stateRepository: StateRepository
 ) {
-    CredentialPage(register, homePage, login, isRegistration = false)
+    CredentialPage(navController,stateRepository, isRegistration = false)
 }

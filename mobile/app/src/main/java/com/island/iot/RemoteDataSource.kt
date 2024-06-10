@@ -5,6 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
+const val API_URL = "http://192.168.0.25:1880"
+
 enum class ResponseStatus {
     OK
 }
@@ -27,7 +29,7 @@ data class DeleteJugRequest(val token: String, val id: Int)
 
 data class RenameJugRequest(val token: String, val name: String)
 
-interface RemoteService {
+interface RemoteDataSource {
     @POST("register")
     suspend fun register(@Body body: RegisterRequest): RegisterResponse
 
@@ -51,7 +53,37 @@ interface RemoteService {
     suspend fun renameJug(@Body body: RenameJugRequest): Response
 }
 
-class RemoteDataSource(url: String) :
-    RemoteService by (Retrofit.Builder().baseUrl(url)
+class RemoteDataSourceFake : RemoteDataSource {
+    override suspend fun register(body: RegisterRequest): RegisterResponse {
+        throw NotImplementedError()
+    }
+
+    override suspend fun login(body: RegisterRequest): LoginResponse {
+        throw NotImplementedError()
+    }
+
+    override suspend fun delete(body: RegisterRequest): RegisterResponse {
+        throw NotImplementedError()
+    }
+
+    override suspend fun filter(body: FilterRequest): RegisterResponse {
+        throw NotImplementedError()
+    }
+
+    override suspend fun getJugs(body: GetJugsRequest): GetJugsResponse {
+        throw NotImplementedError()
+    }
+
+    override suspend fun deleteJug(body: DeleteJugRequest): Response {
+        throw NotImplementedError()
+    }
+
+    override suspend fun renameJug(body: RenameJugRequest): Response {
+        throw NotImplementedError()
+    }
+}
+
+class RemoteDataSourceImpl :
+    RemoteDataSource by (Retrofit.Builder().baseUrl(API_URL)
         .addConverterFactory(GsonConverterFactory.create()).build()
-        .create(RemoteService::class.java))
+        .create(RemoteDataSource::class.java))

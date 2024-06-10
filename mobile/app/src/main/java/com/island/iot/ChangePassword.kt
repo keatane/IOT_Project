@@ -21,10 +21,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun ChangePasswordSection(
-    accountPage: () -> Unit = {},
+    navController: NavController, stateRepository: StateRepository
 ) {
     var oldPassword by remember {
         mutableStateOf("")
@@ -38,12 +40,25 @@ fun ChangePasswordSection(
             .fillMaxHeight()
             .padding(4.dp)
     ) {
-        Text(text = "Insert your passwords", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally))
+        Text(
+            text = "Insert your passwords",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
         CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
         CardTextField(label = "New Password", text = password, onChange = { password = it })
         ExtendedFloatingActionButton(
             onClick = { /* TODO */ },
-            icon = { Icon(Icons.Filled.Check, "Confirm password icon", tint = colorResource(id = R.color.cream)) },
+            icon = {
+                Icon(
+                    Icons.Filled.Check,
+                    "Confirm password icon",
+                    tint = colorResource(id = R.color.cream)
+                )
+            },
             text = { Text(text = "Change password", color = colorResource(id = R.color.cream)) },
             containerColor = colorResource(id = R.color.water),
             modifier = Modifier
@@ -51,9 +66,20 @@ fun ChangePasswordSection(
                 .align(Alignment.CenterHorizontally)
         )
         ExtendedFloatingActionButton(
-            onClick = { accountPage() },
-            icon = { Icon(Icons.Filled.ArrowBack, "Confirm email icon", tint = colorResource(id = R.color.cream)) },
-            text = { Text(text = "Return to account details", color = colorResource(id = R.color.cream)) },
+            onClick = { Route.ACCOUNT.open(navController, stateRepository) },
+            icon = {
+                Icon(
+                    Icons.Filled.ArrowBack,
+                    "Confirm email icon",
+                    tint = colorResource(id = R.color.cream)
+                )
+            },
+            text = {
+                Text(
+                    text = "Return to account details",
+                    color = colorResource(id = R.color.cream)
+                )
+            },
             containerColor = colorResource(id = R.color.water),
             modifier = Modifier
                 .padding(16.dp)
@@ -65,15 +91,17 @@ fun ChangePasswordSection(
 @Preview(showBackground = true)
 @Composable
 fun ChangePasswordPreview() {
+    val navController = rememberNavController()
     Decorations(
+        navController, FAKE_REPOSITORY, Route.CHANGE_PASSWORD
     ) {
-        ChangePassword()
+        ChangePassword(navController, FAKE_REPOSITORY)
     }
 }
 
 @Composable
 fun ChangePassword(
-    accountPage: () -> Unit = {},
+    navController: NavController, stateRepository: StateRepository
 ) {
-    ChangePasswordSection(accountPage)
+    ChangePasswordSection(navController, stateRepository)
 }

@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 data class NewsArticle(val title: String, val content: String, val imageUrl: String)
 
@@ -71,10 +73,12 @@ val sampleNewsArticles = listOf(
 
 // Composable function to display the news feed
 @Composable
-fun NewsFeed() {
+fun NewsFeed(navController: NavController,stateRepository: StateRepository) {
     val newsArticles = sampleNewsArticles // Replace with fetchNewsArticles() for real data
     Column {
-        Text(text = "Latest news", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp, 0.dp).align(Alignment.CenterHorizontally))
+        Text(text = "Latest news", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier
+            .padding(16.dp, 0.dp)
+            .align(Alignment.CenterHorizontally))
         for (article in newsArticles) {
             NewsCard(article = article)
             Spacer(modifier = Modifier.height(8.dp))
@@ -85,17 +89,17 @@ fun NewsFeed() {
 @Preview(showBackground = true)
 @Composable
 fun NewsPreview() {
-    Decorations() {
-        News()
+    val controller= rememberNavController()
+    Decorations(controller, FAKE_REPOSITORY,Route.NEWS) {
+        News(controller, FAKE_REPOSITORY)
     }
 }
 
 @Composable
 fun News(
-    initNews : () -> Unit = {}
+    navController: NavController,stateRepository: StateRepository
 ) {
-    initNews()
     ScrollableContent {
-        NewsFeed()
+        NewsFeed(navController,stateRepository)
     }
 }

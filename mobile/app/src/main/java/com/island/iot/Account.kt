@@ -30,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun WarningDialog(openAlertDialog: MutableState<Boolean>) {
@@ -49,8 +51,7 @@ fun WarningDialog(openAlertDialog: MutableState<Boolean>) {
 
 @Composable
 fun AccountSection(
-    passwordPage: () -> Unit,
-    deleteAccount: (String, String) -> Unit
+    navController: NavController,stateRepository: StateRepository
 ) {
     val openAlertDeleteDialog = remember { mutableStateOf(false) }
     var email by remember {
@@ -65,7 +66,9 @@ fun AccountSection(
         if (openAlertDeleteDialog.value) {
             WarningDialog(openAlertDeleteDialog)
         }
-        Text(text = "Insert your new email", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally))
+        Text(text = "Insert your new email", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier
+            .padding(16.dp)
+            .align(Alignment.CenterHorizontally))
         CardTextField(label = "Email", text = email, onChange = { email = it })
         ExtendedFloatingActionButton(
             onClick = { /* TODO */ },
@@ -77,7 +80,7 @@ fun AccountSection(
                 .align(Alignment.CenterHorizontally)
         )
         ExtendedFloatingActionButton(
-            onClick = { passwordPage() },
+            onClick = { Route.CHANGE_PASSWORD.open(navController,stateRepository) },
             icon = { Icon(painterResource(id = R.drawable.key), "Key icon", tint = colorResource(id = R.color.cream)) },
             text = { Text(text = "Change password", color = colorResource(id = R.color.cream)) },
             containerColor = colorResource(id = R.color.water),
@@ -110,22 +113,21 @@ fun AccountSection(
 @Preview(showBackground = true)
 @Composable
 fun AccountPreview() {
-    Decorations {
-        Account()
+    val navController= rememberNavController()
+    Decorations(navController, FAKE_REPOSITORY,Route.ACCOUNT) {
+        Account(navController, FAKE_REPOSITORY)
     }
 }
 
 @Composable
 fun Account(
-    initAccount: () -> Unit = {},
-    passwordPage: () -> Unit = {},
-    deleteAccount: (String, String) -> Unit = { _, _ -> },
+    navController: NavController,
+    stateRepository: StateRepository,
 ) {
-    initAccount()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        AccountSection(passwordPage, deleteAccount)
+        AccountSection(navController,stateRepository)
     }
 }
