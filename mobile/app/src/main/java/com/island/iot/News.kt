@@ -90,7 +90,7 @@ fun NewsFeed(navController: NavController,stateRepository: StateRepository) {
 @Composable
 fun NewsPreview() {
     val controller= rememberNavController()
-    Decorations(controller, FAKE_REPOSITORY,Route.NEWS) {
+    Decorations(controller,Route.NEWS) {
         News(controller, FAKE_REPOSITORY)
     }
 }

@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
@@ -84,7 +83,6 @@ fun Grid(navController: NavController, repository: StateRepository) {
         R.color.seaweed,
         R.color.octopus
     )
-    val jugsList by repository.jugList.collectAsState()
     val selectedJug by repository.selectedJug.collectAsState(null)
     ScrollableContent {
         Text(
@@ -111,7 +109,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
             ) {
                 Metric(
                     "Filter capacity",
-                    if (jugsList.isNotEmpty()) selectedJug?.filter.toString() + "L" else "N/A",
+                    if (selectedJug != null) selectedJug!!.filter.toString() + "L" else "N/A",
                     cardColor = colors[2]
                 )
                 Metric("Filter life", "N/A", cardColor = colors[3])
@@ -167,7 +165,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
 @Preview
 fun DashboardPreview() {
     val navController = rememberNavController()
-    Decorations(navController, FAKE_REPOSITORY,Route.DASHBOARD) {
+    Decorations(navController, Route.DASHBOARD) {
         Dashboard(navController, FAKE_REPOSITORY)
     }
 }

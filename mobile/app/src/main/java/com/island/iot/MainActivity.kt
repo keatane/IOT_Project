@@ -1,21 +1,10 @@
 package com.island.iot
 
-import android.companion.AssociationRequest
-import android.companion.CompanionDeviceManager
-import android.companion.WifiDeviceFilter
-import android.content.Intent
-import android.content.IntentSender
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
-import android.net.wifi.ScanResult
-import android.net.wifi.WifiNetworkSpecifier
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -39,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -50,143 +40,61 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.island.iot.ui.theme.IOTTheme
-import kotlinx.coroutines.flow.Flow
-import java.util.regex.Pattern
 
 
 class MainActivity : ComponentActivity() {
-    val DEVICE_REQUEST_CODE = 1
-    val NORMAL_WIFI_CODE = 2
+    private val pairing = PairingImpl(this)
 
     companion object {
         @Composable
-        fun get(): MainActivity {
-            return LocalContext.current as MainActivity
+        fun getPairing(): Pairing {
+            val context = LocalContext.current
+            return if (context is MainActivity) context.pairing else FAKE_PAIRING
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pairing.onCreate(this)
         setContent {
             Root()
         }
     }
-
-    val deviceFilter: WifiDeviceFilter =
-        WifiDeviceFilter.Builder().setNamePattern(Pattern.compile("jug_\\d+")).build()
-    val pairingRequest = AssociationRequest.Builder().addDeviceFilter(deviceFilter).build()
-
-    val allPairingRequest = AssociationRequest.Builder().build()
-
-    fun searchJugs() {
-        search(pairingRequest, DEVICE_REQUEST_CODE)
-    }
-
-    private fun search(request: AssociationRequest, code: Int) {
-        val deviceManager = getSystemService(CompanionDeviceManager::class.java)
-
-        deviceManager.associate(
-            request,
-            object : CompanionDeviceManager.Callback() {
-                // Called when a device is found. Launch the IntentSender so the user
-                // can select the device they want to pair with.
-                override fun onDeviceFound(chooserLauncher: IntentSender) {
-                    startIntentSenderForResult(
-                        chooserLauncher,
-                        code, null, 0, 0, 0
-                    )
-                }
-
-                override fun onFailure(error: CharSequence?) {
-                    // Handle the failure.
-                }
-            }, null
-        )
-
-    }
-
-    private fun connect(ssid: String) {
-        val connectivityManager = getSystemService(ConnectivityManager::class.java)
-        val wifiNetworkSpecifier = WifiNetworkSpecifier.Builder()
-            .setSsid(ssid)
-            .build()
-
-        val networkRequest = NetworkRequest.Builder()
-            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-            .setNetworkSpecifier(wifiNetworkSpecifier)
-            .build()
-
-        connectivityManager.requestNetwork(networkRequest, object :
-            ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                Log.d("fdhjhjdsjdjs", "CONNETED YAYAYAYYAY")
-                connectivityManager.bindProcessToNetwork(network)
-                search(allPairingRequest, NORMAL_WIFI_CODE)
-            }
-        })
-    }
-
-    fun disconnect() {
-        val connectivityManager = getSystemService(ConnectivityManager::class.java)
-        connectivityManager.bindProcessToNetwork(null)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            DEVICE_REQUEST_CODE -> when (resultCode) {
-                RESULT_OK -> {
-                    // The user chose to pair the app with a Bluetooth device.
-                    val deviceToPair: ScanResult? =
-                        data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
-                    Log.d("dhjfhdjhhdjhf", deviceToPair!!.BSSID)
-                    val viewModel: StateViewModel by viewModels()
-                    viewModel.repository.enterConnecting()
-                    connect(deviceToPair.SSID)
-                }
-            }
-
-            NORMAL_WIFI_CODE -> when (resultCode) {
-                RESULT_OK -> {
-                    // The user chose to pair the app with a Bluetooth device.
-                    val deviceToPair: ScanResult? =
-                        data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
-                    Log.d("dhjfhdjhhdjhf", deviceToPair!!.BSSID)
-                    val viewModel: StateViewModel by viewModels()
-                    viewModel.repository.enterAskPassword(deviceToPair.SSID)
-                }
-            }
-
-            else -> super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
 }
 
-enum class Route(val id: String, val bottomBar: Boolean, val title: String) {
-    DASHBOARD("dashboard", true, "Dashboard"),
-    LOGINPAGE("loginpage", false, "Login Page"),
-    REGISTERPAGE("registerpage", false, "Register Page"),
-    ACCOUNT("account", true, "Account"),
-    CHANGE_PASSWORD("changePassword", true, "Change Password"),
-    CHARTS("charts", true, "Charts"),
-    JUGS("jugs", true, "Jugs"),
-    NEWS("news", true, "News Feed");
+enum class Route(
+    val id: String,
+    val title: String,
+    val bottomBar: Boolean,
+    val clearStack: Boolean
+) {
+    DASHBOARD("dashboard", "Dashboard", true, true),
+    LOGINPAGE("loginpage", "Login Page", false, true),
+    REGISTERPAGE("registerpage", "Register Page", false, false),
+    ACCOUNT("account", "Account", true, true),
+    CHANGE_PASSWORD("changePassword", "Change Password", true, false),
+    CHARTS("charts", "Charts", true, true),
+    JUGS("jugs", "Jugs", true, true),
+    NEWS("news", "News Feed", true, false);
 
     companion object {
-        fun getCurrentRoute(controller: NavController): Route? {
-            val id = controller.currentDestination?.route ?: return null
+        fun getCurrentRoute(backStackEntry: NavBackStackEntry?): Route? {
+            val id = backStackEntry?.destination?.route ?: return null
             return Route.entries.find { it.id == id }!!
         }
     }
 
-    fun open(controller: NavController, repository: StateRepository) {
-        controller.popBackStack(controller.currentDestination!!.route!!, inclusive = true)
+    fun open(controller: NavController) {
+        if (clearStack)
+            controller.popBackStack(controller.graph.id, inclusive = true)
         controller.navigate(id)
-        repository.currentRoute.value = this
     }
 }
 
@@ -207,11 +115,12 @@ enum class BottomButton(val route: Route, val text: String, val icon: ImageVecto
 @Composable
 fun Decorations(
     navController: NavController,
-    repository: StateRepository,
     previewRoute: Route?,
     content: @Composable (Modifier) -> Unit
 ) {
-    val currentRoute = repository.currentRoute.collectAsState().value ?: previewRoute!!
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val prevBackStackEntry = navController.previousBackStackEntry
+    val currentRoute = Route.getCurrentRoute(currentBackStackEntry) ?: previewRoute!!
     Log.d("djsjdsd", currentRoute.toString())
     val bottomBarVisible = currentRoute.bottomBar
     val selectedButton = BottomButton.getSelectedButton(currentRoute)
@@ -236,20 +145,19 @@ fun Decorations(
                             )
                         },
                         navigationIcon = {
-                            IconButton(onClick = {
-                                Route.DASHBOARD.open(
-                                    navController,
-                                    repository
-                                )
-                            }) {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    contentDescription = "Go back"
-                                )
-                            }
+                            if (prevBackStackEntry != null)
+                                IconButton(onClick = {
+                                    while (navController.previousBackStackEntry != null)
+                                        navController.popBackStack()
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                        contentDescription = "Go back"
+                                    )
+                                }
                         },
                         actions = {
-                            IconButton(onClick = { Route.NEWS.open(navController, repository) }) {
+                            IconButton(onClick = { Route.NEWS.open(navController) }) {
                                 Icon(
                                     imageVector = Icons.Filled.Email,
                                     contentDescription = "News feed"
@@ -272,7 +180,7 @@ fun Decorations(
                                 label = { Text(item.text) },
                                 selected = item == selectedButton,
                                 onClick = {
-                                    item.route.open(navController, repository)
+                                    item.route.open(navController)
 //                                    selectedItem = index; if (prevSelected != selectedItem) navigate(item.route)
                                 },
                                 colors = NavigationBarItemColors(
@@ -300,13 +208,6 @@ fun Decorations(
 }
 
 @Composable
-fun LoginNavigate(user: Flow<User?>, navigate: () -> Unit) {
-    val userValue by user.collectAsState(initial = null)
-    if (userValue !== null) navigate()
-}
-
-
-@Composable
 fun PasswordDialog(callback: (String) -> Unit) {
     DialogGeneric(
         onDismissRequest = { },
@@ -320,7 +221,7 @@ fun PasswordDialog(callback: (String) -> Unit) {
 fun Root(viewModel: StateViewModel = viewModel()) {
     val state = viewModel.repository
     val controller = rememberNavController()
-    Decorations(navController = controller, state, previewRoute = Route.LOGINPAGE) {
+    Decorations(navController = controller, previewRoute = Route.LOGINPAGE) {
         NavHost(
             navController = controller,
             modifier = it,
@@ -363,18 +264,25 @@ fun Root(viewModel: StateViewModel = viewModel()) {
                 )
             }
         }
+        SideEffects(controller = controller, state = state)
     }
-    LoginNavigate(user = state.user) {
-        Route.DASHBOARD.open(controller, state)
-    }
+}
+
+@Composable
+fun SideEffects(controller: NavController, state: StateRepository) {
     val pairingState by state.pairingState.collectAsState()
-    val mainActivity = MainActivity.get()
     if (pairingState == PairingState.ASK_PASSWORD)
         PasswordDialog {
-            state.launch {
-                state.enterSending(it)
-                mainActivity.disconnect()
-            }
+            state.setWifiPassword(it)
         }
-
+    val user by state.user.collectAsState(null)
+    LaunchedEffect(key1 = user) {
+        if (user != null) Route.DASHBOARD.open(controller)
+    }
+    val lastError by state.lastError.collectAsState()
+    val context = LocalContext.current
+    LaunchedEffect(key1 = lastError) {
+        if (lastError != null)
+            Toast.makeText(context, lastError, Toast.LENGTH_SHORT).show()
+    }
 }

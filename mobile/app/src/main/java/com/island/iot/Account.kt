@@ -80,7 +80,7 @@ fun AccountSection(
                 .align(Alignment.CenterHorizontally)
         )
         ExtendedFloatingActionButton(
-            onClick = { Route.CHANGE_PASSWORD.open(navController,stateRepository) },
+            onClick = { Route.CHANGE_PASSWORD.open(navController) },
             icon = { Icon(painterResource(id = R.drawable.key), "Key icon", tint = colorResource(id = R.color.cream)) },
             text = { Text(text = "Change password", color = colorResource(id = R.color.cream)) },
             containerColor = colorResource(id = R.color.water),
@@ -114,7 +114,7 @@ fun AccountSection(
 @Composable
 fun AccountPreview() {
     val navController= rememberNavController()
-    Decorations(navController, FAKE_REPOSITORY,Route.ACCOUNT) {
+    Decorations(navController,Route.ACCOUNT) {
         Account(navController, FAKE_REPOSITORY)
     }
 }

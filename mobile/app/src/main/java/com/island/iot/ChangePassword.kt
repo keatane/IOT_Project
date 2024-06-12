@@ -66,7 +66,7 @@ fun ChangePasswordSection(
                 .align(Alignment.CenterHorizontally)
         )
         ExtendedFloatingActionButton(
-            onClick = { Route.ACCOUNT.open(navController, stateRepository) },
+            onClick = { Route.ACCOUNT.open(navController) },
             icon = {
                 Icon(
                     Icons.Filled.ArrowBack,
@@ -93,7 +93,7 @@ fun ChangePasswordSection(
 fun ChangePasswordPreview() {
     val navController = rememberNavController()
     Decorations(
-        navController, FAKE_REPOSITORY, Route.CHANGE_PASSWORD
+        navController, Route.CHANGE_PASSWORD
     ) {
         ChangePassword(navController, FAKE_REPOSITORY)
     }

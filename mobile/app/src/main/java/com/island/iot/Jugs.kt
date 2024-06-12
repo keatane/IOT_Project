@@ -161,7 +161,7 @@ fun Jug(
 fun JugsSection(
     navController: NavController, repository: StateRepository
 ) {
-    val mainActivity = MainActivity.get()
+    val pairing=MainActivity.getPairing()
     val jugList by repository.jugList.collectAsState()
     Column {
         for ((index, jug) in jugList.withIndex()) {
@@ -175,7 +175,7 @@ fun JugsSection(
                     }
                 },
                 dashboardPage = {
-                    Route.DASHBOARD.open(navController, repository)
+                    Route.DASHBOARD.open(navController)
                 },
                 renameJug = { id, name ->
                     repository.launch {
@@ -187,7 +187,7 @@ fun JugsSection(
             )
         }
         ExtendedFloatingActionButton(
-            onClick = { mainActivity.searchJugs() },
+            onClick = { repository.launch{repository.pairJug(pairing)} },
             icon = {
                 Icon(
                     painterResource(id = R.drawable.wifi),
@@ -209,7 +209,7 @@ fun JugsSection(
 @Composable
 fun JugsPreview() {
     val controller = rememberNavController()
-    Decorations(controller, FAKE_REPOSITORY, Route.JUGS) {
+    Decorations(controller, Route.JUGS) {
         Jugs(controller, FAKE_REPOSITORY)
     }
 }

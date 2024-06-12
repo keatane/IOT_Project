@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 @Preview
 fun LoginPagePreview() {
     val controller:NavController= rememberNavController()
-    Decorations(controller, FAKE_REPOSITORY,Route.LOGINPAGE
+    Decorations(controller,Route.LOGINPAGE
     ) {
         LoginPage(controller, FAKE_REPOSITORY)
     }

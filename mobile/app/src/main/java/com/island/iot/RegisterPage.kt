@@ -47,7 +47,7 @@ import kotlinx.coroutines.launch
 @Preview
 fun RegisterPagePreview() {
     val navController= rememberNavController()
-    Decorations(navController, FAKE_REPOSITORY,Route.REGISTERPAGE
+    Decorations(navController,Route.REGISTERPAGE
     ) {
         RegisterPage(navController, FAKE_REPOSITORY)
     }

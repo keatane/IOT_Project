@@ -2,14 +2,16 @@ package com.island.iot
 
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.zip
-import java.net.SocketTimeoutException
+import okio.IOException
+import kotlin.math.max
 
 
 class StateRepository(
-    val launch: (suspend CoroutineScope.() -> Unit) -> Unit,
+    private val _launch: (suspend CoroutineScope.() -> Unit) -> Unit,
     private val _remoteDataSource: RemoteDataSource,
     private val _localDataSource: LocalDataSource,
     private val _memoryDataSource: MemoryDataSource,
@@ -18,26 +20,57 @@ class StateRepository(
     val jugList = _memoryDataSource.jugList.asStateFlow()
     val pairingState = _memoryDataSource.pairingState.asStateFlow()
     val user = _localDataSource.user
-    val currentRoute = _memoryDataSource.currentRoute
     val selectedJug =
-        _memoryDataSource.jugList.zip(_memoryDataSource.selectedJugIndex) { list, index ->
-            list.getOrNull(index ?: return@zip null)
+        _memoryDataSource.jugList.combine(_memoryDataSource.selectedJugIndex) { list, index ->
+            Log.d("JUG LIST", list.toString())
+            Log.d("JUG INDEX", index.toString())
+            list.getOrNull(index)
         }
+    val lastError = _memoryDataSource.lastError.asStateFlow()
 
-    suspend fun _updateJugs() {
-        val user = _localDataSource.user.first()
-        if (user != null) {
+    private suspend fun updateJugs() {
+        var first = true
+        while (true) {
+            val user = _localDataSource.user.first { it != null }
+            user!!
             try {
                 val jugs = _remoteDataSource.getJugs(GetJugsRequest(user.token)).jugs!!
                 _memoryDataSource.jugList.value = jugs
-            } catch (e: SocketTimeoutException) {
-                Log.e("ERRORS", "ERROR", e)
+            } catch (e: IOException) {
+                // TODO: remove this
+                if (first)
+                    _memoryDataSource.jugList.value =
+                        listOf(
+                            JugElement(title = "Kitchen Jug", filter = 150, id = 0),
+                            JugElement(title = "Living Room Jug", filter = 200, id = 1)
+                        )
+            }
+            first = false
+            delay(1000)
+        }
+    }
+
+    private suspend fun clearErrors() {
+        while (true) {
+            _memoryDataSource.lastError.value = null
+            delay(1000)
+        }
+    }
+
+    fun launch(f: suspend CoroutineScope.() -> Unit) {
+        _launch {
+            try {
+                f()
+            } catch (e: Throwable) {
+                Log.e("ERROR", "ERROR", e)
+                _memoryDataSource.lastError.value = e.toString()
             }
         }
     }
 
     init {
-        launch { _updateJugs() }
+        launch { updateJugs() }
+        launch { clearErrors() }
     }
 
     fun setSelectedJug(jug: JugElement) {
@@ -56,14 +89,14 @@ class StateRepository(
     }
 
     suspend fun renameJug(jug: JugElement, name: String) {
-        _modifySingleJug(jug.id) { it.copy(title = name) }
+        _modifySingleJug(jug, jug.copy(title = name))
         _remoteDataSource.renameJug(
             RenameJugRequest(_localDataSource.user.first()!!.token, name)
         )
     }
 
     suspend fun changeFilter(jug: JugElement, filter: Int) {
-        _modifySingleJug(jug.id) { it.copy(filter = filter) }
+        _modifySingleJug(jug, jug.copy(filter = filter))
         _filter(
             _localDataSource.user.first()!!.token,
             jug.id,
@@ -115,30 +148,48 @@ class StateRepository(
     private fun _modifyJugList(callback: (MutableList<JugElement>) -> Unit) {
         val mutable = _memoryDataSource.jugList.value.toMutableList()
         callback(mutable)
+        val index =
+            mutable.indexOf(_memoryDataSource.jugList.value.getOrNull(_memoryDataSource.selectedJugIndex.value))
+        _memoryDataSource.selectedJugIndex.value = max(index, 0)
         _memoryDataSource.jugList.value = mutable
     }
 
-    private fun _modifySingleJug(id: Int, callback: (JugElement) -> JugElement) {
-        _modifyJugList { it[id] = callback(it[id]) }
+    private fun _modifySingleJug(prev: JugElement, new: JugElement) {
+        _modifyJugList { it[it.indexOf(prev)] = new }
     }
 
-    fun enterConnecting() {
+    private fun _enterConnecting() {
         _memoryDataSource.pairingState.value = PairingState.CONNECTING
     }
 
-    fun enterAskPassword(ssid: String) {
-        _memoryDataSource.ssid.value = ssid
+    fun enterAskPassword() {
         _memoryDataSource.wifiPassword.value = ""
         _memoryDataSource.pairingState.value = PairingState.ASK_PASSWORD
     }
 
-    suspend fun enterSending(wifiPassword: String) {
-        _memoryDataSource.wifiPassword.value = wifiPassword
+    suspend fun enterSending(ssid: String, wifiPassword: String) {
         _memoryDataSource.pairingState.value = PairingState.SENDING
         _pair(
-            _memoryDataSource.ssid.value,
-            _memoryDataSource.wifiPassword.value,
+            ssid, wifiPassword,
             _localDataSource.user.first()!!.token
         )
+        _memoryDataSource.pairingState.value = PairingState.NONE
     }
+
+    fun setWifiPassword(password: String) {
+        _memoryDataSource.wifiPassword.value = password
+        Log.d("fhdjhdfdf", "Setting wifi password to")
+    }
+
+    suspend fun pairJug(pairing: Pairing) {
+        val jug = pairing.selectJug()
+        _enterConnecting()
+        pairing.connectToJug(jug!!)
+        val wifi = pairing.selectWifi()
+        enterAskPassword()
+        val password = _memoryDataSource.wifiPassword.first { it != "" }
+        enterSending(wifi!!, password)
+        pairing.disconnect()
+    }
+
 }

@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 fun ChartsPreview() {
     val controller = rememberNavController()
     Decorations(
-        controller, FAKE_REPOSITORY,Route.CHARTS
+        controller,Route.CHARTS
     ) {
         Chart(controller, FAKE_REPOSITORY)
     }

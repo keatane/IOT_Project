@@ -232,12 +232,12 @@ fun CredentialPage(
                 Spacer(modifier = Modifier.weight(1f))
                 CredentialCard(
                     operation = {username,password->stateRepository.launch{if(isRegistration){stateRepository.register(username,password)}else stateRepository.login(username,password) }},
-                    navigate = {if(isRegistration)Route.LOGINPAGE.open(navController, stateRepository)else Route.REGISTERPAGE.open(navController,stateRepository)},
+                    navigate = {if(isRegistration)Route.LOGINPAGE.open(navController)else Route.REGISTERPAGE.open(navController)},
                     isRegistration = isRegistration,
                     firstButtonMsg = if (!isRegistration) "Login" else "Sign up",
                     secondButtonMsg = if (!isRegistration) "Not a user? Sign up" else "Already a user? Sign in"
                 )
-                Button(onClick = { Route.DASHBOARD.open(navController,stateRepository) }) { Text("HomePage") }
+                Button(onClick = { Route.DASHBOARD.open(navController) }) { Text("HomePage") }
             }
         }
     }
