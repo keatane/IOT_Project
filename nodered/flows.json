@@ -555,7 +555,7 @@
             "33457bfaf6556358"
         ],
         "x": 314,
-        "y": 1039,
+        "y": 1099,
         "w": 792,
         "h": 162
     },
@@ -694,7 +694,7 @@
             "e7bd29cb35dc2be0"
         ],
         "x": 314,
-        "y": 1239,
+        "y": 1299,
         "w": 792,
         "h": 162
     },
@@ -711,12 +711,18 @@
             "bf3e55578af7a2e4",
             "3ef85ed4716564ae",
             "fa768fe8dd244a44",
-            "1b5612176c75fd15"
+            "1b5612176c75fd15",
+            "ae2b33962a87399a",
+            "a492687f220674ec",
+            "0956b5d39aba1b9f",
+            "cc54a4dbd8fd882f",
+            "a4d6a0147eedd8e8",
+            "daa275236cb1cf09"
         ],
         "x": 314,
         "y": 839,
         "w": 792,
-        "h": 162
+        "h": 222
     },
     {
         "id": "e5db3ff7e0f7bdc2",
@@ -822,7 +828,7 @@
             "ebae16586d820da2"
         ],
         "x": 314,
-        "y": 1439,
+        "y": 1499,
         "w": 892,
         "h": 122
     },
@@ -5733,7 +5739,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 420,
-        "y": 1080,
+        "y": 1140,
         "wires": [
             [
                 "6426c3f9917d2081"
@@ -5759,7 +5765,7 @@
         "fontSize": "16",
         "color": "#000000",
         "x": 900,
-        "y": 1080,
+        "y": 1140,
         "wires": []
     },
     {
@@ -5783,7 +5789,7 @@
         "to": "",
         "reg": false,
         "x": 660,
-        "y": 1080,
+        "y": 1140,
         "wires": [
             [
                 "e12e139248b70364",
@@ -5843,7 +5849,7 @@
         "type": "calculator",
         "z": "dd62ac133fb1360c",
         "g": "d8af04f52759052d",
-        "name": "",
+        "name": "Plastic",
         "inputMsgField": "payload",
         "outputMsgField": "payload",
         "operation": "mult",
@@ -5852,7 +5858,7 @@
         "truncate": false,
         "decimals": 0,
         "decimals2": 0,
-        "x": 400,
+        "x": 390,
         "y": 880,
         "wires": [
             [
@@ -5917,7 +5923,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 440,
-        "y": 1280,
+        "y": 1340,
         "wires": [
             [
                 "c38392d9d315dc5d"
@@ -5945,7 +5951,7 @@
         "to": "",
         "reg": false,
         "x": 660,
-        "y": 1280,
+        "y": 1340,
         "wires": [
             [
                 "5415beb9fff2b624",
@@ -5973,7 +5979,7 @@
         "fontSize": "16",
         "color": "#000000",
         "x": 890,
-        "y": 1280,
+        "y": 1340,
         "wires": []
     },
     {
@@ -6059,7 +6065,10 @@
         "y": 880,
         "wires": [
             [
-                "3ef85ed4716564ae"
+                "3ef85ed4716564ae",
+                "ae2b33962a87399a",
+                "a492687f220674ec",
+                "a4d6a0147eedd8e8"
             ]
         ]
     },
@@ -6518,7 +6527,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 930,
-        "y": 1320,
+        "y": 1380,
         "wires": [
             []
         ]
@@ -6541,7 +6550,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 230,
-        "y": 1280,
+        "y": 1340,
         "wires": [
             [
                 "96122b6e803914d0"
@@ -6588,7 +6597,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 940,
-        "y": 1120,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -6616,7 +6625,7 @@
             "b4bb400f7fb5444d"
         ],
         "x": 255,
-        "y": 1080,
+        "y": 1140,
         "wires": [
             [
                 "fffcf2415ff35daf"
@@ -6632,7 +6641,7 @@
             "b4bb400f7fb5444d"
         ],
         "x": 115,
-        "y": 1280,
+        "y": 1340,
         "wires": [
             [
                 "9de3a121d9fea562"
@@ -6710,7 +6719,7 @@
         "diff": false,
         "className": "",
         "x": 930,
-        "y": 1160,
+        "y": 1220,
         "wires": []
     },
     {
@@ -6739,7 +6748,7 @@
         "diff": false,
         "className": "",
         "x": 910,
-        "y": 1360,
+        "y": 1420,
         "wires": []
     },
     {
@@ -6756,7 +6765,7 @@
         ],
         "uncaught": false,
         "x": 410,
-        "y": 1480,
+        "y": 1540,
         "wires": [
             []
         ]
@@ -6780,7 +6789,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 580,
-        "y": 1480,
+        "y": 1540,
         "wires": [
             [
                 "48549ff50829816e"
@@ -6808,7 +6817,7 @@
         "to": "",
         "reg": false,
         "x": 780,
-        "y": 1480,
+        "y": 1540,
         "wires": [
             [
                 "451e852607a62c46"
@@ -6830,7 +6839,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1050,
-        "y": 1480,
+        "y": 1540,
         "wires": []
     },
     {
@@ -6845,7 +6854,7 @@
         ],
         "uncaught": false,
         "x": 430,
-        "y": 1520,
+        "y": 1580,
         "wires": [
             []
         ]
@@ -6869,7 +6878,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 620,
-        "y": 1520,
+        "y": 1580,
         "wires": [
             [
                 "ebae16586d820da2"
@@ -6897,12 +6906,144 @@
         "to": "",
         "reg": false,
         "x": 800,
-        "y": 1520,
+        "y": 1580,
         "wires": [
             [
                 "451e852607a62c46"
             ]
         ]
+    },
+    {
+        "id": "ae2b33962a87399a",
+        "type": "calculator",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "name": "Money plastic",
+        "inputMsgField": "payload",
+        "outputMsgField": "payload",
+        "operation": "mult",
+        "constant": "0.2",
+        "round": false,
+        "truncate": false,
+        "decimals": 0,
+        "decimals2": 0,
+        "x": 420,
+        "y": 940,
+        "wires": [
+            [
+                "0956b5d39aba1b9f"
+            ]
+        ]
+    },
+    {
+        "id": "a492687f220674ec",
+        "type": "calculator",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "name": "Money jug",
+        "inputMsgField": "payload",
+        "outputMsgField": "payload",
+        "operation": "mult",
+        "constant": "0.08",
+        "round": false,
+        "truncate": false,
+        "decimals": 0,
+        "decimals2": 0,
+        "x": 410,
+        "y": 980,
+        "wires": [
+            [
+                "cc54a4dbd8fd882f"
+            ]
+        ]
+    },
+    {
+        "id": "0956b5d39aba1b9f",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "group": "a6a64a541ae8c000",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "€ spent with plastics",
+        "label": "€ spent with plastics",
+        "format": "{{msg.payload | number: 2}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "16",
+        "color": "#000000",
+        "x": 620,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "cc54a4dbd8fd882f",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "group": "a6a64a541ae8c000",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "€ spent with jugs",
+        "label": "€ spent with jugs",
+        "format": "{{msg.payload | number: 2}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "16",
+        "color": "#000000",
+        "x": 610,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "a4d6a0147eedd8e8",
+        "type": "calculator",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "name": "Money saving",
+        "inputMsgField": "payload",
+        "outputMsgField": "payload",
+        "operation": "mult",
+        "constant": "0.12",
+        "round": false,
+        "truncate": false,
+        "decimals": 0,
+        "decimals2": 0,
+        "x": 420,
+        "y": 1020,
+        "wires": [
+            [
+                "daa275236cb1cf09"
+            ]
+        ]
+    },
+    {
+        "id": "daa275236cb1cf09",
+        "type": "ui_text",
+        "z": "dd62ac133fb1360c",
+        "g": "d8af04f52759052d",
+        "group": "a6a64a541ae8c000",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "€ saved",
+        "label": "€ saved",
+        "format": "{{msg.payload | number: 2}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Verdana,Verdana,Geneva,sans-serif",
+        "fontSize": "16",
+        "color": "#000000",
+        "x": 580,
+        "y": 1020,
+        "wires": []
     },
     {
         "id": "f26cc9e6ff46d635",
