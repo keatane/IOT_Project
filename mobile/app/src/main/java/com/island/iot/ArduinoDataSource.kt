@@ -5,11 +5,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-const val ARDUINO_URL="http://192.168.4.1:8080"
+const val ARDUINO_URL = "http://192.168.4.1:8080"
 
 data class PairRequest(val ssid: String, val pw: String, val token: String)
 
-data class PairResponse(val status: ResponseStatus)
+data class PairResponse(val id: Int)
 
 interface ArduinoDataSource {
     @POST("/")

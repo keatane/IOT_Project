@@ -51,7 +51,14 @@ fun ChangePasswordSection(
         CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
         CardTextField(label = "New Password", text = password, onChange = { password = it })
         ExtendedFloatingActionButton(
-            onClick = { /* TODO */ },
+            onClick = {
+                stateRepository.launch {
+                    stateRepository.changePassword(
+                        oldPassword,
+                        password
+                    ); Route.ACCOUNT.open(navController)
+                }
+            },
             icon = {
                 Icon(
                     Icons.Filled.Check,

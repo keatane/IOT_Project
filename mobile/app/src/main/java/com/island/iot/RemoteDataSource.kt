@@ -5,56 +5,73 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-const val API_URL = "http://192.168.0.25:1880"
+const val API_URL = "http://192.168.137.1:1881"
 
-enum class ResponseStatus {
-    OK
-}
-
-data class Response(val response: ResponseStatus)
 
 data class RegisterRequest(val username: String, val password: String)
 
-data class RegisterResponse(val status: ResponseStatus)
-
-data class LoginResponse(val status: ResponseStatus, val token: String?, val userId: Int?)
+data class LoginResponse(val token: String, val userId: Int)
 
 data class FilterRequest(val token: String, val jugId: Int, val filter: Int)
 
 data class GetJugsRequest(val token: String)
 
-data class GetJugsResponse(val status: ResponseStatus, val jugs: List<JugElement>?)
+data class GetJugsResponse(val jugs: List<JugElement>)
 
 data class DeleteJugRequest(val token: String, val id: Int)
 
-data class RenameJugRequest(val token: String, val name: String)
+data class RenameJugRequest(val token: String, val id: Int, val name: String)
+
+data class DeleteAccountRequest(val token: String)
+
+data class ChangeEmailRequest(val token: String, val newEmail: String)
+
+data class ChangePasswordRequest(val token: String, val oldPw: String, val newPw: String)
+
+data class JugDataRequest(val token: String, val id: Int)
+
 
 interface RemoteDataSource {
     @POST("register")
-    suspend fun register(@Body body: RegisterRequest): RegisterResponse
+    suspend fun register(@Body body: RegisterRequest)
 
     @POST("login")
     suspend fun login(@Body body: RegisterRequest): LoginResponse
 
-    @POST("delete")
-    suspend fun delete(@Body body: RegisterRequest): RegisterResponse
-
     @POST("filter")
-    suspend fun filter(@Body body: FilterRequest): RegisterResponse
+    suspend fun filter(@Body body: FilterRequest)
 
     /* To be added for the dashboard */
     @POST("getJugs")
     suspend fun getJugs(@Body body: GetJugsRequest): GetJugsResponse
 
     @POST("deleteJug")
-    suspend fun deleteJug(@Body body: DeleteJugRequest): Response
+    suspend fun deleteJug(@Body body: DeleteJugRequest)
 
     @POST("renameJug")
-    suspend fun renameJug(@Body body: RenameJugRequest): Response
+    suspend fun renameJug(@Body body: RenameJugRequest)
+
+    @POST("deleteAccount")
+    suspend fun deleteAccount(@Body body: DeleteAccountRequest)
+
+    @POST("email")
+    suspend fun changeEmail(@Body body: ChangeEmailRequest)
+
+    @POST("pw")
+    suspend fun changePassword(@Body body: ChangePasswordRequest)
+
+    @POST("getTotalLitres")
+    suspend fun totalLitres(@Body body: JugDataRequest): Int
+
+    @POST("getTotalLitresFilter")
+    suspend fun totalLitresFilter(@Body body: JugDataRequest): Int
+
+    @POST("getDailyLitres")
+    suspend fun dailyLitres(@Body body: JugDataRequest): Int
 }
 
 class RemoteDataSourceFake : RemoteDataSource {
-    override suspend fun register(body: RegisterRequest): RegisterResponse {
+    override suspend fun register(body: RegisterRequest) {
         throw NotImplementedError()
     }
 
@@ -62,11 +79,7 @@ class RemoteDataSourceFake : RemoteDataSource {
         throw NotImplementedError()
     }
 
-    override suspend fun delete(body: RegisterRequest): RegisterResponse {
-        throw NotImplementedError()
-    }
-
-    override suspend fun filter(body: FilterRequest): RegisterResponse {
+    override suspend fun filter(body: FilterRequest) {
         throw NotImplementedError()
     }
 
@@ -74,11 +87,35 @@ class RemoteDataSourceFake : RemoteDataSource {
         throw NotImplementedError()
     }
 
-    override suspend fun deleteJug(body: DeleteJugRequest): Response {
+    override suspend fun deleteJug(body: DeleteJugRequest) {
         throw NotImplementedError()
     }
 
-    override suspend fun renameJug(body: RenameJugRequest): Response {
+    override suspend fun renameJug(body: RenameJugRequest) {
+        throw NotImplementedError()
+    }
+
+    override suspend fun deleteAccount(body: DeleteAccountRequest) {
+        throw NotImplementedError()
+    }
+
+    override suspend fun changeEmail(body: ChangeEmailRequest) {
+        throw NotImplementedError()
+    }
+
+    override suspend fun changePassword(body: ChangePasswordRequest) {
+        throw NotImplementedError()
+    }
+
+    override suspend fun totalLitres(body: JugDataRequest): Int {
+        throw NotImplementedError()
+    }
+
+    override suspend fun totalLitresFilter(body: JugDataRequest): Int {
+        throw NotImplementedError()
+    }
+
+    override suspend fun dailyLitres(body: JugDataRequest): Int {
         throw NotImplementedError()
     }
 }

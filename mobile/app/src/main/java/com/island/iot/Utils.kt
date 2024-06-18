@@ -311,6 +311,15 @@ fun GenericDialog(
     )
 }
 
+@Composable
+fun BlockingDialog(dialogTitle:String){
+    AlertDialog(
+        onDismissRequest = { },
+        title={Text(text=dialogTitle)},
+        confirmButton = {}
+    )
+}
+
 
 @Composable
 fun AutoCloseDialog(
@@ -383,6 +392,7 @@ fun PromptDialog(
         )
     }
 }
+
 
 @Composable
 fun ActionButton(

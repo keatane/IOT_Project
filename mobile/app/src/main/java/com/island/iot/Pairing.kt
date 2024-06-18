@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.net.ConnectivityManager
+import android.net.ConnectivityManager.NetworkCallback
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
@@ -61,6 +62,7 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
         WifiDeviceFilter.Builder().setNamePattern(Pattern.compile("jug_\\d+")).build()
     private val jugRequest = AssociationRequest.Builder().addDeviceFilter(jugWifiFilter).build()
     private val wifiRequest = AssociationRequest.Builder().build()
+    private lateinit var networkCallback: NetworkCallback
 
     private class WifiChooserContract : ActivityResultContract<IntentSenderRequest, String?>() {
         private val contract = ActivityResultContracts.StartIntentSenderForResult()
@@ -107,14 +109,16 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
                 .setNetworkSpecifier(wifiNetworkSpecifier)
                 .build()
 
-            connectivityManager.requestNetwork(networkRequest, object :
-                ConnectivityManager.NetworkCallback() {
+            networkCallback = object :
+                NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     Log.d("fdhjhjdsjdjs", "CONNETED YAYAYAYYAY")
                     connectivityManager.bindProcessToNetwork(network)
                     cont.resume(Unit)
                 }
-            })
+            }
+
+            connectivityManager.requestNetwork(networkRequest, networkCallback)
         }
     }
 
@@ -125,6 +129,7 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
 
     override suspend fun disconnect() {
         connectivityManager.bindProcessToNetwork(null)
+        connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 
     private suspend fun selectWifi(intentSenderRequest: IntentSenderRequest): String? {

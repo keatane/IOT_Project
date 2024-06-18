@@ -58,6 +58,7 @@ export class RestAPI<RequestType, ResponseType> {
         body: JSON.stringify(obj),
       },
     );
+    if (!response.ok)throw new Error(response.status.toString());
     return (await response.json()) as ResponseType;
   }
   public recv(

@@ -4,25 +4,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 
 enum class PairingState {
-    NONE, CONNECTING, ASK_PASSWORD, SENDING
+    NONE, CONNECTING, ASK_PASSWORD, SENDING, DONE
 }
 
-data class JugElement(val title: String?, val filter: Int, val id: Int)
+data class JugElement(val name: String, val filtercapacity: Int, val id: Int)
 
 interface MemoryDataSource {
     val pairingState: MutableStateFlow<PairingState>
     val wifiPassword: MutableStateFlow<String>
     val jugList: MutableStateFlow<List<JugElement>>
-    val selectedJugIndex: MutableStateFlow<Int>
     val lastError: MutableStateFlow<String?>
+    val totalLitres: MutableStateFlow<Int?>
 }
 
 class MemoryDataSourceImpl : MemoryDataSource {
     override val pairingState = MutableStateFlow(PairingState.NONE)
     override val wifiPassword = MutableStateFlow("")
     override val jugList: MutableStateFlow<List<JugElement>> = MutableStateFlow(listOf())
-    override val selectedJugIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     override val lastError: MutableStateFlow<String?> = MutableStateFlow(null)
+    override val totalLitres: MutableStateFlow<Int?> = MutableStateFlow(null)
 }
 
 class MemoryDataSourceFake : MemoryDataSource {
@@ -30,10 +30,10 @@ class MemoryDataSourceFake : MemoryDataSource {
     override val wifiPassword = MutableStateFlow("")
     override val jugList: MutableStateFlow<List<JugElement>> = MutableStateFlow(
         listOf(
-            JugElement(title = "Kitchen Jug", filter = 150, id = 0),
-            JugElement(title = "Living Room Jug", filter = 200, id = 1)
+            JugElement(name = "Kitchen Jug", filtercapacity = 150, id = 0),
+            JugElement(name = "Living Room Jug", filtercapacity = 200, id = 1)
         )
     )
-    override val selectedJugIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     override val lastError: MutableStateFlow<String?> = MutableStateFlow(null)
+    override val totalLitres: MutableStateFlow<Int?> = MutableStateFlow(null)
 }

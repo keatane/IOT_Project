@@ -1,6 +1,6 @@
 import { program } from "commander";
 import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
-import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API } from "./api.js";
+import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES } from "./api.js";
 
 async function sendLoop(id:string|number){
     let stop=false;
@@ -63,8 +63,46 @@ async function arduinoServer(id:string|number){
     return await EDGE_PAIR_API.recv(async (request)=>{
         console.log(request);
         const token=request.token;
-        return await pair(id,token);
+        await pair(id,token);
+        return {id}
     });
+}
+
+async function getJugs(token:string){
+    return await GET_JUGS_API.send({token})
+}
+
+async function setFilter(token:string,id:number|string,value:number|string){
+    id=Number(id)
+    value=Number(value)
+    return await FILTER_API.send({token,id,filterCapacity: value})
+}
+
+async function changePassword(token:string,oldPassword:string,newPassword:string){
+    return CHANGE_PASSWORD_API.send({token,oldPw:oldPassword,newPw:newPassword})
+}
+
+async function deleteJug(token:string,id:number|string){
+    id=Number(id)
+    return DELETE_JUG_API.send({token,id})
+}
+
+async function renameJug(token:string,id:number|string,name:string){
+    id=Number(id)
+    return RENAME_JUG_API.send({token,id,name})
+}
+
+async function deleteAccount(token:string){
+    return DELETE_ACCOUNT_API.send({token})
+}
+
+async function changeEmail(token:string,email:string){
+    return CHANGE_EMAIL_API.send({token,newEmail:email})
+}
+
+async function totalLitres(token:string,id:number|string){
+    id=Number(id)
+    return TOTAL_LITRES.send({token,id})
 }
 
 async function arduinoClient(ssid:string,pw:string,token:string){
@@ -87,4 +125,12 @@ program.command("filter <n> <token> <capacity>").action(entry(filter));
 program.command("arduino-client <ssid> <pw> <token>").action(entry(arduinoClient));
 program.command("arduino-server <id>").action(entry(arduinoServer));
 program.command("arduino-simulator <id>").action(entry(arduinoSimulator));
+program.command("set-filter <token> <id> <value>").action(entry(setFilter));
+program.command("get-jugs <token>").action(entry(getJugs));
+program.command("change-password <token> <oldPassword> <newPassword>").action(entry(changePassword));
+program.command("delete-jug <token> <id>").action(entry(deleteJug));
+program.command("rename-jug <token> <id> <name>").action(entry(renameJug));
+program.command("delete-account <token>").action(entry(deleteAccount));
+program.command("change-email <token> <email>").action(entry(changeEmail));
+program.command("total-litres <token> <id>").action(entry(totalLitres));
 program.parse();

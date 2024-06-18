@@ -221,7 +221,12 @@ fun PasswordDialog(callback: (String?) -> Unit) {
         dialogTitle = "Wifi password",
         icon = Icons.Default.Edit,
     ) {
-        OutlinedTextField(value = text, onValueChange = { text = it }, singleLine = true, visualTransformation = PasswordVisualTransformation())
+        OutlinedTextField(
+            value = text,
+            onValueChange = { text = it },
+            singleLine = true,
+            visualTransformation = PasswordVisualTransformation()
+        )
     }
 }
 
@@ -283,8 +288,25 @@ fun SideEffects(controller: NavController, state: StateRepository) {
         PasswordDialog {
             state.setWifiPassword(it!!)
         }
+    if (pairingState == PairingState.CONNECTING) {
+        BlockingDialog(dialogTitle = "Connecting the jug")
+    }
+    if (pairingState == PairingState.SENDING) {
+        BlockingDialog(dialogTitle = "Pairing the jug")
+    }
+    if (pairingState == PairingState.DONE) {
+        GenericDialog(
+            onDismissRequest = { state.resetPairingState() },
+            onConfirmation = { state.resetPairingState() },
+            dialogTitle = "Paired the jug",
+            icon = Icons.Filled.Home
+        ) {
+
+        }
+    }
     val user by state.user.collectAsState(null)
     LaunchedEffect(key1 = user) {
+        if (user == null) Route.LOGINPAGE.open(controller)
         if (user != null) Route.DASHBOARD.open(controller)
     }
     val lastError by state.lastError.collectAsState()

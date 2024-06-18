@@ -29,13 +29,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun WarningDialog(openAlertDialog: MutableState<Boolean>) {
+fun WarningDialog(openAlertDialog: MutableState<Boolean>,dialogText:String="",onConfirm:()->Unit) {
     ConfirmDialog(
         onConfirmation = {
-            println("Account deleted")
+            onConfirm()
         },
         dialogTitle = "Are you sure?",
-        dialogText = "This action is irreversible. Your account will be permanently deleted.",
+        dialogText = dialogText,
         icon = Icons.Default.Warning, visibleState = openAlertDialog
     )
 }
@@ -44,7 +44,9 @@ fun WarningDialog(openAlertDialog: MutableState<Boolean>) {
 fun AccountSection(
     navController: NavController, stateRepository: StateRepository
 ) {
-    val openAlertDeleteDialog = remember { mutableStateOf(false) }
+    val deleteAccountDialog = remember { mutableStateOf(false) }
+    val logoutDialog=remember{ mutableStateOf(false) }
+    val changeEmailDialog=remember{ mutableStateOf(false) }
     var email by remember {
         mutableStateOf("")
     }
@@ -67,7 +69,7 @@ fun AccountSection(
             contentDescription = "Confirm email icon",
             text = "Change email"
         ) {
-            /*TODO*/
+            changeEmailDialog.value=true
         }
         ActionButton(
             icon = painterResource(id = R.drawable.key),
@@ -81,7 +83,7 @@ fun AccountSection(
             contentDescription = "Logout icon",
             text = "Logout"
         ) {
-            /*TODO*/
+            logoutDialog.value=true
         }
         ActionButton(
             icon = Icons.Filled.Delete,
@@ -89,10 +91,16 @@ fun AccountSection(
             text = "Delete account",
             buttonColor = Color.Red
         ) {
-            openAlertDeleteDialog.value = true
+            deleteAccountDialog.value = true
         }
     }
-    WarningDialog(openAlertDeleteDialog)
+    WarningDialog(changeEmailDialog) {
+        stateRepository.launch { stateRepository.changeEmail(email) }
+    }
+    WarningDialog(deleteAccountDialog,"This action is irreversible. Your account will be permanently deleted."){stateRepository.launch { stateRepository.deleteAccount() }}
+    WarningDialog(logoutDialog) {
+        stateRepository.launch { stateRepository.logout()}
+    }
 }
 
 

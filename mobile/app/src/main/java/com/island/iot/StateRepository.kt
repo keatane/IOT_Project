@@ -5,8 +5,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import okio.IOException
+import retrofit2.HttpException
 import kotlin.math.max
 
 
@@ -17,32 +20,39 @@ class StateRepository(
     private val _memoryDataSource: MemoryDataSource,
     private val _arduinoDataSource: ArduinoDataSource
 ) {
-    val jugList = _memoryDataSource.jugList.asStateFlow()
+    val jugList = _memoryDataSource.jugList.map { jugs -> jugs.sortedBy { it.id } }
     val pairingState = _memoryDataSource.pairingState.asStateFlow()
     val user = _localDataSource.user
+    private val selectedJugIndex = _localDataSource.user.map { it?.selectedJugIndex ?: 0 }
     val selectedJug =
-        _memoryDataSource.jugList.combine(_memoryDataSource.selectedJugIndex) { list, index ->
+        _memoryDataSource.jugList.combine(selectedJugIndex) { list, index ->
             Log.d("JUG LIST", list.toString())
             Log.d("JUG INDEX", index.toString())
             list.getOrNull(index)
         }
     val lastError = _memoryDataSource.lastError.asStateFlow()
+    val totalLitres =
+        _memoryDataSource.totalLitres.map { if (selectedJug.first() == null) null else it }
 
     private suspend fun updateJugs() {
         var first = true
         while (true) {
-            val user = _localDataSource.user.first { it != null }
-            user!!
+            val user = _localDataSource.user.filterNotNull().first()
             try {
-                val jugs = _remoteDataSource.getJugs(GetJugsRequest(user.token)).jugs!!
+                val jugs = _remoteDataSource.getJugs(GetJugsRequest(user.token)).jugs
                 _memoryDataSource.jugList.value = jugs
+            } catch (e: HttpException) {
+                if (e.code() == 401) {
+                    logout()
+                }
             } catch (e: IOException) {
+                Log.e("UPDATE JUG", "ERROR", e)
                 // TODO: remove this
                 if (first)
                     _memoryDataSource.jugList.value =
                         listOf(
-                            JugElement(title = "Kitchen Jug", filter = 150, id = 0),
-                            JugElement(title = "Living Room Jug", filter = 200, id = 1)
+                            JugElement(name = "Kitchen Jug", filtercapacity = 150, id = 0),
+                            JugElement(name = "Living Room Jug", filtercapacity = 200, id = 1)
                         )
             }
             first = false
@@ -53,6 +63,27 @@ class StateRepository(
     private suspend fun clearErrors() {
         while (true) {
             _memoryDataSource.lastError.value = null
+            delay(1000)
+        }
+    }
+
+    private suspend fun clearJugData() {
+        selectedJug.collect {
+            _memoryDataSource.totalLitres.value = null
+        }
+    }
+
+    private suspend fun updateJugData() {
+        while (true) {
+            val user = user.filterNotNull().first()
+            val jug = selectedJug.filterNotNull().first()
+            try {
+                val totalLitres =
+                    _remoteDataSource.totalLitres(JugDataRequest(token = user.token, id = jug.id))
+                _memoryDataSource.totalLitres.value = totalLitres
+            } catch (e: Exception) {
+                Log.e("TOTAL LITRES", "ERROR", e)
+            }
             delay(1000)
         }
     }
@@ -71,10 +102,16 @@ class StateRepository(
     init {
         launch { updateJugs() }
         launch { clearErrors() }
+        launch { clearJugData() }
+        launch { updateJugData() }
     }
 
-    fun setSelectedJug(jug: JugElement) {
-        _memoryDataSource.selectedJugIndex.value = jugList.value.indexOf(jug)
+    suspend fun _setSelectedJugIndex(index: Int) {
+        _localDataSource.setUser(user.filterNotNull().first().copy(selectedJugIndex = index))
+    }
+
+    suspend fun setSelectedJug(jug: JugElement) {
+        _setSelectedJugIndex(jugList.first().indexOf(jug))
     }
 
     suspend fun deleteJug(jug: JugElement) {
@@ -83,78 +120,75 @@ class StateRepository(
         Log.d("JUGS SIZE", jugs.size.toString())
         Log.d("djksjdf", jugs.toString())
         _modifyJugList { it.remove(jug) }
-        val user = _localDataSource.user.first()
-        user!!
+        val user = _localDataSource.user.filterNotNull().first()
         _remoteDataSource.deleteJug(DeleteJugRequest(user.token, jug.id))
     }
 
     suspend fun renameJug(jug: JugElement, name: String) {
-        _modifySingleJug(jug, jug.copy(title = name))
         _remoteDataSource.renameJug(
-            RenameJugRequest(_localDataSource.user.first()!!.token, name)
+            RenameJugRequest(_localDataSource.user.first()!!.token, jug.id, name)
         )
+        _modifySingleJug(jug, jug.copy(name = name))
     }
 
     suspend fun changeFilter(jug: JugElement, filter: Int) {
-        _modifySingleJug(jug, jug.copy(filter = filter))
-        _filter(
-            _localDataSource.user.first()!!.token,
-            jug.id,
-            filter
+        _remoteDataSource.filter(
+            FilterRequest(
+                _localDataSource.user.filterNotNull().first().token,
+                jug.id,
+                filter
+            )
         )
+        _modifySingleJug(jug, jug.copy(filtercapacity = filter))
     }
 
 
     suspend fun register(username: String, password: String): User {
-        val registerResult = _remoteDataSource.register(RegisterRequest(username, password))
-        when (registerResult.status) {
-            ResponseStatus.OK -> {}
-        }
+        _remoteDataSource.register(RegisterRequest(username, password))
         return login(username, password)
     }
 
     suspend fun login(username: String, password: String): User {
         val result = _remoteDataSource.login(RegisterRequest(username, password))
-        when (result.status) {
-            ResponseStatus.OK -> {}
-        }
-        val user = User(result.userId!!, result.token!!)
+        val user = User(result.userId, result.token)
         _localDataSource.setUser(user)
         return user
     }
 
-    suspend fun delete(username: String, password: String) {
-        val result = _remoteDataSource.delete(RegisterRequest(username, password))
-        when (result.status) {
-            ResponseStatus.OK -> {}
-        }
+    suspend fun deleteAccount() {
+        _remoteDataSource.deleteAccount(DeleteAccountRequest(user.filterNotNull().first().token))
+        logout()
     }
 
-    suspend fun _filter(username: String, jugId: Int, filter: Int) {
-        val result = _remoteDataSource.filter(FilterRequest(username, jugId, filter))
-        when (result.status) {
-            ResponseStatus.OK -> {}
-        }
+    suspend fun changeEmail(email: String) {
+        _remoteDataSource.changeEmail(ChangeEmailRequest(user.filterNotNull().first().token, email))
     }
 
-    suspend fun _pair(ssid: String, password: String, token: String) {
+    suspend fun changePassword(oldPassword: String, newPassword: String) {
+        _remoteDataSource.changePassword(
+            ChangePasswordRequest(
+                user.filterNotNull().first().token,
+                oldPassword,
+                newPassword
+            )
+        )
+    }
+
+    suspend fun _pair(ssid: String, password: String, token: String): Int {
         Log.d("fhdjhfdjfhjdhfj", "START PAIRING")
-        val result = _arduinoDataSource.pair(PairRequest(ssid, password, token))
-        when (result.status) {
-            ResponseStatus.OK -> {}
-        }
+        return _arduinoDataSource.pair(PairRequest(ssid, password, token)).id
     }
 
-    private fun _modifyJugList(callback: (MutableList<JugElement>) -> Unit) {
+    private suspend fun _modifyJugList(callback: (MutableList<JugElement>) -> Unit) {
         val mutable = _memoryDataSource.jugList.value.toMutableList()
         callback(mutable)
         val index =
-            mutable.indexOf(_memoryDataSource.jugList.value.getOrNull(_memoryDataSource.selectedJugIndex.value))
-        _memoryDataSource.selectedJugIndex.value = max(index, 0)
+            mutable.indexOf(_memoryDataSource.jugList.value.getOrNull(selectedJugIndex.first()))
+        _setSelectedJugIndex(max(index, 0))
         _memoryDataSource.jugList.value = mutable
     }
 
-    private fun _modifySingleJug(prev: JugElement, new: JugElement) {
+    private suspend fun _modifySingleJug(prev: JugElement, new: JugElement) {
         _modifyJugList { it[it.indexOf(prev)] = new }
     }
 
@@ -167,13 +201,20 @@ class StateRepository(
         _memoryDataSource.pairingState.value = PairingState.ASK_PASSWORD
     }
 
-    suspend fun enterSending(ssid: String, wifiPassword: String) {
+    suspend fun enterSending(ssid: String, wifiPassword: String): Int {
         _memoryDataSource.pairingState.value = PairingState.SENDING
-        _pair(
+        return _pair(
             ssid, wifiPassword,
-            _localDataSource.user.first()!!.token
+            _localDataSource.user.filterNotNull().first().token
         )
+    }
+
+    fun resetPairingState() {
         _memoryDataSource.pairingState.value = PairingState.NONE
+    }
+
+    suspend fun logout() {
+        _localDataSource.deleteUser(_localDataSource.user.filterNotNull().first())
     }
 
     fun setWifiPassword(password: String) {
@@ -188,8 +229,10 @@ class StateRepository(
         val wifi = pairing.selectWifi()
         enterAskPassword()
         val password = _memoryDataSource.wifiPassword.first { it != "" }
-        enterSending(wifi!!, password)
+        val jugId = enterSending(wifi!!, password)
         pairing.disconnect()
+        jugList.map { jugList -> jugList.find { it.id == jugId } }.filterNotNull().first()
+        _memoryDataSource.pairingState.value = PairingState.DONE
     }
 
 }

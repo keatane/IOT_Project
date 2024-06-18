@@ -155,13 +155,13 @@ fun JugsSection(
     navController: NavController, repository: StateRepository
 ) {
     val pairing = MainActivity.getPairing()
-    val jugList by repository.jugList.collectAsState()
+    val jugList by repository.jugList.collectAsState(listOf())
     Column {
         for ((index, jug) in jugList.withIndex()) {
             Jug(
                 index,
                 jug,
-                jug.title ?: "i don't know",
+                jug.name ?: "i don't know",
                 changeFilter = { jugId, filter ->
                     repository.launch {
                         repository.changeFilter(jugId, filter)
@@ -176,7 +176,7 @@ fun JugsSection(
                     }
                 },
                 deleteJug = { repository.launch { repository.deleteJug(it) } },
-                selectJug = { repository.setSelectedJug(it) }
+                selectJug = { repository.launch{repository.setSelectedJug(it)} }
             )
         }
         ExtendedFloatingActionButton(

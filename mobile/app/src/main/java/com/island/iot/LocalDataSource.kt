@@ -6,6 +6,7 @@ import androidx.room.Database
 import androidx.room.Delete
 import androidx.room.Entity
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Room
@@ -20,6 +21,7 @@ data class User(
     @PrimaryKey
     val userId: Int,
     val token: String,
+    val selectedJugIndex: Int = 0,
 )
 
 @Dao
@@ -27,7 +29,7 @@ interface UserDAO {
     @Query("SELECT * FROM user")
     fun get(): Flow<List<User>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(users: User)
 
     @Delete

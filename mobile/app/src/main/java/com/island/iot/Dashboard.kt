@@ -84,9 +84,10 @@ fun Grid(navController: NavController, repository: StateRepository) {
         R.color.octopus
     )
     val selectedJug by repository.selectedJug.collectAsState(null)
+    val totalLitres by repository.totalLitres.collectAsState(null)
     ScrollableContent {
         Text(
-            text = selectedJug?.title.toString(),
+            text = selectedJug?.name.toString(),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(16.dp, 0.dp)
@@ -101,7 +102,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 modifier = Modifier.padding(16.dp, 0.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Metric("Total consumption", "N/A", cardColor = colors[0])
+                Metric("Total consumption",totalLitres?.toString()?:"N/A", cardColor = colors[0])
                 Metric("Daily consumption", "N/A", cardColor = colors[1])
             }
             Column(
@@ -109,7 +110,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
             ) {
                 Metric(
                     "Filter capacity",
-                    if (selectedJug != null) selectedJug!!.filter.toString() + "L" else "N/A",
+                    if (selectedJug != null) selectedJug!!.filtercapacity.toString() + "L" else "N/A",
                     cardColor = colors[2]
                 )
                 Metric("Filter life", "N/A", cardColor = colors[3])
