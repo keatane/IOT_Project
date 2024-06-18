@@ -1,45 +1,26 @@
 [[ Mobile ]]
 
-[ Account ]
-- cambio email utente
-	- implementare chiamata a node-red al click del pulsante, da RemoteDataSource
-- cambio password 
-	- implementare chiamata a node-red al click del pulsante, da RemoteDataSource
-- cancellazione account utente
-	- implementare funzione da LocalDataSource (userDAO)
-	- cancellare da LocalDataSource (?)
-- disconnessione
-	- riportare alla pagina Login/Register
-	- cancellare lo stato di loggato
-
 [ Jugs ]
-- implementare richiesta al db di node-red per le jug dell'utente
-- cancellazione jug
-	- implementare richiesta node-red per cancellazione da db
-- selezione jug da mostrare in dashboard
-	- al momento come global var, prob da cambiare
 - fixare la size massima del nome della jug
 
-[ Login/Register ]
-- implementare handle degli errori in caso di server down (per ora l'app crasha dopo qualche secondo)
-
 [ Dashboard ]
-- implementare lo stato della jug selezionata (per ora global var, selezionata dalla sezione Jug)
 - implementare chiamata di ricezione MQTT dati pubblicati dall'arduino
-- implementare chiamata Buy Filter a un intent online
 - trimmare correttamente i valori
-- inserire immagini cilindro (3 immagini, a seconda della pienezza del cilindro)
 
 [ Charts ]
-- trovare modo di passare history data ad android
 - implementare da libreria i grafici
 
 [ News ]
 - scraping delle news da sito dell'acqua
 - rendere cliccabili i link delle news (redirezione sul sito (?))
-- rifattorizzare il fatto che si è nelle news (mutablestate ripetuto)
 
 [ Altro ]
-- andare indietro con la freccia alla dashboard non aggiorna top e bottom bar
 - sistemare colorazione
-- nuove icone (Google (?))
+- icone intuitive
+- firebase notifiche push
+
+---- 
+
+[[ IOT ]]
+- redis con valori da ThingWorx
+- display LCD arduino (?)
