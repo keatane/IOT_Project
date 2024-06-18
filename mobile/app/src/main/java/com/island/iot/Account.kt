@@ -8,10 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -24,7 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,23 +30,19 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun WarningDialog(openAlertDialog: MutableState<Boolean>) {
-    if (openAlertDialog.value) {
-            AlertDialogGeneric(
-                onDismissRequest = { openAlertDialog.value = false },
-                onConfirmation = {
-                    openAlertDialog.value = false
-                    println("Account deleted")
-                },
-                dialogTitle = "Are you sure?",
-                dialogText = "This action is irreversible. Your account will be permanently deleted.",
-                icon = Icons.Default.Warning
-            )
-    }
+    ConfirmDialog(
+        onConfirmation = {
+            println("Account deleted")
+        },
+        dialogTitle = "Are you sure?",
+        dialogText = "This action is irreversible. Your account will be permanently deleted.",
+        icon = Icons.Default.Warning, visibleState = openAlertDialog
+    )
 }
 
 @Composable
 fun AccountSection(
-    navController: NavController,stateRepository: StateRepository
+    navController: NavController, stateRepository: StateRepository
 ) {
     val openAlertDeleteDialog = remember { mutableStateOf(false) }
     var email by remember {
@@ -63,58 +54,53 @@ fun AccountSection(
             .fillMaxHeight()
             .padding(4.dp)
     ) {
-        if (openAlertDeleteDialog.value) {
-            WarningDialog(openAlertDeleteDialog)
-        }
-        Text(text = "Insert your new email", fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier
-            .padding(16.dp)
-            .align(Alignment.CenterHorizontally))
+        Text(
+            text = "Insert your new email",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(16.dp)
+        )
         CardTextField(label = "Email", text = email, onChange = { email = it })
-        ExtendedFloatingActionButton(
-            onClick = { /* TODO */ },
-            icon = { Icon(Icons.Filled.Check, "Confirm email icon", tint = colorResource(id = R.color.cream)) },
-            text = { Text(text = "Change email", color = colorResource(id = R.color.cream)) },
-            containerColor = colorResource(id = R.color.water),
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-        ExtendedFloatingActionButton(
-            onClick = { Route.CHANGE_PASSWORD.open(navController) },
-            icon = { Icon(painterResource(id = R.drawable.key), "Key icon", tint = colorResource(id = R.color.cream)) },
-            text = { Text(text = "Change password", color = colorResource(id = R.color.cream)) },
-            containerColor = colorResource(id = R.color.water),
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-        ExtendedFloatingActionButton(
-            onClick = { /* TODO */ },
-            icon = { Icon(painterResource(id = R.drawable.logout), "Logout icon", tint = colorResource(id = R.color.cream)) },
-            text = { Text(text = "Logout", color = colorResource(id = R.color.cream)) },
-            containerColor = colorResource(id = R.color.water),
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-        ExtendedFloatingActionButton(
-            onClick = { openAlertDeleteDialog.value = true },
-            icon = { Icon(Icons.Filled.Delete, "Delete icon", tint = colorResource(id = R.color.cream)) },
-            text = { Text(text = "Delete account", color = colorResource(id = R.color.cream)) },
-            containerColor = Color.Red,
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
+        ActionButton(
+            icon = Icons.Filled.Check,
+            contentDescription = "Confirm email icon",
+            text = "Change email"
+        ) {
+            /*TODO*/
+        }
+        ActionButton(
+            icon = painterResource(id = R.drawable.key),
+            contentDescription = "Key icon",
+            text = "Change password"
+        ) {
+            Route.CHANGE_PASSWORD.open(navController)
+        }
+        ActionButton(
+            icon = painterResource(id = R.drawable.logout),
+            contentDescription = "Logout icon",
+            text = "Logout"
+        ) {
+            /*TODO*/
+        }
+        ActionButton(
+            icon = Icons.Filled.Delete,
+            contentDescription = "Delete icon",
+            text = "Delete account",
+            buttonColor = Color.Red
+        ) {
+            openAlertDeleteDialog.value = true
+        }
     }
+    WarningDialog(openAlertDeleteDialog)
 }
 
 
 @Preview(showBackground = true)
 @Composable
 fun AccountPreview() {
-    val navController= rememberNavController()
-    Decorations(navController,Route.ACCOUNT) {
+    val navController = rememberNavController()
+    Decorations(navController, Route.ACCOUNT) {
         Account(navController, FAKE_REPOSITORY)
     }
 }
@@ -128,6 +114,6 @@ fun Account(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        AccountSection(navController,stateRepository)
+        AccountSection(navController, stateRepository)
     }
 }

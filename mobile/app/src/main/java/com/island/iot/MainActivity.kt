@@ -23,6 +23,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -31,6 +32,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -38,6 +42,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
@@ -208,13 +213,16 @@ fun Decorations(
 }
 
 @Composable
-fun PasswordDialog(callback: (String) -> Unit) {
-    DialogGeneric(
-        onDismissRequest = { },
-        onConfirmation = callback,
+fun PasswordDialog(callback: (String?) -> Unit) {
+    var text by remember { mutableStateOf("") }
+    GenericDialog(
+        onDismissRequest = { callback(null) },
+        onConfirmation = { callback(text) },
         dialogTitle = "Wifi password",
-        icon = Icons.Default.Edit
-    )
+        icon = Icons.Default.Edit,
+    ) {
+        OutlinedTextField(value = text, onValueChange = { text = it }, singleLine = true, visualTransformation = PasswordVisualTransformation())
+    }
 }
 
 @Composable
@@ -273,7 +281,7 @@ fun SideEffects(controller: NavController, state: StateRepository) {
     val pairingState by state.pairingState.collectAsState()
     if (pairingState == PairingState.ASK_PASSWORD)
         PasswordDialog {
-            state.setWifiPassword(it)
+            state.setWifiPassword(it!!)
         }
     val user by state.user.collectAsState(null)
     LaunchedEffect(key1 = user) {

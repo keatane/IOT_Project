@@ -2,18 +2,14 @@ package com.island.iot
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,21 +18,17 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,6 +38,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -141,7 +134,7 @@ fun CredentialCard(
             text = password,
             onChange = { password = it }
         )
-        if(isRegistration) {
+        if (isRegistration) {
             CardTextField(
                 label = "Confirm Password",
                 password = true,
@@ -151,8 +144,21 @@ fun CredentialCard(
         }
         ExtendedFloatingActionButton(
             onClick = { operation(email, password) },
-            icon = { Icon(painterResource(id = R.drawable.login), "WiFi icon", tint = colorResource(id = R.color.cream)) },
-            text = { Text(text = firstButtonMsg, fontSize = 16.sp, modifier = Modifier.padding(24.dp, 0.dp), color = colorResource(id = R.color.cream)) },
+            icon = {
+                Icon(
+                    painterResource(id = R.drawable.login),
+                    "WiFi icon",
+                    tint = colorResource(id = R.color.cream)
+                )
+            },
+            text = {
+                Text(
+                    text = firstButtonMsg,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(24.dp, 0.dp),
+                    color = colorResource(id = R.color.cream)
+                )
+            },
             containerColor = colorResource(id = R.color.rock),
             modifier = Modifier
                 .padding(16.dp)
@@ -160,8 +166,21 @@ fun CredentialCard(
         )
         ExtendedFloatingActionButton(
             onClick = { navigate() },
-            icon = { Icon(painterResource(id = R.drawable.people), "WiFi icon", tint = colorResource(id = R.color.cream)) },
-            text = { Text(text = secondButtonMsg, fontSize = 16.sp, modifier = Modifier.padding(24.dp, 0.dp), color = colorResource(id = R.color.cream)) },
+            icon = {
+                Icon(
+                    painterResource(id = R.drawable.people),
+                    "WiFi icon",
+                    tint = colorResource(id = R.color.cream)
+                )
+            },
+            text = {
+                Text(
+                    text = secondButtonMsg,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(24.dp, 0.dp),
+                    color = colorResource(id = R.color.cream)
+                )
+            },
             containerColor = colorResource(id = R.color.rock),
             modifier = Modifier
                 .padding(16.dp)
@@ -172,7 +191,7 @@ fun CredentialCard(
 
 @Composable
 fun CredentialPage(
-    navController: NavController,stateRepository: StateRepository,
+    navController: NavController, stateRepository: StateRepository,
     isRegistration: Boolean = false
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -204,7 +223,9 @@ fun CredentialPage(
                         animationSpec = tween(
                             durationMillis = 1000,
                             easing = FastOutSlowInEasing
-                        ))}
+                        )
+                    )
+                }
             }
         }
 
@@ -212,7 +233,7 @@ fun CredentialPage(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    //.height(600.dp),
+                //.height(600.dp),
             ) {
                 Spacer(modifier = Modifier.size(50.dp))
                 Text(
@@ -231,8 +252,18 @@ fun CredentialPage(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 CredentialCard(
-                    operation = {username,password->stateRepository.launch{if(isRegistration){stateRepository.register(username,password)}else stateRepository.login(username,password) }},
-                    navigate = {if(isRegistration)Route.LOGINPAGE.open(navController)else Route.REGISTERPAGE.open(navController)},
+                    operation = { username, password ->
+                        stateRepository.launch {
+                            if (isRegistration) {
+                                stateRepository.register(username, password)
+                            } else stateRepository.login(username, password)
+                        }
+                    },
+                    navigate = {
+                        if (isRegistration) Route.LOGINPAGE.open(navController) else Route.REGISTERPAGE.open(
+                            navController
+                        )
+                    },
                     isRegistration = isRegistration,
                     firstButtonMsg = if (!isRegistration) "Login" else "Sign up",
                     secondButtonMsg = if (!isRegistration) "Not a user? Sign up" else "Already a user? Sign in"
@@ -245,12 +276,12 @@ fun CredentialPage(
 
 /*** Dialogs ***/
 @Composable
-fun AlertDialogGeneric(
+fun GenericDialog(
     onDismissRequest: () -> Unit,
     onConfirmation: () -> Unit,
     dialogTitle: String,
-    dialogText: String,
     icon: ImageVector,
+    dialogText: @Composable () -> Unit,
 ) {
     AlertDialog(
         icon = {
@@ -260,25 +291,19 @@ fun AlertDialogGeneric(
             Text(text = dialogTitle)
         },
         text = {
-            Text(text = dialogText)
+            dialogText()
         },
-        onDismissRequest = {
-            onDismissRequest()
-        },
+        onDismissRequest = onDismissRequest,
         confirmButton = {
             TextButton(
-                onClick = {
-                    onConfirmation()
-                }
+                onClick = onConfirmation
             ) {
                 Text("Confirm")
             }
         },
         dismissButton = {
             TextButton(
-                onClick = {
-                    onDismissRequest()
-                }
+                onClick = onDismissRequest
             ) {
                 Text("Dismiss")
             }
@@ -286,49 +311,122 @@ fun AlertDialogGeneric(
     )
 }
 
+
 @Composable
-fun DialogGeneric(
-    onDismissRequest: () -> Unit,
-    onConfirmation: (String) -> Unit,
+fun AutoCloseDialog(
+    onDismissRequest: () -> Unit = {},
+    onConfirmation: () -> Unit,
     dialogTitle: String,
     icon: ImageVector,
+    visibleState: MutableState<Boolean>,
+    dialogText: @Composable () -> Unit,
+) {
+    var visible by visibleState
+    if (visible) {
+        GenericDialog(
+            icon = icon,
+            dialogTitle = dialogTitle,
+            onDismissRequest = {
+                visible = false
+                onDismissRequest()
+            },
+            onConfirmation = {
+                visible = false
+                onConfirmation()
+            },
+            dialogText = dialogText
+        )
+    }
+}
+
+@Composable
+fun ConfirmDialog(
+    onDismissRequest: () -> Unit = {},
+    dialogTitle: String,
+    dialogText: String,
+    icon: ImageVector,
+    visibleState: MutableState<Boolean>,
+    onConfirmation: () -> Unit,
+) {
+    AutoCloseDialog(
+        onDismissRequest = onDismissRequest,
+        onConfirmation = onConfirmation,
+        dialogTitle = dialogTitle,
+        icon = icon,
+        visibleState = visibleState,
+    ) {
+        Text(text = dialogText)
+    }
+}
+
+@Composable
+fun PromptDialog(
+    onDismissRequest: () -> Unit = {},
+    dialogTitle: String,
+    icon: ImageVector,
+    visibleState: MutableState<Boolean>,
+    onConfirmation: (String) -> Unit,
 ) {
     var text by remember { mutableStateOf("") }
-    AlertDialog(
+    AutoCloseDialog(
+        onDismissRequest = onDismissRequest,
+        onConfirmation = { onConfirmation(text) },
+        dialogTitle = dialogTitle,
+        icon = icon,
+        visibleState = visibleState
+    ) {
+        OutlinedTextField(
+            value = text,
+            onValueChange = { text = it },
+            label = { Text("Input") },
+            singleLine = true
+        )
+    }
+}
+
+@Composable
+fun ActionButton(
+    text: String, onClick: () -> Unit,
+    buttonColor: Color = colorResource(id = R.color.water),
+    icon: @Composable () -> Unit
+) {
+    ExtendedFloatingActionButton(
+        onClick = onClick,
         icon = {
-            Icon(icon, contentDescription = "Input icon")
+            icon()
         },
-        title = {
-            Text(text = dialogTitle)
-        },
-        text = {
-            OutlinedTextField(
-                value = text,
-                onValueChange = { text = it },
-                label = { Text("Input") },
-                singleLine = true
-            )
-        },
-        onDismissRequest = {
-            onDismissRequest()
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onConfirmation(text)
-                }
-            ) {
-                Text("Confirm")
-            }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = {
-                    onDismissRequest()
-                }
-            ) {
-                Text("Dismiss")
-            }
-        }
+        text = { Text(text = text, color = colorResource(id = R.color.cream)) },
+        containerColor = buttonColor,
+        modifier = Modifier
+            .padding(16.dp)
+        //.align(Alignment.CenterHorizontally)
     )
+}
+
+@Composable
+fun ActionButton(icon: Painter, contentDescription: String, text: String, onClick: () -> Unit) {
+    ActionButton(text, onClick) {
+        Icon(
+            icon,
+            contentDescription,
+            tint = colorResource(id = R.color.cream)
+        )
+    }
+}
+
+@Composable
+fun ActionButton(
+    icon: ImageVector,
+    contentDescription: String,
+    text: String,
+    buttonColor: Color = colorResource(id = R.color.water),
+    onClick: () -> Unit
+) {
+    ActionButton(text, onClick,buttonColor) {
+        Icon(
+            icon,
+            contentDescription,
+            tint = colorResource(id = R.color.cream),
+        )
+    }
 }

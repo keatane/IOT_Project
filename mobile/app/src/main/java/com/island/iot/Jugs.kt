@@ -40,15 +40,12 @@ fun DeleteJugDialog(
     openDeleteDialog: MutableState<Boolean>,
     deleteJug: () -> Unit
 ) {
-    AlertDialogGeneric(
-        onDismissRequest = { openDeleteDialog.value = false },
-        onConfirmation = {
-            openDeleteDialog.value = false
-            deleteJug()
-        },
+    ConfirmDialog(
+        onConfirmation = deleteJug,
         dialogTitle = "Are you sure?",
         dialogText = "This action is irreversible. You will have to pair again the jug if you remove it.",
-        icon = Icons.Default.Warning
+        icon = Icons.Default.Warning,
+        visibleState = openDeleteDialog
     )
 }
 
@@ -57,14 +54,11 @@ fun RenameJugDialog(
     openAlertDialog: MutableState<Boolean>,
     renameJug: (String) -> Unit
 ) {
-    DialogGeneric(
-        onDismissRequest = { openAlertDialog.value = false },
-        onConfirmation = {
-            openAlertDialog.value = false
-            renameJug(it)
-        },
+    PromptDialog(
+        onConfirmation = renameJug,
         dialogTitle = "Rename jug",
-        icon = Icons.Default.Edit
+        icon = Icons.Default.Edit,
+        visibleState = openAlertDialog
     )
 }
 
@@ -73,14 +67,13 @@ fun FilterDialog(
     openFilterDialog: MutableState<Boolean>,
     changeFilter: (Int) -> Unit
 ) {
-    DialogGeneric(
-        onDismissRequest = { openFilterDialog.value = false },
+    PromptDialog(
         onConfirmation = {
-            openFilterDialog.value = false
             changeFilter(it.toInt())
         },
         dialogTitle = "Edit filter capacity",
-        icon = Icons.Default.Edit
+        icon = Icons.Default.Edit,
+        visibleState = openFilterDialog
     )
 }
 
@@ -161,7 +154,7 @@ fun Jug(
 fun JugsSection(
     navController: NavController, repository: StateRepository
 ) {
-    val pairing=MainActivity.getPairing()
+    val pairing = MainActivity.getPairing()
     val jugList by repository.jugList.collectAsState()
     Column {
         for ((index, jug) in jugList.withIndex()) {
@@ -187,7 +180,7 @@ fun JugsSection(
             )
         }
         ExtendedFloatingActionButton(
-            onClick = { repository.launch{repository.pairJug(pairing)} },
+            onClick = { repository.launch { repository.pairJug(pairing) } },
             icon = {
                 Icon(
                     painterResource(id = R.drawable.wifi),
