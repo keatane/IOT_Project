@@ -16,6 +16,8 @@ services:
       THINGWORX_PASSWORD: ${THINGWORX_PASSWORD}
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
+      REDIS_HOST: redis
+      JWT_SECRET: ${JWT_SECRET}
   redis:
     image: docker.io/redis:7.2.5-alpine3.19
     ports:
