@@ -67,5 +67,13 @@
     "1e34bd090b4eae45": {
         "user": "${THINGWORX_USERNAME}",
         "password": "${THINGWORX_PASSWORD}"
+    },
+    "f52f87f8bdfaeeae": {
+        "user": "${THINGWORX_USERNAME}",
+        "password": "${THINGWORX_PASSWORD}"
+    },
+    "77ca70b72d5388f6": {
+        "user": "${THINGWORX_USERNAME}",
+        "password": "${THINGWORX_PASSWORD}"
     }
 }
