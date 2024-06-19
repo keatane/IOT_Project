@@ -61,9 +61,7 @@ fun ScrollableContent(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .padding(0.dp, 32.dp),
+        modifier = Modifier.verticalScroll(rememberScrollState())
     ) { content() }
 }
 
@@ -110,8 +108,8 @@ fun CredentialCard(
         mutableStateOf("")
     }
     OutlinedCard(
-        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.water)),
-        border = BorderStroke(2.dp, colorResource(id = R.color.ocean)),
+        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.abyss)),
+        border = BorderStroke(2.dp, colorResource(id = R.color.rock)),
         modifier = maxWidth
     ) {
         Text(
@@ -147,7 +145,7 @@ fun CredentialCard(
             icon = {
                 Icon(
                     painterResource(id = R.drawable.login),
-                    "WiFi icon",
+                    "Enter icon",
                     tint = colorResource(id = R.color.cream)
                 )
             },
@@ -159,7 +157,7 @@ fun CredentialCard(
                     color = colorResource(id = R.color.cream)
                 )
             },
-            containerColor = colorResource(id = R.color.rock),
+            containerColor = colorResource(id = R.color.water),
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
@@ -169,7 +167,7 @@ fun CredentialCard(
             icon = {
                 Icon(
                     painterResource(id = R.drawable.people),
-                    "WiFi icon",
+                    "Member icon",
                     tint = colorResource(id = R.color.cream)
                 )
             },
@@ -181,7 +179,7 @@ fun CredentialCard(
                     color = colorResource(id = R.color.cream)
                 )
             },
-            containerColor = colorResource(id = R.color.rock),
+            containerColor = colorResource(id = R.color.water),
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
@@ -231,9 +229,7 @@ fun CredentialPage(
 
         Column {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                //.height(600.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Spacer(modifier = Modifier.size(50.dp))
                 Text(
@@ -405,11 +401,9 @@ fun ActionButton(
         icon = {
             icon()
         },
-        text = { Text(text = text, color = colorResource(id = R.color.cream)) },
+        text = { Text(text = text, color = colorResource(id = R.color.cream), modifier = Modifier.padding(24.dp, 0.dp)) },
         containerColor = buttonColor,
-        modifier = Modifier
-            .padding(16.dp)
-        //.align(Alignment.CenterHorizontally)
+        modifier = Modifier.padding(16.dp)
     )
 }
 

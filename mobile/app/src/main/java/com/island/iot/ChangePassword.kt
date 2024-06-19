@@ -1,13 +1,15 @@
 package com.island.iot
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,12 +30,10 @@ import androidx.navigation.compose.rememberNavController
 fun ChangePasswordSection(
     navController: NavController, stateRepository: StateRepository
 ) {
-    var oldPassword by remember {
-        mutableStateOf("")
-    }
-    var password by remember {
-        mutableStateOf("")
-    }
+    var oldPassword by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    val changePasswordDialog = remember{ mutableStateOf(false) }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -41,57 +41,46 @@ fun ChangePasswordSection(
             .padding(4.dp)
     ) {
         Text(
-            text = "Insert your passwords",
+            text = "Account password",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
+        OutlinedCard(
+            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.abyss)),
+            border = BorderStroke(2.dp, colorResource(id = R.color.rock)),
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
-        )
-        CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
-        CardTextField(label = "New Password", text = password, onChange = { password = it })
-        ExtendedFloatingActionButton(
-            onClick = {
-                stateRepository.launch {
-                    stateRepository.changePassword(
-                        oldPassword,
-                        password
-                    ); Route.ACCOUNT.open(navController)
-                }
-            },
-            icon = {
-                Icon(
-                    Icons.Filled.Check,
-                    "Confirm password icon",
-                    tint = colorResource(id = R.color.cream)
-                )
-            },
-            text = { Text(text = "Change password", color = colorResource(id = R.color.cream)) },
-            containerColor = colorResource(id = R.color.water),
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-        ExtendedFloatingActionButton(
-            onClick = { Route.ACCOUNT.open(navController) },
-            icon = {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    "Confirm email icon",
-                    tint = colorResource(id = R.color.cream)
-                )
-            },
-            text = {
-                Text(
-                    text = "Return to account details",
-                    color = colorResource(id = R.color.cream)
-                )
-            },
-            containerColor = colorResource(id = R.color.water),
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
+        ) {
+            Text(
+                text = "Insert your passwords",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.cream),
+                modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally)
+            )
+            CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
+            CardTextField(label = "New Password", text = password, onChange = { password = it })
+        }
+        ActionButton(
+            icon = Icons.Filled.Check,
+            contentDescription = "Confirm password icon",
+            text = "Change password"
+        ) {
+            changePasswordDialog.value=true
+        }
+        ActionButton(
+            icon = Icons.Filled.ArrowBack,
+            contentDescription = "Return to account details",
+            text = "Return to account details"
+        ) {
+            Route.ACCOUNT.open(navController)
+        }
+        WarningDialog(changePasswordDialog, "Your password will be irreversibly changed.") {
+            stateRepository.launch { stateRepository.changePassword(oldPassword, password) }
+        }
     }
 }
 

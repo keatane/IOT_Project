@@ -252,14 +252,10 @@ fun Root(viewModel: StateViewModel = viewModel()) {
                 Dashboard(controller, state)
             }
             composable(Route.ACCOUNT.id) {
-                Account(
-                    controller, state
-                )
+                Account(controller, state)
             }
             composable(Route.CHANGE_PASSWORD.id) {
-                ChangePassword(
-                    controller, state
-                )
+                ChangePassword(controller, state)
             }
             composable(Route.CHARTS.id) {
                 Chart(

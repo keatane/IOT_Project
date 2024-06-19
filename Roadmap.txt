@@ -3,18 +3,26 @@
 [ Jugs ]
 - fixare la size massima del nome della jug
 
+[ Login ]
+- implementare check su confirm password
+
+[ Change Password ]
+- implementare check su confirm password
+
 [ Charts ]
 - implementare da libreria i grafici
 
 [ News ]
 - scraping delle news da sito dell'acqua
-- rendere cliccabili i link delle news (redirezione sul sito (?))
+- rendere cliccabili i link delle news (redirezione sul sito)
 
 [ Altro ]
-- sistemare colorazione
 - icone intuitive
 - firebase notifiche push
 - in background l'app sospende le chiamate http
+- risolvere problema barra in alto a volte scompare
+- fixare la posizione in portrait
+- risolvere tutti i warning su android studio
 
 ---- 
 

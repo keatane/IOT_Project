@@ -119,19 +119,18 @@ fun nullAppend(x: Any?, y: String): String? {
 fun Grid(navController: NavController, repository: StateRepository) {
     val uriHandler = LocalUriHandler.current
     val colors = intListOf(
-        R.color.abyss,
-        R.color.abyss,
-        R.color.abyss,
-        R.color.abyss,
+        R.color.aquamarine,
+        R.color.aquamarine,
+        R.color.aquamarine,
+        R.color.aquamarine,
         R.color.seaweed,
-        R.color.octopus
+        R.color.octopus // change to red if filter status == 100%
     )
     val selectedJug by repository.selectedJug.collectAsState(null)
     val totalLitres by repository.totalLitres.collectAsState(null)
     val totalLitresFilter by repository.totalLitresFilter.collectAsState(null)
     val dailyLitres by repository.dailyLitres.collectAsState(null)
     val hasFilter = (selectedJug?.filtercapacity ?: 0) != 0
-    Log.d("TOTALLITRES",totalLitres.toString())
 
     ScrollableContent {
         Text(
@@ -157,7 +156,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 )
                 Metric(
                     "Daily consumption",
-                    nullAppend(nullRound(dailyLitres), "L") ?: "N/A",
+                    nullAppend(nullRound(dailyLitres), "L/d") ?: "N/A",
                     cardColor = colors[1]
                 )
             }

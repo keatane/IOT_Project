@@ -29,8 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
@@ -156,7 +158,15 @@ fun JugsSection(
 ) {
     val pairing = MainActivity.getPairing()
     val jugList by repository.jugList.collectAsState(listOf())
-    Column {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        Text(
+            text = "Your jugs",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
         for ((index, jug) in jugList.withIndex()) {
             Jug(
                 index,
