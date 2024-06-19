@@ -1,6 +1,6 @@
 import { program } from "commander";
 import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
-import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES } from "./api.js";
+import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES, TOTAL_LITRES_FILTER, DAILY_LITRES } from "./api.js";
 
 async function sendLoop(id:string|number){
     let stop=false;
@@ -105,6 +105,16 @@ async function totalLitres(token:string,id:number|string){
     return TOTAL_LITRES.send({token,id})
 }
 
+async function totalLitresFilter(token:string,id:number|string){
+    id=Number(id)
+    return TOTAL_LITRES_FILTER.send({token,id})
+}
+
+async function dailyLitres(token:string,id:number|string){
+    id=Number(id)
+    return DAILY_LITRES.send({token,id})
+}
+
 async function arduinoClient(ssid:string,pw:string,token:string){
     return await EDGE_PAIR_API.send({ssid,pw,token});
 }
@@ -133,4 +143,6 @@ program.command("rename-jug <token> <id> <name>").action(entry(renameJug));
 program.command("delete-account <token>").action(entry(deleteAccount));
 program.command("change-email <token> <email>").action(entry(changeEmail));
 program.command("total-litres <token> <id>").action(entry(totalLitres));
+program.command("total-litres-filter <token> <id>").action(entry(totalLitresFilter));
+program.command("daily-litres <token> <id>").action(entry(dailyLitres));
 program.parse();
