@@ -61,13 +61,13 @@ interface RemoteDataSource {
     suspend fun changePassword(@Body body: ChangePasswordRequest)
 
     @POST("getTotalLitres")
-    suspend fun totalLitres(@Body body: JugDataRequest): Int
+    suspend fun totalLitres(@Body body: JugDataRequest): Double
 
     @POST("getTotalLitresFilter")
-    suspend fun totalLitresFilter(@Body body: JugDataRequest): Int
+    suspend fun totalLitresFilter(@Body body: JugDataRequest): Double
 
     @POST("getDailyLitres")
-    suspend fun dailyLitres(@Body body: JugDataRequest): Int
+    suspend fun dailyLitres(@Body body: JugDataRequest): Double
 }
 
 class RemoteDataSourceFake : RemoteDataSource {
@@ -107,15 +107,15 @@ class RemoteDataSourceFake : RemoteDataSource {
         throw NotImplementedError()
     }
 
-    override suspend fun totalLitres(body: JugDataRequest): Int {
+    override suspend fun totalLitres(body: JugDataRequest): Double {
         throw NotImplementedError()
     }
 
-    override suspend fun totalLitresFilter(body: JugDataRequest): Int {
+    override suspend fun totalLitresFilter(body: JugDataRequest): Double {
         throw NotImplementedError()
     }
 
-    override suspend fun dailyLitres(body: JugDataRequest): Int {
+    override suspend fun dailyLitres(body: JugDataRequest): Double {
         throw NotImplementedError()
     }
 }

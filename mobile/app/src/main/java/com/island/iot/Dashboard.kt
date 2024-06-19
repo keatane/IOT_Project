@@ -1,5 +1,6 @@
 package com.island.iot
 
+import android.util.Log
 import androidx.collection.intListOf
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,32 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.pow
+
+fun calculateEstimatedFilterLifeHours(
+    dailyConsumption: Double?,
+    totalLitresFilter: Double?,
+    filter: Int?
+): Double? {
+    dailyConsumption ?: return null
+    totalLitresFilter ?: return null
+    filter ?: return null
+    val remainingFilter = filter - totalLitresFilter
+    return max(remainingFilter / dailyConsumption,0.0)
+}
+
+fun plasticSaved(total: Double?): Double? {
+    total ?: return null
+    return total * 32.0 / 500000
+}
+
+fun filterStatus(totalLitresFilter: Double?, filter: Int?): Double? {
+    totalLitresFilter ?: return null
+    filter ?: return null
+    return totalLitresFilter * 100 / filter
+}
 
 @Composable
 fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false) {
@@ -71,6 +98,22 @@ fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false
     }
 }
 
+const val DIGITS = 1
+
+fun nullRound(x: Double?, digits: Int = DIGITS): String? {
+    x ?: return null
+    if(digits==0)return Math.ceil(x).toInt().toString()
+    val integral = Math.round(x)
+    val fractual = Math.abs(x) % 1
+    val fractualString=fractual.toString().substring(2).padEnd(digits,'0').substring(0,digits)
+    return "${integral}.${fractualString}"
+}
+
+fun nullAppend(x: Any?, y: String): String? {
+    x ?: return null
+    return x.toString() + y
+}
+
 
 @Composable
 fun Grid(navController: NavController, repository: StateRepository) {
@@ -85,6 +128,11 @@ fun Grid(navController: NavController, repository: StateRepository) {
     )
     val selectedJug by repository.selectedJug.collectAsState(null)
     val totalLitres by repository.totalLitres.collectAsState(null)
+    val totalLitresFilter by repository.totalLitresFilter.collectAsState(null)
+    val dailyLitres by repository.dailyLitres.collectAsState(null)
+    val hasFilter = (selectedJug?.filtercapacity ?: 0) != 0
+    Log.d("TOTALLITRES",totalLitres.toString())
+
     ScrollableContent {
         Text(
             text = selectedJug?.name.toString(),
@@ -102,18 +150,38 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 modifier = Modifier.padding(16.dp, 0.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Metric("Total consumption",totalLitres?.toString()?:"N/A", cardColor = colors[0])
-                Metric("Daily consumption", "N/A", cardColor = colors[1])
+                Metric(
+                    "Total consumption",
+                    nullAppend(nullRound(totalLitres), "L") ?: "N/A",
+                    cardColor = colors[0]
+                )
+                Metric(
+                    "Daily consumption",
+                    nullAppend(nullRound(dailyLitres), "L") ?: "N/A",
+                    cardColor = colors[1]
+                )
             }
             Column(
                 modifier = Modifier.padding(16.dp, 0.dp)
             ) {
                 Metric(
                     "Filter capacity",
-                    if (selectedJug != null) selectedJug!!.filtercapacity.toString() + "L" else "N/A",
+                    nullAppend(selectedJug?.filtercapacity, "L") ?: "N/A",
                     cardColor = colors[2]
                 )
-                Metric("Filter life", "N/A", cardColor = colors[3])
+                Metric(
+                    "Estimated Filter life",
+                    if (hasFilter) nullAppend(
+                        nullRound(
+                            calculateEstimatedFilterLifeHours(
+                                dailyLitres,
+                                totalLitresFilter,
+                                selectedJug?.filtercapacity
+                            ),0
+                        ), " d"
+                    ) ?: "N/A" else "N/A",
+                    cardColor = colors[3]
+                )
             }
         }
         Row(
@@ -124,10 +192,10 @@ fun Grid(navController: NavController, repository: StateRepository) {
         ) {
             Metric(
                 "Quantity of plastic saved",
-                "N/A",
+                nullAppend(nullRound(plasticSaved(totalLitres), 3), " kg") ?: "N/A",
                 cardColor = colors[4],
                 true
-            ) // totalFilter*32/500000
+            )
         }
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -137,10 +205,17 @@ fun Grid(navController: NavController, repository: StateRepository) {
         ) {
             Metric(
                 "Filter status",
-                "N/A",
+                if (hasFilter) nullAppend(
+                    nullRound(
+                        filterStatus(
+                            totalLitresFilter,
+                            selectedJug?.filtercapacity
+                        )
+                    ), " %"
+                ) ?: "N/A" else "N/A",
                 cardColor = colors[5],
                 true
-            ) // totalFilter*32/500000, // totalFilter/filterCapacity*100 (trim 2,3 o 4)
+            )
         }
         Row(
             horizontalArrangement = Arrangement.Center,

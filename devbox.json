@@ -11,6 +11,17 @@
     "linux-wifi-hotspot@latest"
   ],
   "shell": {
-    "init_hook": ["source .env","export MQTT_USERNAME","export MQTT_PASSWORD","export DB_USERNAME","export DB_PASSWORD","export DB_DATABASE","export THINGWORX_USERNAME","export THINGWORX_PASSWORD","export JWT_SECRET","echo Loaded"]
+    "init_hook": [
+      "source .env",
+      "export MQTT_USERNAME",
+      "export MQTT_PASSWORD",
+      "export DB_USERNAME",
+      "export DB_PASSWORD",
+      "export DB_DATABASE",
+      "export THINGWORX_USERNAME",
+      "export THINGWORX_PASSWORD",
+      "export JWT_SECRET",
+      "echo Loaded"
+    ]
   }
 }
