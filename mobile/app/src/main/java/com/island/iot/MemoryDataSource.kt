@@ -17,6 +17,8 @@ interface MemoryDataSource {
     val totalLitres: MutableStateFlow<Double?>
     val totalLitresFilter: MutableStateFlow<Double?>
     val dailyLitres: MutableStateFlow<Double?>
+    val hourLitres: MutableStateFlow<List<Double>?>
+    val weekLitres: MutableStateFlow<List<Double>?>
 }
 
 class MemoryDataSourceImpl : MemoryDataSource {
@@ -27,6 +29,8 @@ class MemoryDataSourceImpl : MemoryDataSource {
     override val totalLitres: MutableStateFlow<Double?> = MutableStateFlow(null)
     override val totalLitresFilter: MutableStateFlow<Double?> = MutableStateFlow(null)
     override val dailyLitres: MutableStateFlow<Double?> = MutableStateFlow(null)
+    override val hourLitres: MutableStateFlow<List<Double>?> = MutableStateFlow(null)
+    override val weekLitres: MutableStateFlow<List<Double>?> = MutableStateFlow(null)
 }
 
 class MemoryDataSourceFake : MemoryDataSource {
@@ -42,4 +46,8 @@ class MemoryDataSourceFake : MemoryDataSource {
     override val totalLitres: MutableStateFlow<Double?> = MutableStateFlow(5000.0)
     override val totalLitresFilter: MutableStateFlow<Double?> = MutableStateFlow(50.0)
     override val dailyLitres: MutableStateFlow<Double?> = MutableStateFlow(30.0)
+    override val hourLitres: MutableStateFlow<List<Double>?> =
+        MutableStateFlow(generateSequence(0.0) { it + 1 }.take(60).toList())
+    override val weekLitres: MutableStateFlow<List<Double>?> =
+        MutableStateFlow(generateSequence(0.0) { it + 1 }.take(60).toList())
 }

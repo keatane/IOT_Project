@@ -68,6 +68,12 @@ interface RemoteDataSource {
 
     @POST("getDailyLitres")
     suspend fun dailyLitres(@Body body: JugDataRequest): Double
+
+    @POST("getHourLitres")
+    suspend fun hourLitres(@Body body: JugDataRequest): List<Double>
+
+    @POST("getWeekLitres")
+    suspend fun weekLitres(@Body body: JugDataRequest): List<Double>
 }
 
 class RemoteDataSourceFake : RemoteDataSource {
@@ -116,6 +122,14 @@ class RemoteDataSourceFake : RemoteDataSource {
     }
 
     override suspend fun dailyLitres(body: JugDataRequest): Double {
+        throw NotImplementedError()
+    }
+
+    override suspend fun hourLitres(body: JugDataRequest): List<Double> {
+        throw NotImplementedError()
+    }
+
+    override suspend fun weekLitres(body: JugDataRequest): List<Double> {
         throw NotImplementedError()
     }
 }

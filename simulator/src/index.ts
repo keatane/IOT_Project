@@ -1,6 +1,6 @@
 import { program } from "commander";
 import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
-import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES, TOTAL_LITRES_FILTER, DAILY_LITRES } from "./api.js";
+import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES, TOTAL_LITRES_FILTER, DAILY_LITRES, HOUR_LITRES, WEEK_LITRES } from "./api.js";
 import { createClient } from "redis";
 
 async function sendLoop(id:string|number){
@@ -116,6 +116,16 @@ async function dailyLitres(token:string,id:number|string){
     return DAILY_LITRES.send({token,id})
 }
 
+async function hourLitres(token:string,id:number|string){
+    id=Number(id)
+    return HOUR_LITRES.send({token,id})
+}
+
+async function weekLitres(token:string,id:number|string){
+    id=Number(id)
+    return WEEK_LITRES.send({token,id})
+}
+
 async function arduinoClient(ssid:string,pw:string,token:string){
     return await EDGE_PAIR_API.send({ssid,pw,token});
 }
@@ -136,6 +146,8 @@ async function createRedisData(id:string){
         await client.ts.create(`data:${id}`,'RETENTION',1000*60*60*24*7)
     const args=Array.from(range(0,10),
             _=>[`data:${id}`,Math.floor(new Date().getTime()-1000*60*60*24-Math.random()*1000000).toString(),Math.floor(Math.random()*100).toString()])
+    .concat(Array.from(range(0,10),
+             _=>[`data:${id}`,Math.floor(new Date().getTime()-Math.random()*1000*60*60).toString(),Math.floor(Math.random()*100).toString()]))
     .reduce((acc,elem)=>acc.concat(elem))
     await client.sendCommand(["TS.MADD",...args]);
 
@@ -162,5 +174,7 @@ program.command("change-email <token> <email>").action(entry(changeEmail));
 program.command("total-litres <token> <id>").action(entry(totalLitres));
 program.command("total-litres-filter <token> <id>").action(entry(totalLitresFilter));
 program.command("daily-litres <token> <id>").action(entry(dailyLitres));
+program.command("hour-litres <token> <id>").action(entry(hourLitres));
+program.command("week-litres <token> <id>").action(entry(weekLitres));
 program.command("create-redis-data <id>").action(entry(createRedisData));
 program.parse();

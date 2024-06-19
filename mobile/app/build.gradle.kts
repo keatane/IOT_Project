@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.navigation.compose)
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
+    implementation("com.github.tehras:charts:0.2.4-alpha")
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)

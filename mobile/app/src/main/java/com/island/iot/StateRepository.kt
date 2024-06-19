@@ -37,6 +37,10 @@ class StateRepository(
         _memoryDataSource.totalLitresFilter.map { if (selectedJug.first() == null) null else it }
     val dailyLitres =
         _memoryDataSource.dailyLitres.map { if (selectedJug.first() == null) null else it }
+    val hourLitres =
+        _memoryDataSource.hourLitres.map { if (selectedJug.first() == null) null else it }
+    val weekLitres =
+        _memoryDataSource.weekLitres.map { if (selectedJug.first() == null) null else it }
 
     private suspend fun updateJugs() {
         var first = true
@@ -103,7 +107,19 @@ class StateRepository(
             } catch (e: Exception) {
                 Log.e("DAILY USAGE", "ERROR", e)
             }
-            delay(1000)
+            try {
+                _memoryDataSource.hourLitres.value =
+                    _remoteDataSource.hourLitres(JugDataRequest(token = user.token, id = jug.id))
+            } catch (e: Exception) {
+                Log.e("HOUR USAGE", "ERROR", e)
+            }
+            try {
+                _memoryDataSource.weekLitres.value =
+                    _remoteDataSource.weekLitres(JugDataRequest(token = user.token, id = jug.id))
+            } catch (e: Exception) {
+                Log.e("WEEK USAGE", "ERROR", e)
+            }
+            delay(3000)
         }
     }
 

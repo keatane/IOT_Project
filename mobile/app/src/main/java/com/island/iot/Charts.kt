@@ -1,9 +1,12 @@
 package com.island.iot
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -11,19 +14,29 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.github.tehras.charts.line.LineChart
+import com.github.tehras.charts.line.LineChartData
+import com.github.tehras.charts.line.renderer.line.SolidLineDrawer
+import com.github.tehras.charts.line.renderer.point.FilledCircularPointDrawer
+import com.github.tehras.charts.line.renderer.xaxis.SimpleXAxisDrawer
+import com.github.tehras.charts.line.renderer.yaxis.SimpleYAxisDrawer
+import com.github.tehras.charts.piechart.animation.simpleChartAnimation
+import kotlinx.coroutines.flow.first
 
 @Preview(showBackground = true)
 @Composable
 fun ChartsPreview() {
     val controller = rememberNavController()
     Decorations(
-        controller,Route.CHARTS
+        controller, Route.CHARTS
     ) {
         Chart(controller, FAKE_REPOSITORY)
     }
@@ -42,24 +55,47 @@ fun ChartChart(title: String) {
     }
 }
 
+@Composable
+fun TimeChart(data: List<Pair<Int, Double>>) {
+    Text("ciao")
+    Text("ciao")
+    Text("ciao")
+    Text("ciao")
+    Text("ciao")
+    LineChart(
+        linesChartData = listOf(
+            LineChartData(
+                lineDrawer = SolidLineDrawer(),
+                points = data.map { LineChartData.Point(it.second.toFloat(), it.first.toString()) }
+            )
+        ),
+        // Optional properties.
+        modifier = Modifier.width(360.dp).height(360.dp),
+        animation = simpleChartAnimation(),
+        pointDrawer = FilledCircularPointDrawer(),
+        xAxisDrawer = SimpleXAxisDrawer(),
+        yAxisDrawer = SimpleYAxisDrawer(),
+        horizontalOffset = 5f,
+        labels = listOf("label 1")
+    )
+}
 
 @Composable
 fun Chart(
     controller: NavController, repository: StateRepository
 ) {
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        ScrollableContent {
-            ChartChart("Litres consumed in the last hour")
-            HorizontalDivider(
-                thickness = 2.dp, modifier = Modifier
-                    .fillMaxWidth(1f)
-                    .padding(36.dp)
-            )
-            ChartChart("Litres consumed in the last days")
-        }
+    ScrollableContent{
+        val hourLitres by repository.hourLitres.collectAsState(initial = null)
+        //ScrollableContent {
+        if(hourLitres!=null)
+            TimeChart(listOf(Pair(1,1.0),Pair(2,2.0),Pair(3,3.0),Pair(4,4.0)))
+//        HorizontalDivider(
+//            thickness = 2.dp, modifier = Modifier
+//                .fillMaxWidth(1f)
+//                .padding(36.dp)
+//        )
+        //ChartChart("Litres consumed in the last days")
+        //}
     }
 }
