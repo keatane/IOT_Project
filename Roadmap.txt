@@ -3,10 +3,6 @@
 [ Jugs ]
 - fixare la size massima del nome della jug
 
-[ Dashboard ]
-- implementare chiamata di ricezione MQTT dati pubblicati dall'arduino
-- trimmare correttamente i valori
-
 [ Charts ]
 - implementare da libreria i grafici
 
@@ -18,9 +14,9 @@
 - sistemare colorazione
 - icone intuitive
 - firebase notifiche push
+- in background l'app sospende le chiamate http
 
 ---- 
 
 [[ IOT ]]
-- redis con valori da ThingWorx
 - display LCD arduino (?)

@@ -56,23 +56,15 @@
         "user": "$(THINGWORX_USERNAME)",
         "password": "$(THINGWORX_PASSWORD)"
     },
-    "d930b849a028d572": {
-        "user": "${THINGWORX_USERNAME}",
-        "password": "${THINGWORX_PASSWORD}"
-    },
-    "bc417dfbd220c402": {
-        "user": "${THINGWORX_USERNAME}",
-        "password": "${THINGWORX_PASSWORD}"
-    },
-    "1e34bd090b4eae45": {
-        "user": "${THINGWORX_USERNAME}",
-        "password": "${THINGWORX_PASSWORD}"
-    },
     "f52f87f8bdfaeeae": {
         "user": "${THINGWORX_USERNAME}",
         "password": "${THINGWORX_PASSWORD}"
     },
     "77ca70b72d5388f6": {
+        "user": "${THINGWORX_USERNAME}",
+        "password": "${THINGWORX_PASSWORD}"
+    },
+    "661d4502910d1445": {
         "user": "${THINGWORX_USERNAME}",
         "password": "${THINGWORX_PASSWORD}"
     }
