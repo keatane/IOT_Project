@@ -1,6 +1,7 @@
 import { program } from "commander";
 import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
 import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES, TOTAL_LITRES_FILTER, DAILY_LITRES } from "./api.js";
+import { createClient } from "redis";
 
 async function sendLoop(id:string|number){
     let stop=false;
@@ -124,6 +125,22 @@ async function arduinoSimulator(id:string|number){
     await sendLoop(id);
 }
 
+async function createRedisData(id:string){
+    const host=process.env["IP"]||"127.0.0.1";
+    console.log(`data:${id}`)
+    const client=createClient({url: `redis://${host}:6379`})
+    client.connect()
+    await client.set(`total:${id}`,Math.random()*100)
+    await client.set(`filtered:${id}`,Math.random()*100)
+    if(!await client.exists(`data:${id}`))
+        await client.ts.create(`data:${id}`,'RETENTION',1000*60*60*24*7)
+    const args=Array.from(range(0,10),
+            _=>[`data:${id}`,Math.floor(new Date().getTime()-1000*60*60*24-Math.random()*1000000).toString(),Math.floor(Math.random()*100).toString()])
+    .reduce((acc,elem)=>acc.concat(elem))
+    await client.sendCommand(["TS.MADD",...args]);
+
+}
+
 program.command("register <username> <password>").action(entry(register));
 program.command("login <username> <password>").action(entry(login));
 program.command("pair <id> <token>").action(entry(pair));
@@ -145,4 +162,5 @@ program.command("change-email <token> <email>").action(entry(changeEmail));
 program.command("total-litres <token> <id>").action(entry(totalLitres));
 program.command("total-litres-filter <token> <id>").action(entry(totalLitresFilter));
 program.command("daily-litres <token> <id>").action(entry(dailyLitres));
+program.command("create-redis-data <id>").action(entry(createRedisData));
 program.parse();

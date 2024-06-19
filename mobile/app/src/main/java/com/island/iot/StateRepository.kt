@@ -33,6 +33,10 @@ class StateRepository(
     val lastError = _memoryDataSource.lastError.asStateFlow()
     val totalLitres =
         _memoryDataSource.totalLitres.map { if (selectedJug.first() == null) null else it }
+    val totalLitresFilter =
+        _memoryDataSource.totalLitresFilter.map { if (selectedJug.first() == null) null else it }
+    val dailyLitres =
+        _memoryDataSource.dailyLitres.map { if (selectedJug.first() == null) null else it }
 
     private suspend fun updateJugs() {
         var first = true
@@ -78,11 +82,26 @@ class StateRepository(
             val user = user.filterNotNull().first()
             val jug = selectedJug.filterNotNull().first()
             try {
-                val totalLitres =
+                _memoryDataSource.totalLitres.value =
                     _remoteDataSource.totalLitres(JugDataRequest(token = user.token, id = jug.id))
-                _memoryDataSource.totalLitres.value = totalLitres
             } catch (e: Exception) {
                 Log.e("TOTAL LITRES", "ERROR", e)
+            }
+            try {
+                _memoryDataSource.totalLitresFilter.value = _remoteDataSource.totalLitresFilter(
+                    JugDataRequest(
+                        token = user.token,
+                        id = jug.id
+                    )
+                )
+            } catch (e: Exception) {
+                Log.e("TOTAL LITRES FILTER", "ERROR", e)
+            }
+            try {
+                _memoryDataSource.dailyLitres.value =
+                    _remoteDataSource.dailyLitres(JugDataRequest(token = user.token, id = jug.id))
+            } catch (e: Exception) {
+                Log.e("DAILY USAGE", "ERROR", e)
             }
             delay(1000)
         }
@@ -111,7 +130,7 @@ class StateRepository(
     }
 
     suspend fun setSelectedJug(jug: JugElement) {
-        _setSelectedJugIndex(jugList.first().indexOf(jug))
+        _setSelectedJugIndex(_memoryDataSource.jugList.first().indexOf(jug))
     }
 
     suspend fun deleteJug(jug: JugElement) {
@@ -231,7 +250,8 @@ class StateRepository(
         val password = _memoryDataSource.wifiPassword.first { it != "" }
         val jugId = enterSending(wifi!!, password)
         pairing.disconnect()
-        jugList.map { jugList -> jugList.find { it.id == jugId } }.filterNotNull().first()
+        _memoryDataSource.jugList.map { jugList -> jugList.find { it.id == jugId } }.filterNotNull()
+            .first()
         _memoryDataSource.pairingState.value = PairingState.DONE
     }
 
