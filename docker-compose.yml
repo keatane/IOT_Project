@@ -19,7 +19,7 @@ services:
       REDIS_HOST: redis
       JWT_SECRET: ${JWT_SECRET}
   redis:
-    image: docker.io/redis:7.2.5-alpine3.19
+    image: docker.io/redislabs/redistimeseries:1.12.1
     ports:
       - "6379:6379"
   db:
