@@ -78,6 +78,10 @@ class StateRepository(
     private suspend fun clearJugData() {
         selectedJug.collect {
             _memoryDataSource.totalLitres.value = null
+            _memoryDataSource.totalLitresFilter.value = null
+            _memoryDataSource.dailyLitres.value = null
+            _memoryDataSource.hourLitres.value = null
+            _memoryDataSource.weekLitres.value = null
         }
     }
 

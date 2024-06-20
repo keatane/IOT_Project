@@ -54,12 +54,6 @@ fun ChartChart(title: String) {
 
 @Composable
 fun TimeChart(data: List<Pair<Int, Double>>) {
-    Text(
-        text = "Litres consumed in the last days",
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(16.dp)
-    )
     LineChart(
         linesChartData = listOf(
             LineChartData(
@@ -68,19 +62,15 @@ fun TimeChart(data: List<Pair<Int, Double>>) {
             )
         ),
         // Optional properties.
-        modifier = Modifier.width(360.dp).height(360.dp),
+        modifier = Modifier
+            .width(360.dp)
+            .height(360.dp),
         animation = simpleChartAnimation(),
         pointDrawer = FilledCircularPointDrawer(),
         xAxisDrawer = SimpleXAxisDrawer(),
         yAxisDrawer = SimpleYAxisDrawer(),
         horizontalOffset = 5f,
         labels = listOf("label 1")
-    )
-    Text(
-        text = "Litres consumed in the last hour",
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(16.dp)
     )
 }
 
@@ -91,15 +81,23 @@ fun Chart(
 
     ScrollableContent{
         val hourLitres by repository.hourLitres.collectAsState(initial = null)
-        //ScrollableContent {
+        val weekLitres by repository.weekLitres.collectAsState(initial = null)
+        Text(
+            text = "Litres consumed in the last days",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
+        if(weekLitres!=null) TimeChart(weekLitres!!.mapIndexed{x,y->Pair(x,y)})
+        else Text("Loading data")
+        Text(
+            text = "Litres consumed in the last hour",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
         if(hourLitres!=null)
-            TimeChart(listOf(Pair(1,1.0),Pair(2,2.0),Pair(3,3.0),Pair(4,4.0)))
-//        HorizontalDivider(
-//            thickness = 2.dp, modifier = Modifier
-//                .fillMaxWidth(1f)
-//                .padding(36.dp)
-//        )
-        //ChartChart("Litres consumed in the last days")
-        //}
+            TimeChart(hourLitres!!.mapIndexed{x,y->Pair(x,y)})
+        else Text("Loading data")
     }
 }
