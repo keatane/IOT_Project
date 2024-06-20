@@ -1,3 +1,5 @@
+@file:Suppress("FunctionName")
+
 package com.island.iot
 
 import android.util.Log
@@ -156,7 +158,7 @@ class StateRepository(
         launch { updateNews() }
     }
 
-    suspend fun _setSelectedJugIndex(index: Int) {
+    private suspend fun _setSelectedJugIndex(index: Int) {
         _localDataSource.setUser(user.filterNotNull().first().copy(selectedJugIndex = index))
     }
 
@@ -165,10 +167,7 @@ class StateRepository(
     }
 
     suspend fun deleteJug(jug: JugElement) {
-        Log.d("LAST STUCK", "LAST STUCK")
-        val jugs = _memoryDataSource.jugList.first()
-        Log.d("JUGS SIZE", jugs.size.toString())
-        Log.d("djksjdf", jugs.toString())
+        _memoryDataSource.jugList.first()
         _modifyJugList { it.remove(jug) }
         val user = _localDataSource.user.filterNotNull().first()
         _remoteDataSource.deleteJug(DeleteJugRequest(user.token, jug.id))
@@ -224,8 +223,7 @@ class StateRepository(
         )
     }
 
-    suspend fun _pair(ssid: String, password: String, token: String) {
-        Log.d("fhdjhfdjfhjdhfj", "START PAIRING")
+    private suspend fun _pair(ssid: String, password: String, token: String) {
         return _arduinoDataSource.pair(PairRequest(ssid, password, token))
     }
 
@@ -246,12 +244,12 @@ class StateRepository(
         _memoryDataSource.pairingState.value = PairingState.CONNECTING
     }
 
-    fun enterAskPassword() {
+    private fun enterAskPassword() {
         _memoryDataSource.wifiPassword.value = null
         _memoryDataSource.pairingState.value = PairingState.ASK_PASSWORD
     }
 
-    suspend fun enterSending(ssid: String, wifiPassword: String) {
+    private suspend fun enterSending(ssid: String, wifiPassword: String) {
         _memoryDataSource.pairingState.value = PairingState.SENDING
         _pair(
             ssid, wifiPassword,
@@ -269,7 +267,6 @@ class StateRepository(
 
     fun setWifiPassword(password: String) {
         _memoryDataSource.wifiPassword.value = password
-        Log.d("fhdjhdfdf", "Setting wifi password to")
     }
 
     suspend fun pairJug(pairing: Pairing) {

@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,7 +40,7 @@ fun WarningDialog(openAlertDialog: MutableState<Boolean>,dialogText:String="",on
         onConfirmation = {
             onConfirm()
         },
-        dialogTitle = "Are you sure?",
+        dialogTitle = stringResource(R.string.are_you_sure),
         dialogText = dialogText,
         icon = Icons.Default.Warning, visibleState = openAlertDialog
     )
@@ -63,7 +64,7 @@ fun AccountSection(
                 .padding(4.dp)
         ) {
             Text(
-                text = "Account details",
+                text = stringResource(R.string.account_details),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(16.dp)
@@ -77,7 +78,7 @@ fun AccountSection(
                     .align(Alignment.CenterHorizontally)
             ) {
                 Text(
-                    text = "Insert your new email",
+                    text = stringResource(R.string.insert_your_new_email),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.cream),
@@ -89,43 +90,43 @@ fun AccountSection(
             }
             ActionButton(
                 icon = Icons.Filled.Check,
-                contentDescription = "Confirm email icon",
-                text = "Change email"
+                contentDescription = stringResource(R.string.confirm_email_icon),
+                text = stringResource(R.string.change_email)
             ) {
                 if(email.isEmpty())return@ActionButton
                 changeEmailDialog.value = true
             }
             ActionButton(
                 icon = painterResource(id = R.drawable.key),
-                contentDescription = "Key icon",
-                text = "Change password"
+                contentDescription = stringResource(R.string.key_icon),
+                text = stringResource(R.string.change_password)
             ) {
                 Route.CHANGE_PASSWORD.open(navController)
             }
             ActionButton(
                 icon = painterResource(id = R.drawable.logout),
-                contentDescription = "Logout icon",
-                text = "Logout"
+                contentDescription = stringResource(R.string.logout_icon),
+                text = stringResource(R.string.logout)
             ) {
                 logoutDialog.value = true
             }
             ActionButton(
                 icon = Icons.Filled.Delete,
-                contentDescription = "Delete icon",
-                text = "Delete account",
+                contentDescription = stringResource(R.string.delete_icon),
+                text = stringResource(R.string.delete_account),
                 buttonColor = Color.Red
             ) {
                 deleteAccountDialog.value = true
             }
         }
     }
-    WarningDialog(changeEmailDialog, "Your email will be irreversibly changed.") {
+    WarningDialog(changeEmailDialog, stringResource(R.string.irreversibly_email)) {
         stateRepository.launch { stateRepository.changeEmail(email) }
     }
-    WarningDialog(deleteAccountDialog,"This action is irreversible. Your account will be permanently deleted.") {
+    WarningDialog(deleteAccountDialog, stringResource(R.string.irreversibly_delete)) {
         stateRepository.launch { stateRepository.deleteAccount() }
     }
-    WarningDialog(logoutDialog, "This will disconnect your from the app. You will have to login again.") {
+    WarningDialog(logoutDialog, stringResource(R.string.irreversibly_logout)) {
         stateRepository.launch { stateRepository.logout()}
     }
 }

@@ -55,12 +55,12 @@ class LocalDataSourceFake : LocalDataSource {
 
 
 class LocalDataSourceImpl(context: Context) : LocalDataSource {
-    val _db = Room.databaseBuilder(
+    private val _db = Room.databaseBuilder(
         context,
         AppDatabase::class.java, "database"
     ).build()
-    val _userDAO = _db.userDao()
-    val _user = _userDAO.get()
+    private val _userDAO = _db.userDao()
+    private val _user = _userDAO.get()
     override val user = _user.map { if (it.isEmpty()) null else it.first() }
 
     override suspend fun setUser(user: User) {

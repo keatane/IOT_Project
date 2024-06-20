@@ -1,3 +1,78 @@
 <resources>
-    <string name="app_name">SmartJugs</string>
+    <string name="app_name" translatable="false">SmartJugs</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="account_details">Account details</string>
+    <string name="insert_your_new_email">Insert your new email</string>
+    <string name="change_email">Change email</string>
+    <string name="change_password">Change password</string>
+    <string name="logout" translatable="false">Logout</string>
+    <string name="delete_account">Delete account</string>
+    <string name="irreversibly_email">Your email will be irreversibly changed.</string>
+    <string name="irreversibly_delete">This action is irreversible. Your account and associated information will be permanently deleted.</string>
+    <string name="irreversibly_logout">This will disconnect your from the app. You will have to login again.</string>
+    <string name="account_password" translatable="false">Account password</string>
+    <string name="insert_your_passwords">Insert your passwords</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="return_to_account_details">Return to account details</string>
+    <string name="irreversibly_password">Your password will be irreversibly changed.</string>
+    <string name="jug_not_selected">Jug not selected</string>
+    <string name="litres_consumed_in_the_last_hour">Litres consumed in the last hour</string>
+    <string name="loading_data">Loading data</string>
+    <string name="litres_consumed_in_the_last_days">Litres consumed in the last days</string>
+    <string name="please_insert_your_credentials">Please insert your credentials</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="not_a_user_sign_up">Not a user? Sign up</string>
+    <string name="already_a_user_sign_in">Already a user? Login</string>
+    <string name="n_a" translatable="false">N/A</string>
+    <string name="total_consumption">Total consumption</string>
+    <string name="daily_consumption">Daily consumption</string>
+    <string name="filter_capacity">Filter capacity</string>
+    <string name="estimated_filter_life">Estimated Filter life</string>
+    <string name="d">" d"</string>
+    <string name="quantity_of_plastic_saved">Quantity of plastic saved</string>
+    <string name="kg" translatable="false">" kg"</string>
+    <string name="filter_usage">Filter usage</string>
+    <string name="percentage" translatable="false">" %"</string>
+    <string name="buy_filter">Buy filter</string>
+    <string name="irreversible_delete_jug">This action is irreversible. You will have to pair again the jug if you remove it.</string>
+    <string name="rename_jug_12_max">Rename jug (12 max)</string>
+    <string name="edit_filter_capacity">Edit filter capacity</string>
+    <string name="inspect">Inspect</string>
+    <string name="rename_jug">Rename Jug</string>
+    <string name="change_filter">Change filter</string>
+    <string name="delete_jug">Delete jug</string>
+    <string name="your_jugs">Your jugs</string>
+    <string name="no_name">No name</string>
+    <string name="wifi_icon" translatable="false">WiFi icon</string>
+    <string name="pair_a_new_jug">Pair a new jug</string>
+    <string name="delete_icon" translatable="false">Delete icon</string>
+    <string name="logout_icon" translatable="false">Logout icon</string>
+    <string name="key_icon" translatable="false">Key icon</string>
+    <string name="confirm_email_icon" translatable="false">Confirm email icon</string>
+    <string name="return_to_account_details_icon" translatable="false">Return to account details icon</string>
+    <string name="confirm_password_icon" translatable="false">Confirm password icon</string>
+    <string name="member_icon" translatable="false">Member icon</string>
+    <string name="enter_icon" translatable="false">Enter icon</string>
+    <string name="l" translatable="false">L</string>
+    <string name="l_d">L/d</string>
+    <string name="go_back">Go back</string>
+    <string name="news_icon" translatable="false">News icon</string>
+    <string name="wifi_password" translatable="false">WiFi password</string>
+    <string name="connecting_the_jug">Connecting the jug</string>
+    <string name="pairing_the_jug">Pairing the jug</string>
+    <string name="jug_successfully_paired">Jug successfully paired</string>
+    <string name="latest_news">Latest news</string>
+    <string name="news_article_image" translatable="false">News article image</string>
+    <string name="open">Follow article</string>
+    <string name="loading">Loading</string>
+    <string name="warning_icon" translatable="false">Warning icon</string>
+    <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="input" translatable="false">Input</string>
 </resources>

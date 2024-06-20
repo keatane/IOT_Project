@@ -1,7 +1,6 @@
 package com.island.iot
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,11 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
@@ -42,6 +39,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -78,13 +76,13 @@ enum class Route(
     val id: String,
     val title: String,
     val bottomBar: Boolean,
-    val clearStack: Boolean
+    private val clearStack: Boolean,
 ) {
     DASHBOARD("dashboard", "Dashboard", true, true),
-    LOGINPAGE("loginpage", "Login Page", false, true),
-    REGISTERPAGE("registerpage", "Register Page", false, false),
+    LOGINPAGE("loginpage", "Login", false, true),
+    REGISTERPAGE("registerpage", "Register", false, false),
     ACCOUNT("account", "Account", true, true),
-    CHANGE_PASSWORD("changePassword", "Change Password", true, false),
+    CHANGE_PASSWORD("changePassword", "Password Manager", true, false),
     CHARTS("charts", "Charts", true, true),
     JUGS("jugs", "Jugs", true, true),
     NEWS("news", "News Feed", true, false);
@@ -126,7 +124,6 @@ fun Decorations(
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val prevBackStackEntry = navController.previousBackStackEntry
     val currentRoute = Route.getCurrentRoute(currentBackStackEntry) ?: previewRoute!!
-    Log.d("djsjdsd", currentRoute.toString())
     val bottomBarVisible = currentRoute.bottomBar
     val selectedButton = BottomButton.getSelectedButton(currentRoute)
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -157,7 +154,7 @@ fun Decorations(
                                 }) {
                                     Icon(
                                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                        contentDescription = "Go back"
+                                        contentDescription = stringResource(R.string.go_back)
                                     )
                                 }
                         },
@@ -165,7 +162,7 @@ fun Decorations(
                             IconButton(onClick = { Route.NEWS.open(navController) }) {
                                 Icon(
                                     painterResource(id = R.drawable.news),
-                                    "News icon",
+                                    stringResource(R.string.news_icon),
                                     tint = colorResource(id = R.color.cream)
                                 )
                             }
@@ -217,7 +214,7 @@ fun PasswordDialog(callback: (String?) -> Unit) {
     val visible = rememberSaveable { mutableStateOf(true) }
     PromptDialog(
         onDismissRequest = { callback(null) },
-        dialogTitle = "Wifi password",
+        dialogTitle = stringResource(R.string.wifi_password),
         icon = Icons.Default.Edit,
         visibleState = visible,
         password = true
@@ -282,13 +279,13 @@ fun SideEffects(controller: NavController, state: StateRepository) {
             state.setWifiPassword(it ?: "")
         }
     if (pairingState == PairingState.CONNECTING) {
-        BlockingDialog(dialogTitle = "Connecting the jug")
+        BlockingDialog(dialogTitle = stringResource(R.string.connecting_the_jug))
     }
     if (pairingState == PairingState.SENDING) {
-        BlockingDialog(dialogTitle = "Pairing the jug")
+        BlockingDialog(dialogTitle = stringResource(R.string.pairing_the_jug))
     }
     if (pairingState == PairingState.DONE) {
-        AlertDialog("The Jug was paired", "", icon = Icons.Filled.CheckCircle) {
+        AlertDialog(stringResource(R.string.jug_successfully_paired), "", icon = Icons.Filled.CheckCircle) {
             state.resetPairingState()
         }
     }

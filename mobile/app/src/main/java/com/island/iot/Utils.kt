@@ -3,6 +3,7 @@ package com.island.iot
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -14,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
@@ -49,7 +50,7 @@ fun GenericDialog(
 ) {
     AlertDialog(
         icon = {
-            Icon(icon, contentDescription = "Warning icon")
+            Icon(icon, contentDescription = stringResource(R.string.warning_icon))
         },
         title = {
             Text(text = dialogTitle)
@@ -62,14 +63,14 @@ fun GenericDialog(
             TextButton(
                 onClick = onConfirmation
             ) {
-                Text("Confirm")
+                Text(stringResource(R.string.confirm))
             }
         },
         dismissButton = {
             TextButton(
                 onClick = onDismissRequest
             ) {
-                Text("Dismiss")
+                Text(stringResource(R.string.dismiss))
             }
         }
     )
@@ -120,7 +121,7 @@ fun AlertDialog(
 ) {
     AlertDialog(
         icon = {
-            Icon(icon, contentDescription = "Warning icon")
+            Icon(icon, contentDescription = stringResource(R.string.warning_icon))
         },
         title = {
             Text(text = dialogTitle)
@@ -133,7 +134,7 @@ fun AlertDialog(
             TextButton(
                 onClick = onDismissRequest,
             ) {
-                Text("OK")
+                Text(stringResource(R.string.ok))
             }
         },
     )
@@ -186,7 +187,7 @@ fun PromptDialog(
                 emptyError = it.isEmpty()
                 text = it
             },
-            label = { Text("Input") },
+            label = { Text(stringResource(R.string.input)) },
             singleLine = true,
             isError = emptyError,
             keyboardOptions = if (numeric) KeyboardOptions(keyboardType = KeyboardType.NumberPassword) else if (password) KeyboardOptions(
@@ -212,7 +213,7 @@ fun ActionButton(
             Text(
                 text = text,
                 color = colorResource(id = R.color.cream),
-                modifier = Modifier.padding(24.dp, 0.dp)
+                modifier = Modifier.padding(18.dp, 0.dp)
             )
         },
         containerColor = buttonColor,

@@ -1,6 +1,7 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package com.island.iot
 
-import android.util.Log
 import androidx.collection.intListOf
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,9 +34,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import kotlin.math.abs
+import kotlin.math.ceil
 import kotlin.math.max
-import kotlin.math.min
-import kotlin.math.pow
 
 fun calculateEstimatedFilterLifeHours(
     dailyConsumption: Double?,
@@ -102,11 +104,11 @@ const val DIGITS = 1
 
 fun nullRound(x: Double?, digits: Int = DIGITS): String? {
     x ?: return null
-    if(digits==0)return Math.ceil(x).toInt().toString()
+    if(digits==0)return ceil(x).toInt().toString()
     val integral = Math.round(x)
-    val fractual = Math.abs(x) % 1
-    val fractualString=fractual.toString().substring(2).padEnd(digits,'0').substring(0,digits)
-    return "${integral}.${fractualString}"
+    val fractional = abs(x) % 1
+    val fractionalString=fractional.toString().substring(2).padEnd(digits,'0').substring(0,digits)
+    return "${integral}.${fractionalString}"
 }
 
 fun nullAppend(x: Any?, y: String): String? {
@@ -134,7 +136,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
 
     ScrollableContent {
         Text(
-            text = selectedJug?.name?:"Jug not selected",
+            text = selectedJug?.name?:stringResource(id = R.string.jug_not_selected),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(16.dp)
@@ -150,13 +152,13 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Metric(
-                    "Total consumption",
-                    nullAppend(nullRound(totalLitres), "L") ?: "N/A",
+                    stringResource(R.string.total_consumption),
+                    nullAppend(nullRound(totalLitres), stringResource(R.string.l)) ?: stringResource(R.string.n_a),
                     cardColor = colors[0]
                 )
                 Metric(
-                    "Daily consumption",
-                    nullAppend(nullRound(dailyLitres), "L/d") ?: "N/A",
+                    stringResource(R.string.daily_consumption),
+                    nullAppend(nullRound(dailyLitres), stringResource(R.string.l_d)) ?: stringResource(R.string.n_a),
                     cardColor = colors[1]
                 )
             }
@@ -164,12 +166,12 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 modifier = Modifier.padding(16.dp, 0.dp)
             ) {
                 Metric(
-                    "Filter capacity",
-                    nullAppend(selectedJug?.filtercapacity, "L") ?: "N/A",
+                    stringResource(R.string.filter_capacity),
+                    nullAppend(selectedJug?.filtercapacity, "L") ?: stringResource(R.string.n_a),
                     cardColor = colors[2]
                 )
                 Metric(
-                    "Estimated Filter life",
+                    stringResource(R.string.estimated_filter_life),
                     if (hasFilter) nullAppend(
                         nullRound(
                             calculateEstimatedFilterLifeHours(
@@ -177,8 +179,8 @@ fun Grid(navController: NavController, repository: StateRepository) {
                                 totalLitresFilter,
                                 selectedJug?.filtercapacity
                             ),0
-                        ), " d"
-                    ) ?: "N/A" else "N/A",
+                        ), stringResource(R.string.d)
+                    ) ?: stringResource(R.string.n_a) else stringResource(R.string.n_a),
                     cardColor = colors[3]
                 )
             }
@@ -190,8 +192,8 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 .padding(0.dp, 8.dp)
         ) {
             Metric(
-                "Quantity of plastic saved",
-                nullAppend(nullRound(plasticSaved(totalLitres), 3), " kg") ?: "N/A",
+                stringResource(R.string.quantity_of_plastic_saved),
+                nullAppend(nullRound(plasticSaved(totalLitres), 3), stringResource(R.string.kg)) ?: stringResource(R.string.n_a),
                 cardColor = colors[4],
                 true
             )
@@ -203,15 +205,15 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 .padding(0.dp, 8.dp)
         ) {
             Metric(
-                "Filter usage",
+                stringResource(R.string.filter_usage),
                 if (hasFilter) nullAppend(
                     nullRound(
                         filterStatus(
                             totalLitresFilter,
                             selectedJug?.filtercapacity
                         )
-                    ), " %"
-                ) ?: "N/A" else "N/A",
+                    ), stringResource(R.string.percentage)
+                ) ?: stringResource(R.string.n_a) else stringResource(R.string.n_a),
                 cardColor = colors[5],
                 true
             )
@@ -225,11 +227,11 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 icon = {
                     Icon(
                         Icons.Filled.ShoppingCart,
-                        "Buy filter",
+                        stringResource(R.string.buy_filter),
                         tint = colorResource(id = R.color.cream)
                     )
                 },
-                text = { Text(text = "Buy filter", color = colorResource(id = R.color.cream)) },
+                text = { Text(text = stringResource(R.string.buy_filter), color = colorResource(id = R.color.cream)) },
                 containerColor = colorResource(id = R.color.water),
             )
         }

@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package com.island.iot
 
 import androidx.compose.foundation.BorderStroke
@@ -12,10 +14,10 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -129,7 +131,7 @@ fun Chart(
                 .padding(4.dp)
         ) {
             Text(
-                text = selectedJug?.name ?: "Jug not selected",
+                text = selectedJug?.name ?: stringResource(R.string.jug_not_selected),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(id = R.color.cream),
@@ -144,7 +146,7 @@ fun Chart(
                     .align(Alignment.CenterHorizontally)
             ) {
                 Text(
-                    text = "Litres consumed in the last hour",
+                    text = stringResource(R.string.litres_consumed_in_the_last_hour),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.cream),
@@ -153,9 +155,9 @@ fun Chart(
                 if (hourLitres != null)
                     TimeChart(hourLitres.mapIndexed { x, y -> Pair(x, y) })
                 else Text(
-                    "Loading data", modifier = Modifier
+                    stringResource(R.string.loading_data), modifier = Modifier
                         .padding(16.dp)
-                        .align(Alignment.CenterHorizontally)
+                        .align(Alignment.CenterHorizontally).align(Alignment.CenterHorizontally)
                 )
             }
             OutlinedCard(
@@ -167,15 +169,15 @@ fun Chart(
                     .align(Alignment.CenterHorizontally)
             ) {
                 Text(
-                    text = "Litres consumed in the last days",
+                    text = stringResource(R.string.litres_consumed_in_the_last_days),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.cream),
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally)
                 )
                 if (weekLitres != null) DailyChart(weekLitres.mapIndexed { x, y -> Pair(x, y) })
                 else Text(
-                    "Loading data", modifier = Modifier
+                    stringResource(R.string.loading_data), modifier = Modifier
                         .padding(16.dp)
                         .align(Alignment.CenterHorizontally)
                 )

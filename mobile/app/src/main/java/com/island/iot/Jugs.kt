@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,8 +45,8 @@ fun DeleteJugDialog(
 ) {
     ConfirmDialog(
         onConfirmation = deleteJug,
-        dialogTitle = "Are you sure?",
-        dialogText = "This action is irreversible. You will have to pair again the jug if you remove it.",
+        dialogTitle = stringResource(id = R.string.are_you_sure),
+        dialogText = stringResource(R.string.irreversible_delete_jug),
         icon = Icons.Default.Warning,
         visibleState = openDeleteDialog
     )
@@ -53,14 +54,14 @@ fun DeleteJugDialog(
 
 @Composable
 fun RenameJugDialog(
-    openAlertDialog: MutableState<Boolean>,
+    openRenameDialog: MutableState<Boolean>,
     renameJug: (String) -> Unit
 ) {
     PromptDialog(
-        onConfirmation = { renameJug(it);true },
-        dialogTitle = "Rename jug",
+        onConfirmation = { if (it.length <= 12){renameJug(it);true} else false },
+        dialogTitle = stringResource(R.string.rename_jug_12_max),
         icon = Icons.Default.Edit,
-        visibleState = openAlertDialog
+        visibleState = openRenameDialog
     )
 }
 
@@ -75,7 +76,7 @@ fun FilterDialog(
             changeFilter(number)
             return@PromptDialog true
         },
-        dialogTitle = "Edit filter capacity",
+        dialogTitle = stringResource(R.string.edit_filter_capacity),
         icon = Icons.Default.Edit,
         visibleState = openFilterDialog,
         numeric = true
@@ -126,28 +127,28 @@ fun Jug(
             IconButton(onClick = { selectJug(jug); dashboardPage() }) {
                 Icon(
                     Icons.Outlined.Info,
-                    contentDescription = "Observe",
+                    contentDescription = stringResource(R.string.inspect),
                     tint = colorResource(id = R.color.cream)
                 )
             }
             IconButton(onClick = { openRenameDialog.value = true }) {
                 Icon(
                     Icons.Outlined.Create,
-                    contentDescription = "Rename",
+                    contentDescription = stringResource(R.string.rename_jug),
                     tint = colorResource(id = R.color.cream)
                 )
             }
             IconButton(onClick = { openFilterDialog.value = true }) {
                 Icon(
                     Icons.Outlined.Build,
-                    contentDescription = "Change filter",
+                    contentDescription = stringResource(R.string.change_filter),
                     tint = colorResource(id = R.color.cream)
                 )
             }
             IconButton(onClick = { openDeleteDialog.value = true }) {
                 Icon(
                     Icons.Outlined.Delete,
-                    contentDescription = "Delete jug",
+                    contentDescription = stringResource(R.string.delete_jug),
                     tint = colorResource(id = R.color.cream)
                 )
             }
@@ -161,54 +162,52 @@ fun JugsSection(
 ) {
     val pairing = MainActivity.getPairing()
     val jugList by repository.jugList.collectAsState(listOf())
-    ScrollableContent {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Your jugs",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(16.dp)
-            )
-            for ((index, jug) in jugList.withIndex()) {
-                Jug(
-                    index,
-                    jug,
-                    jug.name ?: "i don't know",
-                    changeFilter = { jugId, filter ->
-                        repository.launch {
-                            repository.changeFilter(jugId, filter)
-                        }
-                    },
-                    dashboardPage = {
-                        Route.DASHBOARD.open(navController)
-                    },
-                    renameJug = { id, name ->
-                        repository.launch {
-                            repository.renameJug(id, name)
-                        }
-                    },
-                    deleteJug = { repository.launch { repository.deleteJug(it) } },
-                    selectJug = { repository.launch { repository.setSelectedJug(it) } }
-                )
-            }
-            ExtendedFloatingActionButton(
-                onClick = { repository.launch { repository.pairJug(pairing) } },
-                icon = {
-                    Icon(
-                        painterResource(id = R.drawable.wifi),
-                        "WiFi icon",
-                        tint = colorResource(id = R.color.cream)
-                    )
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(R.string.your_jugs),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
+        for ((index, jug) in jugList.withIndex()) {
+            Jug(
+                index,
+                jug,
+                jug.name,
+                changeFilter = { jugId, filter ->
+                    repository.launch {
+                        repository.changeFilter(jugId, filter)
+                    }
                 },
-                text = { Text(text = "Pair a new jug", color = colorResource(id = R.color.cream)) },
-                containerColor = colorResource(id = R.color.water),
-                modifier = Modifier
-                    .padding(16.dp)
-                    .align(Alignment.CenterHorizontally)
+                dashboardPage = {
+                    Route.DASHBOARD.open(navController)
+                },
+                renameJug = { id, name ->
+                    repository.launch {
+                        repository.renameJug(id, name)
+                    }
+                },
+                deleteJug = { repository.launch { repository.deleteJug(it) } },
+                selectJug = { repository.launch { repository.setSelectedJug(it) } }
             )
         }
+        ExtendedFloatingActionButton(
+            onClick = { repository.launch { repository.pairJug(pairing) } },
+            icon = {
+                Icon(
+                    painterResource(id = R.drawable.wifi),
+                    stringResource(R.string.wifi_icon),
+                    tint = colorResource(id = R.color.cream)
+                )
+            },
+            text = { Text(text = stringResource(R.string.pair_a_new_jug)  , color = colorResource(id = R.color.cream)) },
+            containerColor = colorResource(id = R.color.water),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
     }
 }
 
@@ -226,15 +225,17 @@ fun JugsPreview() {
 fun Jugs(
     navController: NavController, stateRepository: StateRepository
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(0.dp, 32.dp)
-    ) {
-        JugsSection(
-            navController, stateRepository
-        )
+    ScrollableContent {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 4.dp)
+        ) {
+            JugsSection(
+                navController, stateRepository
+            )
+        }
     }
 }
 

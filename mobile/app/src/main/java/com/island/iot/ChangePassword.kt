@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedCard
@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,7 +42,7 @@ fun ChangePasswordSection(
             .padding(4.dp)
     ) {
         Text(
-            text = "Account password",
+            text = stringResource(R.string.account_password),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(16.dp)
@@ -55,31 +56,33 @@ fun ChangePasswordSection(
                 .align(Alignment.CenterHorizontally)
         ) {
             Text(
-                text = "Insert your passwords",
+                text = stringResource(R.string.insert_your_passwords),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(id = R.color.cream),
-                modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally)
             )
-            CardTextField(password = true, label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
-            CardTextField(password = true, label = "New Password", text = password, onChange = { password = it })
+            CardTextField(password = true, label = stringResource(R.string.old_password), text = oldPassword, onChange = { oldPassword = it })
+            CardTextField(password = true, label = stringResource(R.string.new_password), text = password, onChange = { password = it })
         }
         ActionButton(
             icon = Icons.Filled.Check,
-            contentDescription = "Confirm password icon",
-            text = "Change password"
+            contentDescription = stringResource(R.string.confirm_password_icon),
+            text = stringResource(id = R.string.change_password),
         ) {
             if (oldPassword.isEmpty() || password.isEmpty()) return@ActionButton
             changePasswordDialog.value=true
         }
         ActionButton(
-            icon = Icons.Filled.ArrowBack,
-            contentDescription = "Return to account details",
-            text = "Return to account details"
+            icon = Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = stringResource(R.string.return_to_account_details_icon),
+            text = stringResource(R.string.return_to_account_details)
         ) {
             Route.ACCOUNT.open(navController)
         }
-        WarningDialog(changePasswordDialog, "Your password will be irreversibly changed.") {
+        WarningDialog(changePasswordDialog, stringResource(R.string.irreversibly_password)) {
             stateRepository.launch { stateRepository.changePassword(oldPassword, password) }
         }
     }

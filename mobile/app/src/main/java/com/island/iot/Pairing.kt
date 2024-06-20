@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
+
 package com.island.iot
 
 import android.app.Activity.RESULT_OK
@@ -14,7 +16,6 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiNetworkSpecifier
-import android.util.Log
 import androidx.activity.result.ActivityResultCaller
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContract
@@ -112,7 +113,6 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
             networkCallback = object :
                 NetworkCallback() {
                 override fun onAvailable(network: Network) {
-                    Log.d("fdhjhjdsjdjs", "CONNETED YAYAYAYYAY")
                     connectivityManager.bindProcessToNetwork(network)
                     cont.resume(true)
                 }
@@ -138,7 +138,7 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
 
     private suspend fun selectWifi(intentSenderRequest: IntentSenderRequest): String? {
         return suspendCancellableCoroutine { cont ->
-            wifiCallback = { Log.d("djksjdfd", "WIFI CALLBACK SELECT WIFI");cont.resume(it) }
+            wifiCallback = { cont.resume(it) }
             wifiSelection.launch(intentSenderRequest)
         }
     }

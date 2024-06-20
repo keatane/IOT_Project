@@ -1,16 +1,15 @@
 [[ Mobile ]]
 
 [ Jugs ]
-- fixare la size massima del nome della jug
+- rename porta alla dashboard di un'altra caraffa (far rimanere sulla pagina), ma solo quando è stato selezionato una volta l'inspect di una qualsiasi caraffa e poi rinominata
 
 [ Altro ]
 - firebase notifiche push
-- in background l'app sospende le chiamate http
+- in background l'app deve sospendere le chiamate http
 - risolvere problema barra in alto a volte scompare
-- fixare la posizione in portrait
-- risolvere tutti i warning su android studio
-- traduzione
+- traduzione: puoi passare il context alle enum (facilmente)?
 - cambiare eccezioni in toast con definizioni user friendly (server error)
+- rimuovere TODO state repository
 
 ---- 
 

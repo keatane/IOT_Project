@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -107,7 +108,7 @@ fun CredentialCard(
         modifier = maxWidth
     ) {
         Text(
-            text = "Please insert your credentials",
+            text = stringResource(R.string.please_insert_your_credentials),
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally),
@@ -116,12 +117,12 @@ fun CredentialCard(
             color = colorResource(id = R.color.cream)
         )
         CardTextField(
-            label = "Email",
+            label = stringResource(R.string.email),
             text = email,
             onChange = { email = it }
         )
         CardTextField(
-            label = "Password",
+            label = stringResource(R.string.password),
             password = true,
             text = password,
             onChange = {
@@ -131,7 +132,7 @@ fun CredentialCard(
         )
         if (isRegistration) {
             CardTextField(
-                label = "Confirm Password",
+                label = stringResource(R.string.confirm_password),
                 password = true,
                 text = confPassword,
                 onChange = {
@@ -153,7 +154,7 @@ fun CredentialCard(
             icon = {
                 Icon(
                     painterResource(id = R.drawable.login),
-                    "Enter icon",
+                    stringResource(R.string.enter_icon),
                     tint = colorResource(id = R.color.cream)
                 )
             },
@@ -175,7 +176,7 @@ fun CredentialCard(
             icon = {
                 Icon(
                     painterResource(id = R.drawable.people),
-                    "Member icon",
+                    stringResource(R.string.member_icon),
                     tint = colorResource(id = R.color.cream)
                 )
             },
@@ -241,14 +242,14 @@ fun CredentialPage(
             ) {
                 Spacer(modifier = Modifier.size(50.dp))
                 Text(
-                    text = "SmartJugs",
+                    text = stringResource(id = R.string.app_name),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Thin,
                     modifier = Modifier.padding(32.dp, 4.dp),
                     color = colorResource(id = R.color.cream)
                 )
                 Text(
-                    text = if (!isRegistration) "Login" else "Sign up",
+                    text = if (!isRegistration) stringResource(R.string.login) else stringResource(R.string.sign_up),
                     fontSize = 48.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(32.dp, 0.dp),
@@ -269,8 +270,8 @@ fun CredentialPage(
                         )
                     },
                     isRegistration = isRegistration,
-                    firstButtonMsg = if (!isRegistration) "Login" else "Sign up",
-                    secondButtonMsg = if (!isRegistration) "Not a user? Sign up" else "Already a user? Sign in"
+                    firstButtonMsg = if (!isRegistration) stringResource(R.string.login) else stringResource(R.string.sign_up),
+                    secondButtonMsg = if (!isRegistration) stringResource(R.string.not_a_user_sign_up) else stringResource(R.string.already_a_user_sign_in)
                 )
                 //Button(onClick = { Route.DASHBOARD.open(navController) }) { Text("HomePage") }
             }
