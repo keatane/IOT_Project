@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
@@ -41,6 +43,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
@@ -164,8 +167,9 @@ fun Decorations(
                         actions = {
                             IconButton(onClick = { Route.NEWS.open(navController) }) {
                                 Icon(
-                                    imageVector = Icons.Filled.Email,
-                                    contentDescription = "News feed"
+                                    painterResource(id = R.drawable.news),
+                                    "News icon",
+                                    tint = colorResource(id = R.color.cream)
                                 )
                             }
                         },
@@ -186,7 +190,6 @@ fun Decorations(
                                 selected = item == selectedButton,
                                 onClick = {
                                     item.route.open(navController)
-//                                    selectedItem = index; if (prevSelected != selectedItem) navigate(item.route)
                                 },
                                 colors = NavigationBarItemColors(
                                     selectedIconColor = colorResource(id = R.color.abyss),
@@ -295,7 +298,7 @@ fun SideEffects(controller: NavController, state: StateRepository) {
             onDismissRequest = { state.resetPairingState() },
             onConfirmation = { state.resetPairingState() },
             dialogTitle = "Paired the jug",
-            icon = Icons.Filled.Home
+            icon = Icons.Filled.CheckCircle
         ) {
 
         }

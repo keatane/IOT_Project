@@ -3,20 +3,6 @@
 [ Jugs ]
 - fixare la size massima del nome della jug
 
-[ Login ]
-- implementare check su confirm password
-
-[ Change Password ]
-- implementare check su confirm password
-
-[ Charts ]
-- mettere titolo jug selezionata
-- sistemare grafica con card dietro
-
-[ News ]
-- scraping delle news da sito dell'acqua
-- rendere cliccabili i link delle news (redirezione sul sito)
-
 [ Altro ]
 - firebase notifiche push
 - in background l'app sospende le chiamate http
@@ -24,10 +10,12 @@
 - fixare la posizione in portrait
 - risolvere tutti i warning su android studio
 - traduzione
+- cambiare eccezioni in toast con definizioni user friendly (server error)
 
 ---- 
 
 [[ IOT ]]
+- timeout per arduino se durante il pairing, wifi scelto da app, password inserita sbagliata
 - location (?)
 - application key
 - display LCD arduino (?)

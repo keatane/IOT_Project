@@ -61,7 +61,7 @@ fun NewsFeed(navController: NavController, stateRepository: StateRepository) {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(16.dp, 0.dp)
+                .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
         )
         if (newsArticles != null)
