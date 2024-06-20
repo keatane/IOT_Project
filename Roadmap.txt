@@ -10,6 +10,7 @@
 - traduzione: puoi passare il context alle enum (facilmente)?
 - cambiare eccezioni in toast con definizioni user friendly (server error)
 - rimuovere TODO state repository
+- icona ingranaggio per modificare filtro
 
 ---- 
 
