@@ -51,7 +51,7 @@ class MemoryDataSourceFake : MemoryDataSource {
     override val hourLitres: MutableStateFlow<List<Double>?> =
         MutableStateFlow(generateSequence(0.0) { it + 1 }.take(60).toList())
     override val weekLitres: MutableStateFlow<List<Double>?> =
-        MutableStateFlow(generateSequence(0.0) { it + 1 }.take(60).toList())
+        MutableStateFlow(generateSequence(0.0) { it + 1 }.take(7).toList())
     override val news: MutableStateFlow<List<NewsArticle>?> = MutableStateFlow(
         listOf(
             NewsArticle(
