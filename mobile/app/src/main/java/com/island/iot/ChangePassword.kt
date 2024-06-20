@@ -61,14 +61,15 @@ fun ChangePasswordSection(
                 color = colorResource(id = R.color.cream),
                 modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally)
             )
-            CardTextField(label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
-            CardTextField(label = "New Password", text = password, onChange = { password = it })
+            CardTextField(password = true, label = "Old Password", text = oldPassword, onChange = { oldPassword = it })
+            CardTextField(password = true, label = "New Password", text = password, onChange = { password = it })
         }
         ActionButton(
             icon = Icons.Filled.Check,
             contentDescription = "Confirm password icon",
             text = "Change password"
         ) {
+            if (oldPassword.isEmpty() || password.isEmpty()) return@ActionButton
             changePasswordDialog.value=true
         }
         ActionButton(

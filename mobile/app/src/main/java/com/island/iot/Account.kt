@@ -92,6 +92,7 @@ fun AccountSection(
                 contentDescription = "Confirm email icon",
                 text = "Change email"
             ) {
+                if(email.isEmpty())return@ActionButton
                 changeEmailDialog.value = true
             }
             ActionButton(

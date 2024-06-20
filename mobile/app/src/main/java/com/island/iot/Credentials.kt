@@ -49,25 +49,37 @@ val maxWidth = Modifier
     .fillMaxWidth()
     .padding(16.dp, 24.dp)
 
+
 @Composable
 fun CardTextField(
     label: String,
     password: Boolean = false,
     text: String,
-    onChange: (String) -> Unit
+    onChange: (String) -> Unit,
+    isError: Boolean = false
 ) {
+    var emptyError by rememberSaveable {
+        mutableStateOf(false)
+    }
     TextField(
         value = text,
-        onValueChange = onChange,
+        onValueChange = {
+            emptyError = it.isEmpty()
+            onChange(it)
+        },
         label = { Text(label) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
         visualTransformation = if (password) PasswordVisualTransformation() else VisualTransformation.None,
-        keyboardOptions = if (password) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
-        singleLine = true
+        keyboardOptions = if (password) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions(
+            keyboardType = KeyboardType.Email
+        ),
+        singleLine = true,
+        isError = isError || emptyError
     )
 }
+
 
 @Composable
 fun CredentialCard(
@@ -85,6 +97,9 @@ fun CredentialCard(
     }
     var confPassword by rememberSaveable {
         mutableStateOf("")
+    }
+    var confirmError by rememberSaveable {
+        mutableStateOf(false)
     }
     OutlinedCard(
         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.abyss)),
@@ -109,18 +124,32 @@ fun CredentialCard(
             label = "Password",
             password = true,
             text = password,
-            onChange = { password = it }
+            onChange = {
+                confirmError = false
+                password = it
+            }
         )
         if (isRegistration) {
             CardTextField(
                 label = "Confirm Password",
                 password = true,
                 text = confPassword,
-                onChange = { confPassword = it }
+                onChange = {
+                    confirmError = false
+                    confPassword = it
+                },
+                isError = confirmError
             )
         }
         ExtendedFloatingActionButton(
-            onClick = { operation(email, password) },
+            onClick = {
+                if (password.isEmpty() || (isRegistration && confPassword.isEmpty()) || email.isEmpty()) return@ExtendedFloatingActionButton
+                if (isRegistration && confPassword != password) {
+                    confirmError = true
+                    return@ExtendedFloatingActionButton
+                }
+                operation(email, password)
+            },
             icon = {
                 Icon(
                     painterResource(id = R.drawable.login),

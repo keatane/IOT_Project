@@ -57,7 +57,7 @@ fun RenameJugDialog(
     renameJug: (String) -> Unit
 ) {
     PromptDialog(
-        onConfirmation = renameJug,
+        onConfirmation = { renameJug(it);true },
         dialogTitle = "Rename jug",
         icon = Icons.Default.Edit,
         visibleState = openAlertDialog
@@ -71,11 +71,14 @@ fun FilterDialog(
 ) {
     PromptDialog(
         onConfirmation = {
-            changeFilter(it.toInt())
+            val number = it.toIntOrNull() ?: return@PromptDialog false
+            changeFilter(number)
+            return@PromptDialog true
         },
         dialogTitle = "Edit filter capacity",
         icon = Icons.Default.Edit,
-        visibleState = openFilterDialog
+        visibleState = openFilterDialog,
+        numeric = true
     )
 }
 

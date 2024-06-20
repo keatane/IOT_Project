@@ -9,15 +9,14 @@ const val ARDUINO_URL = "http://192.168.4.1:8080"
 
 data class PairRequest(val ssid: String, val pw: String, val token: String)
 
-data class PairResponse(val id: Int)
 
 interface ArduinoDataSource {
     @POST("/")
-    suspend fun pair(@Body body: PairRequest): PairResponse
+    suspend fun pair(@Body body: PairRequest)
 }
 
 class ArduinoDataSourceFake : ArduinoDataSource {
-    override suspend fun pair(body: PairRequest): PairResponse {
+    override suspend fun pair(body: PairRequest) {
         throw NotImplementedError()
     }
 }

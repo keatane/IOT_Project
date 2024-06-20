@@ -15,6 +15,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +23,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+
 
 /*** General composable functions ***/
 @Composable
@@ -73,10 +76,10 @@ fun GenericDialog(
 }
 
 @Composable
-fun BlockingDialog(dialogTitle:String){
+fun BlockingDialog(dialogTitle: String) {
     AlertDialog(
         onDismissRequest = { },
-        title={Text(text=dialogTitle)},
+        title = { Text(text = dialogTitle) },
         confirmButton = {}
     )
 }
@@ -85,7 +88,7 @@ fun BlockingDialog(dialogTitle:String){
 @Composable
 fun AutoCloseDialog(
     onDismissRequest: () -> Unit = {},
-    onConfirmation: () -> Unit,
+    onConfirmation: () -> Boolean,
     dialogTitle: String,
     icon: ImageVector,
     visibleState: MutableState<Boolean>,
@@ -101,12 +104,39 @@ fun AutoCloseDialog(
                 onDismissRequest()
             },
             onConfirmation = {
-                visible = false
-                onConfirmation()
+                visible = !onConfirmation()
             },
             dialogText = dialogText
         )
     }
+}
+
+@Composable
+fun AlertDialog(
+    dialogTitle: String,
+    dialogText: String,
+    icon: ImageVector,
+    onDismissRequest: () -> Unit,
+) {
+    AlertDialog(
+        icon = {
+            Icon(icon, contentDescription = "Warning icon")
+        },
+        title = {
+            Text(text = dialogTitle)
+        },
+        text = {
+            Text(dialogText)
+        },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(
+                onClick = onDismissRequest,
+            ) {
+                Text("OK")
+            }
+        },
+    )
 }
 
 @Composable
@@ -120,7 +150,7 @@ fun ConfirmDialog(
 ) {
     AutoCloseDialog(
         onDismissRequest = onDismissRequest,
-        onConfirmation = onConfirmation,
+        onConfirmation = { onConfirmation();true },
         dialogTitle = dialogTitle,
         icon = icon,
         visibleState = visibleState,
@@ -135,21 +165,33 @@ fun PromptDialog(
     dialogTitle: String,
     icon: ImageVector,
     visibleState: MutableState<Boolean>,
-    onConfirmation: (String) -> Unit,
+    numeric: Boolean = false,
+    password: Boolean = true,
+    onConfirmation: (String) -> Boolean,
 ) {
-    var text by remember { mutableStateOf("") }
+    var emptyError by rememberSaveable { mutableStateOf(false) }
+    var text by rememberSaveable { mutableStateOf("") }
     AutoCloseDialog(
         onDismissRequest = onDismissRequest,
-        onConfirmation = { onConfirmation(text) },
+        onConfirmation = {
+            text.isNotEmpty() && onConfirmation(text)
+        },
         dialogTitle = dialogTitle,
         icon = icon,
-        visibleState = visibleState
+        visibleState = visibleState,
     ) {
         OutlinedTextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = {
+                emptyError = it.isEmpty()
+                text = it
+            },
             label = { Text("Input") },
-            singleLine = true
+            singleLine = true,
+            isError = emptyError,
+            keyboardOptions = if (numeric) KeyboardOptions(keyboardType = KeyboardType.NumberPassword) else if (password) KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ) else KeyboardOptions.Default
         )
     }
 }
@@ -166,7 +208,13 @@ fun ActionButton(
         icon = {
             icon()
         },
-        text = { Text(text = text, color = colorResource(id = R.color.cream), modifier = Modifier.padding(24.dp, 0.dp)) },
+        text = {
+            Text(
+                text = text,
+                color = colorResource(id = R.color.cream),
+                modifier = Modifier.padding(24.dp, 0.dp)
+            )
+        },
         containerColor = buttonColor,
         modifier = Modifier.padding(16.dp)
     )
@@ -191,7 +239,7 @@ fun ActionButton(
     buttonColor: Color = colorResource(id = R.color.water),
     onClick: () -> Unit
 ) {
-    ActionButton(text, onClick,buttonColor) {
+    ActionButton(text, onClick, buttonColor) {
         Icon(
             icon,
             contentDescription,

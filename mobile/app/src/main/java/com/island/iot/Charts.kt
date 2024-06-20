@@ -118,9 +118,9 @@ fun TimeChart(data: List<Pair<Int, Double>>) {
 fun Chart(
     controller: NavController, repository: StateRepository
 ) {
-    val hourLitres by repository.hourLitres.collectAsState(initial = null)
-    val weekLitres by repository.weekLitres.collectAsState(initial = null)
-    val selectedJug by repository.selectedJug.collectAsState(initial = null)
+    val hourLitres = repository.hourLitres.collectAsState(initial = null).value
+    val weekLitres = repository.weekLitres.collectAsState(initial = null).value
+    val selectedJug = repository.selectedJug.collectAsState(initial = null).value
     ScrollableContent {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -151,7 +151,7 @@ fun Chart(
                     modifier = Modifier.padding(16.dp)
                 )
                 if (hourLitres != null)
-                    TimeChart(hourLitres!!.mapIndexed { x, y -> Pair(x, y) })
+                    TimeChart(hourLitres.mapIndexed { x, y -> Pair(x, y) })
                 else Text(
                     "Loading data", modifier = Modifier
                         .padding(16.dp)
@@ -173,7 +173,7 @@ fun Chart(
                     color = colorResource(id = R.color.cream),
                     modifier = Modifier.padding(16.dp)
                 )
-                if (weekLitres != null) DailyChart(weekLitres!!.mapIndexed { x, y -> Pair(x, y) })
+                if (weekLitres != null) DailyChart(weekLitres.mapIndexed { x, y -> Pair(x, y) })
                 else Text(
                     "Loading data", modifier = Modifier
                         .padding(16.dp)

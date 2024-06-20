@@ -224,9 +224,9 @@ class StateRepository(
         )
     }
 
-    suspend fun _pair(ssid: String, password: String, token: String): Int {
+    suspend fun _pair(ssid: String, password: String, token: String) {
         Log.d("fhdjhfdjfhjdhfj", "START PAIRING")
-        return _arduinoDataSource.pair(PairRequest(ssid, password, token)).id
+        return _arduinoDataSource.pair(PairRequest(ssid, password, token))
     }
 
     private suspend fun _modifyJugList(callback: (MutableList<JugElement>) -> Unit) {
@@ -247,13 +247,13 @@ class StateRepository(
     }
 
     fun enterAskPassword() {
-        _memoryDataSource.wifiPassword.value = ""
+        _memoryDataSource.wifiPassword.value = null
         _memoryDataSource.pairingState.value = PairingState.ASK_PASSWORD
     }
 
-    suspend fun enterSending(ssid: String, wifiPassword: String): Int {
+    suspend fun enterSending(ssid: String, wifiPassword: String) {
         _memoryDataSource.pairingState.value = PairingState.SENDING
-        return _pair(
+        _pair(
             ssid, wifiPassword,
             _localDataSource.user.filterNotNull().first().token
         )
@@ -273,17 +273,25 @@ class StateRepository(
     }
 
     suspend fun pairJug(pairing: Pairing) {
-        val jug = pairing.selectJug()
+        val jug = pairing.selectJug() ?: return resetPairingState()
+        val jugId = jug.split("_").last().toIntOrNull() ?: return resetPairingState()
+        val jugElem = _memoryDataSource.jugList.first().find { it.id == jugId }
+        if (jugElem != null)
+            deleteJug(jugElem)
         _enterConnecting()
-        pairing.connectToJug(jug!!)
-        val wifi = pairing.selectWifi()
-        enterAskPassword()
-        val password = _memoryDataSource.wifiPassword.first { it != "" }
-        val jugId = enterSending(wifi!!, password)
-        pairing.disconnect()
+        try {
+            val pairingResult = pairing.connectToJug(jug)
+            if (!pairingResult) return resetPairingState()
+            val wifi = pairing.selectWifi() ?: return resetPairingState()
+            enterAskPassword()
+            val password = _memoryDataSource.wifiPassword.filterNotNull().first()
+            if (password.isEmpty()) return resetPairingState()
+            enterSending(wifi, password)
+        } finally {
+            pairing.disconnect()
+        }
         _memoryDataSource.jugList.map { jugList -> jugList.find { it.id == jugId } }.filterNotNull()
             .first()
         _memoryDataSource.pairingState.value = PairingState.DONE
     }
-
 }

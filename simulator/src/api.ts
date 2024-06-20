@@ -106,9 +106,5 @@ interface EdgePairRequest{
     token:string
 }
 
-interface EdgePairResponse{
-    id:number
-}
-
-export const EDGE_PAIR_API=new RestAPI<EdgePairRequest,EdgePairResponse>("pair",Method.POST,"192.168.4.1","8080");
+export const EDGE_PAIR_API=new RestAPI<EdgePairRequest,Empty>("pair",Method.POST,"192.168.4.1","8080");
 

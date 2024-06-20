@@ -83,7 +83,6 @@ void pair(JsonDocument& document) {
   }
   setPairing(document["ssid"],document["pw"],document["token"]);
   document.clear();
-  document["id"] = JUG_ID;
 }
 
 void setPairing(const String& ssid,const String& pw,const String& token){

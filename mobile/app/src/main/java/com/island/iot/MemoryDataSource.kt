@@ -11,7 +11,7 @@ data class JugElement(val name: String, val filtercapacity: Int, val id: Int)
 
 interface MemoryDataSource {
     val pairingState: MutableStateFlow<PairingState>
-    val wifiPassword: MutableStateFlow<String>
+    val wifiPassword: MutableStateFlow<String?>
     val jugList: MutableStateFlow<List<JugElement>>
     val lastError: MutableStateFlow<String?>
     val totalLitres: MutableStateFlow<Double?>
@@ -24,7 +24,7 @@ interface MemoryDataSource {
 
 class MemoryDataSourceImpl : MemoryDataSource {
     override val pairingState = MutableStateFlow(PairingState.NONE)
-    override val wifiPassword = MutableStateFlow("")
+    override val wifiPassword: MutableStateFlow<String?> = MutableStateFlow(null)
     override val jugList: MutableStateFlow<List<JugElement>> = MutableStateFlow(listOf())
     override val lastError: MutableStateFlow<String?> = MutableStateFlow(null)
     override val totalLitres: MutableStateFlow<Double?> = MutableStateFlow(null)
@@ -37,7 +37,7 @@ class MemoryDataSourceImpl : MemoryDataSource {
 
 class MemoryDataSourceFake : MemoryDataSource {
     override val pairingState = MutableStateFlow(PairingState.NONE)
-    override val wifiPassword = MutableStateFlow("")
+    override val wifiPassword: MutableStateFlow<String?> = MutableStateFlow(null)
     override val jugList: MutableStateFlow<List<JugElement>> = MutableStateFlow(
         listOf(
             JugElement(name = "Kitchen Jug", filtercapacity = 150, id = 0),

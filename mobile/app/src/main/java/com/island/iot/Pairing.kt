@@ -25,7 +25,7 @@ import kotlin.coroutines.resume
 
 interface Pairing {
     suspend fun selectJug(): String?
-    suspend fun connectToJug(ssid: String)
+    suspend fun connectToJug(ssid: String): Boolean
     suspend fun selectWifi(): String?
     suspend fun disconnect()
 }
@@ -37,7 +37,7 @@ class PairingFake : Pairing {
         throw NotImplementedError()
     }
 
-    override suspend fun connectToJug(ssid: String) {
+    override suspend fun connectToJug(ssid: String): Boolean {
         throw NotImplementedError()
     }
 
@@ -98,7 +98,7 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
         return selectWifi(intentSender)
     }
 
-    override suspend fun connectToJug(ssid: String) {
+    override suspend fun connectToJug(ssid: String): Boolean {
         return suspendCancellableCoroutine { cont ->
             val wifiNetworkSpecifier = WifiNetworkSpecifier.Builder()
                 .setSsid(ssid)
@@ -114,7 +114,11 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
                 override fun onAvailable(network: Network) {
                     Log.d("fdhjhjdsjdjs", "CONNETED YAYAYAYYAY")
                     connectivityManager.bindProcessToNetwork(network)
-                    cont.resume(Unit)
+                    cont.resume(true)
+                }
+
+                override fun onUnavailable() {
+                    cont.resume(false)
                 }
             }
 
