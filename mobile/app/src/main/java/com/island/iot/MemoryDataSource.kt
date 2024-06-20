@@ -19,6 +19,7 @@ interface MemoryDataSource {
     val dailyLitres: MutableStateFlow<Double?>
     val hourLitres: MutableStateFlow<List<Double>?>
     val weekLitres: MutableStateFlow<List<Double>?>
+    val news: MutableStateFlow<List<NewsArticle>?>
 }
 
 class MemoryDataSourceImpl : MemoryDataSource {
@@ -31,6 +32,7 @@ class MemoryDataSourceImpl : MemoryDataSource {
     override val dailyLitres: MutableStateFlow<Double?> = MutableStateFlow(null)
     override val hourLitres: MutableStateFlow<List<Double>?> = MutableStateFlow(null)
     override val weekLitres: MutableStateFlow<List<Double>?> = MutableStateFlow(null)
+    override val news: MutableStateFlow<List<NewsArticle>?> = MutableStateFlow(null)
 }
 
 class MemoryDataSourceFake : MemoryDataSource {
@@ -50,4 +52,26 @@ class MemoryDataSourceFake : MemoryDataSource {
         MutableStateFlow(generateSequence(0.0) { it + 1 }.take(60).toList())
     override val weekLitres: MutableStateFlow<List<Double>?> =
         MutableStateFlow(generateSequence(0.0) { it + 1 }.take(60).toList())
+    override val news: MutableStateFlow<List<NewsArticle>?> = MutableStateFlow(
+        listOf(
+            NewsArticle(
+                title = "Tech Giant Announces New Product",
+                content = "A well-known tech company unveiled its latest innovation today. Read more to find out what it is!",
+                imageUrl = "https://claynewsnetwork.com/wp-content/uploads/03-10-17BAnner.png",
+                url = "http://www.google.com"
+            ),
+            NewsArticle(
+                title = "Sports: Local Team Makes Big Win",
+                content = "Our favorite sports team triumphed over their rivals in a nail-biting game! Get the details here.",
+                imageUrl = "https://claynewsnetwork.com/wp-content/uploads/03-10-17BAnner.png",
+                url = "http://www.google.com"
+            ),
+            NewsArticle(
+                title = "Travel: Explore Breathtaking Destinations",
+                content = "Looking for your next adventure? Discover some of the most stunning places to visit around the world.",
+                imageUrl = "https://claynewsnetwork.com/wp-content/uploads/03-10-17BAnner.png",
+                url = "http://www.google.com"
+            )
+        )
+    )
 }

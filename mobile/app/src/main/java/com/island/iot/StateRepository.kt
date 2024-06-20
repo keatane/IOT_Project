@@ -18,7 +18,8 @@ class StateRepository(
     private val _remoteDataSource: RemoteDataSource,
     private val _localDataSource: LocalDataSource,
     private val _memoryDataSource: MemoryDataSource,
-    private val _arduinoDataSource: ArduinoDataSource
+    private val _arduinoDataSource: ArduinoDataSource,
+    private val _newsDataSource: NewsDataSource,
 ) {
     val jugList = _memoryDataSource.jugList.map { jugs -> jugs.sortedBy { it.id } }
     val pairingState = _memoryDataSource.pairingState.asStateFlow()
@@ -41,6 +42,7 @@ class StateRepository(
         _memoryDataSource.hourLitres.map { if (selectedJug.first() == null) null else it }
     val weekLitres =
         _memoryDataSource.weekLitres.map { if (selectedJug.first() == null) null else it }
+    val news = _memoryDataSource.news.asStateFlow()
 
     private suspend fun updateJugs() {
         var first = true
@@ -138,11 +140,20 @@ class StateRepository(
         }
     }
 
+    private suspend fun updateNews() {
+        try {
+            _memoryDataSource.news.value = _newsDataSource.getNews()
+        } catch (e: Exception) {
+            Log.e("UPDATE NEWS", "ERROR", e)
+        }
+    }
+
     init {
         launch { updateJugs() }
         launch { clearErrors() }
         launch { clearJugData() }
         launch { updateJugData() }
+        launch { updateNews() }
     }
 
     suspend fun _setSelectedJugIndex(index: Int) {

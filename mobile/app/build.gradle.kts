@@ -48,7 +48,8 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,DEPENDENCIES}"
+            excludes += "/mozilla/public-suffix-list.txt"
         }
     }
 }
@@ -74,6 +75,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
     implementation("com.github.tehras:charts:0.2.4-alpha")
+    implementation("it.skrape:skrapeit:1.2.2")
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
