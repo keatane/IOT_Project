@@ -23,8 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 
-
-// Modified NewsCard to handle online images
 @Composable
 fun NewsCard(article: NewsArticle) {
     val uriHandler=LocalUriHandler.current
@@ -53,8 +51,6 @@ fun NewsCard(article: NewsArticle) {
     }
 }
 
-
-// Composable function to display the news feed
 @Composable
 fun NewsFeed(navController: NavController, stateRepository: StateRepository) {
     val newsArticles =

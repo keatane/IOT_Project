@@ -243,7 +243,7 @@ fun CredentialPage(
                     firstButtonMsg = if (!isRegistration) "Login" else "Sign up",
                     secondButtonMsg = if (!isRegistration) "Not a user? Sign up" else "Already a user? Sign in"
                 )
-                Button(onClick = { Route.DASHBOARD.open(navController) }) { Text("HomePage") }
+                //Button(onClick = { Route.DASHBOARD.open(navController) }) { Text("HomePage") }
             }
         }
     }

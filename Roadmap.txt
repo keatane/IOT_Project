@@ -12,19 +12,18 @@
 [ Charts ]
 - mettere titolo jug selezionata
 - sistemare grafica con card dietro
-- cambiare con barplot
 
 [ News ]
 - scraping delle news da sito dell'acqua
 - rendere cliccabili i link delle news (redirezione sul sito)
 
 [ Altro ]
-- icone intuitive
 - firebase notifiche push
 - in background l'app sospende le chiamate http
 - risolvere problema barra in alto a volte scompare
 - fixare la posizione in portrait
 - risolvere tutti i warning su android studio
+- traduzione
 
 ---- 
 

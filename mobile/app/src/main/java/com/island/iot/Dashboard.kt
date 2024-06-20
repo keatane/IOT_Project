@@ -203,7 +203,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 .padding(0.dp, 8.dp)
         ) {
             Metric(
-                "Filter status",
+                "Filter usage",
                 if (hasFilter) nullAppend(
                     nullRound(
                         filterStatus(
