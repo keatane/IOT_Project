@@ -139,7 +139,7 @@
                 "y": 100,
                 "wires": [
                     {
-                        "id": "4ef11d4b115a505d"
+                        "id": "c4bdcc33cbf74d3f"
                     }
                 ]
             }
@@ -168,7 +168,7 @@
         ],
         "out": [
             {
-                "x": 740,
+                "x": 900,
                 "y": 80,
                 "wires": [
                     {
@@ -1209,25 +1209,6 @@
         "h": 122
     },
     {
-        "id": "c59a8be5b2f67b77",
-        "type": "group",
-        "z": "b6b33a23690f53f3",
-        "g": "d0158497c3f88bb8",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "82fb31efe44e0adb",
-            "dbf82feb9c4d4d46",
-            "d440997e40980e95"
-        ],
-        "x": 274,
-        "y": 339,
-        "w": 552,
-        "h": 82
-    },
-    {
         "id": "38063613653e8a1a",
         "type": "group",
         "z": "7af354fb2230bd6b",
@@ -1316,18 +1297,16 @@
             "31ff0273f34611eb",
             "e5460c07c86d70f6",
             "4034126e43898b85",
-            "2173b4f8c284c583",
             "a175f8a745e83e2f",
             "2e951943e6dc5046",
             "345e9507d7a3b201",
-            "e415abdfc5454652",
-            "041c425add571edc",
-            "2c40328772420831"
+            "467b19b451346f48",
+            "662638515caf474e"
         ],
         "x": 44,
         "y": 619,
         "w": 1102,
-        "h": 322
+        "h": 302
     },
     {
         "id": "e629f80dbbf9bdfe",
@@ -1418,6 +1397,25 @@
         "y": 3499,
         "w": 1312,
         "h": 282
+    },
+    {
+        "id": "c59a8be5b2f67b77",
+        "type": "group",
+        "z": "b6b33a23690f53f3",
+        "g": "d0158497c3f88bb8",
+        "name": "Handling error",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "82fb31efe44e0adb",
+            "dbf82feb9c4d4d46",
+            "d440997e40980e95"
+        ],
+        "x": 274,
+        "y": 339,
+        "w": 552,
+        "h": 82
     },
     {
         "id": "b3a6633e59d62793",
@@ -2296,7 +2294,7 @@
         "method": "POST",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Services/EnableThing",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{jugid}}/Services/EnableThing",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -2328,7 +2326,7 @@
         "method": "POST",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{thing_id}}/Services/RestartThing",
+        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{jugid}}/Services/RestartThing",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -2373,7 +2371,8 @@
         "y": 300,
         "wires": [
             [
-                "6f1e5e7364d80697"
+                "6f1e5e7364d80697",
+                "281461b3d1958110"
             ]
         ]
     },
@@ -2382,7 +2381,7 @@
         "type": "function",
         "z": "b6b33a23690f53f3",
         "name": "Create HTTP Body with Thing name, projectName and Template",
-        "func": "msg.payload = {\"name\": `Jug${msg.payload}`, \"projectName\": \"cattaneo-isola\", \"thingTemplateName\": \"JugTemplate\" };\nreturn msg;",
+        "func": "msg.payload = {\"name\": `Jug${msg.jugid}`, \"projectName\": \"cattaneo-isola\", \"thingTemplateName\": \"JugTemplate\" };\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2394,33 +2393,6 @@
         "wires": [
             [
                 "89435c690d0590a0"
-            ]
-        ]
-    },
-    {
-        "id": "4ef11d4b115a505d",
-        "type": "change",
-        "z": "b6b33a23690f53f3",
-        "name": "Extract thing_id",
-        "rules": [
-            {
-                "t": "set",
-                "p": "thing_id",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 220,
-        "y": 100,
-        "wires": [
-            [
-                "c4bdcc33cbf74d3f"
             ]
         ]
     },
@@ -2545,6 +2517,23 @@
         "statusType": "auto",
         "x": 720,
         "y": 380,
+        "wires": []
+    },
+    {
+        "id": "281461b3d1958110",
+        "type": "debug",
+        "z": "b6b33a23690f53f3",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 160,
         "wires": []
     },
     {
@@ -7699,7 +7688,7 @@
         "z": "217d4457bda21c0d",
         "g": "e39613053ecf19ba",
         "name": "Return hour consumption",
-        "func": "const current = new Date().getTime();\nconst bin = Array(60);\n\nfor (let i=0; i < bin.length; ++i)\n    bin[i] = 0;\n\nfor (let i = 0; i < msg.payload.length; ++i){\n    const previous = msg.payload[i][0];\n    const delta  = Math.floor((current - previous) / 60000);\n    if (delta == 0) continue;\n    bin[60 - delta] += Number(msg.payload[i][1]); // we exclude the current minute\n}\n\nmsg.payload = bin;\nreturn msg;",
+        "func": "let current = new Date();\ncurrent.setSeconds(0);\ncurrent.setMilliseconds(0);\nconst currentTime = current.getTime();\nconst bin = Array(60);\n\nfor (let i=0; i < bin.length; ++i)\n    bin[i] = 0;\n\nfor (let i = 0; i < msg.payload.length; ++i){\n    const previous = msg.payload[i][0];\n    const delta  = Math.floor((currentTime - previous) / 60000);\n    if (delta <= 0) continue;\n    bin[60 - delta] += Number(msg.payload[i][1]); // we exclude the current minute\n}\n\nmsg.payload = bin;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -8327,7 +8316,9 @@
         "x": 640,
         "y": 220,
         "wires": [
-            []
+            [
+                "a2a3b1eb4e88c290"
+            ]
         ]
     },
     {
@@ -8359,7 +8350,7 @@
         "pauseType": "rate",
         "timeout": "5",
         "timeoutUnits": "seconds",
-        "rate": "3",
+        "rate": "1",
         "nbRateUnits": "1",
         "rateUnits": "second",
         "randomFirst": "1",
@@ -8411,7 +8402,7 @@
         "z": "7af354fb2230bd6b",
         "g": "e781aa7211d99e25",
         "name": "Request Daily Stream",
-        "method": "GET",
+        "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
         "url": "http://212.78.1.205:8080/Thingworx/Things/Jug{{jug}}/Services/QueryPropertyHistory",
@@ -8439,7 +8430,6 @@
         "y": 840,
         "wires": [
             [
-                "2173b4f8c284c583",
                 "4034126e43898b85"
             ]
         ]
@@ -8584,7 +8574,7 @@
         "z": "7af354fb2230bd6b",
         "g": "b4ccca51421e7bbd",
         "name": "Set redis payload",
-        "func": "msg.payload = [`total:${msg.jug}`, msg.payload];\nreturn msg;",
+        "func": "msg.payload = [`total:${msg.jug}`, msg.payload.rows[0].totalLitresJug];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -8638,9 +8628,7 @@
         "name": "link in 12",
         "links": [
             "b5a9c745b6311f75",
-            "3bc7dbfaf2527fba",
-            "bb0181636da5a32c",
-            "ab20fd40b692ceb9"
+            "bb0181636da5a32c"
         ],
         "x": 405,
         "y": 220,
@@ -8672,9 +8660,7 @@
         "name": "link out 11",
         "mode": "link",
         "links": [
-            "87b2ec98fde60d9b",
-            "47bed87945d83ae7",
-            "675d2f9aa578f26f"
+            "87b2ec98fde60d9b"
         ],
         "x": 1325,
         "y": 160,
@@ -8705,7 +8691,7 @@
         "name": "link out 12",
         "mode": "link",
         "links": [
-            "ba7f434ec626a3de"
+            "675d2f9aa578f26f"
         ],
         "x": 735,
         "y": 420,
@@ -8718,7 +8704,7 @@
         "g": "e781aa7211d99e25",
         "name": "link in 14",
         "links": [
-            "347d9f4ea62ff99c"
+            "ab20fd40b692ceb9"
         ],
         "x": 85,
         "y": 660,
@@ -8738,8 +8724,8 @@
         "links": [
             "ba7f434ec626a3de"
         ],
-        "x": 945,
-        "y": 840,
+        "x": 1075,
+        "y": 880,
         "wires": []
     },
     {
@@ -8939,7 +8925,7 @@
         "z": "7af354fb2230bd6b",
         "g": "e781aa7211d99e25",
         "name": "Set redis payload",
-        "func": "const arr = [];\nfor (let i=0; i < msg.payload.length; ++i){\n    let elem = [`data:${msg.jug}`, msg.payload[i][0], msg.payload[i][1]];\n    arr.push(...elem);\n}\nmsg.payload = arr;\nreturn msg;",
+        "func": "const arr = [];\nconst data = msg.payload.rows;\nfor (let i=0; i < data.length; ++i){\n    let elem = [`data:${msg.jug}`, data[i].timestamp, data[i].litresPerSecond];\n    arr.push(...elem);\n}\nmsg.payload = arr;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -8950,27 +8936,9 @@
         "y": 840,
         "wires": [
             [
-                "a175f8a745e83e2f"
+                "467b19b451346f48"
             ]
         ]
-    },
-    {
-        "id": "2173b4f8c284c583",
-        "type": "debug",
-        "z": "7af354fb2230bd6b",
-        "g": "e781aa7211d99e25",
-        "name": "debug 20",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 260,
-        "y": 900,
-        "wires": []
     },
     {
         "id": "a175f8a745e83e2f",
@@ -8985,8 +8953,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 640,
-        "y": 840,
+        "x": 960,
+        "y": 820,
         "wires": [
             [
                 "bb0181636da5a32c"
@@ -9010,8 +8978,7 @@
         "y": 720,
         "wires": [
             [
-                "e415abdfc5454652",
-                "041c425add571edc"
+                "662638515caf474e"
             ]
         ]
     },
@@ -9035,154 +9002,6 @@
                 "2e951943e6dc5046"
             ]
         ]
-    },
-    {
-        "id": "e415abdfc5454652",
-        "type": "debug",
-        "z": "7af354fb2230bd6b",
-        "g": "e781aa7211d99e25",
-        "name": "debug 21",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 440,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "c5d55d9fc628fd0b",
-        "type": "redis-command",
-        "z": "7af354fb2230bd6b",
-        "server": "df153d084656312d",
-        "command": "TS.GET",
-        "name": "",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 480,
-        "y": 1180,
-        "wires": [
-            [
-                "ab0f8b8478318094"
-            ]
-        ]
-    },
-    {
-        "id": "5b4776cf9f763cf9",
-        "type": "function",
-        "z": "7af354fb2230bd6b",
-        "name": "Set redis payload",
-        "func": "msg.payload = [`data:1`];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 1180,
-        "wires": [
-            [
-                "c5d55d9fc628fd0b"
-            ]
-        ]
-    },
-    {
-        "id": "ab0f8b8478318094",
-        "type": "debug",
-        "z": "7af354fb2230bd6b",
-        "name": "debug 22",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 640,
-        "y": 1180,
-        "wires": []
-    },
-    {
-        "id": "6c144add65debd49",
-        "type": "inject",
-        "z": "7af354fb2230bd6b",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 1180,
-        "wires": [
-            [
-                "5b4776cf9f763cf9"
-            ]
-        ]
-    },
-    {
-        "id": "041c425add571edc",
-        "type": "change",
-        "z": "7af354fb2230bd6b",
-        "g": "e781aa7211d99e25",
-        "name": "Save recent time and set params",
-        "rules": [
-            {
-                "t": "set",
-                "p": "time",
-                "pt": "msg",
-                "to": "payload[0]",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{ \"maxItems\": \"1000\"}",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 820,
-        "y": 720,
-        "wires": [
-            [
-                "77ca70b72d5388f6"
-            ]
-        ]
-    },
-    {
-        "id": "2c40328772420831",
-        "type": "comment",
-        "z": "7af354fb2230bd6b",
-        "g": "e781aa7211d99e25",
-        "name": "C'è un undefined",
-        "info": "",
-        "x": 160,
-        "y": 780,
-        "wires": []
     },
     {
         "id": "661d4502910d1445",
@@ -9249,7 +9068,7 @@
         "z": "7af354fb2230bd6b",
         "g": "e629f80dbbf9bdfe",
         "name": "Set redis payload",
-        "func": "msg.payload = [`filtered:${msg.jug}`, msg.payload];\nreturn msg;",
+        "func": "msg.payload = [`filtered:${msg.jug}`, msg.payload.rows[0].totalLitresFilter];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -9271,7 +9090,7 @@
         "g": "e629f80dbbf9bdfe",
         "name": "link in 15",
         "links": [
-            "347d9f4ea62ff99c"
+            "3bc7dbfaf2527fba"
         ],
         "x": 85,
         "y": 540,
@@ -9289,11 +9108,62 @@
         "name": "link out 14",
         "mode": "link",
         "links": [
-            "ba7f434ec626a3de"
+            "47bed87945d83ae7"
         ],
         "x": 735,
         "y": 540,
         "wires": []
+    },
+    {
+        "id": "467b19b451346f48",
+        "type": "switch",
+        "z": "7af354fb2230bd6b",
+        "g": "e781aa7211d99e25",
+        "name": "Is array not empty?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 840,
+        "wires": [
+            [
+                "a175f8a745e83e2f"
+            ],
+            [
+                "bb0181636da5a32c"
+            ]
+        ]
+    },
+    {
+        "id": "662638515caf474e",
+        "type": "function",
+        "z": "7af354fb2230bd6b",
+        "g": "e781aa7211d99e25",
+        "name": "Set request params",
+        "func": "// If time not specified, request all data withing a week\nlet seven_days_ago = new Date()\nseven_days_ago.setHours(0);\nseven_days_ago.setMinutes(0);\nseven_days_ago.setSeconds(0);\nseven_days_ago.setMilliseconds(0);\nseven_days_ago = seven_days_ago.getTime() - 1000*60*60*24*7;  \nmsg.payload = {\"startDate\": msg.payload.length == 0 ? seven_days_ago : msg.payload[0] + 1};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 720,
+        "wires": [
+            [
+                "77ca70b72d5388f6"
+            ]
+        ]
     },
     {
         "id": "12d815057cd57334",
@@ -9347,7 +9217,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "1",
+        "repeat": "2",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,

@@ -134,10 +134,10 @@ fun Grid(navController: NavController, repository: StateRepository) {
 
     ScrollableContent {
         Text(
-            text = selectedJug?.name.toString(),
+            text = selectedJug?.name?:"Jug not selected",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp, 0.dp)
+            modifier = Modifier.padding(16.dp)
         )
         Row(
             horizontalArrangement = Arrangement.Center,

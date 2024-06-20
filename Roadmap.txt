@@ -10,7 +10,9 @@
 - implementare check su confirm password
 
 [ Charts ]
-- implementare da libreria i grafici
+- mettere titolo jug selezionata
+- sistemare grafica con card dietro
+- cambiare con barplot
 
 [ News ]
 - scraping delle news da sito dell'acqua
@@ -27,4 +29,6 @@
 ---- 
 
 [[ IOT ]]
+- location (?)
+- application key
 - display LCD arduino (?)

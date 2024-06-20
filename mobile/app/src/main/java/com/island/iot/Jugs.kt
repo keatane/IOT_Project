@@ -158,52 +158,54 @@ fun JugsSection(
 ) {
     val pairing = MainActivity.getPairing()
     val jugList by repository.jugList.collectAsState(listOf())
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        Text(
-            text = "Your jugs",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp)
-        )
-        for ((index, jug) in jugList.withIndex()) {
-            Jug(
-                index,
-                jug,
-                jug.name ?: "i don't know",
-                changeFilter = { jugId, filter ->
-                    repository.launch {
-                        repository.changeFilter(jugId, filter)
-                    }
+    ScrollableContent {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Your jugs",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(16.dp)
+            )
+            for ((index, jug) in jugList.withIndex()) {
+                Jug(
+                    index,
+                    jug,
+                    jug.name ?: "i don't know",
+                    changeFilter = { jugId, filter ->
+                        repository.launch {
+                            repository.changeFilter(jugId, filter)
+                        }
+                    },
+                    dashboardPage = {
+                        Route.DASHBOARD.open(navController)
+                    },
+                    renameJug = { id, name ->
+                        repository.launch {
+                            repository.renameJug(id, name)
+                        }
+                    },
+                    deleteJug = { repository.launch { repository.deleteJug(it) } },
+                    selectJug = { repository.launch { repository.setSelectedJug(it) } }
+                )
+            }
+            ExtendedFloatingActionButton(
+                onClick = { repository.launch { repository.pairJug(pairing) } },
+                icon = {
+                    Icon(
+                        painterResource(id = R.drawable.wifi),
+                        "WiFi icon",
+                        tint = colorResource(id = R.color.cream)
+                    )
                 },
-                dashboardPage = {
-                    Route.DASHBOARD.open(navController)
-                },
-                renameJug = { id, name ->
-                    repository.launch {
-                        repository.renameJug(id, name)
-                    }
-                },
-                deleteJug = { repository.launch { repository.deleteJug(it) } },
-                selectJug = { repository.launch{repository.setSelectedJug(it)} }
+                text = { Text(text = "Pair a new jug", color = colorResource(id = R.color.cream)) },
+                containerColor = colorResource(id = R.color.water),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally)
             )
         }
-        ExtendedFloatingActionButton(
-            onClick = { repository.launch { repository.pairJug(pairing) } },
-            icon = {
-                Icon(
-                    painterResource(id = R.drawable.wifi),
-                    "WiFi icon",
-                    tint = colorResource(id = R.color.cream)
-                )
-            },
-            text = { Text(text = "Pair a new jug", color = colorResource(id = R.color.cream)) },
-            containerColor = colorResource(id = R.color.water),
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally)
-        )
     }
 }
 

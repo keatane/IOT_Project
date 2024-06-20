@@ -1,6 +1,9 @@
 package com.island.iot
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,20 +15,26 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.github.tehras.charts.bar.BarChart
+import com.github.tehras.charts.bar.BarChartData
+import com.github.tehras.charts.bar.renderer.bar.SimpleBarDrawer
+import com.github.tehras.charts.bar.renderer.label.SimpleValueDrawer
+import com.github.tehras.charts.bar.renderer.xaxis.SimpleXAxisDrawer
+import com.github.tehras.charts.bar.renderer.yaxis.SimpleYAxisDrawer
 import com.github.tehras.charts.line.LineChart
 import com.github.tehras.charts.line.LineChartData
 import com.github.tehras.charts.line.renderer.line.SolidLineDrawer
 import com.github.tehras.charts.line.renderer.point.FilledCircularPointDrawer
-import com.github.tehras.charts.line.renderer.xaxis.SimpleXAxisDrawer
-import com.github.tehras.charts.line.renderer.yaxis.SimpleYAxisDrawer
 import com.github.tehras.charts.piechart.animation.simpleChartAnimation
 
 @Preview(showBackground = true)
@@ -40,16 +49,25 @@ fun ChartsPreview() {
 }
 
 @Composable
-fun ChartChart(title: String) {
-    OutlinedCard(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        border = BorderStroke(1.dp, Color.Black),
+fun DailyChart(data: List<Pair<Int, Double>>) {
+    BarChart(
+        barChartData = BarChartData(bars = data.map {
+            BarChartData.Bar(
+                label = it.first.toString(),
+                value = it.second.toFloat(),
+                color = colorResource(id = R.color.crab)
+            )
+        }),
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        Text(text = title, modifier = Modifier.padding(64.dp))
-    }
+            .width(350.dp)
+            .height(250.dp)
+            .padding(16.dp),
+        animation = simpleChartAnimation(),
+        barDrawer = SimpleBarDrawer(),
+        xAxisDrawer = SimpleXAxisDrawer(axisLineColor = colorResource(id = R.color.cream)),
+        yAxisDrawer = SimpleYAxisDrawer(labelTextColor = colorResource(id = R.color.cream), axisLineColor = colorResource(id = R.color.cream)),
+        labelDrawer = SimpleValueDrawer(labelTextColor = colorResource(id = R.color.cream))
+        )
 }
 
 @Composable
@@ -61,16 +79,16 @@ fun TimeChart(data: List<Pair<Int, Double>>) {
                 points = data.map { LineChartData.Point(it.second.toFloat(), it.first.toString()) }
             )
         ),
-        // Optional properties.
         modifier = Modifier
-            .width(360.dp)
-            .height(360.dp),
+            .width(350.dp)
+            .height(250.dp)
+            .padding(16.dp),
         animation = simpleChartAnimation(),
-        pointDrawer = FilledCircularPointDrawer(),
-        xAxisDrawer = SimpleXAxisDrawer(),
-        yAxisDrawer = SimpleYAxisDrawer(),
+        pointDrawer = FilledCircularPointDrawer(color = colorResource(id = R.color.ocean), diameter = 2.dp),
+        xAxisDrawer = com.github.tehras.charts.line.renderer.xaxis.SimpleXAxisDrawer(labelTextColor = colorResource(id = R.color.cream), axisLineColor = colorResource(id = R.color.cream)),
+        yAxisDrawer = com.github.tehras.charts.line.renderer.yaxis.SimpleYAxisDrawer(labelTextColor = colorResource(id = R.color.cream), axisLineColor = colorResource(id = R.color.cream)),
         horizontalOffset = 5f,
-        labels = listOf("label 1")
+        labels = data.mapIndexed { index, elem -> if (index % 5 == 0) elem.first.toString() else "" }
     )
 }
 
@@ -78,26 +96,64 @@ fun TimeChart(data: List<Pair<Int, Double>>) {
 fun Chart(
     controller: NavController, repository: StateRepository
 ) {
-
-    ScrollableContent{
-        val hourLitres by repository.hourLitres.collectAsState(initial = null)
-        val weekLitres by repository.weekLitres.collectAsState(initial = null)
-        Text(
-            text = "Litres consumed in the last days",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp)
-        )
-        if(weekLitres!=null) TimeChart(weekLitres!!.mapIndexed{x,y->Pair(x,y)})
-        else Text("Loading data")
-        Text(
-            text = "Litres consumed in the last hour",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp)
-        )
-        if(hourLitres!=null)
-            TimeChart(hourLitres!!.mapIndexed{x,y->Pair(x,y)})
-        else Text("Loading data")
+    val hourLitres by repository.hourLitres.collectAsState(initial = null)
+    val weekLitres by repository.weekLitres.collectAsState(initial = null)
+    val selectedJug by repository.selectedJug.collectAsState(initial = null)
+    ScrollableContent {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(4.dp)
+        ) {
+            Text(
+                text = selectedJug?.name ?: "Jug not selected",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.cream),
+                modifier = Modifier.padding(16.dp)
+            )
+            OutlinedCard(
+                colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.abyss)),
+                border = BorderStroke(2.dp, colorResource(id = R.color.rock)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(
+                    text = "Litres consumed in the last hour",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.cream),
+                    modifier = Modifier.padding(16.dp)
+                )
+                if (hourLitres != null)
+                    TimeChart(hourLitres!!.mapIndexed { x, y -> Pair(x, y) })
+                else Text("Loading data", modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally))
+            }
+            OutlinedCard(
+                colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.abyss)),
+                border = BorderStroke(2.dp, colorResource(id = R.color.rock)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(
+                    text = "Litres consumed in the last days",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.cream),
+                    modifier = Modifier.padding(16.dp)
+                )
+                if (weekLitres != null) DailyChart(weekLitres!!.mapIndexed { x, y -> Pair(x, y) })
+                else Text("Loading data", modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally))
+            }
+        }
     }
 }
