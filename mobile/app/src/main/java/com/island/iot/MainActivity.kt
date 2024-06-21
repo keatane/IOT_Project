@@ -1,9 +1,16 @@
 package com.island.iot
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -42,6 +49,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -49,11 +57,50 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.island.iot.ui.theme.IOTTheme
+import kotlinx.coroutines.tasks.await
 
 
 class MainActivity : ComponentActivity() {
     private val pairing = PairingImpl(this)
+
+    // Declare the launcher at the top of your Activity/Fragment:
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // FCM SDK (and your app) can post notifications.
+        } else {
+            // TODO: Inform user that that your app will not show notifications.
+        }
+    }
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.POST_NOTIFICATIONS
+                ) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                val notificationManager = getSystemService(NotificationManager::class.java)
+                notificationManager.createNotificationChannel(
+                    NotificationChannel(
+                        "test",
+                        "test",
+                        NotificationManager.IMPORTANCE_DEFAULT
+                    )
+                )
+                // FCM SDK (and your app) can post notifications.
+            } else {
+                // Directly ask for the permission
+                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
 
     companion object {
         @Composable
@@ -63,12 +110,21 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    fun firebase() {
+        val viewModel: StateViewModel by viewModels()
+        Log.d("SHAKHSJad", "djskjdskjd")
+        viewModel.repository.launch { Log.d("FIREBASE", Firebase.messaging.token.await()) }
+        askNotificationPermission()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pairing.onCreate(this)
         setContent {
             Root()
         }
+        // TODO: REMOVE
+        firebase()
     }
 }
 
@@ -179,7 +235,12 @@ fun Decorations(
                     ) {
                         BottomButton.entries.forEach { item ->
                             NavigationBarItem(
-                                icon = { Icon(item.icon, contentDescription = LocalContext.current.getString(item.text)) },
+                                icon = {
+                                    Icon(
+                                        item.icon,
+                                        contentDescription = LocalContext.current.getString(item.text)
+                                    )
+                                },
                                 label = { Text(LocalContext.current.getString(item.text)) },
                                 selected = item == selectedButton,
                                 onClick = {
@@ -285,7 +346,11 @@ fun SideEffects(controller: NavController, state: StateRepository) {
         BlockingDialog(dialogTitle = stringResource(R.string.pairing_the_jug))
     }
     if (pairingState == PairingState.DONE) {
-        AlertDialog(stringResource(R.string.jug_successfully_paired), "", icon = Icons.Filled.CheckCircle) {
+        AlertDialog(
+            stringResource(R.string.jug_successfully_paired),
+            "",
+            icon = Icons.Filled.CheckCircle
+        ) {
             state.resetPairingState()
         }
     }
