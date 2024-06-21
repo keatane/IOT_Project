@@ -10,6 +10,7 @@
         "node-red-contrib-jwt": "~0.1.0",
         "node-red-contrib-postgresql": "~0.14.0",
         "node-red-contrib-redis": "~1.3.9",
+        "node-red-contrib-web-worldmap": "~4.8.0",
         "node-red-dashboard": "~3.6.5",
         "settings": "^0.1.1"
     }

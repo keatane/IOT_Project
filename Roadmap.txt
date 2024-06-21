@@ -4,19 +4,19 @@
 - rename porta alla dashboard di un'altra caraffa (far rimanere sulla pagina), ma solo quando è stato selezionato una volta l'inspect di una qualsiasi caraffa e poi rinominata
 
 [ Altro ]
-- firebase notifiche push
-- in background l'app deve sospendere le chiamate http
-- risolvere problema barra in alto a volte scompare
-- traduzione: puoi passare il context alle enum (facilmente)?
+- fixare la barra in alto di posizione, se possibile
 - cambiare eccezioni in toast con definizioni user friendly (server error)
-- rimuovere TODO state repository
-- mettere dati filtro in tempo reale
+- rimuovere TODO in state repository file
+- mettere dati filtro in tempo reale (litresPerSecond), nuovo quadrato largo, prima di plastic saved (diretto via MQTT)
 - icona ingranaggio per modificare filtro
+- pagina login/register scrollabile
 
 ---- 
 
 [[ IOT ]]
 - timeout per arduino se durante il pairing, wifi scelto da app, password inserita sbagliata
-- location (?)
-- application key
+- application key thingworx per nascondere le credenziali
+- risolvere node red "credenziali non criptate"
 - display LCD arduino (?)
+- qos (?)
+- struttura dei servizi

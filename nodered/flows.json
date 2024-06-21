@@ -34,7 +34,7 @@
     {
         "id": "4c20aa2ac87fc1e6",
         "type": "tab",
-        "label": "Playground",
+        "label": "Godot",
         "disabled": false,
         "info": "",
         "env": []
@@ -101,7 +101,7 @@
         ],
         "out": [
             {
-                "x": 1340,
+                "x": 1300,
                 "y": 180,
                 "wires": [
                     {
@@ -111,8 +111,8 @@
                 ]
             },
             {
-                "x": 760,
-                "y": 280,
+                "x": 340,
+                "y": 260,
                 "wires": [
                     {
                         "id": "c9342c2ae65773a2",
@@ -121,7 +121,7 @@
                 ]
             },
             {
-                "x": 1100,
+                "x": 760,
                 "y": 240,
                 "wires": [
                     {
@@ -331,88 +331,6 @@
         "env": [],
         "meta": {},
         "color": "#DDAA99"
-    },
-    {
-        "id": "7f812365318f4aea",
-        "type": "group",
-        "z": "4c20aa2ac87fc1e6",
-        "name": "Client Application",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "f26cc9e6ff46d635",
-            "b6601b20bee7cc98",
-            "f8c1aade031fe803",
-            "16a011c4b7e2fc9f",
-            "06d3ba75d9facdef",
-            "76ef18b8c3aade51"
-        ],
-        "x": 154,
-        "y": 399,
-        "w": 632,
-        "h": 262
-    },
-    {
-        "id": "323958da1d4e2b7b",
-        "type": "group",
-        "z": "4c20aa2ac87fc1e6",
-        "name": "Client Jugs",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "14a3846a85810dfa",
-            "27e373792b79bb87",
-            "8a150a90525f1e19",
-            "b599ee280cb26889",
-            "761f1c76987d467d",
-            "1a3567de62c2120d",
-            "a385fed9aa8a7fe3",
-            "e3923ac5b4ee2839",
-            "4708d0a4450dd8e9",
-            "3472f2444d2a7046",
-            "552a23f5ed7b1610",
-            "669db4e658511a7f",
-            "4734de29655a0c1a"
-        ],
-        "x": 154,
-        "y": 99,
-        "w": 1152,
-        "h": 242
-    },
-    {
-        "id": "a70a5b1a39c32320",
-        "type": "group",
-        "z": "4c20aa2ac87fc1e6",
-        "name": "Create/Delete Thing Thingworx",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "df69d4b1370ec407",
-            "b9b2e90c86433bf3",
-            "8745783c2d4b7dfb",
-            "abf1b4b172e6ae86",
-            "120dae098c73873b",
-            "6bf593c124f692f4",
-            "1e33342913f1a641",
-            "e007aae71a2fd34c",
-            "12e14872e9e1debc",
-            "fa3fe7db1655837d",
-            "5a63caf10b3b9a0e",
-            "983a4efb652711eb",
-            "acb3b289268ebf17",
-            "289d5d7502ba340b",
-            "776ccf38c843d360",
-            "c5526e3a82f3fba4",
-            "00166d442c6f8738",
-            "1d00234f8763a250"
-        ],
-        "x": 154,
-        "y": 719,
-        "w": 1172,
-        "h": 342
     },
     {
         "id": "1589093497ae43e3",
@@ -651,8 +569,8 @@
             "eb0e1351ff4cb256",
             "14f845b4086a8052"
         ],
-        "x": 154,
-        "y": 1119,
+        "x": 134,
+        "y": 99,
         "w": 372,
         "h": 82
     },
@@ -669,13 +587,12 @@
             "6f1e5e7364d80697",
             "12d7faae89458ea7",
             "5abf18101812be96",
-            "505ccfe324b1de17",
-            "c59a8be5b2f67b77"
+            "505ccfe324b1de17"
         ],
-        "x": 248,
+        "x": 294,
         "y": 159,
-        "w": 658,
-        "h": 288
+        "w": 612,
+        "h": 182
     },
     {
         "id": "99bd9f011057c2f8",
@@ -827,7 +744,7 @@
             "ebae16586d820da2"
         ],
         "x": 314,
-        "y": 1499,
+        "y": 1719,
         "w": 892,
         "h": 122
     },
@@ -852,7 +769,7 @@
             "6fc6bab94a4ae8e3"
         ],
         "x": 34,
-        "y": 3999,
+        "y": 4299,
         "w": 1312,
         "h": 162
     },
@@ -872,12 +789,15 @@
             "5898347def636b4d",
             "d0c5bf7405388a7c",
             "c98c52a08de3b558",
-            "367f5704e274bbf0"
+            "367f5704e274bbf0",
+            "82e4247a771226d0",
+            "8f712530a5c66d57",
+            "50f589db459557ce"
         ],
         "x": 34,
-        "y": 3819,
+        "y": 4059,
         "w": 632,
-        "h": 142
+        "h": 202
     },
     {
         "id": "2014e345587e4007",
@@ -898,9 +818,9 @@
             "bad79e1fd1d22d16"
         ],
         "x": 714,
-        "y": 3819,
+        "y": 4059,
         "w": 632,
-        "h": 142
+        "h": 202
     },
     {
         "id": "8b12de2fdf899788",
@@ -1082,139 +1002,6 @@
         "y": 2859,
         "w": 1312,
         "h": 282
-    },
-    {
-        "id": "2a455b354fa5ac4b",
-        "type": "group",
-        "z": "8ae59feea1fac0e6",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "f7b8d800ce802bd0",
-            "dc17b309695413e2",
-            "e2c04ed8d99c5955",
-            "7eff09d6e17068ec"
-        ],
-        "x": 54,
-        "y": 319,
-        "w": 792,
-        "h": 122
-    },
-    {
-        "id": "573cea743ea49a20",
-        "type": "group",
-        "z": "3a056c2d95c24d79",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "de379a7fba40d258",
-            "59f7c4243704b7d3",
-            "cb196dd79b58aac0",
-            "cc5e7890c7ab3370"
-        ],
-        "x": 54,
-        "y": 339,
-        "w": 792,
-        "h": 122
-    },
-    {
-        "id": "7b45d7f0acfcc315",
-        "type": "group",
-        "z": "98b9aea3ec541c1d",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "66f82dd9ef9ab9d0",
-            "7d6900434ef47f10",
-            "2dc9d9745baa9e4d",
-            "9a01bde105f55677"
-        ],
-        "x": 54,
-        "y": 179,
-        "w": 792,
-        "h": 122
-    },
-    {
-        "id": "e4dbdab3cce69d07",
-        "type": "group",
-        "z": "3642f44d746371ee",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "1c210d1a9cd0fd62",
-            "4786ad158d83845b",
-            "05b2b88c300427a1",
-            "f906418e505016f9"
-        ],
-        "x": 54,
-        "y": 259,
-        "w": 792,
-        "h": 122
-    },
-    {
-        "id": "f55e5e8ebac5f3f1",
-        "type": "group",
-        "z": "fa232f5df39eb96b",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "7885c5b251a7a118",
-            "6d77058b6e4337a4",
-            "68a6f715d055a1a1",
-            "167d0c15c481f00e"
-        ],
-        "x": 54,
-        "y": 159,
-        "w": 792,
-        "h": 122
-    },
-    {
-        "id": "6b82aca48fea7a32",
-        "type": "group",
-        "z": "bf3376f998e1b263",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "02c99a90cea7aaf8",
-            "540abdd22703d5ef",
-            "a0f717575a528fd8",
-            "12eabbbb344f50c6"
-        ],
-        "x": 54,
-        "y": 179,
-        "w": 792,
-        "h": 122
-    },
-    {
-        "id": "6bcf31badccd15b1",
-        "type": "group",
-        "z": "e6c0f715714d0f23",
-        "name": "Handling error",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "e1e6e53593aa2103",
-            "9c759da4e3e497d8",
-            "b36567d208dc325b",
-            "0121d86d3e04d3b7"
-        ],
-        "x": 54,
-        "y": 259,
-        "w": 792,
-        "h": 122
     },
     {
         "id": "38063613653e8a1a",
@@ -1407,22 +1194,88 @@
         "h": 282
     },
     {
-        "id": "c59a8be5b2f67b77",
+        "id": "37721d011799f43a",
         "type": "group",
-        "z": "b6b33a23690f53f3",
-        "g": "d0158497c3f88bb8",
-        "name": "Handling error",
+        "z": "3a056c2d95c24d79",
+        "name": "Firebase Token Handler",
         "style": {
             "label": true
         },
         "nodes": [
-            "82fb31efe44e0adb",
-            "dbf82feb9c4d4d46",
-            "d440997e40980e95"
+            "0a207a4223822828",
+            "105adace85471fc0",
+            "fe6b5ae2588f8915",
+            "54be08ef54c8720b"
         ],
-        "x": 274,
-        "y": 339,
-        "w": 552,
+        "x": 584,
+        "y": 319,
+        "w": 752,
+        "h": 82
+    },
+    {
+        "id": "4124681a5ccaaaf2",
+        "type": "group",
+        "z": "2751cff285e8ba2d",
+        "name": "Firebase notification process",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "f1f33d90d871e986",
+            "e2d44055a3b0e842"
+        ],
+        "x": 474,
+        "y": 359,
+        "w": 472,
+        "h": 82
+    },
+    {
+        "id": "19762fd47b742d3c",
+        "type": "group",
+        "z": "217d4457bda21c0d",
+        "name": "Set Location",
+        "style": {
+            "label": true,
+            "stroke": "#a4a4a4"
+        },
+        "nodes": [
+            "42eaea6f2fbfb1e4",
+            "f7237cf3043d6090",
+            "4a3dd7bf7cbcc405",
+            "aeac0f7ba5098724",
+            "59b79324370ce600",
+            "b662a3a1f6e7fec3",
+            "25a30e09aab14018",
+            "cd58d3bd7a4a4f5e",
+            "2880cb275f1a652c",
+            "f2961548194dc877",
+            "6eeb14468afaed1f",
+            "01e3a3cc433b1c59",
+            "bb6ab39b15241f2d",
+            "ac7791be6d092be9"
+        ],
+        "x": 34,
+        "y": 3819,
+        "w": 1312,
+        "h": 202
+    },
+    {
+        "id": "5b2449d89192a504",
+        "type": "group",
+        "z": "dd62ac133fb1360c",
+        "name": "Location on map",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a113a6d1a7a1ea63",
+            "dc5aa2cfa5df5e61",
+            "ed633ab67bec359b",
+            "9bc749ad4f114060"
+        ],
+        "x": 314,
+        "y": 1519,
+        "w": 792,
         "h": 82
     },
     {
@@ -1486,28 +1339,6 @@
         "icon": "mi-emoji_events",
         "disabled": false,
         "hidden": false
-    },
-    {
-        "id": "fcdb4c412482dcd0",
-        "type": "ui_group",
-        "name": "Total Litres (App)",
-        "tab": "c1ceec1569757720",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "cc5f98c0f184bc2e",
-        "type": "ui_group",
-        "name": "Litres per second (App)",
-        "tab": "c1ceec1569757720",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
     },
     {
         "id": "c527304ede8acd9c",
@@ -1772,6 +1603,25 @@
         "name": "FB_Admin"
     },
     {
+        "id": "5f9d14c098bf937f",
+        "type": "ui_tab",
+        "name": "Location",
+        "icon": "gps_fixed",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "2315b68dc8088d18",
+        "type": "ui_group",
+        "name": "Jugs Location",
+        "tab": "5f9d14c098bf937f",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "8e7d846effd9e3d7",
         "type": "json",
         "z": "8ae59feea1fac0e6",
@@ -1915,83 +1765,6 @@
         ]
     },
     {
-        "id": "f7b8d800ce802bd0",
-        "type": "catch",
-        "z": "8ae59feea1fac0e6",
-        "g": "2a455b354fa5ac4b",
-        "name": "DB Catch",
-        "scope": [
-            "43ca287d27944fbd"
-        ],
-        "uncaught": false,
-        "x": 140,
-        "y": 360,
-        "wires": [
-            [
-                "7eff09d6e17068ec",
-                "e2c04ed8d99c5955"
-            ]
-        ]
-    },
-    {
-        "id": "dc17b309695413e2",
-        "type": "http response",
-        "z": "8ae59feea1fac0e6",
-        "g": "2a455b354fa5ac4b",
-        "name": "HTTP Response Error",
-        "statusCode": "",
-        "headers": {},
-        "x": 720,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "e2c04ed8d99c5955",
-        "type": "change",
-        "z": "8ae59feea1fac0e6",
-        "g": "2a455b354fa5ac4b",
-        "name": "Craft Return Status \"SERVER_ERROR\" (500)",
-        "rules": [
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "500",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 400,
-        "wires": [
-            [
-                "dc17b309695413e2"
-            ]
-        ]
-    },
-    {
-        "id": "7eff09d6e17068ec",
-        "type": "debug",
-        "z": "8ae59feea1fac0e6",
-        "g": "2a455b354fa5ac4b",
-        "name": "Print error msg (API)",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error.message",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 360,
-        "wires": []
-    },
-    {
         "id": "344ec21cbcc27646",
         "type": "postgresql",
         "z": "3a056c2d95c24d79",
@@ -2001,11 +1774,11 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 610,
+        "x": 650,
         "y": 80,
         "wires": [
             [
-                "c9342c2ae65773a2"
+                "b04c2642611152ff"
             ]
         ]
     },
@@ -2029,7 +1802,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 530,
+        "x": 190,
         "y": 220,
         "wires": [
             [
@@ -2058,7 +1831,7 @@
         "id": "7e1954517d0b4ab3",
         "type": "change",
         "z": "3a056c2d95c24d79",
-        "name": "Prepare params (email) and save pw",
+        "name": "Prepare params (email) and save pw, token",
         "rules": [
             {
                 "t": "set",
@@ -2073,6 +1846,13 @@
                 "pt": "msg",
                 "to": "payload.password",
                 "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "firebaseToken",
+                "pt": "msg",
+                "to": "payload.firebaseToken",
+                "tot": "msg"
             }
         ],
         "action": "",
@@ -2080,7 +1860,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
+        "x": 390,
         "y": 80,
         "wires": [
             [
@@ -2101,11 +1881,11 @@
         "match": "match",
         "outputs": 2,
         "rounds": 10,
-        "x": 960,
+        "x": 620,
         "y": 200,
         "wires": [
             [
-                "eb01921b49e9b9ed"
+                "59c779ace80f7635"
             ],
             []
         ]
@@ -2136,7 +1916,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 750,
+        "x": 410,
         "y": 200,
         "wires": [
             [
@@ -2163,56 +1943,25 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1180,
+        "x": 1140,
         "y": 180,
         "wires": [
             []
         ]
     },
     {
-        "id": "de379a7fba40d258",
-        "type": "catch",
-        "z": "3a056c2d95c24d79",
-        "g": "573cea743ea49a20",
-        "name": "DB Catch",
-        "scope": [
-            "344ec21cbcc27646"
-        ],
-        "uncaught": false,
-        "x": 140,
-        "y": 380,
-        "wires": [
-            [
-                "cc5e7890c7ab3370",
-                "cb196dd79b58aac0"
-            ]
-        ]
-    },
-    {
-        "id": "59f7c4243704b7d3",
-        "type": "http response",
-        "z": "3a056c2d95c24d79",
-        "g": "573cea743ea49a20",
-        "name": "HTTP Response Error",
-        "statusCode": "",
-        "headers": {},
-        "x": 720,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "cb196dd79b58aac0",
+        "id": "0a207a4223822828",
         "type": "change",
         "z": "3a056c2d95c24d79",
-        "g": "573cea743ea49a20",
-        "name": "Craft Return Status \"SERVER_ERROR\" (500)",
+        "g": "37721d011799f43a",
+        "name": "Prepare params (firebaseToken, userId)",
         "rules": [
             {
                 "t": "set",
-                "p": "statusCode",
+                "p": "params",
                 "pt": "msg",
-                "to": "500",
-                "tot": "num"
+                "to": "[msg.firebaseToken, msg.userId]",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -2220,31 +1969,152 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 420,
-        "y": 420,
+        "x": 860,
+        "y": 360,
         "wires": [
             [
-                "59f7c4243704b7d3"
+                "105adace85471fc0"
             ]
         ]
     },
     {
-        "id": "cc5e7890c7ab3370",
-        "type": "debug",
+        "id": "105adace85471fc0",
+        "type": "postgresql",
         "z": "3a056c2d95c24d79",
-        "g": "573cea743ea49a20",
-        "name": "Print error msg (API)",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error.message",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 380,
+        "g": "37721d011799f43a",
+        "name": "Register firebaseToken",
+        "query": "INSERT INTO FirebaseTokens VALUES ($1, $2)\nON CONFLICT (token) DO NOTHING;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1140,
+        "y": 360,
+        "wires": [
+            [
+                "54be08ef54c8720b"
+            ]
+        ]
+    },
+    {
+        "id": "59c779ace80f7635",
+        "type": "switch",
+        "z": "3a056c2d95c24d79",
+        "name": "Is token undefined?",
+        "property": "firebaseToken",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "undefined",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 850,
+        "y": 180,
+        "wires": [
+            [
+                "eb01921b49e9b9ed"
+            ],
+            [
+                "5d5894e60dda010b"
+            ]
+        ]
+    },
+    {
+        "id": "b04c2642611152ff",
+        "type": "link out",
+        "z": "3a056c2d95c24d79",
+        "name": "link out 21",
+        "mode": "link",
+        "links": [
+            "2369ea38a30c8949"
+        ],
+        "x": 765,
+        "y": 80,
         "wires": []
+    },
+    {
+        "id": "2369ea38a30c8949",
+        "type": "link in",
+        "z": "3a056c2d95c24d79",
+        "name": "link in 23",
+        "links": [
+            "b04c2642611152ff"
+        ],
+        "x": 65,
+        "y": 220,
+        "wires": [
+            [
+                "c9342c2ae65773a2"
+            ]
+        ]
+    },
+    {
+        "id": "5d5894e60dda010b",
+        "type": "link out",
+        "z": "3a056c2d95c24d79",
+        "name": "link out 22",
+        "mode": "link",
+        "links": [
+            "fe6b5ae2588f8915"
+        ],
+        "x": 945,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "fe6b5ae2588f8915",
+        "type": "link in",
+        "z": "3a056c2d95c24d79",
+        "g": "37721d011799f43a",
+        "name": "link in 24",
+        "links": [
+            "5d5894e60dda010b"
+        ],
+        "x": 625,
+        "y": 360,
+        "wires": [
+            [
+                "0a207a4223822828"
+            ]
+        ]
+    },
+    {
+        "id": "54be08ef54c8720b",
+        "type": "link out",
+        "z": "3a056c2d95c24d79",
+        "g": "37721d011799f43a",
+        "name": "link out 23",
+        "mode": "link",
+        "links": [
+            "1ac30b54ad114966"
+        ],
+        "x": 1295,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "1ac30b54ad114966",
+        "type": "link in",
+        "z": "3a056c2d95c24d79",
+        "name": "link in 25",
+        "links": [
+            "54be08ef54c8720b"
+        ],
+        "x": 1005,
+        "y": 240,
+        "wires": [
+            [
+                "eb01921b49e9b9ed"
+            ]
+        ]
     },
     {
         "id": "ce16f9573b804d91",
@@ -2283,7 +2153,7 @@
         "type": "function",
         "z": "b6b33a23690f53f3",
         "name": "Craft success message on condition",
-        "func": "if (msg.payload == \"\"){\n    msg.payload = \"Thing successfully added.\"\n}\nreturn msg;",
+        "func": "if (msg.payload == \"\"){\n    msg.payload = \"Thing addition request completed.\"\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2467,72 +2337,6 @@
         "wires": []
     },
     {
-        "id": "82fb31efe44e0adb",
-        "type": "catch",
-        "z": "b6b33a23690f53f3",
-        "g": "c59a8be5b2f67b77",
-        "name": "HTTP Catch",
-        "scope": [
-            "ce16f9573b804d91",
-            "6f1e5e7364d80697",
-            "12d7faae89458ea7"
-        ],
-        "uncaught": false,
-        "x": 370,
-        "y": 380,
-        "wires": [
-            [
-                "dbf82feb9c4d4d46"
-            ]
-        ]
-    },
-    {
-        "id": "dbf82feb9c4d4d46",
-        "type": "change",
-        "z": "b6b33a23690f53f3",
-        "g": "c59a8be5b2f67b77",
-        "name": "Craft error msg",
-        "rules": [
-            {
-                "t": "set",
-                "p": "error",
-                "pt": "msg",
-                "to": "Error while performing HTTP Request during Thing Creation phase",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 540,
-        "y": 380,
-        "wires": [
-            [
-                "d440997e40980e95"
-            ]
-        ]
-    },
-    {
-        "id": "d440997e40980e95",
-        "type": "debug",
-        "z": "b6b33a23690f53f3",
-        "g": "c59a8be5b2f67b77",
-        "name": "Print error",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 380,
-        "wires": []
-    },
-    {
         "id": "281461b3d1958110",
         "type": "debug",
         "z": "b6b33a23690f53f3",
@@ -2554,12 +2358,12 @@
         "type": "postgresql",
         "z": "98b9aea3ec541c1d",
         "name": "Insert or Update Jug",
-        "query": "INSERT INTO JugTable VALUES ($1, $2, 0, $3)\nON CONFLICT (id) DO UPDATE\n    SET userId = $2;",
+        "query": "INSERT INTO JugTable(id,userId,filterCapacity,name,lat,lon) VALUES ($1, $2, 0, $3, null, null)\nON CONFLICT (id) DO UPDATE\n    SET userId = $2;",
         "postgreSQLConfig": "647f7f903ce97865",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 540,
+        "x": 620,
         "y": 80,
         "wires": [
             []
@@ -2569,13 +2373,13 @@
         "id": "111121c67e0c3d75",
         "type": "change",
         "z": "98b9aea3ec541c1d",
-        "name": "Prepare params (jugId, userId)",
+        "name": "Prepare params (jugId, userId, jugName)",
         "rules": [
             {
                 "t": "set",
                 "p": "params",
                 "pt": "msg",
-                "to": "[msg.jugid, msg.token.userid,  msg.payload.jugname]",
+                "to": "[msg.jugid, msg.token.userid, msg.payload.jugname]",
                 "tot": "jsonata"
             }
         ],
@@ -2584,90 +2388,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
+        "x": 300,
         "y": 80,
         "wires": [
             [
                 "17a95012080ff363"
             ]
         ]
-    },
-    {
-        "id": "66f82dd9ef9ab9d0",
-        "type": "catch",
-        "z": "98b9aea3ec541c1d",
-        "g": "7b45d7f0acfcc315",
-        "name": "DB Catch",
-        "scope": [
-            "17a95012080ff363"
-        ],
-        "uncaught": false,
-        "x": 140,
-        "y": 220,
-        "wires": [
-            [
-                "9a01bde105f55677",
-                "2dc9d9745baa9e4d"
-            ]
-        ]
-    },
-    {
-        "id": "7d6900434ef47f10",
-        "type": "http response",
-        "z": "98b9aea3ec541c1d",
-        "g": "7b45d7f0acfcc315",
-        "name": "HTTP Response Error",
-        "statusCode": "",
-        "headers": {},
-        "x": 720,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "2dc9d9745baa9e4d",
-        "type": "change",
-        "z": "98b9aea3ec541c1d",
-        "g": "7b45d7f0acfcc315",
-        "name": "Craft Return Status \"SERVER_ERROR\" (500)",
-        "rules": [
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "500",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 260,
-        "wires": [
-            [
-                "7d6900434ef47f10"
-            ]
-        ]
-    },
-    {
-        "id": "9a01bde105f55677",
-        "type": "debug",
-        "z": "98b9aea3ec541c1d",
-        "g": "7b45d7f0acfcc315",
-        "name": "Print error msg (API)",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error.message",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 220,
-        "wires": []
     },
     {
         "id": "08d1b59a62811f23",
@@ -2703,12 +2430,12 @@
         "type": "postgresql",
         "z": "3642f44d746371ee",
         "name": "Update Filter Capacity (DB)",
-        "query": "UPDATE JugTable SET filterCapacity = $2 WHERE id = $1;",
+        "query": "UPDATE JugTable SET filterCapacity = $2, notified = false WHERE id = $1;",
         "postgreSQLConfig": "647f7f903ce97865",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 780,
+        "x": 740,
         "y": 160,
         "wires": [
             [
@@ -2813,83 +2540,6 @@
         ]
     },
     {
-        "id": "1c210d1a9cd0fd62",
-        "type": "catch",
-        "z": "3642f44d746371ee",
-        "g": "e4dbdab3cce69d07",
-        "name": "DB Catch",
-        "scope": [
-            "45d1266ff6761abe"
-        ],
-        "uncaught": false,
-        "x": 140,
-        "y": 300,
-        "wires": [
-            [
-                "f906418e505016f9",
-                "05b2b88c300427a1"
-            ]
-        ]
-    },
-    {
-        "id": "4786ad158d83845b",
-        "type": "http response",
-        "z": "3642f44d746371ee",
-        "g": "e4dbdab3cce69d07",
-        "name": "HTTP Response Error",
-        "statusCode": "",
-        "headers": {},
-        "x": 720,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "05b2b88c300427a1",
-        "type": "change",
-        "z": "3642f44d746371ee",
-        "g": "e4dbdab3cce69d07",
-        "name": "Craft Return Status \"SERVER_ERROR\" (500)",
-        "rules": [
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "500",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 340,
-        "wires": [
-            [
-                "4786ad158d83845b"
-            ]
-        ]
-    },
-    {
-        "id": "f906418e505016f9",
-        "type": "debug",
-        "z": "3642f44d746371ee",
-        "g": "e4dbdab3cce69d07",
-        "name": "Print error msg (API)",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error.message",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 300,
-        "wires": []
-    },
-    {
         "id": "835fc3041479b855",
         "type": "change",
         "z": "3642f44d746371ee",
@@ -2908,7 +2558,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
+        "x": 450,
         "y": 160,
         "wires": [
             [
@@ -2987,83 +2637,6 @@
         "statusType": "auto",
         "x": 1080,
         "y": 60,
-        "wires": []
-    },
-    {
-        "id": "7885c5b251a7a118",
-        "type": "catch",
-        "z": "fa232f5df39eb96b",
-        "g": "f55e5e8ebac5f3f1",
-        "name": "DB Catch",
-        "scope": [
-            "325c4faa337cc671"
-        ],
-        "uncaught": false,
-        "x": 140,
-        "y": 200,
-        "wires": [
-            [
-                "167d0c15c481f00e",
-                "68a6f715d055a1a1"
-            ]
-        ]
-    },
-    {
-        "id": "6d77058b6e4337a4",
-        "type": "http response",
-        "z": "fa232f5df39eb96b",
-        "g": "f55e5e8ebac5f3f1",
-        "name": "HTTP Response Error",
-        "statusCode": "",
-        "headers": {},
-        "x": 720,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "68a6f715d055a1a1",
-        "type": "change",
-        "z": "fa232f5df39eb96b",
-        "g": "f55e5e8ebac5f3f1",
-        "name": "Craft Return Status \"SERVER_ERROR\" (500)",
-        "rules": [
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "500",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 240,
-        "wires": [
-            [
-                "6d77058b6e4337a4"
-            ]
-        ]
-    },
-    {
-        "id": "167d0c15c481f00e",
-        "type": "debug",
-        "z": "fa232f5df39eb96b",
-        "g": "f55e5e8ebac5f3f1",
-        "name": "Print error msg (API)",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error.message",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 200,
         "wires": []
     },
     {
@@ -3159,83 +2732,6 @@
         ]
     },
     {
-        "id": "02c99a90cea7aaf8",
-        "type": "catch",
-        "z": "bf3376f998e1b263",
-        "g": "6b82aca48fea7a32",
-        "name": "DB Catch",
-        "scope": [
-            "7a97413dbf01a821"
-        ],
-        "uncaught": false,
-        "x": 140,
-        "y": 220,
-        "wires": [
-            [
-                "12eabbbb344f50c6",
-                "a0f717575a528fd8"
-            ]
-        ]
-    },
-    {
-        "id": "540abdd22703d5ef",
-        "type": "http response",
-        "z": "bf3376f998e1b263",
-        "g": "6b82aca48fea7a32",
-        "name": "HTTP Response Error",
-        "statusCode": "",
-        "headers": {},
-        "x": 720,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "a0f717575a528fd8",
-        "type": "change",
-        "z": "bf3376f998e1b263",
-        "g": "6b82aca48fea7a32",
-        "name": "Craft Return Status \"SERVER_ERROR\" (500)",
-        "rules": [
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "500",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 260,
-        "wires": [
-            [
-                "540abdd22703d5ef"
-            ]
-        ]
-    },
-    {
-        "id": "12eabbbb344f50c6",
-        "type": "debug",
-        "z": "bf3376f998e1b263",
-        "g": "6b82aca48fea7a32",
-        "name": "Print error msg (API)",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error.message",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 220,
-        "wires": []
-    },
-    {
         "id": "a28cd932aa8b670a",
         "type": "postgresql",
         "z": "e6c0f715714d0f23",
@@ -3281,83 +2777,6 @@
             [],
             []
         ]
-    },
-    {
-        "id": "e1e6e53593aa2103",
-        "type": "catch",
-        "z": "e6c0f715714d0f23",
-        "g": "6bcf31badccd15b1",
-        "name": "DB Catch",
-        "scope": [
-            "a28cd932aa8b670a"
-        ],
-        "uncaught": false,
-        "x": 140,
-        "y": 300,
-        "wires": [
-            [
-                "0121d86d3e04d3b7",
-                "b36567d208dc325b"
-            ]
-        ]
-    },
-    {
-        "id": "9c759da4e3e497d8",
-        "type": "http response",
-        "z": "e6c0f715714d0f23",
-        "g": "6bcf31badccd15b1",
-        "name": "HTTP Response Error",
-        "statusCode": "",
-        "headers": {},
-        "x": 720,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "b36567d208dc325b",
-        "type": "change",
-        "z": "e6c0f715714d0f23",
-        "g": "6bcf31badccd15b1",
-        "name": "Craft Return Status \"SERVER_ERROR\" (500)",
-        "rules": [
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "500",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 340,
-        "wires": [
-            [
-                "9c759da4e3e497d8"
-            ]
-        ]
-    },
-    {
-        "id": "0121d86d3e04d3b7",
-        "type": "debug",
-        "z": "e6c0f715714d0f23",
-        "g": "6bcf31badccd15b1",
-        "name": "Print error msg (API)",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "error.message",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 300,
-        "wires": []
     },
     {
         "id": "e617a36252101d98",
@@ -3583,12 +3002,12 @@
         "type": "http in",
         "z": "217d4457bda21c0d",
         "g": "20496de9b60de6a8",
-        "name": "Get Filter",
+        "name": "Update Filter",
         "url": "/filter",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 120,
+        "x": 130,
         "y": 940,
         "wires": [
             [
@@ -3622,7 +3041,7 @@
         "key": "",
         "signvar": "token",
         "storetoken": "token",
-        "x": 670,
+        "x": 690,
         "y": 940,
         "wires": [
             [
@@ -3639,7 +3058,7 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 250,
+        "x": 270,
         "y": 940,
         "wires": [
             [
@@ -3676,7 +3095,7 @@
         "z": "217d4457bda21c0d",
         "g": "20496de9b60de6a8",
         "name": "",
-        "x": 910,
+        "x": 930,
         "y": 940,
         "wires": [
             [
@@ -3950,7 +3369,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
+        "x": 470,
         "y": 940,
         "wires": [
             [
@@ -3979,7 +3398,7 @@
         ],
         "uncaught": false,
         "x": 120,
-        "y": 4040,
+        "y": 4340,
         "wires": [
             [
                 "aed1bb2bfb8d429a"
@@ -4135,7 +3554,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 3860,
+        "y": 4100,
         "wires": [
             [
                 "83c99c7142a96e7f"
@@ -4154,7 +3573,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 3860,
+        "y": 4100,
         "wires": [
             [
                 "367f5704e274bbf0"
@@ -4184,7 +3603,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 3920,
+        "y": 4160,
         "wires": [
             [
                 "d0c5bf7405388a7c"
@@ -4203,7 +3622,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 3920,
+        "y": 4160,
         "wires": [
             [
                 "c98c52a08de3b558"
@@ -4224,7 +3643,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 3920,
+        "y": 4160,
         "wires": []
     },
     {
@@ -4250,7 +3669,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 820,
-        "y": 3860,
+        "y": 4100,
         "wires": [
             [
                 "28705e872a39bf64"
@@ -4269,7 +3688,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 1040,
-        "y": 3860,
+        "y": 4100,
         "wires": [
             [
                 "1cd3cb4c7a6a6292"
@@ -4291,7 +3710,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1240,
-        "y": 3860,
+        "y": 4100,
         "wires": []
     },
     {
@@ -4317,7 +3736,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 820,
-        "y": 3920,
+        "y": 4220,
         "wires": [
             [
                 "4810de2e5fcc3538"
@@ -4336,7 +3755,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 1040,
-        "y": 3920,
+        "y": 4220,
         "wires": [
             [
                 "bad79e1fd1d22d16"
@@ -4357,7 +3776,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1240,
-        "y": 3920,
+        "y": 4220,
         "wires": []
     },
     {
@@ -4956,7 +4375,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1240,
-        "y": 4100,
+        "y": 4400,
         "wires": []
     },
     {
@@ -4968,7 +4387,7 @@
         "scope": null,
         "uncaught": true,
         "x": 120,
-        "y": 4120,
+        "y": 4420,
         "wires": [
             [
                 "aed1bb2bfb8d429a"
@@ -5545,7 +4964,7 @@
         "to": "",
         "reg": false,
         "x": 960,
-        "y": 4100,
+        "y": 4400,
         "wires": [
             [
                 "98c6aa8214050734"
@@ -5595,7 +5014,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 900,
-        "y": 4060,
+        "y": 4360,
         "wires": []
     },
     {
@@ -6126,7 +5545,7 @@
             "aed1bb2bfb8d429a"
         ],
         "x": 665,
-        "y": 4080,
+        "y": 4380,
         "wires": [
             [
                 "b4bc44fd8fd0d81f",
@@ -6146,7 +5565,7 @@
             "71a0df322767aff7"
         ],
         "x": 295,
-        "y": 4080,
+        "y": 4380,
         "wires": []
     },
     {
@@ -6814,7 +6233,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 3860,
+        "y": 4100,
         "wires": []
     },
     {
@@ -6958,7 +6377,7 @@
         ],
         "uncaught": false,
         "x": 130,
-        "y": 4080,
+        "y": 4380,
         "wires": [
             [
                 "aed1bb2bfb8d429a"
@@ -8229,6 +7648,375 @@
         ]
     },
     {
+        "id": "8f712530a5c66d57",
+        "type": "inject",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 4220,
+        "wires": [
+            [
+                "50f589db459557ce"
+            ]
+        ]
+    },
+    {
+        "id": "50f589db459557ce",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "Show FB_TOKENS table",
+        "query": "SELECT * FROM FirebaseTokens;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 350,
+        "y": 4220,
+        "wires": [
+            [
+                "82e4247a771226d0"
+            ]
+        ]
+    },
+    {
+        "id": "82e4247a771226d0",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "dd69043d1cb5236a",
+        "name": "debug 30",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 4220,
+        "wires": []
+    },
+    {
+        "id": "42eaea6f2fbfb1e4",
+        "type": "http in",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Set Location",
+        "url": "/setLocation",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 3860,
+        "wires": [
+            [
+                "4a3dd7bf7cbcc405"
+            ]
+        ]
+    },
+    {
+        "id": "f7237cf3043d6090",
+        "type": "http response",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "HTTP Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 780,
+        "y": 3920,
+        "wires": []
+    },
+    {
+        "id": "4a3dd7bf7cbcc405",
+        "type": "json",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "to obj",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 270,
+        "y": 3860,
+        "wires": [
+            [
+                "aeac0f7ba5098724"
+            ]
+        ]
+    },
+    {
+        "id": "aeac0f7ba5098724",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Extract id, lat, lon, token",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lat",
+                "pt": "msg",
+                "to": "payload.lat",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "lon",
+                "pt": "msg",
+                "to": "payload.lon",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "jug",
+                "pt": "msg",
+                "to": "payload.id",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "token",
+                "pt": "msg",
+                "to": "payload.token",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 3860,
+        "wires": [
+            [
+                "6eeb14468afaed1f"
+            ]
+        ]
+    },
+    {
+        "id": "59b79324370ce600",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Set params (jugId, userId)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.jug, msg.token.userid]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 3860,
+        "wires": [
+            [
+                "b662a3a1f6e7fec3"
+            ]
+        ]
+    },
+    {
+        "id": "b662a3a1f6e7fec3",
+        "type": "subflow:e6c0f715714d0f23",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "",
+        "x": 1070,
+        "y": 3860,
+        "wires": [
+            [
+                "f2961548194dc877"
+            ]
+        ]
+    },
+    {
+        "id": "25a30e09aab14018",
+        "type": "complete",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Set Location completed",
+        "scope": [
+            "f7237cf3043d6090"
+        ],
+        "uncaught": false,
+        "x": 160,
+        "y": 3980,
+        "wires": [
+            [
+                "cd58d3bd7a4a4f5e"
+            ]
+        ]
+    },
+    {
+        "id": "cd58d3bd7a4a4f5e",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Craft success msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Set Location request completed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 3980,
+        "wires": [
+            [
+                "2880cb275f1a652c"
+            ]
+        ]
+    },
+    {
+        "id": "2880cb275f1a652c",
+        "type": "debug",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Print result",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 3980,
+        "wires": []
+    },
+    {
+        "id": "f2961548194dc877",
+        "type": "link out",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "link out 26",
+        "mode": "link",
+        "links": [
+            "1c4c6a70bc144fd4",
+            "01e3a3cc433b1c59"
+        ],
+        "x": 1305,
+        "y": 3860,
+        "wires": []
+    },
+    {
+        "id": "6eeb14468afaed1f",
+        "type": "jwt verify",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "",
+        "alg": [
+            "HS256"
+        ],
+        "jwkurl": "",
+        "secret": "secret",
+        "key": "",
+        "signvar": "token",
+        "storetoken": "token",
+        "x": 650,
+        "y": 3860,
+        "wires": [
+            [
+                "59b79324370ce600"
+            ]
+        ]
+    },
+    {
+        "id": "01e3a3cc433b1c59",
+        "type": "link in",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "link in 28",
+        "links": [
+            "f2961548194dc877"
+        ],
+        "x": 75,
+        "y": 3920,
+        "wires": [
+            [
+                "ac7791be6d092be9"
+            ]
+        ]
+    },
+    {
+        "id": "bb6ab39b15241f2d",
+        "type": "postgresql",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Set Jug Location",
+        "query": "UPDATE JugTable SET lat = $2, lon = $3 WHERE id = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 510,
+        "y": 3920,
+        "wires": [
+            [
+                "f7237cf3043d6090"
+            ]
+        ]
+    },
+    {
+        "id": "ac7791be6d092be9",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "19762fd47b742d3c",
+        "name": "Set params (jugId, userId)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.jug, msg.lat, msg.lon]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 3920,
+        "wires": [
+            [
+                "bb6ab39b15241f2d"
+            ]
+        ]
+    },
+    {
         "id": "21d2d9cfcaed8d56",
         "type": "redis-instance",
         "z": "7af354fb2230bd6b",
@@ -8315,7 +8103,7 @@
         "g": "38063613653e8a1a",
         "name": "",
         "pauseType": "delay",
-        "timeout": "5",
+        "timeout": "10",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -9179,17 +8967,69 @@
         ]
     },
     {
-        "id": "d0310a982e3d1e03",
-        "type": "inject",
+        "id": "f1f33d90d871e986",
+        "type": "firebase cloud messaging",
+        "z": "2751cff285e8ba2d",
+        "g": "4124681a5ccaaaf2",
+        "name": "",
+        "admin": "222522e409a8c70d",
+        "kind": "notification",
+        "x": 810,
+        "y": 400,
+        "wires": [
+            [
+                "b87bc0b91bd20db0"
+            ]
+        ]
+    },
+    {
+        "id": "0853278bb994a75e",
+        "type": "postgresql",
+        "z": "2751cff285e8ba2d",
+        "name": "Select all jugs",
+        "query": "SELECT * FROM JugTable NATURAL JOIN FirebaseTokens;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 360,
+        "y": 120,
+        "wires": [
+            [
+                "f03472c43cdfb9ee"
+            ]
+        ]
+    },
+    {
+        "id": "f03472c43cdfb9ee",
+        "type": "split",
         "z": "2751cff285e8ba2d",
         "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "0f9a065b6892bfb4"
+            ]
+        ]
+    },
+    {
+        "id": "5f7c6db27edc37ad",
+        "type": "inject",
+        "z": "2751cff285e8ba2d",
+        "name": "Manual start",
         "props": [
             {
                 "p": "payload"
             },
             {
-                "p": "token",
-                "v": "fRMX5aSLStqJxPmIYv7ihx:APA91bH0NARkXLowxr9Rvb3Z9nt3UtR6S9T8moMCBdKJe7E7onV99A5vr0MacmtvXTHVvnbMVcQ-82pNpk-WdTqXEtebHQNv_kW-4Ihp2DQzYpKrCZjV2HhAEYbSSqbOGzaEk2azIDRZ",
+                "p": "topic",
                 "vt": "str"
             }
         ],
@@ -9198,10 +9038,131 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"title\": \"Titolo\", \"body\":\"ciao\"}",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "0853278bb994a75e"
+            ]
+        ]
+    },
+    {
+        "id": "0f9a065b6892bfb4",
+        "type": "function",
+        "z": "2751cff285e8ba2d",
+        "name": "Set redis payload, save token, notified, filterCapacity, jugid",
+        "func": "msg.token = msg.payload.token;\nmsg.jug = msg.payload.id;\nmsg.filterCapacity = msg.payload.filtercapacity;\nmsg.notified = msg.payload.notified;\nmsg.payload = [`filtered:${msg.jug}`];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 120,
+        "wires": [
+            [
+                "35750d7256961691"
+            ]
+        ]
+    },
+    {
+        "id": "35750d7256961691",
+        "type": "redis-command",
+        "z": "2751cff285e8ba2d",
+        "server": "df153d084656312d",
+        "command": "GET",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
         "payloadType": "json",
-        "x": 250,
-        "y": 220,
+        "block": false,
+        "x": 1120,
+        "y": 120,
+        "wires": [
+            [
+                "e0300de71dbc7972"
+            ]
+        ]
+    },
+    {
+        "id": "b87bc0b91bd20db0",
+        "type": "join",
+        "z": "2751cff285e8ba2d",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 890,
+        "y": 260,
+        "wires": [
+            [
+                "9fdc5ace85da2c5e"
+            ]
+        ]
+    },
+    {
+        "id": "9fdc5ace85da2c5e",
+        "type": "delay",
+        "z": "2751cff285e8ba2d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1040,
+        "y": 260,
+        "wires": [
+            [
+                "cc148dcac4f795ee"
+            ]
+        ]
+    },
+    {
+        "id": "e2d44055a3b0e842",
+        "type": "change",
+        "z": "2751cff285e8ba2d",
+        "g": "4124681a5ccaaaf2",
+        "name": "Prepare notification",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"title\": \"Filter alert\", \"body\":\"Your filter is about to expire!\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 400,
         "wires": [
             [
                 "f1f33d90d871e986"
@@ -9209,34 +9170,223 @@
         ]
     },
     {
-        "id": "0e527e6a5c1519e1",
-        "type": "debug",
+        "id": "44b8c9590517b097",
+        "type": "link out",
         "z": "2751cff285e8ba2d",
-        "name": "debug 27",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 220,
+        "name": "link out 20",
+        "mode": "link",
+        "links": [
+            "c5c4ac09cd76ebdc"
+        ],
+        "x": 635,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "f1f33d90d871e986",
-        "type": "firebase cloud messaging",
+        "id": "c5c4ac09cd76ebdc",
+        "type": "link in",
         "z": "2751cff285e8ba2d",
-        "name": "",
-        "admin": "222522e409a8c70d",
-        "kind": "notification",
-        "x": 590,
+        "name": "link in 22",
+        "links": [
+            "44b8c9590517b097"
+        ],
+        "x": 55,
+        "y": 400,
+        "wires": [
+            [
+                "f4d89bedfabc836d"
+            ]
+        ]
+    },
+    {
+        "id": "d1624d47bd1afc34",
+        "type": "comment",
+        "z": "2751cff285e8ba2d",
+        "name": "Send notification to high filter usage per jug on mobile devices",
+        "info": "",
+        "x": 280,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f7c72e310b754640",
+        "type": "postgresql",
+        "z": "2751cff285e8ba2d",
+        "name": "Set notified",
+        "query": "UPDATE JugTable SET notified = true WHERE id = $1;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "e2d44055a3b0e842"
+            ]
+        ]
+    },
+    {
+        "id": "48f71ebb381121e0",
+        "type": "switch",
+        "z": "2751cff285e8ba2d",
+        "name": "Is not already notified?",
+        "property": "notified",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "44b8c9590517b097"
+            ],
+            [
+                "b87bc0b91bd20db0"
+            ]
+        ]
+    },
+    {
+        "id": "d64f52ed335c5a12",
+        "type": "link out",
+        "z": "2751cff285e8ba2d",
+        "name": "link out 24",
+        "mode": "link",
+        "links": [
+            "c7c141178f166673"
+        ],
+        "x": 1345,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c7c141178f166673",
+        "type": "link in",
+        "z": "2751cff285e8ba2d",
+        "name": "link in 26",
+        "links": [
+            "d64f52ed335c5a12"
+        ],
+        "x": 245,
+        "y": 80,
+        "wires": [
+            [
+                "0853278bb994a75e"
+            ]
+        ]
+    },
+    {
+        "id": "e0300de71dbc7972",
+        "type": "link out",
+        "z": "2751cff285e8ba2d",
+        "name": "link out 25",
+        "mode": "link",
+        "links": [
+            "d83ecd2b2af82f6c"
+        ],
+        "x": 1245,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d83ecd2b2af82f6c",
+        "type": "link in",
+        "z": "2751cff285e8ba2d",
+        "name": "link in 27",
+        "links": [
+            "e0300de71dbc7972"
+        ],
+        "x": 65,
         "y": 220,
         "wires": [
             [
-                "0e527e6a5c1519e1"
+                "770ee71c4249cdf4"
+            ]
+        ]
+    },
+    {
+        "id": "f4d89bedfabc836d",
+        "type": "change",
+        "z": "2751cff285e8ba2d",
+        "name": "Prepare params (jug)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[msg.jug]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 400,
+        "wires": [
+            [
+                "f7c72e310b754640"
+            ]
+        ]
+    },
+    {
+        "id": "770ee71c4249cdf4",
+        "type": "function",
+        "z": "2751cff285e8ba2d",
+        "name": "Is up to 80% usage?",
+        "func": "return (msg.payload) && (msg.filterCapacity > 0) && (msg.payload >= msg.filterCapacity*0.8)  ? [msg, null] : [null, msg];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 220,
+        "wires": [
+            [
+                "48f71ebb381121e0"
+            ],
+            [
+                "b87bc0b91bd20db0"
+            ]
+        ]
+    },
+    {
+        "id": "cc148dcac4f795ee",
+        "type": "change",
+        "z": "2751cff285e8ba2d",
+        "name": "Reset params",
+        "rules": [
+            {
+                "t": "set",
+                "p": "params",
+                "pt": "msg",
+                "to": "[]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 260,
+        "wires": [
+            [
+                "d64f52ed335c5a12"
             ]
         ]
     },
@@ -9292,7 +9442,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "2",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
@@ -10389,7 +10539,8 @@
         "mode": "link",
         "links": [
             "bc2ea44de7c98582",
-            "97382bb942b28a70"
+            "97382bb942b28a70",
+            "767e5feb895e7f58"
         ],
         "x": 255,
         "y": 200,
@@ -10544,7 +10695,7 @@
         ],
         "uncaught": false,
         "x": 410,
-        "y": 1540,
+        "y": 1760,
         "wires": [
             [
                 "9eb6688fb3790834"
@@ -10570,7 +10721,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 580,
-        "y": 1540,
+        "y": 1760,
         "wires": [
             [
                 "48549ff50829816e"
@@ -10598,7 +10749,7 @@
         "to": "",
         "reg": false,
         "x": 780,
-        "y": 1540,
+        "y": 1760,
         "wires": [
             [
                 "451e852607a62c46"
@@ -10620,7 +10771,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1050,
-        "y": 1540,
+        "y": 1760,
         "wires": []
     },
     {
@@ -10635,7 +10786,7 @@
         ],
         "uncaught": false,
         "x": 430,
-        "y": 1580,
+        "y": 1800,
         "wires": [
             []
         ]
@@ -10659,7 +10810,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 620,
-        "y": 1580,
+        "y": 1800,
         "wires": [
             [
                 "ebae16586d820da2"
@@ -10687,7 +10838,7 @@
         "to": "",
         "reg": false,
         "x": 800,
-        "y": 1580,
+        "y": 1800,
         "wires": [
             [
                 "451e852607a62c46"
@@ -10827,214 +10978,44 @@
         "wires": []
     },
     {
-        "id": "f26cc9e6ff46d635",
-        "type": "mqtt in",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "7f812365318f4aea",
-        "name": "",
-        "topic": "/Thingworx/Jug1/litresPerSecond",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "c77abff0c3609a0d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 310,
-        "y": 460,
-        "wires": [
-            [
-                "b6601b20bee7cc98",
-                "76ef18b8c3aade51"
-            ]
-        ]
-    },
-    {
-        "id": "b6601b20bee7cc98",
-        "type": "debug",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "7f812365318f4aea",
-        "name": "Litres per second",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 650,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "16a011c4b7e2fc9f",
-        "type": "mqtt in",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "7f812365318f4aea",
-        "name": "",
-        "topic": "/Thingworx/Jug555/totalLitresFilter",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "c77abff0c3609a0d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 320,
-        "y": 580,
-        "wires": [
-            [
-                "06d3ba75d9facdef",
-                "f8c1aade031fe803"
-            ]
-        ]
-    },
-    {
-        "id": "06d3ba75d9facdef",
-        "type": "debug",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "7f812365318f4aea",
-        "name": "Litres in total",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "27e373792b79bb87",
-        "type": "mqtt out",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "topic": "/Thingworx/Jug1/litresPerSecond",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c77abff0c3609a0d",
-        "x": 840,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "8a150a90525f1e19",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
+        "id": "767e5feb895e7f58",
+        "type": "link in",
+        "z": "dd62ac133fb1360c",
+        "name": "link in 29",
+        "links": [
+            "b4bb400f7fb5444d"
         ],
-        "repeat": "1",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0",
-        "payloadType": "num",
-        "x": 250,
-        "y": 220,
+        "x": 285,
+        "y": 1560,
         "wires": [
             [
-                "b599ee280cb26889"
+                "a113a6d1a7a1ea63"
             ]
         ]
     },
     {
-        "id": "b599ee280cb26889",
-        "type": "function",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "randomize",
-        "func": "msg.payload = msg.payload + Math.random() * 0.5\nreturn msg;",
+        "id": "a113a6d1a7a1ea63",
+        "type": "postgresql",
+        "z": "dd62ac133fb1360c",
+        "g": "5b2449d89192a504",
+        "name": "Select Jugs",
+        "query": "SELECT id, lat, lon FROM JugTable;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
         "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "761f1c76987d467d",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "Clear values",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0",
-        "payloadType": "num",
-        "x": 610,
-        "y": 140,
+        "x": 410,
+        "y": 1560,
         "wires": [
             [
-                "27e373792b79bb87",
-                "1a3567de62c2120d",
-                "4708d0a4450dd8e9",
-                "669db4e658511a7f",
-                "4734de29655a0c1a",
-                "14a3846a85810dfa"
+                "9bc749ad4f114060"
             ]
         ]
     },
     {
-        "id": "1a3567de62c2120d",
-        "type": "mqtt out",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "topic": "/Thingworx/Jug2/litresPerSecond",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c77abff0c3609a0d",
-        "x": 840,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "a385fed9aa8a7fe3",
+        "id": "2bb09d515ea0789f",
         "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
+        "z": "dd62ac133fb1360c",
         "name": "",
         "props": [
             {
@@ -11045,646 +11026,105 @@
                 "vt": "str"
             }
         ],
-        "repeat": "1",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0.2",
-        "payloadType": "num",
-        "x": 250,
-        "y": 260,
-        "wires": [
-            [
-                "e3923ac5b4ee2839"
-            ]
-        ]
-    },
-    {
-        "id": "e3923ac5b4ee2839",
-        "type": "function",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "randomize",
-        "func": "msg.payload = msg.payload + Math.random() * 0.5\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "4708d0a4450dd8e9",
-        "type": "mqtt out",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "topic": "/Thingworx/Jug3/litresPerSecond",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c77abff0c3609a0d",
-        "x": 840,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "3472f2444d2a7046",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0.3",
-        "payloadType": "num",
-        "x": 250,
-        "y": 300,
-        "wires": [
-            [
-                "552a23f5ed7b1610"
-            ]
-        ]
-    },
-    {
-        "id": "552a23f5ed7b1610",
-        "type": "function",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "randomize",
-        "func": "msg.payload = msg.payload + Math.random() * 0.5\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 300,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "669db4e658511a7f",
-        "type": "mqtt out",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "topic": "/Thingworx/Jug0/totalLitresJug",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c77abff0c3609a0d",
-        "x": 1150,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "4734de29655a0c1a",
-        "type": "mqtt out",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "topic": "/Thingworx/Jug2/totalLitresJug",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c77abff0c3609a0d",
-        "x": 1150,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "14a3846a85810dfa",
-        "type": "mqtt out",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "323958da1d4e2b7b",
-        "name": "",
-        "topic": "/Thingworx/Jug3/totalLitresJug",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c77abff0c3609a0d",
-        "x": 1150,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "df69d4b1370ec407",
-        "type": "http request",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Create Thing",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Resources/EntityServices/Services/CreateThing",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [],
-        "x": 430,
-        "y": 760,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b9b2e90c86433bf3",
-        "type": "debug",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 760,
-        "wires": []
-    },
-    {
-        "id": "8745783c2d4b7dfb",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Inject Jug",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{     \"name\": \"Jug555\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
-        "payloadType": "json",
-        "x": 260,
-        "y": 760,
-        "wires": [
-            [
-                "df69d4b1370ec407",
-                "5a63caf10b3b9a0e"
-            ]
-        ]
-    },
-    {
-        "id": "abf1b4b172e6ae86",
-        "type": "http request",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Delete Thing",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Resources/EntityServices/Services/DeleteThing",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [],
-        "x": 530,
-        "y": 860,
-        "wires": [
-            [
-                "e007aae71a2fd34c"
-            ]
-        ]
-    },
-    {
-        "id": "120dae098c73873b",
-        "type": "debug",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "debug 3",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1220,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "6bf593c124f692f4",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Inject Jug",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{     \"name\": \"Jug0\",  \"projectName\":\"cattaneo-isola\",    \"thingTemplateName\": \"JugTemplate\" }",
-        "payloadType": "json",
-        "x": 260,
-        "y": 860,
-        "wires": [
-            [
-                "abf1b4b172e6ae86"
-            ]
-        ]
-    },
-    {
-        "id": "1e33342913f1a641",
-        "type": "function",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Transform output",
-        "func": "if (msg.payload == \"\"){\n    msg.payload = \"Thing successfully added.\"\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1050,
-        "y": 760,
-        "wires": [
-            [
-                "b9b2e90c86433bf3"
-            ]
-        ]
-    },
-    {
-        "id": "e007aae71a2fd34c",
-        "type": "function",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Transform output",
-        "func": "if (msg.payload == \"\"){\n    msg.payload = \"Thing successfully deleted.\"\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1050,
-        "y": 860,
-        "wires": [
-            [
-                "120dae098c73873b",
-                "289d5d7502ba340b"
-            ]
-        ]
-    },
-    {
-        "id": "f8c1aade031fe803",
-        "type": "ui_gauge",
-        "z": "4c20aa2ac87fc1e6",
-        "d": true,
-        "g": "7f812365318f4aea",
-        "name": "",
-        "group": "fcdb4c412482dcd0",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Total litres",
-        "label": "units",
-        "format": "{{msg.count}}",
-        "min": 0,
-        "max": "150",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 620,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "76ef18b8c3aade51",
-        "type": "ui_gauge",
-        "z": "4c20aa2ac87fc1e6",
-        "d": true,
-        "g": "7f812365318f4aea",
-        "name": "",
-        "group": "cc5f98c0f184bc2e",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Litres per second",
-        "label": "units",
-        "format": "{{msg.count}}",
-        "min": 0,
-        "max": "1",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 650,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "12e14872e9e1debc",
-        "type": "http request",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Enable Thing",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug555/Services/EnableThing",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Content-Type",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 650,
-        "y": 800,
-        "wires": [
-            [
-                "fa3fe7db1655837d"
-            ]
-        ]
-    },
-    {
-        "id": "fa3fe7db1655837d",
-        "type": "http request",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Restart Thing",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug555/Services/RestartThing",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Content-Type",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 840,
-        "y": 800,
-        "wires": [
-            [
-                "1e33342913f1a641"
-            ]
-        ]
-    },
-    {
-        "id": "5a63caf10b3b9a0e",
-        "type": "delay",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 420,
-        "y": 800,
-        "wires": [
-            [
-                "12e14872e9e1debc"
-            ]
-        ]
-    },
-    {
-        "id": "983a4efb652711eb",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Clean all",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 260,
-        "y": 920,
+        "x": 210,
+        "y": 1620,
         "wires": [
             [
-                "acb3b289268ebf17"
+                "a113a6d1a7a1ea63"
             ]
         ]
     },
     {
-        "id": "289d5d7502ba340b",
-        "type": "postgresql",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Clean table",
-        "query": "DELETE FROM JugTable;",
-        "postgreSQLConfig": "647f7f903ce97865",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 1050,
-        "y": 920,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "acb3b289268ebf17",
-        "type": "subflow:fa232f5df39eb96b",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "x": 550,
-        "y": 920,
-        "wires": [
-            [
-                "abf1b4b172e6ae86"
-            ]
-        ]
-    },
-    {
-        "id": "776ccf38c843d360",
-        "type": "inject",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Inject Jug",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{ \"maxItems\": \"1000\"}",
-        "payloadType": "json",
-        "x": 260,
-        "y": 1020,
-        "wires": [
-            [
-                "c5526e3a82f3fba4"
-            ]
-        ]
-    },
-    {
-        "id": "c5526e3a82f3fba4",
-        "type": "http request",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "Get value stream",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://212.78.1.205:8080/Thingworx/Things/Jug0/Services/QueryPropertyHistory",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Accept",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            },
-            {
-                "keyType": "Content-Type",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 450,
-        "y": 1020,
-        "wires": [
-            [
-                "00166d442c6f8738",
-                "1d00234f8763a250"
-            ]
-        ]
-    },
-    {
-        "id": "00166d442c6f8738",
-        "type": "debug",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "debug 13",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 960,
+        "id": "dc5aa2cfa5df5e61",
+        "type": "ui_worldmap",
+        "z": "dd62ac133fb1360c",
+        "g": "5b2449d89192a504",
+        "group": "2315b68dc8088d18",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "lat": "41.89053239676532",
+        "lon": "12.479681319124168",
+        "zoom": "5",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "10",
+        "usermenu": "show",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1020,
+        "y": 1560,
         "wires": []
+    },
+    {
+        "id": "ed633ab67bec359b",
+        "type": "change",
+        "z": "dd62ac133fb1360c",
+        "g": "5b2449d89192a504",
+        "name": "Create json position",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"name\":msg.payload.id, \"lat\":msg.payload.lat, \"lon\":msg.payload.lon}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 1560,
+        "wires": [
+            [
+                "dc5aa2cfa5df5e61"
+            ]
+        ]
+    },
+    {
+        "id": "9bc749ad4f114060",
+        "type": "split",
+        "z": "dd62ac133fb1360c",
+        "g": "5b2449d89192a504",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 570,
+        "y": 1560,
+        "wires": [
+            [
+                "ed633ab67bec359b"
+            ]
+        ]
     },
     {
         "id": "eb0e1351ff4cb256",
@@ -11700,8 +11140,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 240,
-        "y": 1160,
+        "x": 220,
+        "y": 140,
         "wires": [
             [
                 "14f845b4086a8052"
@@ -11721,20 +11161,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 420,
-        "y": 1160,
-        "wires": []
-    },
-    {
-        "id": "1d00234f8763a250",
-        "type": "http response",
-        "z": "4c20aa2ac87fc1e6",
-        "g": "a70a5b1a39c32320",
-        "name": "HTTP Response",
-        "statusCode": "",
-        "headers": {},
-        "x": 740,
-        "y": 1020,
+        "x": 400,
+        "y": 140,
         "wires": []
     }
 ]

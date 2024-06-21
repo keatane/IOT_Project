@@ -19,29 +19,9 @@
         "user": "$(THINGWORX_USERNAME)",
         "password": "$(THINGWORX_PASSWORD)"
     },
-    "df69d4b1370ec407": {
-        "user": "$(THINGWORX_USERNAME)",
-        "password": "$(THINGWORX_PASSWORD)"
-    },
-    "abf1b4b172e6ae86": {
-        "user": "$(THINGWORX_USERNAME)",
-        "password": "$(THINGWORX_PASSWORD)"
-    },
-    "12e14872e9e1debc": {
-        "user": "$(THINGWORX_USERNAME)",
-        "password": "$(THINGWORX_PASSWORD)"
-    },
-    "fa3fe7db1655837d": {
-        "user": "$(THINGWORX_USERNAME)",
-        "password": "$(THINGWORX_PASSWORD)"
-    },
     "12d815057cd57334": {
         "user": "$(THINGWORX_USERNAME)",
         "password": "$(THINGWORX_PASSWORD)"
-    },
-    "c5526e3a82f3fba4": {
-        "user": "${THINGWORX_USERNAME}",
-        "password": "${THINGWORX_PASSWORD}"
     },
     "f666e567f16cadaa": {},
     "c82c75d3b593411b": {
