@@ -20,11 +20,13 @@
  *
  **/
 
+const path=require("path")
+
 /* ENV VARS -- Kevin */
 process.env.DB_IP = process.env.DB_IP||"127.0.0.1";
 process.env.DB_PORT = process.env.DB_PORT||"5432";
 process.env.REDIS_HOST = process.env.REDIS_HOST||"127.0.0.1";
-process.env.FB_KEY=process.env.FB_KEY||`${__dirname}/smartjugs-78d6e-firebase-adminsdk-awi6u-ffd4c6ff62.json`;
+process.env.FB_KEY=process.env.FB_KEY||path.join(__dirname,"smartjugs-78d6e-firebase-adminsdk-awi6u-ffd4c6ff62.json");
 
 
 module.exports = {
