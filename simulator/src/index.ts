@@ -1,6 +1,6 @@
 import { program } from "commander";
 import {assert,range,randomNumber,sleep,entry,MQTTAPI} from "./utils.js";
-import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES, TOTAL_LITRES_FILTER, DAILY_LITRES, HOUR_LITRES, WEEK_LITRES } from "./api.js";
+import { REGISTER_API,LOGIN_API,PAIR_API,FILTER_API, EDGE_PAIR_API, GET_JUGS_API, CHANGE_PASSWORD_API, DELETE_JUG_API, RENAME_JUG_API, DELETE_ACCOUNT_API, CHANGE_EMAIL_API, TOTAL_LITRES, TOTAL_LITRES_FILTER, DAILY_LITRES, HOUR_LITRES, WEEK_LITRES, SET_LOCATION_API } from "./api.js";
 import { createClient } from "redis";
 
 async function sendLoop(id:string|number){
@@ -47,7 +47,7 @@ async function filter(id:string|number,token:string,capacity:string|number) {
 }
 
 async function login(username:string,password:string) {
-    return await LOGIN_API.send({username,password});
+    return await LOGIN_API.send({username,password,firebaseToken: null});
 }
 
 async function pair(id: string|number, token: string) {
@@ -58,6 +58,7 @@ async function pair(id: string|number, token: string) {
 async function sendData(id:string|number,data:string|Number){
     return await new MQTTAPI<number,null>(`/Thingworx/Jug${id}/litresPerSecond`,null).send(Number(data));
 }
+
 
 async function arduinoServer(id:string|number){
     id=Number(id.toString());
@@ -126,6 +127,13 @@ async function weekLitres(token:string,id:number|string){
     return WEEK_LITRES.send({token,id})
 }
 
+async function setLocation(token:string,id:number|string,lat:number|string,lon:number|string){
+    lat=Number(lat)
+    lon=Number(lon)
+    id=Number(id)
+    return SET_LOCATION_API.send({token,id,lat,lon})
+}
+
 async function arduinoClient(ssid:string,pw:string,token:string){
     return await EDGE_PAIR_API.send({ssid,pw,token});
 }
@@ -177,4 +185,5 @@ program.command("daily-litres <token> <id>").action(entry(dailyLitres));
 program.command("hour-litres <token> <id>").action(entry(hourLitres));
 program.command("week-litres <token> <id>").action(entry(weekLitres));
 program.command("create-redis-data <id>").action(entry(createRedisData));
+program.command("set-location <token> <id> <lat> <lon>").action(entry(setLocation));
 program.parse();

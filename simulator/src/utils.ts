@@ -88,7 +88,7 @@ export class MQTTAPI<RequestType, ResponseType> {
       username: MQTT_USERNAME,
       password: MQTT_PASSWORD,
     });
-    await client.publishAsync(this.publishTopic, JSON.stringify(obj));
+    await client.publishAsync(this.publishTopic, JSON.stringify(obj),{qos: 1});
     if (this.subscribeTopic == null) return null as any;
     await client.subscribeAsync(this.subscribeTopic);
     const promise = new Promise<ResponseType>((resolve) => {

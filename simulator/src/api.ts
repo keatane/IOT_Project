@@ -13,6 +13,7 @@ export const REGISTER_API=new RestAPI<RegisterRequest,Empty>("register",Method.P
 interface LoginRequest{
     username:string
     password:string
+    firebaseToken:String|null
 }
 
 interface LoginResponse{
@@ -90,6 +91,16 @@ export const TOTAL_LITRES_FILTER=new RestAPI<JugDataRequest,Number>("getTotalLit
 export const DAILY_LITRES=new RestAPI<JugDataRequest,Number>("getDailyLitres",Method.POST);
 export const HOUR_LITRES=new RestAPI<JugDataRequest,Number[]>("getHourLitres",Method.POST);
 export const WEEK_LITRES=new RestAPI<JugDataRequest,Number[]>("getWeekLitres",Method.POST);
+
+interface SetLocationRequest{
+    token:string,
+    id:number,
+    lat:number,
+    lon:number
+}
+
+export const SET_LOCATION_API=new RestAPI<SetLocationRequest,Empty>("setLocation",Method.POST);
+
 
 interface PairRequest{
     id:number,
