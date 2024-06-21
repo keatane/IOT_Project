@@ -4,6 +4,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
+        "@iorsan/node-red-contrib-firebase-cloud-messaging": "~2.0.0",
         "node-red-contrib-bcrypt": "~0.1.6",
         "node-red-contrib-calc": "~1.0.6",
         "node-red-contrib-jwt": "~0.1.0",

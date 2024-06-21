@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "183204097561",
+    "project_id": "smartjugs-78d6e",
+    "storage_bucket": "smartjugs-78d6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183204097561:android:80c76e73bfee274eb40488",
+        "android_client_info": {
+          "package_name": "com.island.iot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfQmzkKtvnHzucste-9djDvr9eXGNCTAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
