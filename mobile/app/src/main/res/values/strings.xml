@@ -88,6 +88,6 @@
     <string name="fri">Fri</string>
     <string name="sat">Sat</string>
     <string name="sun">Sun</string>
-    <string name="l_s">L/s</string>
+    <string name="l_s" translatable="false">L/s</string>
     <string name="litres_per_second">Litres per second</string>
 </resources>
