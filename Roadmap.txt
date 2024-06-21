@@ -11,6 +11,7 @@
 - cambiare eccezioni in toast con definizioni user friendly (server error)
 - rimuovere TODO state repository
 - mettere dati filtro in tempo reale
+- icona ingranaggio per modificare filtro
 
 ---- 
 
