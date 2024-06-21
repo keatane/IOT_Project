@@ -28,8 +28,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            applicationIdSuffix = "test"
-            versionNameSuffix = "0.0.1"
             signingConfig = signingConfigs.getByName("debug")
         }
     }
