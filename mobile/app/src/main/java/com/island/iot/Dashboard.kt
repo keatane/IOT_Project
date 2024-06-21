@@ -46,8 +46,9 @@ fun calculateEstimatedFilterLifeHours(
     dailyConsumption ?: return null
     totalLitresFilter ?: return null
     filter ?: return null
+    if (dailyConsumption == 0.0) return null
     val remainingFilter = filter - totalLitresFilter
-    return max(remainingFilter / dailyConsumption,0.0)
+    return max(remainingFilter / dailyConsumption, 0.0)
 }
 
 fun plasticSaved(total: Double?): Double? {
@@ -104,10 +105,12 @@ const val DIGITS = 1
 
 fun nullRound(x: Double?, digits: Int = DIGITS): String? {
     x ?: return null
-    if(digits==0)return ceil(x).toInt().toString()
+    if (digits == 0) return ceil(x).toInt().toString()
     val integral = Math.round(x)
     val fractional = abs(x) % 1
-    val fractionalString=fractional.toString().substring(2).padEnd(digits,'0').substring(0,digits)
+    var fractionalString =
+        fractional.toString().substring(2).padEnd(digits, '0').substring(0, digits)
+    if (fractionalString.contains("E-")) fractionalString = "0".repeat(digits)
     return "${integral}.${fractionalString}"
 }
 
@@ -136,7 +139,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
 
     ScrollableContent {
         Text(
-            text = selectedJug?.name?:stringResource(id = R.string.jug_not_selected),
+            text = selectedJug?.name ?: stringResource(id = R.string.jug_not_selected),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(16.dp)
@@ -153,12 +156,14 @@ fun Grid(navController: NavController, repository: StateRepository) {
             ) {
                 Metric(
                     stringResource(R.string.total_consumption),
-                    nullAppend(nullRound(totalLitres), stringResource(R.string.l)) ?: stringResource(R.string.n_a),
+                    nullAppend(nullRound(totalLitres), stringResource(R.string.l))
+                        ?: stringResource(R.string.n_a),
                     cardColor = colors[0]
                 )
                 Metric(
                     stringResource(R.string.daily_consumption),
-                    nullAppend(nullRound(dailyLitres), stringResource(R.string.l_d)) ?: stringResource(R.string.n_a),
+                    nullAppend(nullRound(dailyLitres), stringResource(R.string.l_d))
+                        ?: stringResource(R.string.n_a),
                     cardColor = colors[1]
                 )
             }
@@ -178,7 +183,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
                                 dailyLitres,
                                 totalLitresFilter,
                                 selectedJug?.filtercapacity
-                            ),0
+                            ), 0
                         ), stringResource(R.string.d)
                     ) ?: stringResource(R.string.n_a) else stringResource(R.string.n_a),
                     cardColor = colors[3]
@@ -193,7 +198,8 @@ fun Grid(navController: NavController, repository: StateRepository) {
         ) {
             Metric(
                 stringResource(R.string.quantity_of_plastic_saved),
-                nullAppend(nullRound(plasticSaved(totalLitres), 3), stringResource(R.string.kg)) ?: stringResource(R.string.n_a),
+                nullAppend(nullRound(plasticSaved(totalLitres), 3), stringResource(R.string.kg))
+                    ?: stringResource(R.string.n_a),
                 cardColor = colors[4],
                 true
             )
@@ -231,7 +237,12 @@ fun Grid(navController: NavController, repository: StateRepository) {
                         tint = colorResource(id = R.color.cream)
                     )
                 },
-                text = { Text(text = stringResource(R.string.buy_filter), color = colorResource(id = R.color.cream)) },
+                text = {
+                    Text(
+                        text = stringResource(R.string.buy_filter),
+                        color = colorResource(id = R.color.cream)
+                    )
+                },
                 containerColor = colorResource(id = R.color.water),
             )
         }

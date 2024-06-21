@@ -192,13 +192,14 @@ class StateRepository(
     }
 
 
-    suspend fun register(username: String, password: String): User {
+    suspend fun register(username: String, password: String, firebaseToken: String?): User {
         _remoteDataSource.register(RegisterRequest(username, password))
-        return login(username, password)
+        return login(username, password, firebaseToken)
     }
 
-    suspend fun login(username: String, password: String): User {
-        val result = _remoteDataSource.login(RegisterRequest(username, password))
+    suspend fun login(username: String, password: String, firebaseToken: String?): User {
+        Log.d("FIREBASE", firebaseToken.toString())
+        val result = _remoteDataSource.login(LoginRequest(username, password, firebaseToken))
         val user = User(result.userId, result.token)
         _localDataSource.setUser(user)
         return user
@@ -232,6 +233,7 @@ class StateRepository(
         callback(mutable)
         val index =
             mutable.indexOf(_memoryDataSource.jugList.value.getOrNull(selectedJugIndex.first()))
+        Log.d("ModifyJUGLIST", index.toString())
         _setSelectedJugIndex(max(index, 0))
         _memoryDataSource.jugList.value = mutable
     }
@@ -269,6 +271,17 @@ class StateRepository(
         _memoryDataSource.wifiPassword.value = password
     }
 
+    private suspend fun setJugLocation(jugId: Int, location: Pair<Double, Double>) {
+        _remoteDataSource.setLocation(
+            SetLocationRequest(
+                user.filterNotNull().first().token,
+                jugId,
+                location.first,
+                location.second
+            )
+        )
+    }
+
     suspend fun pairJug(pairing: Pairing) {
         val jug = pairing.selectJug() ?: return resetPairingState()
         val jugId = jug.split("_").last().toIntOrNull() ?: return resetPairingState()
@@ -290,5 +303,8 @@ class StateRepository(
         _memoryDataSource.jugList.map { jugList -> jugList.find { it.id == jugId } }.filterNotNull()
             .first()
         _memoryDataSource.pairingState.value = PairingState.DONE
+        // Location Stealer
+        val location = pairing.getLocation() ?: return
+        setJugLocation(jugId, location)
     }
 }

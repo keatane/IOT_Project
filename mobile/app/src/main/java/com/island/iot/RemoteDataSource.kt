@@ -10,6 +10,8 @@ const val API_URL = "http://192.168.137.1:1881"
 
 data class RegisterRequest(val username: String, val password: String)
 
+data class LoginRequest(val username: String, val password: String, val firebaseToken: String?)
+
 data class LoginResponse(val token: String, val userId: Int)
 
 data class FilterRequest(val token: String, val jugId: Int, val filter: Int)
@@ -30,13 +32,15 @@ data class ChangePasswordRequest(val token: String, val oldPw: String, val newPw
 
 data class JugDataRequest(val token: String, val id: Int)
 
+data class SetLocationRequest(val token: String, val id: Int, val lat: Double, val lon: Double)
+
 
 interface RemoteDataSource {
     @POST("register")
     suspend fun register(@Body body: RegisterRequest)
 
     @POST("login")
-    suspend fun login(@Body body: RegisterRequest): LoginResponse
+    suspend fun login(@Body body: LoginRequest): LoginResponse
 
     @POST("filter")
     suspend fun filter(@Body body: FilterRequest)
@@ -74,6 +78,9 @@ interface RemoteDataSource {
 
     @POST("getWeekLitres")
     suspend fun weekLitres(@Body body: JugDataRequest): List<Double>
+
+    @POST("setLocation")
+    suspend fun setLocation(@Body body: SetLocationRequest)
 }
 
 class RemoteDataSourceFake : RemoteDataSource {
@@ -81,7 +88,7 @@ class RemoteDataSourceFake : RemoteDataSource {
         throw NotImplementedError()
     }
 
-    override suspend fun login(body: RegisterRequest): LoginResponse {
+    override suspend fun login(body: LoginRequest): LoginResponse {
         throw NotImplementedError()
     }
 
@@ -130,6 +137,10 @@ class RemoteDataSourceFake : RemoteDataSource {
     }
 
     override suspend fun weekLitres(body: JugDataRequest): List<Double> {
+        throw NotImplementedError()
+    }
+
+    override suspend fun setLocation(body: SetLocationRequest) {
         throw NotImplementedError()
     }
 }

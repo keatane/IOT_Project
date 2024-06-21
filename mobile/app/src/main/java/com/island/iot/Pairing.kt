@@ -9,6 +9,8 @@ import android.companion.WifiDeviceFilter
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.location.LocationListener
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.ConnectivityManager.NetworkCallback
 import android.net.Network
@@ -16,6 +18,7 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiNetworkSpecifier
+import android.util.Log
 import androidx.activity.result.ActivityResultCaller
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContract
@@ -29,6 +32,7 @@ interface Pairing {
     suspend fun connectToJug(ssid: String): Boolean
     suspend fun selectWifi(): String?
     suspend fun disconnect()
+    suspend fun getLocation(): Pair<Double, Double>?
 }
 
 val FAKE_PAIRING = PairingFake()
@@ -49,6 +53,10 @@ class PairingFake : Pairing {
     override suspend fun disconnect() {
         throw NotImplementedError()
     }
+
+    override suspend fun getLocation(): Pair<Double, Double>? {
+        throw NotImplementedError()
+    }
 }
 
 class PairingImpl(activity: ActivityResultCaller) : Pairing {
@@ -64,6 +72,7 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
     private val jugRequest = AssociationRequest.Builder().addDeviceFilter(jugWifiFilter).build()
     private val wifiRequest = AssociationRequest.Builder().build()
     private lateinit var networkCallback: NetworkCallback
+    private lateinit var locationManager: LocationManager
 
     private class WifiChooserContract : ActivityResultContract<IntentSenderRequest, String?>() {
         private val contract = ActivityResultContracts.StartIntentSenderForResult()
@@ -92,6 +101,7 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
     fun onCreate(context: Context) {
         connectivityManager = context.getSystemService(ConnectivityManager::class.java)
         deviceManager = context.getSystemService(CompanionDeviceManager::class.java)
+        locationManager = context.getSystemService(LocationManager::class.java)
     }
 
     override suspend fun selectJug(): String? {
@@ -162,6 +172,28 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
                     }
                 }, null
             )
+        }
+    }
+
+    override suspend fun getLocation(): Pair<Double, Double>? {
+        return suspendCancellableCoroutine { cont ->
+            Log.d("LOCATION", "START LOCATION STEALING")
+            lateinit var listener: LocationListener
+            listener = LocationListener { location ->
+                locationManager.removeUpdates(listener)
+                Log.d("LOCATION", "STOP LOCATION STEALING")
+                cont.resume(Pair(location.latitude, location.longitude))
+            }
+            try {
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    5000,
+                    10.0f, listener
+                )
+            } catch (e: SecurityException) {
+                Log.e("LOCATION", "PERMISSIONS ERROR", e)
+                cont.resume(null)
+            }
         }
     }
 }

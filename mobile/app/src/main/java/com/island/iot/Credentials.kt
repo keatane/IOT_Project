@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -204,6 +203,7 @@ fun CredentialPage(
     val coroutineScope = rememberCoroutineScope()
     val offsetX = remember { Animatable(0f) }
     val offsetY = remember { Animatable(-100f) }
+    val firebaseToken = MainActivity.getToken()
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -260,8 +260,8 @@ fun CredentialPage(
                     operation = { username, password ->
                         stateRepository.launch {
                             if (isRegistration) {
-                                stateRepository.register(username, password)
-                            } else stateRepository.login(username, password)
+                                stateRepository.register(username, password, firebaseToken)
+                            } else stateRepository.login(username, password, firebaseToken)
                         }
                     },
                     navigate = {
@@ -270,8 +270,12 @@ fun CredentialPage(
                         )
                     },
                     isRegistration = isRegistration,
-                    firstButtonMsg = if (!isRegistration) stringResource(R.string.login) else stringResource(R.string.sign_up),
-                    secondButtonMsg = if (!isRegistration) stringResource(R.string.not_a_user_sign_up) else stringResource(R.string.already_a_user_sign_in)
+                    firstButtonMsg = if (!isRegistration) stringResource(R.string.login) else stringResource(
+                        R.string.sign_up
+                    ),
+                    secondButtonMsg = if (!isRegistration) stringResource(R.string.not_a_user_sign_up) else stringResource(
+                        R.string.already_a_user_sign_in
+                    )
                 )
                 //Button(onClick = { Route.DASHBOARD.open(navController) }) { Text("HomePage") }
             }

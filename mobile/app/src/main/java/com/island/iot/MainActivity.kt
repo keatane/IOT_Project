@@ -5,7 +5,6 @@ import android.app.NotificationManager
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -65,19 +64,15 @@ import kotlinx.coroutines.tasks.await
 
 class MainActivity : ComponentActivity() {
     private val pairing = PairingImpl(this)
+    private var firebaseToken: String? = null
 
     // Declare the launcher at the top of your Activity/Fragment:
     private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission(),
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            // FCM SDK (and your app) can post notifications.
-        } else {
-            // TODO: Inform user that that your app will not show notifications.
-        }
-    }
+        ActivityResultContracts.RequestMultiplePermissions(),
+    ) { }
 
     private fun askNotificationPermission() {
+        val permission = mutableListOf<String>()
         // This is only necessary for API level >= 33 (TIRAMISU)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
@@ -96,24 +91,40 @@ class MainActivity : ComponentActivity() {
                 )
                 // FCM SDK (and your app) can post notifications.
             } else {
+                permission.add(android.Manifest.permission.POST_NOTIFICATIONS)
                 // Directly ask for the permission
-                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
             }
         }
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) permission.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
+        if (permission.isNotEmpty())
+            requestPermissionLauncher.launch(permission.toTypedArray())
     }
 
     companion object {
         @Composable
         fun getPairing(): Pairing {
+            return getMainActivity()?.pairing ?: FAKE_PAIRING
+        }
+
+        @Composable
+        fun getMainActivity(): MainActivity? {
             val context = LocalContext.current
-            return if (context is MainActivity) context.pairing else FAKE_PAIRING
+            return if (context is MainActivity) context else null
+        }
+
+        @Composable
+        fun getToken(): String? {
+            return getMainActivity()?.firebaseToken
         }
     }
 
-    fun firebase() {
+    private fun setupFirebase() {
         val viewModel: StateViewModel by viewModels()
-        Log.d("SHAKHSJad", "djskjdskjd")
-        viewModel.repository.launch { Log.d("FIREBASE", Firebase.messaging.token.await()) }
+        viewModel.repository.launch { firebaseToken = Firebase.messaging.token.await() }
         askNotificationPermission()
     }
 
@@ -123,8 +134,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             Root()
         }
-        // TODO: REMOVE
-        firebase()
+        setupFirebase()
+//        val viewModel: StateViewModel by viewModels()
+//        viewModel.repository.launch { Log.d("Obtained location", pairing.getLocation().toString()) }
     }
 }
 
