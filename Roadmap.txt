@@ -1,8 +1,5 @@
 [[ Mobile ]]
 
-[ Jugs ]
-- rename porta alla dashboard di un'altra caraffa (far rimanere sulla pagina), ma solo quando è stato selezionato una volta l'inspect di una qualsiasi caraffa e poi rinominata
-
 [ Altro ]
 - mettere dati filtro in tempo reale (litresPerSecond) (diretto via MQTT)
 - serviceAccountJson per Firebase da criptare (?)
