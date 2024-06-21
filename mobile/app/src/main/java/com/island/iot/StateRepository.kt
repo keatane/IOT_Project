@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import okio.IOException
 import retrofit2.HttpException
+import java.net.SocketTimeoutException
 import kotlin.math.max
 
 
@@ -47,27 +48,18 @@ class StateRepository(
     val news = _memoryDataSource.news.asStateFlow()
 
     private suspend fun updateJugs() {
-        var first = true
         while (true) {
             val user = _localDataSource.user.filterNotNull().first()
             try {
                 val jugs = _remoteDataSource.getJugs(GetJugsRequest(user.token)).jugs
-                _memoryDataSource.jugList.value = jugs
+                _memoryDataSource.jugList.value = jugs.sortedBy { it.id }
             } catch (e: HttpException) {
                 if (e.code() == 401) {
                     logout()
                 }
             } catch (e: IOException) {
                 Log.e("UPDATE JUG", "ERROR", e)
-                // TODO: remove this
-                if (first)
-                    _memoryDataSource.jugList.value =
-                        listOf(
-                            JugElement(name = "Kitchen Jug", filtercapacity = 150, id = 0),
-                            JugElement(name = "Living Room Jug", filtercapacity = 200, id = 1)
-                        )
             }
-            first = false
             delay(1000)
         }
     }
@@ -136,8 +128,20 @@ class StateRepository(
             try {
                 f()
             } catch (e: Throwable) {
+                val message = when (e) {
+                    is HttpException -> when (e.code()) {
+                        500 -> "Server Error"
+                        401 -> "Expired Session"
+                        403 -> "Wrong credentials"
+                        409 -> "User already exists"
+                        else -> e.code().toString()
+                    }
+
+                    is SocketTimeoutException -> "Server timeout error"
+                    else -> e.toString()
+                }
                 Log.e("ERROR", "ERROR", e)
-                _memoryDataSource.lastError.value = e.toString()
+                _memoryDataSource.lastError.value = message
             }
         }
     }
@@ -175,7 +179,7 @@ class StateRepository(
 
     suspend fun renameJug(jug: JugElement, name: String) {
         _remoteDataSource.renameJug(
-            RenameJugRequest(_localDataSource.user.first()!!.token, jug.id, name)
+            RenameJugRequest(_localDataSource.user.filterNotNull().first().token, jug.id, name)
         )
         _modifySingleJug(jug, jug.copy(name = name))
     }
@@ -232,10 +236,16 @@ class StateRepository(
         val mutable = _memoryDataSource.jugList.value.toMutableList()
         callback(mutable)
         val index =
-            mutable.indexOf(_memoryDataSource.jugList.value.getOrNull(selectedJugIndex.first()))
-        Log.d("ModifyJUGLIST", index.toString())
+            mutable.indexOfFirst {
+                it.id == _memoryDataSource.jugList.value.getOrNull(
+                    selectedJugIndex.first()
+                )?.id
+            }
         _setSelectedJugIndex(max(index, 0))
+        mutable.sortBy { it.id }
         _memoryDataSource.jugList.value = mutable
+        Log.d("ModifyJUGLIST", index.toString())
+        Log.d("MODIFYJUGLIST", _memoryDataSource.jugList.value.toString())
     }
 
     private suspend fun _modifySingleJug(prev: JugElement, new: JugElement) {
