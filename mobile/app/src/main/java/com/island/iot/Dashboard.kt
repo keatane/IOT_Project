@@ -2,6 +2,7 @@
 
 package com.island.iot
 
+import android.graphics.Color
 import androidx.collection.intListOf
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -123,14 +124,6 @@ fun nullAppend(x: Any?, y: String): String? {
 @Composable
 fun Grid(navController: NavController, repository: StateRepository) {
     val uriHandler = LocalUriHandler.current
-    val colors = intListOf(
-        R.color.aquamarine,
-        R.color.aquamarine,
-        R.color.aquamarine,
-        R.color.aquamarine,
-        R.color.seaweed,
-        R.color.octopus // change to red if filter status == 100%
-    )
     val selectedJug by repository.selectedJug.collectAsState(null)
     val totalLitres by repository.totalLitres.collectAsState(null)
     val totalLitresFilter by repository.totalLitresFilter.collectAsState(null)
@@ -158,13 +151,13 @@ fun Grid(navController: NavController, repository: StateRepository) {
                     stringResource(R.string.total_consumption),
                     nullAppend(nullRound(totalLitres), stringResource(R.string.l))
                         ?: stringResource(R.string.n_a),
-                    cardColor = colors[0]
+                    cardColor = R.color.aquamarine
                 )
                 Metric(
                     stringResource(R.string.daily_consumption),
                     nullAppend(nullRound(dailyLitres), stringResource(R.string.l_d))
                         ?: stringResource(R.string.n_a),
-                    cardColor = colors[1]
+                    cardColor = R.color.aquamarine
                 )
             }
             Column(
@@ -173,7 +166,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 Metric(
                     stringResource(R.string.filter_capacity),
                     nullAppend(selectedJug?.filtercapacity, "L") ?: stringResource(R.string.n_a),
-                    cardColor = colors[2]
+                    cardColor = R.color.aquamarine
                 )
                 Metric(
                     stringResource(R.string.estimated_filter_life),
@@ -186,9 +179,23 @@ fun Grid(navController: NavController, repository: StateRepository) {
                             ), 0
                         ), stringResource(R.string.d)
                     ) ?: stringResource(R.string.n_a) else stringResource(R.string.n_a),
-                    cardColor = colors[3]
+                    cardColor = R.color.aquamarine
                 )
             }
+        }
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 8.dp)
+        ) {
+            Metric(
+                stringResource(R.string.litres_per_second),
+                nullAppend(nullRound(totalLitres), stringResource(R.string.l_s))
+                    ?: stringResource(R.string.n_a),
+                cardColor = R.color.crab,
+                true
+            )
         }
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -200,7 +207,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 stringResource(R.string.quantity_of_plastic_saved),
                 nullAppend(nullRound(plasticSaved(totalLitres), 3), stringResource(R.string.kg))
                     ?: stringResource(R.string.n_a),
-                cardColor = colors[4],
+                cardColor = R.color.seaweed,
                 true
             )
         }
@@ -220,7 +227,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
                         )
                     ), stringResource(R.string.percentage)
                 ) ?: stringResource(R.string.n_a) else stringResource(R.string.n_a),
-                cardColor = colors[5],
+                cardColor = if((selectedJug?.filtercapacity ?: 0) >= 80) Color.RED else R.color.octopus,
                 true
             )
         }

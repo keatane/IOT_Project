@@ -4,19 +4,14 @@
 - rename porta alla dashboard di un'altra caraffa (far rimanere sulla pagina), ma solo quando è stato selezionato una volta l'inspect di una qualsiasi caraffa e poi rinominata
 
 [ Altro ]
-- fixare la barra in alto di posizione, se possibile
-- cambiare eccezioni in toast con definizioni user friendly (server error)
-- rimuovere TODO in state repository file
-- mettere dati filtro in tempo reale (litresPerSecond), nuovo quadrato largo, prima di plastic saved (diretto via MQTT)
-- icona ingranaggio per modificare filtro
-- pagina login/register scrollabile
+- mettere dati filtro in tempo reale (litresPerSecond) (diretto via MQTT)
+- serviceAccountJson per Firebase da criptare (?)
 
 ---- 
 
 [[ IOT ]]
 - timeout per arduino se durante il pairing, wifi scelto da app, password inserita sbagliata
 - application key thingworx per nascondere le credenziali
-- risolvere node red "credenziali non criptate"
 - display LCD arduino (?)
 - qos (?)
-- struttura dei servizi
+- struttura dei servizi nel report

@@ -111,19 +111,13 @@
                 ]
             },
             {
-                "x": 340,
+                "x": 780,
                 "y": 260,
                 "wires": [
                     {
                         "id": "c9342c2ae65773a2",
                         "port": 1
-                    }
-                ]
-            },
-            {
-                "x": 760,
-                "y": 240,
-                "wires": [
+                    },
                     {
                         "id": "346b27e6057f0e34",
                         "port": 1
@@ -398,15 +392,12 @@
             "7b80c134f08a63b6",
             "6737c839da4aeeab",
             "594f99b964435f02",
-            "b3a6633e59d62793",
             "a4b68c47b965d3f2",
             "2c0f67140fd1b413",
             "40ce6893f6966a45",
             "339436e98d838faf",
             "516f8568ef9efb35",
-            "e5fcae23931eaf27",
             "3694c41146d5c40c",
-            "b2bc6e404e94e376",
             "c6ca80c6a903e7ac",
             "336698c71763f8d9",
             "7b7a4bdf6c1331b2",
@@ -766,12 +757,14 @@
             "b4bc44fd8fd0d81f",
             "fd7954efe8da413c",
             "aed1bb2bfb8d429a",
-            "6fc6bab94a4ae8e3"
+            "6fc6bab94a4ae8e3",
+            "019d6130afe1d91d",
+            "5820aa3bb72d4b30"
         ],
         "x": 34,
         "y": 4299,
         "w": 1312,
-        "h": 162
+        "h": 202
     },
     {
         "id": "dd69043d1cb5236a",
@@ -1277,32 +1270,6 @@
         "y": 1519,
         "w": 792,
         "h": 82
-    },
-    {
-        "id": "b3a6633e59d62793",
-        "type": "junction",
-        "z": "217d4457bda21c0d",
-        "g": "cb681741da812fc7",
-        "x": 520,
-        "y": 460,
-        "wires": [
-            [
-                "e5fcae23931eaf27"
-            ]
-        ]
-    },
-    {
-        "id": "b2bc6e404e94e376",
-        "type": "junction",
-        "z": "217d4457bda21c0d",
-        "g": "cb681741da812fc7",
-        "x": 520,
-        "y": 500,
-        "wires": [
-            [
-                "3694c41146d5c40c"
-            ]
-        ]
     },
     {
         "id": "c77abff0c3609a0d",
@@ -2971,10 +2938,7 @@
                 "6737c839da4aeeab"
             ],
             [
-                "b3a6633e59d62793"
-            ],
-            [
-                "b2bc6e404e94e376"
+                "3694c41146d5c40c"
             ]
         ]
     },
@@ -5018,34 +4982,6 @@
         "wires": []
     },
     {
-        "id": "e5fcae23931eaf27",
-        "type": "change",
-        "z": "217d4457bda21c0d",
-        "g": "cb681741da812fc7",
-        "name": "Craft Return Status \"User not found\" (401)",
-        "rules": [
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "401",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 840,
-        "y": 480,
-        "wires": [
-            [
-                "4f6f6fac724a496a"
-            ]
-        ]
-    },
-    {
         "id": "fb45f15a6ea25bf8",
         "type": "change",
         "z": "217d4457bda21c0d",
@@ -5259,8 +5195,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
-        "y": 520,
+        "x": 750,
+        "y": 480,
         "wires": [
             [
                 "4f6f6fac724a496a"
@@ -8013,6 +7949,66 @@
         "wires": [
             [
                 "bb6ab39b15241f2d"
+            ]
+        ]
+    },
+    {
+        "id": "019d6130afe1d91d",
+        "type": "catch",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "JWT Errors",
+        "scope": [
+            "6737c839da4aeeab",
+            "378b9baed000b7e6",
+            "86072dca8a4675b9",
+            "c243a77177af6c13",
+            "893577be1c16039b",
+            "5b06d76a9679e1cb",
+            "47e2ea0a595f5919",
+            "3fc7f576baa8f340",
+            "12f171e5e2f97465",
+            "d8773bd61cacfc72",
+            "3c48160706d578ce",
+            "450a2702b61f60ee",
+            "14cf398477bf26d0",
+            "ba2885d89716e281",
+            "6eeb14468afaed1f"
+        ],
+        "uncaught": false,
+        "x": 130,
+        "y": 4460,
+        "wires": [
+            [
+                "5820aa3bb72d4b30"
+            ]
+        ]
+    },
+    {
+        "id": "5820aa3bb72d4b30",
+        "type": "change",
+        "z": "217d4457bda21c0d",
+        "g": "d4ecc9458d879224",
+        "name": "Craft Return Status \"INVALID_JWT\" (401)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "401",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 940,
+        "y": 4460,
+        "wires": [
+            [
+                "98c6aa8214050734"
             ]
         ]
     },

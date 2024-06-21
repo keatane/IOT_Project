@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -140,7 +140,7 @@ fun Jug(
             }
             IconButton(onClick = { openFilterDialog.value = true }) {
                 Icon(
-                    Icons.Outlined.Build,
+                    Icons.Outlined.Settings,
                     contentDescription = stringResource(R.string.change_filter),
                     tint = colorResource(id = R.color.cream)
                 )
