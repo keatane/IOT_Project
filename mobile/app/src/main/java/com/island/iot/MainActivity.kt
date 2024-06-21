@@ -74,18 +74,18 @@ class MainActivity : ComponentActivity() {
 
 enum class Route(
     val id: String,
-    val title: String,
+    val title: Int,
     val bottomBar: Boolean,
     private val clearStack: Boolean,
 ) {
-    DASHBOARD("dashboard", "Dashboard", true, true),
-    LOGINPAGE("loginpage", "Login", false, true),
-    REGISTERPAGE("registerpage", "Register", false, false),
-    ACCOUNT("account", "Account", true, true),
-    CHANGE_PASSWORD("changePassword", "Password Manager", true, false),
-    CHARTS("charts", "Charts", true, true),
-    JUGS("jugs", "Jugs", true, true),
-    NEWS("news", "News Feed", true, false);
+    DASHBOARD("dashboard", R.string.dashboard, true, true),
+    LOGINPAGE("loginpage", R.string.login, false, true),
+    REGISTERPAGE("registerpage", R.string.register, false, false),
+    ACCOUNT("account", R.string.account, true, true),
+    CHANGE_PASSWORD("changePassword", R.string.change_password, true, false),
+    CHARTS("charts", R.string.charts, true, true),
+    JUGS("jugs", R.string.jugs, true, true),
+    NEWS("news", R.string.news_feed, true, false);
 
     companion object {
         fun getCurrentRoute(backStackEntry: NavBackStackEntry?): Route? {
@@ -101,11 +101,11 @@ enum class Route(
     }
 }
 
-enum class BottomButton(val route: Route, val text: String, val icon: ImageVector) {
-    DASHBOARD(Route.DASHBOARD, "Dashboard", Icons.Filled.Home),
-    CHARTS(Route.CHARTS, "Charts", Icons.Filled.Menu),
-    JUGS(Route.JUGS, "Jugs", Icons.Filled.Create),
-    ACCOUNT(Route.ACCOUNT, "Account", Icons.Filled.Person);
+enum class BottomButton(val route: Route, val text: Int, val icon: ImageVector) {
+    DASHBOARD(Route.DASHBOARD, R.string.dashboard, Icons.Filled.Home),
+    CHARTS(Route.CHARTS, R.string.charts, Icons.Filled.Menu),
+    JUGS(Route.JUGS, R.string.jugs, Icons.Filled.Create),
+    ACCOUNT(Route.ACCOUNT, R.string.account, Icons.Filled.Person);
 
     companion object {
         fun getSelectedButton(route: Route): BottomButton? {
@@ -141,7 +141,7 @@ fun Decorations(
                         ),
                         title = {
                             Text(
-                                text = currentRoute.title,
+                                text = LocalContext.current.getString(currentRoute.title),
                                 fontWeight = FontWeight.Bold,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -179,8 +179,8 @@ fun Decorations(
                     ) {
                         BottomButton.entries.forEach { item ->
                             NavigationBarItem(
-                                icon = { Icon(item.icon, contentDescription = item.text) },
-                                label = { Text(item.text) },
+                                icon = { Icon(item.icon, contentDescription = LocalContext.current.getString(item.text)) },
+                                label = { Text(LocalContext.current.getString(item.text)) },
                                 selected = item == selectedButton,
                                 onClick = {
                                     item.route.open(navController)

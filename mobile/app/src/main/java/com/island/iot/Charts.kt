@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -49,13 +50,13 @@ fun ChartsPreview() {
 }
 
 val DAY_OF_WEEK = mapOf(
-    Calendar.MONDAY to "Mon",
-    Calendar.TUESDAY to "Tue",
-    Calendar.WEDNESDAY to "Wed",
-    Calendar.THURSDAY to "Thu",
-    Calendar.FRIDAY to "Fri",
-    Calendar.SATURDAY to "Sat",
-    Calendar.SUNDAY to "Sun"
+    Calendar.MONDAY to R.string.mon,
+    Calendar.TUESDAY to R.string.tue,
+    Calendar.WEDNESDAY to R.string.wed,
+    Calendar.THURSDAY to R.string.thu,
+    Calendar.FRIDAY to R.string.fri,
+    Calendar.SATURDAY to R.string.sat,
+    Calendar.SUNDAY to R.string.sun
 )
 
 @Composable
@@ -66,7 +67,7 @@ fun DailyChart(data: List<Pair<Int, Double>>) {
             val day=Calendar.getInstance()
             day.add(Calendar.DATE,-delta)
             BarChartData.Bar(
-                label = DAY_OF_WEEK[day.get(Calendar.DAY_OF_WEEK)]!!,
+                label = LocalContext.current.getString(DAY_OF_WEEK[day.get(Calendar.DAY_OF_WEEK)]!!),
                 value = it.second.toFloat(),
                 color = colorResource(id = R.color.crab)
             )
@@ -157,7 +158,8 @@ fun Chart(
                 else Text(
                     stringResource(R.string.loading_data), modifier = Modifier
                         .padding(16.dp)
-                        .align(Alignment.CenterHorizontally).align(Alignment.CenterHorizontally)
+                        .align(Alignment.CenterHorizontally)
+                        .align(Alignment.CenterHorizontally)
                 )
             }
             OutlinedCard(
@@ -173,7 +175,9 @@ fun Chart(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.cream),
-                    modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally)
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .align(Alignment.CenterHorizontally)
                 )
                 if (weekLitres != null) DailyChart(weekLitres.mapIndexed { x, y -> Pair(x, y) })
                 else Text(

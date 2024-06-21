@@ -75,4 +75,17 @@
     <string name="dismiss">Dismiss</string>
     <string name="ok" translatable="false">OK</string>
     <string name="input" translatable="false">Input</string>
+    <string name="dashboard" translatable="false">Dashboard</string>
+    <string name="register">Register</string>
+    <string name="account" translatable="false">Account</string>
+    <string name="charts">Charts</string>
+    <string name="jugs">Jugs</string>
+    <string name="news_feed" translatable="false">News Feed</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
 </resources>

@@ -51,4 +51,14 @@
     <string name="loading">Caricamento</string>
     <string name="confirm">Conferma</string>
     <string name="dismiss">Annulla</string>
+    <string name="register">Registrati</string>
+    <string name="charts">Grafici</string>
+    <string name="jugs">Caraffe</string>
+    <string name="mon">Lun</string>
+    <string name="tue">Mar</string>
+    <string name="wed">Mer</string>
+    <string name="thu">Gio</string>
+    <string name="fri">Ven</string>
+    <string name="sat">Sab</string>
+    <string name="sun">Dom</string>
 </resources>
