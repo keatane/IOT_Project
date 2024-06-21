@@ -1,0 +1,9 @@
+{
+    "settings": {
+        "spec": "settings",
+        "module": "settings",
+        "subpath": "",
+        "builtin": false,
+        "known": false
+    }
+}

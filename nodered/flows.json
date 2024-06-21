@@ -1767,13 +1767,9 @@
         "optionsType": "json"
     },
     {
-        "id": "8bd1bda7eea7facb",
-        "type": "FCM Config",
-        "name": "SmartJugs",
-        "keyPath": "",
-        "keyPathType": "str",
-        "proxy": "",
-        "proxyType": "str"
+        "id": "222522e409a8c70d",
+        "type": "firebase admin",
+        "name": "FB_Admin"
     },
     {
         "id": "8e7d846effd9e3d7",
@@ -9183,34 +9179,6 @@
         ]
     },
     {
-        "id": "1ceba795cb10c8c5",
-        "type": "FCM Send",
-        "z": "2751cff285e8ba2d",
-        "name": "",
-        "firebaseConfig": "8bd1bda7eea7facb",
-        "destinationMode": "token",
-        "destination": "",
-        "destinationType": "str",
-        "notificationTitle": "Filter warning",
-        "notificationTitleType": "str",
-        "notificationBody": "`The filter of the jug ${msg.payload.jugname}`",
-        "notificationBodyType": "jsonata",
-        "notificationImage": "",
-        "notificationImageType": "str",
-        "data": "{\"id\":msg.payload.jugid}",
-        "dataType": "jsonata",
-        "x": 620,
-        "y": 220,
-        "wires": [
-            [
-                "0e527e6a5c1519e1"
-            ],
-            [
-                "efb946ee90eb6a65"
-            ]
-        ]
-    },
-    {
         "id": "d0310a982e3d1e03",
         "type": "inject",
         "z": "2751cff285e8ba2d",
@@ -9220,7 +9188,8 @@
                 "p": "payload"
             },
             {
-                "p": "topic",
+                "p": "token",
+                "v": "fRMX5aSLStqJxPmIYv7ihx:APA91bH0NARkXLowxr9Rvb3Z9nt3UtR6S9T8moMCBdKJe7E7onV99A5vr0MacmtvXTHVvnbMVcQ-82pNpk-WdTqXEtebHQNv_kW-4Ihp2DQzYpKrCZjV2HhAEYbSSqbOGzaEk2azIDRZ",
                 "vt": "str"
             }
         ],
@@ -9229,13 +9198,13 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 360,
+        "payload": "{\"title\": \"Titolo\", \"body\":\"ciao\"}",
+        "payloadType": "json",
+        "x": 250,
         "y": 220,
         "wires": [
             [
-                "1ceba795cb10c8c5"
+                "f1f33d90d871e986"
             ]
         ]
     },
@@ -9252,26 +9221,24 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 920,
-        "y": 160,
+        "x": 880,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "efb946ee90eb6a65",
-        "type": "debug",
+        "id": "f1f33d90d871e986",
+        "type": "firebase cloud messaging",
         "z": "2751cff285e8ba2d",
-        "name": "debug 28",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 920,
-        "y": 240,
-        "wires": []
+        "name": "",
+        "admin": "222522e409a8c70d",
+        "kind": "notification",
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "0e527e6a5c1519e1"
+            ]
+        ]
     },
     {
         "id": "12d815057cd57334",
