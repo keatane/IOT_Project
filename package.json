@@ -7,8 +7,5 @@
     "stop-hotspot": "sudo pkill create_ap && sudo pkill dnsmasq",
     "monitor": "stty -F /dev/ttyACM0 raw 9600 && cat /dev/ttyACM0",
     "nodered-windows": "powershell -command 'get-content .env | foreach {$name, $value = $_.split(\"=\");set-content env:\\$name $value};bun run nodered'"
-  },
-  "dependencies": {
-    "redis": "^4.6.14"
   }
 }
