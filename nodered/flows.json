@@ -1612,10 +1612,10 @@
     {
         "id": "df153d084656312d",
         "type": "redis-config",
-        "name": "${REDIS_HOST}",
-        "options": "{}",
+        "name": "Redis",
+        "options": "{\"host\":$env(\"REDIS_HOST\")}",
         "cluster": false,
-        "optionsType": "json"
+        "optionsType": "jsonata"
     },
     {
         "id": "222522e409a8c70d",

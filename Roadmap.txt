@@ -8,7 +8,6 @@
 ---- 
 
 [[ IOT ]]
-- risolvere errore redis ECONNREFUSED per nodered (problema col compose?)
 - timeout per arduino se durante il pairing, wifi scelto da app, password inserita sbagliata
 - application key thingworx per nascondere le credenziali
 - display LCD arduino (?)
