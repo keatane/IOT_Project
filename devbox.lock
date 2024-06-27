@@ -269,6 +269,54 @@
         }
       }
     },
+    "mermaid-cli@latest": {
+      "last_modified": "2024-06-20T08:04:27Z",
+      "resolved": "github:NixOS/nixpkgs/9b10b8f00cb5494795e5f51b39210fed4d2b0748#mermaid-cli",
+      "source": "devbox-search",
+      "version": "10.9.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/98x3q42g96vhj6amfvddja82rg1zxfvg-mermaid-cli-10.9.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/98x3q42g96vhj6amfvddja82rg1zxfvg-mermaid-cli-10.9.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/5irwh0igganzkgdrf5j6a058laafi1gh-mermaid-cli-10.9.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/5irwh0igganzkgdrf5j6a058laafi1gh-mermaid-cli-10.9.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hkl6b3mnsqnkkf03cw84kfy9c367n96k-mermaid-cli-10.9.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hkl6b3mnsqnkkf03cw84kfy9c367n96k-mermaid-cli-10.9.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/446nzdz4n635hplhdcgcl123kgrqg4q4-mermaid-cli-10.9.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/446nzdz4n635hplhdcgcl123kgrqg4q4-mermaid-cli-10.9.0"
+        }
+      }
+    },
     "nodePackages.node-red@latest": {
       "last_modified": "2024-04-19T17:36:04-04:00",
       "resolved": "github:NixOS/nixpkgs/92d295f588631b0db2da509f381b4fb1e74173c5#nodePackages.node-red",
