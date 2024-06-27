@@ -1,7 +1,8 @@
 [[ Mobile ]]
+- migliorare geolocalizzazione (?)
 
 [ Altro ]
-- mettere dati filtro in tempo reale (litresPerSecond) (diretto via MQTT)
+- mettere dati filtro in tempo reale (litresPerSecond) (diretto via MQTT) (Per ogni MQTT se Utente attivo e aggiornato aggiorna variabili, se inattivo cancella variabili)
 - serviceAccountJson per Firebase da criptare (?)
 - la notifica effettivamente porta alla dashboard della jug di interesse?
 
