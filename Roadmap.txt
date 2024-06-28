@@ -1,16 +1,21 @@
 [[ Mobile ]]
 - migliorare geolocalizzazione (DONE)
+- misura performance 
+
+---- 
+
+[[ IOT ]]
+- timeout per arduino se durante il pairing, wifi scelto da app, password inserita sbagliata (DONE)
+- application key thingworx per nascondere le credenziali (Lorenzo non l'ha messa)
+- display LCD arduino (?)
+- qos (?)
+- struttura dei servizi nel report (DONE)
+
+----
 
 [ Altro ]
 - mettere dati filtro in tempo reale (litresPerSecond) (diretto via MQTT) (DONE)
 - serviceAccountJson per Firebase da criptare (?)
 - la notifica effettivamente porta alla dashboard della jug di interesse? (DONE)
+- dividersi slide
 
----- 
-
-[[ IOT ]]
-- timeout per arduino se durante il pairing, wifi scelto da app, password inserita sbagliata
-- application key thingworx per nascondere le credenziali
-- display LCD arduino (?)
-- qos (?)
-- struttura dei servizi nel report (DONE)
