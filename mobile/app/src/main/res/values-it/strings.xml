@@ -62,4 +62,6 @@
     <string name="sat">Sab</string>
     <string name="sun">Dom</string>
     <string name="litres_per_second">Litri al secondo</string>
+    <string name="filter_alert">Allerta filtro</string>
+    <string name="your_filter_is_about_to_expire">Il filtro della tua caraffa sta per esaurirsi!</string>
 </resources>

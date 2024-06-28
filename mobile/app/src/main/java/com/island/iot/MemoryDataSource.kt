@@ -47,7 +47,7 @@ class MemoryDataSourceFake : MemoryDataSource {
         )
     )
     override val lastError: MutableStateFlow<String?> = MutableStateFlow(null)
-    override val totalLitres: MutableStateFlow<Double?> = MutableStateFlow(5000.0)
+    override val totalLitres: MutableStateFlow<Double?> = MutableStateFlow(500.0)
     override val litresPerSecond: MutableStateFlow<Double?> = MutableStateFlow(1.0)
     override val totalLitresFilter: MutableStateFlow<Double?> = MutableStateFlow(50.0)
     override val dailyLitres: MutableStateFlow<Double?> = MutableStateFlow(30.0)

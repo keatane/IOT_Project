@@ -90,4 +90,6 @@
     <string name="sun">Sun</string>
     <string name="l_s" translatable="false">L/s</string>
     <string name="litres_per_second">Litres per second</string>
+    <string name="filter_alert">Filter alert</string>
+    <string name="your_filter_is_about_to_expire">Your jug filter is about to expire!</string>
 </resources>

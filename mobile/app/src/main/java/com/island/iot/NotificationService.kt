@@ -36,8 +36,8 @@ class NotificationService : FirebaseMessagingService() {
         val channelId = FILTER_ALERT_CHANNEL
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Filter alert")
-            .setContentText("Your filter is about to expire!")
+            .setContentTitle(getString(R.string.filter_alert))
+            .setContentText(getString(R.string.your_filter_is_about_to_expire))
             .setSmallIcon(R.mipmap.ic_launcher)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
