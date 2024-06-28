@@ -192,6 +192,14 @@ class StateRepository(
         _setSelectedJugIndex(_memoryDataSource.jugList.first().indexOf(jug))
     }
 
+    suspend fun setSelectedJugId(jugId: Int) {
+        Log.d("SELECTED JUG ID", "Waiting for jug to appear")
+        val jugList =
+            _memoryDataSource.jugList.first { list -> list.find { it.id == jugId } != null }
+        Log.d("SELECTED JUG ID", "Selecting Jug")
+        setSelectedJug(jugList.find { it.id == jugId }!!)
+    }
+
     suspend fun deleteJug(jug: JugElement) {
         _memoryDataSource.jugList.first()
         _modifyJugList { it.remove(jug) }

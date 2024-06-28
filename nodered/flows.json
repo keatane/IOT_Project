@@ -9786,7 +9786,7 @@
         "g": "4124681a5ccaaaf2",
         "name": "",
         "admin": "222522e409a8c70d",
-        "kind": "notification",
+        "kind": "data",
         "x": 810,
         "y": 400,
         "wires": [
@@ -9965,8 +9965,8 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"title\": \"Filter alert\", \"body\":\"Your filter is about to expire!\"}",
-                "tot": "json"
+                "to": "{\"jugId\":msg.jug}",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -10200,6 +10200,54 @@
         "wires": [
             [
                 "d64f52ed335c5a12"
+            ]
+        ]
+    },
+    {
+        "id": "b81d18410f63c333",
+        "type": "inject",
+        "z": "2751cff285e8ba2d",
+        "name": "Debug",
+        "props": [
+            {
+                "p": "token",
+                "v": "dnCaAoWORBOFHU6A0hLQ0d:APA91bFunsoTuxwPW9f-PZjAM9LU0Gh1I_Ka5135wQh7SkQ_zXfgzaUIvS1tgLdDFMlkRTXhxksffBKi6dfWArvAkI4mrCjCchMFnXpKFyxO7mOnNjdM0cZCnN2ur3hd72yUaakvQplk",
+                "vt": "str"
+            },
+            {
+                "p": "jug",
+                "v": "3",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 520,
+        "wires": [
+            [
+                "74ad2577a33aef69"
+            ]
+        ]
+    },
+    {
+        "id": "74ad2577a33aef69",
+        "type": "postgresql",
+        "z": "2751cff285e8ba2d",
+        "name": "Select all jugs",
+        "query": "SELECT * FROM FirebaseTokens;",
+        "postgreSQLConfig": "647f7f903ce97865",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "e2d44055a3b0e842"
             ]
         ]
     },

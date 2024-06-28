@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -61,6 +62,7 @@ import com.google.firebase.messaging.ktx.messaging
 import com.island.iot.ui.theme.IOTTheme
 import kotlinx.coroutines.tasks.await
 
+const val FILTER_ALERT_CHANNEL = "filteralert"
 
 class MainActivity : ComponentActivity() {
     private val pairing = PairingImpl(this)
@@ -84,8 +86,8 @@ class MainActivity : ComponentActivity() {
                 val notificationManager = getSystemService(NotificationManager::class.java)
                 notificationManager.createNotificationChannel(
                     NotificationChannel(
-                        "test",
-                        "test",
+                        FILTER_ALERT_CHANNEL,
+                        "Filter Alert",
                         NotificationManager.IMPORTANCE_DEFAULT
                     )
                 )
@@ -135,6 +137,17 @@ class MainActivity : ComponentActivity() {
             Root()
         }
         setupFirebase()
+        Log.d("SELECTED JUG ID", intent::class.simpleName!!)
+        val jugId = intent.action?.toIntOrNull()
+        Log.d("SELECTED JUG ID", jugId.toString())
+        if (jugId != null) {
+            val viewModel: StateViewModel by viewModels()
+            viewModel.repository.launch {
+                viewModel.repository.setSelectedJugId(
+                    jugId
+                )
+            }
+        }
 
         // DEBUG
 //        val viewModel: StateViewModel by viewModels()
