@@ -186,7 +186,7 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
             }
             try {
                 locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
+                    LocationManager.NETWORK_PROVIDER,
                     5000,
                     10.0f, listener
                 )

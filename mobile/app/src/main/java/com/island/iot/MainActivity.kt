@@ -13,8 +13,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
@@ -99,9 +97,9 @@ class MainActivity : ComponentActivity() {
         }
         if (ContextCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
-        ) permission.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
+        ) permission.add(android.Manifest.permission.ACCESS_COARSE_LOCATION)
         if (permission.isNotEmpty())
             requestPermissionLauncher.launch(permission.toTypedArray())
     }
@@ -137,6 +135,8 @@ class MainActivity : ComponentActivity() {
             Root()
         }
         setupFirebase()
+
+        // DEBUG
 //        val viewModel: StateViewModel by viewModels()
 //        viewModel.repository.launch { Log.d("Obtained location", pairing.getLocation().toString()) }
     }
