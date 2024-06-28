@@ -38,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.max
+import kotlin.math.pow
 
 fun calculateEstimatedFilterLifeHours(
     dailyConsumption: Double?,
@@ -102,17 +103,16 @@ fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false
     }
 }
 
-const val DIGITS = 1
-
-fun nullRound(x: Double?, digits: Int = DIGITS): String? {
+fun nullRound(x: Double?, digits: Int = 1): String? {
     x ?: return null
     if (digits == 0) return ceil(x).toInt().toString()
-    val integral = Math.round(x)
-    val fractional = abs(x) % 1
-    var fractionalString =
-        fractional.toString().substring(2).padEnd(digits, '0').substring(0, digits)
-    if (fractionalString.contains("E-")) fractionalString = "0".repeat(digits)
-    return "${integral}.${fractionalString}"
+    val rounded=Math.round(x*10.0.pow(digits))/10.0.pow(digits)
+    var result=rounded.toString()
+    if(result.contains("E-"))result="0"
+    val parts=result.split(".").toMutableList()
+    if(parts.size==1)parts.add("")
+    parts[1]=parts[1].padEnd(digits,'0').substring(0,digits)
+    return parts.joinToString(".")
 }
 
 fun nullAppend(x: Any?, y: String): String? {
@@ -126,6 +126,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
     val uriHandler = LocalUriHandler.current
     val selectedJug by repository.selectedJug.collectAsState(null)
     val totalLitres by repository.totalLitres.collectAsState(null)
+    val litresPerSecond by repository.litresPerSecond.collectAsState(null)
     val totalLitresFilter by repository.totalLitresFilter.collectAsState(null)
     val dailyLitres by repository.dailyLitres.collectAsState(null)
     val hasFilter = (selectedJug?.filtercapacity ?: 0) != 0
@@ -191,7 +192,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
         ) {
             Metric(
                 stringResource(R.string.litres_per_second),
-                nullAppend(nullRound(totalLitres), stringResource(R.string.l_s))
+                nullAppend(nullRound(litresPerSecond), stringResource(R.string.l_s))
                     ?: stringResource(R.string.n_a),
                 cardColor = R.color.crab,
                 true

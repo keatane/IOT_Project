@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-const val API_URL = "http://192.168.137.1:1881"
+const val API_URL = "http://192.168.0.25:1881"
 
 
 data class RegisterRequest(val username: String, val password: String)
@@ -67,6 +67,9 @@ interface RemoteDataSource {
     @POST("getTotalLitres")
     suspend fun totalLitres(@Body body: JugDataRequest): Double
 
+    @POST("getLitresPerSecond")
+    suspend fun litresPerSecond(@Body body: JugDataRequest): Double
+
     @POST("getTotalLitresFilter")
     suspend fun totalLitresFilter(@Body body: JugDataRequest): Double
 
@@ -121,6 +124,10 @@ class RemoteDataSourceFake : RemoteDataSource {
     }
 
     override suspend fun totalLitres(body: JugDataRequest): Double {
+        throw NotImplementedError()
+    }
+
+    override suspend fun litresPerSecond(body: JugDataRequest): Double {
         throw NotImplementedError()
     }
 

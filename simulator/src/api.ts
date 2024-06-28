@@ -87,6 +87,7 @@ interface JugDataRequest{
 }
 
 export const TOTAL_LITRES=new RestAPI<JugDataRequest,Number>("getTotalLitres",Method.POST);
+export const LITRES_PER_SECOND=new RestAPI<JugDataRequest,Number>("getLitresPerSecond",Method.POST);
 export const TOTAL_LITRES_FILTER=new RestAPI<JugDataRequest,Number>("getTotalLitresFilter",Method.POST);
 export const DAILY_LITRES=new RestAPI<JugDataRequest,Number>("getDailyLitres",Method.POST);
 export const HOUR_LITRES=new RestAPI<JugDataRequest,Number[]>("getHourLitres",Method.POST);

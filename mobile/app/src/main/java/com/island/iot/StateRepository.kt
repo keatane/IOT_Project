@@ -37,6 +37,8 @@ class StateRepository(
     val lastError = _memoryDataSource.lastError.asStateFlow()
     val totalLitres =
         _memoryDataSource.totalLitres.map { if (selectedJug.first() == null) null else it }
+    val litresPerSecond =
+        _memoryDataSource.litresPerSecond.map { if (selectedJug.first() == null) null else it }
     val totalLitresFilter =
         _memoryDataSource.totalLitresFilter.map { if (selectedJug.first() == null) null else it }
     val dailyLitres =
@@ -81,7 +83,7 @@ class StateRepository(
         }
     }
 
-    private suspend fun updateJugData() {
+    private suspend fun updateJugDataFast() {
         while (true) {
             val user = user.filterNotNull().first()
             val jug = selectedJug.filterNotNull().first()
@@ -102,6 +104,25 @@ class StateRepository(
                 Log.e("TOTAL LITRES FILTER", "ERROR", e)
             }
             try {
+                _memoryDataSource.litresPerSecond.value =
+                    _remoteDataSource.litresPerSecond(
+                        JugDataRequest(
+                            token = user.token,
+                            id = jug.id
+                        )
+                    )
+            } catch (e: Exception) {
+                Log.e("LITRES PER SECOND", "ERROR", e)
+            }
+            delay(1000)
+        }
+    }
+
+    private suspend fun updateJugData() {
+        while (true) {
+            val user = user.filterNotNull().first()
+            val jug = selectedJug.filterNotNull().first()
+            try {
                 _memoryDataSource.dailyLitres.value =
                     _remoteDataSource.dailyLitres(JugDataRequest(token = user.token, id = jug.id))
             } catch (e: Exception) {
@@ -119,7 +140,7 @@ class StateRepository(
             } catch (e: Exception) {
                 Log.e("WEEK USAGE", "ERROR", e)
             }
-            delay(3000)
+            delay(5000)
         }
     }
 
@@ -159,6 +180,7 @@ class StateRepository(
         launch { clearErrors() }
         launch { clearJugData() }
         launch { updateJugData() }
+        launch { updateJugDataFast() }
         launch { updateNews() }
     }
 
