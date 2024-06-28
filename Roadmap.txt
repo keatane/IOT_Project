@@ -1,8 +1,8 @@
 [[ Mobile ]]
-- migliorare geolocalizzazione (?)
+- migliorare geolocalizzazione (DONE)
 
 [ Altro ]
-- mettere dati filtro in tempo reale (litresPerSecond) (diretto via MQTT) (Per ogni MQTT se Utente attivo e aggiornato aggiorna variabili, se inattivo cancella variabili)
+- mettere dati filtro in tempo reale (litresPerSecond) (diretto via MQTT) (DONE)
 - serviceAccountJson per Firebase da criptare (?)
 - la notifica effettivamente porta alla dashboard della jug di interesse?
 
@@ -13,4 +13,4 @@
 - application key thingworx per nascondere le credenziali
 - display LCD arduino (?)
 - qos (?)
-- struttura dei servizi nel report
+- struttura dei servizi nel report (DONE)
