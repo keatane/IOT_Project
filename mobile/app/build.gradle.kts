@@ -85,6 +85,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     ksp(libs.androidx.room.compiler)
+    implementation("androidx.fragment:fragment:1.3.1")
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-messaging-ktx")
 }
