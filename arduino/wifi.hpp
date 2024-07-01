@@ -51,6 +51,7 @@ public:
   bool ensureConnected() const{
     int countBeforeFail = 0;
     while (WiFi.status() != WL_CONNECTED) {
+      Serial.println("Trying to connect...");
       const IPAddress EMPTY = IPAddress(0, 0, 0, 0);
       WiFi.config(EMPTY, EMPTY, EMPTY);
       int status = WiFi.begin(ssid.c_str(), pw.c_str());
@@ -60,9 +61,8 @@ public:
         Serial.println(ip);
         return true;
       }
-      delay(1000);
       countBeforeFail++;
-      if(countBeforeFail>10) return false;
+      if(countBeforeFail>5) return false;
     }
     return false;
   }
