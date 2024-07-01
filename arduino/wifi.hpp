@@ -62,7 +62,7 @@ public:
         return true;
       }
       countBeforeFail++;
-      if(countBeforeFail>5) return false;
+      if(countBeforeFail>4) return false;
     }
     return false;
   }

@@ -61,7 +61,7 @@ public:
     Serial.print(username);
     Serial.print(" password:");
     Serial.println(password);
-    for(int i=0;i<4;++i){
+    for(int i=0;i<5;++i){
       if(mqttClient.connect(id.c_str(), username.c_str(), password.c_str()))return true;
       Serial.println(".");
       delay(1000);
