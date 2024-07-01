@@ -1,0 +1,33 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="JugSimulator"
+run/main_scene="res://mqttexample.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://jug_logo.png"
+
+[audio]
+
+buses/default_bus_layout=""
+
+[display]
+
+window/size/viewport_width=900
+window/size/viewport_height=520
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/mqtt/plugin.cfg")
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.289584, 0.291964, 0.372283, 1)

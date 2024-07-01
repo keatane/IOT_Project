@@ -1,0 +1,310 @@
+[gd_scene load_steps=15 format=3 uid="uid://sca5nhn6lprk"]
+
+[ext_resource type="Script" path="res://mqttexample.gd" id="1_6i2w6"]
+[ext_resource type="PackedScene" uid="uid://bdxcunnrfcx5" path="res://addons/mqtt/mqtt.tscn" id="2_t6rxa"]
+[ext_resource type="Script" path="res://Rotation.gd" id="3_hu3wv"]
+[ext_resource type="ArrayMesh" uid="uid://da87pcsjki5yo" path="res://models/jug.obj" id="4_fx57g"]
+[ext_resource type="ArrayMesh" uid="uid://bx3gsr1ja520n" path="res://models/glass.obj" id="5_tqeml"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iasn2"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.215686, 0.4, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppk4t"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.341176, 0.101961, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b54y"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.341176, 0.101961, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xasl1"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.341176, 0.101961, 0.0392157, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pgkkk"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y14f6"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 0.05
+direction = Vector3(1, 0, 1)
+spread = 20.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4xof"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.168627, 0.560784, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pyn51"]
+material = SubResource("StandardMaterial3D_h4xof")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ho8m8"]
+
+[node name="mqttexample" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -123.0
+offset_top = -64.0
+offset_right = -1023.0
+offset_bottom = -584.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6i2w6")
+
+[node name="MQTT" parent="." instance=ExtResource("2_t6rxa")]
+
+[node name="VBox" type="VBoxContainer" parent="."]
+self_modulate = Color(0.0588235, 1, 1, 1)
+layout_mode = 0
+offset_left = 137.0
+offset_top = 82.0
+offset_right = 1017.0
+offset_bottom = 576.0
+
+[node name="HBoxBrokerControl" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Labelbroker" type="Label" parent="VBox/HBoxBrokerControl"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "MQTT broker:"
+
+[node name="ButtonConnect" type="CheckButton" parent="VBox/HBoxBrokerControl"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Connect to broker"
+
+[node name="status" type="Label" parent="VBox/HBoxBrokerControl"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_iasn2")
+text = "...Status"
+horizontal_alignment = 1
+
+[node name="HBoxBroker" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/HBoxBroker"]
+layout_mode = 2
+text = "URL: "
+
+[node name="brokeraddress" type="LineEdit" parent="VBox/HBoxBroker"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "test.mosquitto.org"
+
+[node name="Label2" type="Label" parent="VBox/HBoxBroker"]
+layout_mode = 2
+text = "Port: "
+
+[node name="brokerport" type="LineEdit" parent="VBox/HBoxBroker"]
+layout_mode = 2
+tooltip_text = "Port
+"
+text = "1883"
+
+[node name="Label3" type="Label" parent="VBox/HBoxBroker"]
+layout_mode = 2
+text = "Protocol: "
+
+[node name="brokerprotocol" type="OptionButton" parent="VBox/HBoxBroker"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "tcp://"
+popup/item_0/id = 0
+popup/item_1/text = "ssl://"
+popup/item_1/id = 1
+popup/item_2/text = "ws://"
+popup/item_2/id = 2
+popup/item_3/text = "wss://"
+popup/item_3/id = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxLastwill" type="HBoxContainer" parent="VBox"]
+visible = false
+layout_mode = 2
+
+[node name="Labellastwill" type="Label" parent="VBox/HBoxLastwill"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Last will:"
+
+[node name="Label" type="Label" parent="VBox/HBoxLastwill"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "topic:"
+
+[node name="lastwilltopic" type="LineEdit" parent="VBox/HBoxLastwill"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "godot/myname/mywill"
+
+[node name="Label2" type="Label" parent="VBox/HBoxLastwill"]
+layout_mode = 2
+text = "message:"
+
+[node name="lastwillmessage" type="LineEdit" parent="VBox/HBoxLastwill"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "goodbye world"
+
+[node name="lastwillretain" type="CheckButton" parent="VBox/HBoxLastwill"]
+layout_mode = 2
+text = "Retain
+"
+
+[node name="HSeparator2" type="HSeparator" parent="VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxSubscriptions" type="HBoxContainer" parent="VBox"]
+visible = false
+layout_mode = 2
+
+[node name="Labellastwill2" type="Label" parent="VBox/HBoxSubscriptions"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Subscriptions:"
+
+[node name="Label3" type="Label" parent="VBox/HBoxSubscriptions"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "topic:"
+
+[node name="subscribetopic" type="LineEdit" parent="VBox/HBoxSubscriptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "godot/+"
+
+[node name="subscribe" type="Button" parent="VBox/HBoxSubscriptions"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ppk4t")
+text = "subscribe
+"
+
+[node name="subscriptions" type="OptionButton" parent="VBox/HBoxSubscriptions"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+tooltip_text = "Subscribed topics
+"
+item_count = 1
+selected = 0
+popup/item_0/text = "<none>"
+popup/item_0/id = 0
+
+[node name="unsubscribe" type="Button" parent="VBox/HBoxSubscriptions"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_8b54y")
+text = "unsubscribe
+"
+
+[node name="HSeparator3" type="HSeparator" parent="VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxPublish" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Labellastwill" type="Label" parent="VBox/HBoxPublish"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Publish:"
+
+[node name="Label" type="Label" parent="VBox/HBoxPublish"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "topic:"
+
+[node name="publishtopic" type="LineEdit" parent="VBox/HBoxPublish"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "/jug/godot"
+
+[node name="Label2" type="Label" parent="VBox/HBoxPublish"]
+layout_mode = 2
+text = "message:"
+
+[node name="publishmessage" type="LineEdit" parent="VBox/HBoxPublish"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hello there"
+
+[node name="publishretain" type="CheckButton" parent="VBox/HBoxPublish"]
+layout_mode = 2
+text = "Retain
+"
+
+[node name="publish" type="Button" parent="VBox/HBoxPublish"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_xasl1")
+text = "Publish"
+
+[node name="HSeparator4" type="HSeparator" parent="VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0388994, 0, -0.0336945)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59, 0)
+script = ExtResource("3_hu3wv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/CharacterBody3D"]
+shape = SubResource("BoxShape3D_pgkkk")
+
+[node name="Jug" type="MeshInstance3D" parent="Node3D/CharacterBody3D"]
+mesh = ExtResource("4_fx57g")
+skeleton = NodePath("../../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.532909, 1.12946)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_y14f6")
+draw_pass_1 = SubResource("SphereMesh_pyn51")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(-0.00631563, -0.411323, 0.911468, -0.00285002, 0.911489, 0.411314, -0.999976, 2.32836e-10, -0.00692891, 3.08365, 3.27073, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(0.814424, 0.116876, 0.568379, -0.301654, 0.922025, 0.24264, -0.495701, -0.369065, 0.786175, 2.0334, 0, 3.04018)
+
+[node name="Glass" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106797, 0.304, 1.36636)
+mesh = ExtResource("5_tqeml")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(6.95764, 0, 0, 0, 1.00014, 0, 0, 0, 6.56937, 0, 0.150518, 0)
+mesh = SubResource("PlaneMesh_ho8m8")
+
+[connection signal="broker_connected" from="MQTT" to="." method="_on_mqtt_broker_connected"]
+[connection signal="broker_connection_failed" from="MQTT" to="." method="_on_mqtt_broker_connection_failed"]
+[connection signal="broker_disconnected" from="MQTT" to="." method="_on_mqtt_broker_disconnected"]
+[connection signal="received_message" from="MQTT" to="." method="_on_mqtt_received_message"]
+[connection signal="toggled" from="VBox/HBoxBrokerControl/ButtonConnect" to="." method="_on_button_connect_toggled"]
+[connection signal="item_selected" from="VBox/HBoxBroker/brokerprotocol" to="." method="_on_brokerprotocol_item_selected"]
+[connection signal="pressed" from="VBox/HBoxSubscriptions/subscribe" to="." method="_on_subscribe_pressed"]
+[connection signal="pressed" from="VBox/HBoxSubscriptions/unsubscribe" to="." method="_on_unsubscribe_pressed"]
+[connection signal="pressed" from="VBox/HBoxPublish/publish" to="." method="_on_publish_pressed"]
