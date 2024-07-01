@@ -170,11 +170,11 @@
         ],
         "out": [
             {
-                "x": 900,
+                "x": 1040,
                 "y": 80,
                 "wires": [
                     {
-                        "id": "17a95012080ff363",
+                        "id": "1d0942988eaee2b3",
                         "port": 0
                     }
                 ]
@@ -2388,10 +2388,12 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 620,
+        "x": 600,
         "y": 80,
         "wires": [
-            []
+            [
+                "1d0942988eaee2b3"
+            ]
         ]
     },
     {
@@ -2419,6 +2421,31 @@
             [
                 "17a95012080ff363"
             ]
+        ]
+    },
+    {
+        "id": "1d0942988eaee2b3",
+        "type": "change",
+        "z": "98b9aea3ec541c1d",
+        "name": "Craft Return Status \"OK\" (200)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"statusCode\":200}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 80,
+        "wires": [
+            []
         ]
     },
     {
