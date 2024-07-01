@@ -16,6 +16,7 @@ struct PairingData{
 enum State { UNPAIRED, PAIRING,PAIRED };
 State state = UNPAIRED;
 PairingData userData;
+bool suspended=false;
 
 WaterSensor waterSensor(FLOW_SENSOR);
 HTTPServer httpServer(SERVER_PORT);
@@ -97,9 +98,12 @@ void setPaired() {
 
 void loopPaired() {
   if(wifi.ensureConnected())mqtt.connect();
-  Serial.println("CONNECTED and looping");
   double litres = waterSensor.measure();
-  Serial.println(litres);
-  Serial.println(String(litres));
-  mqtt.publish(MQTT_SENSOR_TOPIC, String(litres).c_str());
+  if(litres!=0||!suspended){
+      Serial.println("CONNECTED and looping");
+      Serial.println(litres);
+      Serial.println(String(litres));
+      mqtt.publish(MQTT_SENSOR_TOPIC, String(litres).c_str());
+  }
+  suspended=litres==0;
 }
