@@ -70,7 +70,8 @@ class PairingImpl(activity: ActivityResultCaller) : Pairing {
     private val jugWifiFilter: WifiDeviceFilter =
         WifiDeviceFilter.Builder().setNamePattern(Pattern.compile("jug_\\d+")).build()
     private val jugRequest = AssociationRequest.Builder().addDeviceFilter(jugWifiFilter).build()
-    private val wifiRequest = AssociationRequest.Builder().build()
+    private val wifiRequest =
+        AssociationRequest.Builder().addDeviceFilter(WifiDeviceFilter.Builder().build()).build()
     private lateinit var networkCallback: NetworkCallback
     private lateinit var locationManager: LocationManager
 
