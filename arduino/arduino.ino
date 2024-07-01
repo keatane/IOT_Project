@@ -53,7 +53,6 @@ void setUnpaired() {
 
 void loopPairing(){
   wifi.connect(userData.ssid, userData.pw);
-  wifi.ensureConnected(); // TO-remove: è già chiamata dalla connect in wifi.hpp
   if(!mqtt.connect()){
       setUnpaired();
       return;

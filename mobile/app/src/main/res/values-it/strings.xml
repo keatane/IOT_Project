@@ -64,4 +64,5 @@
     <string name="litres_per_second">Litri al secondo</string>
     <string name="filter_alert">Allerta filtro</string>
     <string name="your_filter_is_about_to_expire">Il filtro della tua caraffa sta per esaurirsi!</string>
+    <string name="error">Ops, c\'è stato un problema</string>
 </resources>

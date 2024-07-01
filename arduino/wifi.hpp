@@ -49,7 +49,7 @@ public:
     ensureConnected();
   }
   bool ensureConnected() const{
-    int countBeforeFail = 0; // added
+    int countBeforeFail = 0;
     while (WiFi.status() != WL_CONNECTED) {
       const IPAddress EMPTY = IPAddress(0, 0, 0, 0);
       WiFi.config(EMPTY, EMPTY, EMPTY);
@@ -61,8 +61,8 @@ public:
         return true;
       }
       delay(1000);
-      countBeforeFail++; // added
-      if(countBeforeFail>10) return false; // added
+      countBeforeFail++;
+      if(countBeforeFail>10) return false;
     }
     return false;
   }

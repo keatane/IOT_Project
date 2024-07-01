@@ -2,8 +2,6 @@
 
 package com.island.iot
 
-import android.graphics.Color
-import androidx.collection.intListOf
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -35,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.max
 import kotlin.math.pow
@@ -65,10 +63,16 @@ fun filterStatus(totalLitresFilter: Double?, filter: Int?): Double? {
 }
 
 @Composable
-fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false) {
+fun Metric(
+    title: String,
+    value: String,
+    cardColor: Int,
+    isLast: Boolean = false,
+    red: Boolean = false
+) {
     Card(
         shape = CardDefaults.elevatedShape,
-        colors = CardDefaults.cardColors(containerColor = colorResource(id = cardColor)),
+        colors = CardDefaults.cardColors(containerColor = if (red) Color.Red else colorResource(id = cardColor)),
         modifier = Modifier
             .width(if (!isLast) 150.dp else 300.dp)
             .height(130.dp)
@@ -106,12 +110,12 @@ fun Metric(title: String, value: String, cardColor: Int, isLast: Boolean = false
 fun nullRound(x: Double?, digits: Int = 1): String? {
     x ?: return null
     if (digits == 0) return ceil(x).toInt().toString()
-    val rounded=Math.round(x*10.0.pow(digits))/10.0.pow(digits)
-    var result=rounded.toString()
-    if(result.contains("E-"))result="0"
-    val parts=result.split(".").toMutableList()
-    if(parts.size==1)parts.add("")
-    parts[1]=parts[1].padEnd(digits,'0').substring(0,digits)
+    val rounded = Math.round(x * 10.0.pow(digits)) / 10.0.pow(digits)
+    var result = rounded.toString()
+    if (result.contains("E-")) result = "0"
+    val parts = result.split(".").toMutableList()
+    if (parts.size == 1) parts.add("")
+    parts[1] = parts[1].padEnd(digits, '0').substring(0, digits)
     return parts.joinToString(".")
 }
 
@@ -130,6 +134,10 @@ fun Grid(navController: NavController, repository: StateRepository) {
     val totalLitresFilter by repository.totalLitresFilter.collectAsState(null)
     val dailyLitres by repository.dailyLitres.collectAsState(null)
     val hasFilter = (selectedJug?.filtercapacity ?: 0) != 0
+    val usedPercentage = filterStatus(
+        totalLitresFilter,
+        selectedJug?.filtercapacity
+    )
 
     ScrollableContent {
         Text(
@@ -192,7 +200,7 @@ fun Grid(navController: NavController, repository: StateRepository) {
         ) {
             Metric(
                 stringResource(R.string.litres_per_second),
-                nullAppend(nullRound(litresPerSecond), stringResource(R.string.l_s))
+                nullAppend(nullRound(litresPerSecond, 2), stringResource(R.string.l_s))
                     ?: stringResource(R.string.n_a),
                 cardColor = R.color.crab,
                 true
@@ -222,14 +230,13 @@ fun Grid(navController: NavController, repository: StateRepository) {
                 stringResource(R.string.filter_usage),
                 if (hasFilter) nullAppend(
                     nullRound(
-                        filterStatus(
-                            totalLitresFilter,
-                            selectedJug?.filtercapacity
-                        )
+                        usedPercentage
                     ), stringResource(R.string.percentage)
                 ) ?: stringResource(R.string.n_a) else stringResource(R.string.n_a),
-                cardColor = if((selectedJug?.filtercapacity ?: 0) >= 80) Color.RED else R.color.octopus,
-                true
+                cardColor = R.color.octopus,
+                red = (usedPercentage
+                    ?: 0.0) >= 80.0,
+                isLast = true
             )
         }
         Row(

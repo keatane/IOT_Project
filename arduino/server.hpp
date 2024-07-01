@@ -28,8 +28,13 @@ public:
     serializeJson(result, Serial);
     Serial.println("");
     callback(result);
-    serializeJson(result, client);
+    ArduinoHttpServer::StreamHttpReply httpReply(client,"application/json");
+    httpReply.send("{}");
+    // serializeJson(result, client);
+    Serial.println("closing client");
+    client.flush();
     client.stop();
+    delay(1000);
     Serial.println("client disconnected");
     return result;
   }

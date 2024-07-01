@@ -92,4 +92,5 @@
     <string name="litres_per_second">Litres per second</string>
     <string name="filter_alert">Filter alert</string>
     <string name="your_filter_is_about_to_expire">Your jug filter is about to expire!</string>
+    <string name="error">Ops, there was a problem</string>
 </resources>

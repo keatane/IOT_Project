@@ -562,7 +562,7 @@
         ],
         "x": 134,
         "y": 99,
-        "w": 372,
+        "w": 492,
         "h": 82
     },
     {
@@ -1028,7 +1028,8 @@
             "5b48393db4e27cf6",
             "99e53198b6af5126",
             "bb3c30d868248d31",
-            "42cb9c76c9a980d2"
+            "42cb9c76c9a980d2",
+            "b0ee92db4b65ba08"
         ],
         "x": 44,
         "y": 99,
@@ -7497,7 +7498,7 @@
         "z": "217d4457bda21c0d",
         "g": "87a70ae14006afaf",
         "name": "Return week consumption",
-        "func": "const current = new Date().getTime();\nlet bin = Array(7);\n\nfor (let i = 0; i < bin.length; ++i)\n    bin[i] = 0;\n\nfor (let i = 0; i < msg.payload.length; ++i){\n    let previous = msg.payload[i][0];\n    const delta  = Math.floor((current - previous) / (1000 * 60 * 60 * 24));\n    console.log(delta);\n    bin[7 - 1 - delta] += Number(msg.payload[i][1]); // we include the current day\n}\n\nmsg.payload = bin;\nreturn msg;",
+        "func": "const current = new Date().getTime();\nlet bin = Array(7);\n\nfor (let i = 0; i < bin.length; ++i)\n    bin[i] = 0;\n\nfor (let i = 0; i < msg.payload.length; ++i){\n    let previous = msg.payload[i][0];\n    const delta  = Math.floor((current - previous) / (1000 * 60 * 60 * 24));\n    bin[7 - 1 - delta] += Number(msg.payload[i][1]); // we include the current day\n}\n\nmsg.payload = bin;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -8484,7 +8485,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 500,
+        "x": 540,
         "y": 240,
         "wires": [
             [
@@ -8665,7 +8666,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
+        "x": 700,
         "y": 240,
         "wires": [
             [
@@ -8712,7 +8713,7 @@
         "z": "7af354fb2230bd6b",
         "g": "38063613653e8a1a",
         "name": "Set payload to userid and backup jug",
-        "func": "msg.jug = msg.payload.id;\nmsg.payload = [`last_active:${msg.payload.userid}`];\nreturn msg;",
+        "func": "msg.jug = msg.payload.id;\nmsg.userid=msg.payload.userid;\nmsg.payload = [`last_active:${msg.userid}`];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -9498,7 +9499,6 @@
         "id": "b404f05e23d9d205",
         "type": "mqtt in",
         "z": "7af354fb2230bd6b",
-        "d": true,
         "name": "",
         "topic": "/Thingworx/+/litresPerSecond",
         "qos": "2",
@@ -9576,26 +9576,6 @@
         ]
     },
     {
-        "id": "b19a5fa95b01884a",
-        "type": "function",
-        "z": "7af354fb2230bd6b",
-        "name": "function 2",
-        "func": "msg.userid=msg.payload[0].userid\nmsg.payload=[`last_active:${msg.userid}`];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 660,
-        "y": 1280,
-        "wires": [
-            [
-                "2572bb3ef09625fc"
-            ]
-        ]
-    },
-    {
         "id": "495c2f3c48471cb6",
         "type": "function",
         "z": "7af354fb2230bd6b",
@@ -9612,57 +9592,6 @@
         "wires": [
             [
                 "512e731f79ab66bf"
-            ],
-            [
-                "a58310e7494113c7"
-            ]
-        ]
-    },
-    {
-        "id": "2572bb3ef09625fc",
-        "type": "redis-command",
-        "z": "7af354fb2230bd6b",
-        "server": "df153d084656312d",
-        "command": "EXISTS",
-        "name": "",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 840,
-        "y": 1280,
-        "wires": [
-            [
-                "d009265d20b0dd16"
-            ]
-        ]
-    },
-    {
-        "id": "d009265d20b0dd16",
-        "type": "switch",
-        "z": "7af354fb2230bd6b",
-        "name": "Is not already created?",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "0",
-                "vt": "num"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1060,
-        "y": 1280,
-        "wires": [
-            [
-                "46659fd914033c39"
             ],
             []
         ]
@@ -9723,44 +9652,6 @@
             [
                 "0d09c9a9e26103a3"
             ]
-        ]
-    },
-    {
-        "id": "a58310e7494113c7",
-        "type": "function",
-        "z": "7af354fb2230bd6b",
-        "name": "function 5",
-        "func": "msg.payload=[\n    `last_active:${msg.userid}`,\n    `total:${msg.jug}`,\n    `filtered:${msg.jug}`,\n    `litresPerSecond:${msg.jug}`,\n    `data:${msg.jug}`,\n];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 580,
-        "y": 1500,
-        "wires": [
-            [
-                "97b84693d6cfe499"
-            ]
-        ]
-    },
-    {
-        "id": "97b84693d6cfe499",
-        "type": "redis-command",
-        "z": "7af354fb2230bd6b",
-        "server": "df153d084656312d",
-        "command": "DEL",
-        "name": "",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 760,
-        "y": 1500,
-        "wires": [
-            []
         ]
     },
     {
@@ -9879,11 +9770,11 @@
         "links": [
             "14d37406895bec8d"
         ],
-        "x": 405,
+        "x": 315,
         "y": 240,
         "wires": [
             [
-                "ba928c6f3cbb3d2a"
+                "b0ee92db4b65ba08"
             ]
         ]
     },
@@ -9962,6 +9853,97 @@
         "x": 715,
         "y": 320,
         "wires": []
+    },
+    {
+        "id": "b19a5fa95b01884a",
+        "type": "function",
+        "z": "7af354fb2230bd6b",
+        "name": "function 2",
+        "func": "if(msg.payload.length==0)return [null,msg]\nmsg.userid=msg.payload[0].userid\nmsg.payload=[`last_active:${msg.userid}`];\nreturn [msg,null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1280,
+        "wires": [
+            [
+                "2572bb3ef09625fc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2572bb3ef09625fc",
+        "type": "redis-command",
+        "z": "7af354fb2230bd6b",
+        "server": "df153d084656312d",
+        "command": "EXISTS",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 840,
+        "y": 1280,
+        "wires": [
+            [
+                "d009265d20b0dd16"
+            ]
+        ]
+    },
+    {
+        "id": "d009265d20b0dd16",
+        "type": "switch",
+        "z": "7af354fb2230bd6b",
+        "name": "Is not already created?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1060,
+        "y": 1280,
+        "wires": [
+            [
+                "46659fd914033c39"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b0ee92db4b65ba08",
+        "type": "function",
+        "z": "7af354fb2230bd6b",
+        "g": "38063613653e8a1a",
+        "name": "function 5",
+        "func": "msg.payload=[`last_active:${msg.userid}`];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "ba928c6f3cbb3d2a"
+            ]
+        ]
     },
     {
         "id": "f1f33d90d871e986",
@@ -12180,15 +12162,15 @@
         "z": "4c20aa2ac87fc1e6",
         "g": "f74c838012730271",
         "name": "",
-        "topic": "/jug/godot",
+        "topic": "/Thingworx/Jug3/litresPerSecond",
         "qos": "0",
         "datatype": "auto-detect",
-        "broker": "f666e567f16cadaa",
+        "broker": "c77abff0c3609a0d",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 220,
+        "x": 290,
         "y": 140,
         "wires": [
             [
@@ -12209,7 +12191,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 400,
+        "x": 520,
         "y": 140,
         "wires": []
     }

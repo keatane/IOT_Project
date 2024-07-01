@@ -25,6 +25,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 
@@ -167,7 +169,7 @@ fun PromptDialog(
     icon: ImageVector,
     visibleState: MutableState<Boolean>,
     numeric: Boolean = false,
-    password: Boolean = true,
+    password: Boolean = false,
     onConfirmation: (String) -> Boolean,
 ) {
     var emptyError by rememberSaveable { mutableStateOf(false) }
@@ -190,6 +192,7 @@ fun PromptDialog(
             label = { Text(stringResource(R.string.input)) },
             singleLine = true,
             isError = emptyError,
+            visualTransformation = if (password) PasswordVisualTransformation() else VisualTransformation.None,
             keyboardOptions = if (numeric) KeyboardOptions(keyboardType = KeyboardType.NumberPassword) else if (password) KeyboardOptions(
                 keyboardType = KeyboardType.Password
             ) else KeyboardOptions.Default

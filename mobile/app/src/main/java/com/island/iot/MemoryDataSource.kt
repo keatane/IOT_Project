@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 
 enum class PairingState {
-    NONE, CONNECTING, ASK_PASSWORD, SENDING, DONE
+    NONE, CONNECTING, ASK_PASSWORD, SENDING, DONE, ERROR
 }
 
 data class JugElement(val name: String, val filtercapacity: Int, val id: Int)

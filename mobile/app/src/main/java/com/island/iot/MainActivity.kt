@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
@@ -380,6 +381,13 @@ fun SideEffects(controller: NavController, state: StateRepository) {
         ) {
             state.resetPairingState()
         }
+    }
+    if (pairingState == PairingState.ERROR) {
+        AlertDialog(
+            stringResource(R.string.error),
+            "",
+            icon = Icons.Filled.Clear
+        ) { state.resetPairingState() }
     }
     val user by state.user.collectAsState(null)
     LaunchedEffect(key1 = user) {

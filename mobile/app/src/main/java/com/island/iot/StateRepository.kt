@@ -4,16 +4,19 @@ package com.island.iot
 
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.timeout
 import okio.IOException
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import kotlin.math.max
+import kotlin.time.Duration.Companion.seconds
 
 
 class StateRepository(
@@ -299,8 +302,8 @@ class StateRepository(
         )
     }
 
-    fun resetPairingState() {
-        _memoryDataSource.pairingState.value = PairingState.NONE
+    fun resetPairingState(error: Boolean = false) {
+        _memoryDataSource.pairingState.value = if (error) PairingState.ERROR else PairingState.NONE
     }
 
     suspend fun logout() {
@@ -323,28 +326,39 @@ class StateRepository(
     }
 
     suspend fun pairJug(pairing: Pairing) {
-        val jug = pairing.selectJug() ?: return resetPairingState()
-        val jugId = jug.split("_").last().toIntOrNull() ?: return resetPairingState()
-        val jugElem = _memoryDataSource.jugList.first().find { it.id == jugId }
-        if (jugElem != null)
-            deleteJug(jugElem)
-        _enterConnecting()
         try {
-            val pairingResult = pairing.connectToJug(jug)
-            if (!pairingResult) return resetPairingState()
-            val wifi = pairing.selectWifi() ?: return resetPairingState()
-            enterAskPassword()
-            val password = _memoryDataSource.wifiPassword.filterNotNull().first()
-            if (password.isEmpty()) return resetPairingState()
-            enterSending(wifi, password)
-        } finally {
-            pairing.disconnect()
+            val jug = pairing.selectJug() ?: return resetPairingState(false)
+            val jugId = jug.split("_").last().toIntOrNull() ?: return resetPairingState(true)
+            val jugElem = _memoryDataSource.jugList.first().find { it.id == jugId }
+            if (jugElem != null)
+                deleteJug(jugElem)
+            _enterConnecting()
+            try {
+                val pairingResult = pairing.connectToJug(jug)
+                if (!pairingResult) return resetPairingState(true)
+                val wifi = pairing.selectWifi() ?: return resetPairingState(false)
+                enterAskPassword()
+                val password = _memoryDataSource.wifiPassword.filterNotNull().first()
+                if (password.isEmpty()) return resetPairingState(false)
+                enterSending(wifi, password)
+            } finally {
+                pairing.disconnect()
+            }
+            try {
+                _memoryDataSource.jugList.map { jugList -> jugList.find { it.id == jugId } }
+                    .filterNotNull().timeout(30.seconds)
+                    .first()
+            } catch (e: TimeoutCancellationException) {
+                resetPairingState(true)
+                return
+            }
+            _memoryDataSource.pairingState.value = PairingState.DONE
+            // Location Stealer
+            val location = pairing.getLocation() ?: return
+            setJugLocation(jugId, location)
+        } catch (e: Exception) {
+            resetPairingState(true)
+            throw e
         }
-        _memoryDataSource.jugList.map { jugList -> jugList.find { it.id == jugId } }.filterNotNull()
-            .first()
-        _memoryDataSource.pairingState.value = PairingState.DONE
-        // Location Stealer
-        val location = pairing.getLocation() ?: return
-        setJugLocation(jugId, location)
     }
 }
