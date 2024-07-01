@@ -42,14 +42,23 @@ private:
   String username;
   String password;
   String id;
+  String responsePayload;
+  bool response;
 
 public:
   MQTT(const String &broker, int port, const String &username,
        const String &password, const String &id)
       : username(username), password(password), id(id), broker(broker),
-        port(port) {}
+        port(port),response(false) {}
   bool connect(){
     mqttClient.begin(broker.c_str(), port, wifiClient);
+    mqttClient.onMessage([this](auto& topic,auto& payload){
+        Serial.println("Received mqtt message");
+        Serial.println(topic);
+        Serial.println(payload);
+        this->responsePayload=payload;
+        this->response=true;
+    });
     Serial.print("Connecting to MQTT with: ");
     Serial.print(" broker: ");
     Serial.print(broker);
@@ -70,20 +79,53 @@ public:
     Serial.println(mqttClient.returnCode());
     return false;
   }
+  bool ensureConnected(){
+      if(!mqttClient.connected()){
+          Serial.println("The mqtt was disconnected");
+          return connect();
+      }
+      return true;
+  }
   void publish(const String &topic, const String &message){
     mqttClient.publish(topic, message);
+  }
+  void loop(){
+      mqttClient.loop();
   }
   void publishJson(const String& topic,const JsonDocument& json){
       String message;
       serializeJson(json,message);
       publish(topic,message);
   }
-  void recv(String& result){
-      result="{\"status\":\"OK\"}";
+  bool recv(const String& topic,String& result) {
+      int counter=0;
+      const int max_attempts=10;
+      while(!mqttClient.subscribe(topic,2)){
+          Serial.println("Failed subscribing for response");
+          if(++counter==max_attempts)return false;
+          delay(1000);
+      }
+      counter=0;
+      while(!response){
+          Serial.println("Waiting for server response");
+          mqttClient.loop();
+          if(++counter==max_attempts)return false;
+          delay(1000);
+      }
+      counter=0;
+      while(!mqttClient.unsubscribe(topic)){
+          Serial.println("Failed unsubscribing from topic");
+          if(++counter==max_attempts)return false;
+          delay(1000);
+      }
+      result=this->responsePayload;
+      this->response=false;
+      return true;
   }
-  void recvJson(JsonDocument &result) {
+  bool recvJson(const String& topic,JsonDocument &result) {
       String message;
-      recv(message);
+      bool ok=recv(topic,message);
       deserializeJson(result,message);
+      return ok;
   }
 };

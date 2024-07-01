@@ -10,15 +10,15 @@ private:
 public:
   HTTPServer(int port) : server(port) {}
   void begin() { server.begin(); }
-  JsonDocument loop(void (*callback)(JsonDocument &)) {
+  bool loop(bool (*callback)(const JsonDocument &)) {
     JsonDocument result;
     WiFiClient client = server.available();
     if (!client)
-      return result;
+      return false;
     ArduinoHttpServer::StreamHttpRequest<512> httpRequest(client);
     bool success = httpRequest.readRequest();
     if (!success)
-      return result;
+      return false;
     const char *body = httpRequest.getBody();
     Serial.print("Body: ");
     Serial.println(body);
@@ -27,15 +27,14 @@ public:
     Serial.print("json:");
     serializeJson(result, Serial);
     Serial.println("");
-    callback(result);
+    bool ok=callback(result);
     ArduinoHttpServer::StreamHttpReply httpReply(client,"application/json");
-    httpReply.send("{}");
-    // serializeJson(result, client);
+    httpReply.send(ok?"{}":"{\"error\":\"Malformed request\"}");
     Serial.println("closing client");
     client.flush();
     client.stop();
     delay(1000);
     Serial.println("client disconnected");
-    return result;
+    return ok;
   }
 };

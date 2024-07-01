@@ -108,8 +108,16 @@ interface PairRequest{
     token:string,
 }
 
+enum StatusCode{
+    ok=200
+}
 
-export const PAIR_API=new MQTTAPI<PairRequest,Empty>("/jug/pair","/jug/pair/response");
+interface PairResponse{
+    statusCode:StatusCode
+}
+
+
+export const PAIR_API=new MQTTAPI<PairRequest,PairResponse>("/jug/pair","/jug/pair/response");
 
 
 interface EdgePairRequest{

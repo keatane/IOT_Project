@@ -41,6 +41,15 @@ async function simulator(n:number|string) {
     await Promise.allSettled(background);
 }
 
+async function simulatorSingle(username:string,password:string,id:string|number){
+    id=Number(id.toString())
+    const obj=await login(username,password);
+    const token=obj["token"];
+    assert(token!==undefined);
+    await pair(id,token);
+    await sendLoop(id);
+}
+
 async function singleInstance(username:string,password:string,id:string|number){
     id=Number(id.toString())
     await register(username,password);
@@ -186,7 +195,7 @@ program.command("login <username> <password>").action(entry(login));
 program.command("pair <id> <token>").action(entry(pair));
 program.command("send-data <id> <data>").action(entry(sendData));
 program.command("send-loop <id>").action(entry(sendLoop));
-program.command("simulator-single <username> <password> <id>").action(entry(singleInstance));
+program.command("simulator-single <username> <password> <id>").action(entry(simulatorSingle));
 program.command("simulator <n>").action(entry(simulator));
 program.command("filter <n> <token> <capacity>").action(entry(filter));
 program.command("arduino-client <ssid> <pw> <token>").action(entry(arduinoClient));

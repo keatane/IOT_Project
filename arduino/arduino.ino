@@ -63,8 +63,13 @@ void loopPairing(){
   request["id"]=JUG_ID;
   mqtt.publishJson(MQTT_TOKEN_TOPIC, request);
   JsonDocument response;
-  mqtt.recvJson(response);
-  if(response["status"]!="OK"){
+  if(!mqtt.recvJson(MQTT_RESPONSE_TOPIC,response)){
+      Serial.println("Could not receive mqtt response");
+      setUnpaired();
+      return;
+  }
+  if(response["statusCode"]!=200){
+      Serial.println("Server error");
       setUnpaired();
       return;
   }
@@ -73,16 +78,14 @@ void loopPairing(){
 
 void loopUnpaired() { httpServer.loop(pair); }
 
-void pair(JsonDocument& document) {
+bool pair(const JsonDocument& document) {
   serializeJson(document, Serial);
   if (!document.containsKey("ssid") || !document.containsKey("pw") ||
       !document.containsKey("token")) {
-    document.clear();
-    document["status"] = "Malformed";
-    return;
+    return false;
   }
   setPairing(document["ssid"],document["pw"],document["token"]);
-  document.clear();
+  return true;
 }
 
 void setPairing(const String& ssid,const String& pw,const String& token){
@@ -97,13 +100,23 @@ void setPaired() {
 }
 
 void loopPaired() {
-  if(wifi.ensureConnected())mqtt.connect();
+  if(wifi.ensureConnected()){
+      if(!mqtt.connect()){
+          Serial.println("Failed connecting to mqtt");
+          return;
+      }
+  }
+  if(!mqtt.ensureConnected()){
+      Serial.println("Failed connecting to mqtt");
+      return;
+  }
+  mqtt.loop();
   double litres = waterSensor.measure();
   if(litres!=0||!suspended){
       Serial.println("CONNECTED and looping");
       Serial.println(litres);
       Serial.println(String(litres));
-      mqtt.publish(MQTT_SENSOR_TOPIC, String(litres).c_str());
+      mqtt.publish(MQTT_SENSOR_TOPIC, String(litres));
   }
   suspended=litres==0;
 }

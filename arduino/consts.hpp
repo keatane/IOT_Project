@@ -12,3 +12,4 @@
 #define MQTT_ID "jug" XSTR(JUG_ID)
 #define MQTT_SENSOR_TOPIC "/Thingworx/Jug" XSTR(JUG_ID) "/litresPerSecond"
 #define MQTT_TOKEN_TOPIC "/jug/pair"
+#define MQTT_RESPONSE_TOPIC "/jug/pair/response"
