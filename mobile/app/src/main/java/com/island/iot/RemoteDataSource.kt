@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-const val API_URL = "http://192.168.4.1:1881"
+const val API_URL = "http://192.168.137.1:1880"
 
 
 data class RegisterRequest(val username: String, val password: String)
