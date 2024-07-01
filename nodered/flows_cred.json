@@ -23,7 +23,6 @@
         "user": "$(THINGWORX_USERNAME)",
         "password": "$(THINGWORX_PASSWORD)"
     },
-    "f666e567f16cadaa": {},
     "c82c75d3b593411b": {
         "user": "${THINGWORX_USERNAME}",
         "password": "$(THINGWORX_PASSWORD)"
