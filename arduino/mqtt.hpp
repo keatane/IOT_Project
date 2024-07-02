@@ -113,11 +113,7 @@ public:
           delay(1000);
       }
       counter=0;
-      while(!mqttClient.unsubscribe(topic)){
-          Serial.println("Failed unsubscribing from topic");
-          if(++counter==max_attempts)return false;
-          delay(1000);
-      }
+      mqttClient.unsubscribe(topic);
       result=this->responsePayload;
       this->response=false;
       return true;
