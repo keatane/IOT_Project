@@ -1224,7 +1224,7 @@
         },
         "nodes": [
             "f1f33d90d871e986",
-            "e2d44055a3b0e842"
+            "eb98adf80dc6d6a8"
         ],
         "x": 474,
         "y": 359,
@@ -10137,34 +10137,6 @@
         ]
     },
     {
-        "id": "e2d44055a3b0e842",
-        "type": "change",
-        "z": "2751cff285e8ba2d",
-        "g": "4124681a5ccaaaf2",
-        "name": "Prepare notification",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{\"jugId\":msg.jug}",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 590,
-        "y": 400,
-        "wires": [
-            [
-                "f1f33d90d871e986"
-            ]
-        ]
-    },
-    {
         "id": "44b8c9590517b097",
         "type": "link out",
         "z": "2751cff285e8ba2d",
@@ -10217,7 +10189,7 @@
         "y": 400,
         "wires": [
             [
-                "e2d44055a3b0e842"
+                "eb98adf80dc6d6a8"
             ]
         ]
     },
@@ -10429,7 +10401,28 @@
         "y": 520,
         "wires": [
             [
-                "e2d44055a3b0e842"
+                "eb98adf80dc6d6a8"
+            ]
+        ]
+    },
+    {
+        "id": "eb98adf80dc6d6a8",
+        "type": "function",
+        "z": "2751cff285e8ba2d",
+        "g": "4124681a5ccaaaf2",
+        "name": "Prepare notification",
+        "func": "msg.payload = {\"jugId\":`${msg.jug}`}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "f1f33d90d871e986"
             ]
         ]
     },
