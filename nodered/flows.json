@@ -1028,11 +1028,14 @@
             "99e53198b6af5126",
             "bb3c30d868248d31",
             "42cb9c76c9a980d2",
-            "b0ee92db4b65ba08"
+            "b0ee92db4b65ba08",
+            "fc971498a2acc2af",
+            "59531b83118576d1",
+            "4f71fb20c65e9255"
         ],
         "x": 44,
         "y": 99,
-        "w": 1162,
+        "w": 1282,
         "h": 262
     },
     {
@@ -8560,7 +8563,7 @@
         "y": 160,
         "wires": [
             [
-                "6a11b96d12bac454"
+                "fc971498a2acc2af"
             ]
         ]
     },
@@ -8582,7 +8585,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1060,
+        "x": 1140,
         "y": 320,
         "wires": [
             [
@@ -8602,7 +8605,7 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 390,
+        "x": 510,
         "y": 160,
         "wires": [
             [
@@ -8714,7 +8717,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
+        "x": 730,
         "y": 160,
         "wires": [
             [
@@ -8829,7 +8832,7 @@
         "links": [
             "6595481df1f98efd"
         ],
-        "x": 1165,
+        "x": 1245,
         "y": 320,
         "wires": []
     },
@@ -9695,7 +9698,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 880,
+        "x": 1000,
         "y": 160,
         "wires": [
             [
@@ -9724,7 +9727,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1050,
+        "x": 1170,
         "y": 160,
         "wires": [
             [
@@ -9745,7 +9748,7 @@
         "links": [
             "bb3c30d868248d31"
         ],
-        "x": 1165,
+        "x": 1285,
         "y": 200,
         "wires": []
     },
@@ -9759,7 +9762,7 @@
         "links": [
             "7018ca34006a871a"
         ],
-        "x": 1165,
+        "x": 1285,
         "y": 140,
         "wires": []
     },
@@ -9962,6 +9965,67 @@
         "wires": []
     },
     {
+        "id": "fc971498a2acc2af",
+        "type": "switch",
+        "z": "7af354fb2230bd6b",
+        "g": "38063613653e8a1a",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "6a11b96d12bac454"
+            ],
+            [
+                "59531b83118576d1"
+            ]
+        ]
+    },
+    {
+        "id": "59531b83118576d1",
+        "type": "link out",
+        "z": "7af354fb2230bd6b",
+        "g": "38063613653e8a1a",
+        "name": "link out 32",
+        "mode": "link",
+        "links": [
+            "4f71fb20c65e9255"
+        ],
+        "x": 475,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4f71fb20c65e9255",
+        "type": "link in",
+        "z": "7af354fb2230bd6b",
+        "g": "38063613653e8a1a",
+        "name": "link in 34",
+        "links": [
+            "59531b83118576d1"
+        ],
+        "x": 1025,
+        "y": 280,
+        "wires": [
+            [
+                "f4b3f90ad6ba0cda"
+            ]
+        ]
+    },
+    {
         "id": "f1f33d90d871e986",
         "type": "firebase cloud messaging",
         "z": "2751cff285e8ba2d",
@@ -9991,7 +10055,7 @@
         "y": 120,
         "wires": [
             [
-                "f03472c43cdfb9ee"
+                "a13868ee41f88223"
             ]
         ]
     },
@@ -10006,7 +10070,7 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 530,
+        "x": 650,
         "y": 120,
         "wires": [
             [
@@ -10055,7 +10119,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
+        "x": 930,
         "y": 120,
         "wires": [
             [
@@ -10075,7 +10139,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1120,
+        "x": 1220,
         "y": 120,
         "wires": [
             [
@@ -10260,7 +10324,7 @@
         "links": [
             "d83ecd2b2af82f6c"
         ],
-        "x": 1245,
+        "x": 1305,
         "y": 120,
         "wires": []
     },
@@ -10423,6 +10487,64 @@
         "wires": [
             [
                 "f1f33d90d871e986"
+            ]
+        ]
+    },
+    {
+        "id": "a13868ee41f88223",
+        "type": "switch",
+        "z": "2751cff285e8ba2d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 120,
+        "wires": [
+            [
+                "f03472c43cdfb9ee"
+            ],
+            [
+                "ae23d6c0356909da"
+            ]
+        ]
+    },
+    {
+        "id": "ae23d6c0356909da",
+        "type": "link out",
+        "z": "2751cff285e8ba2d",
+        "name": "link out 33",
+        "mode": "link",
+        "links": [
+            "0a2d98af20752b7a"
+        ],
+        "x": 595,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0a2d98af20752b7a",
+        "type": "link in",
+        "z": "2751cff285e8ba2d",
+        "name": "link in 35",
+        "links": [
+            "ae23d6c0356909da"
+        ],
+        "x": 925,
+        "y": 220,
+        "wires": [
+            [
+                "9fdc5ace85da2c5e"
             ]
         ]
     },
