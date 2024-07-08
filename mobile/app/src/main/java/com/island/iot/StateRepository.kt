@@ -325,10 +325,11 @@ class StateRepository(
                         location.second
                     )
                 )
+                Log.d("LOCATION", "Succesfully sent")
                 return
             } catch (e: Exception) {
                 Log.e("LOCATION", "Error", e)
-                delay(1000)
+                delay(5000)
             }
         }
     }
