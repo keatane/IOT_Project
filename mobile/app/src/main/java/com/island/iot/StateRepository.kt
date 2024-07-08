@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.timeout
-import okio.IOException
 import retrofit2.HttpException
+import java.io.IOException
 import java.net.SocketTimeoutException
 import kotlin.math.max
 import kotlin.time.Duration.Companion.seconds
@@ -315,14 +315,22 @@ class StateRepository(
     }
 
     private suspend fun setJugLocation(jugId: Int, location: Pair<Double, Double>) {
-        _remoteDataSource.setLocation(
-            SetLocationRequest(
-                user.filterNotNull().first().token,
-                jugId,
-                location.first,
-                location.second
-            )
-        )
+        for (i in 0..9) {
+            try {
+                _remoteDataSource.setLocation(
+                    SetLocationRequest(
+                        user.filterNotNull().first().token,
+                        jugId,
+                        location.first,
+                        location.second
+                    )
+                )
+                return
+            } catch (e: Exception) {
+                Log.e("LOCATION", "Error", e)
+                delay(1000)
+            }
+        }
     }
 
     suspend fun pairJug(pairing: Pairing) {
