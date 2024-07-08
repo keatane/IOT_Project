@@ -72,7 +72,18 @@ class MainActivity : ComponentActivity() {
     // Declare the launcher at the top of your Activity/Fragment:
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
-    ) { }
+    ) { registerNotificationChannel() }
+
+    private fun registerNotificationChannel() {
+        val notificationManager = getSystemService(NotificationManager::class.java)
+        notificationManager.createNotificationChannel(
+            NotificationChannel(
+                FILTER_ALERT_CHANNEL,
+                "Filter Alert",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+        )
+    }
 
     private fun askNotificationPermission() {
         val permission = mutableListOf<String>()
@@ -84,14 +95,7 @@ class MainActivity : ComponentActivity() {
                 ) ==
                 PackageManager.PERMISSION_GRANTED
             ) {
-                val notificationManager = getSystemService(NotificationManager::class.java)
-                notificationManager.createNotificationChannel(
-                    NotificationChannel(
-                        FILTER_ALERT_CHANNEL,
-                        "Filter Alert",
-                        NotificationManager.IMPORTANCE_DEFAULT
-                    )
-                )
+                registerNotificationChannel()
                 // FCM SDK (and your app) can post notifications.
             } else {
                 permission.add(android.Manifest.permission.POST_NOTIFICATIONS)
